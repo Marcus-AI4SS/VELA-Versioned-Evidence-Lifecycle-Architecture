@@ -5,8 +5,8 @@ for arg in "$@"; do
   case "$arg" in
     --bootstrap-tools) VELA_BOOTSTRAP_TOOLS=1 ;;
     --skip-dependency-install) VELA_SKIP_DEP_INSTALL=1 ;;
-    --skip-local-environment) VELA_SKIP_LOCAL_ENV=1 ;;
-    --force-local-environment) VELA_FORCE_LOCAL_ENV=1 ;;
+    --skip-runtime) VELA_SKIP_RUNTIME=1 ;;
+    --force-runtime) VELA_FORCE_RUNTIME=1 ;;
     *)
       printf 'Unknown option: %s\n' "$arg" >&2
       exit 2
@@ -71,17 +71,17 @@ EOF
 
 "$PYTHON_BIN" "$SCRIPT" doctor
 if [ "${VELA_BOOTSTRAP_TOOLS:-0}" = "1" ]; then
-  "$PYTHON_BIN" "$SCRIPT" local-env bootstrap-tools --include all --install --yes
+  "$PYTHON_BIN" "$SCRIPT" runtime bootstrap-tools --include all --install --yes
 fi
-if [ "${VELA_SKIP_LOCAL_ENV:-0}" != "1" ]; then
-  if [ "${VELA_FORCE_LOCAL_ENV:-0}" = "1" ]; then
-    "$PYTHON_BIN" "$SCRIPT" local-env install-runtime --include core,automation,toolchain --python "$PYTHON_BIN" --commit --force-core
+if [ "${VELA_SKIP_RUNTIME:-0}" != "1" ]; then
+  if [ "${VELA_FORCE_RUNTIME:-0}" = "1" ]; then
+    "$PYTHON_BIN" "$SCRIPT" runtime enable --include core,automation,toolchain --python "$PYTHON_BIN" --commit --force-core
   else
-    "$PYTHON_BIN" "$SCRIPT" local-env install-runtime --include core,automation,toolchain --python "$PYTHON_BIN" --commit
+    "$PYTHON_BIN" "$SCRIPT" runtime enable --include core,automation,toolchain --python "$PYTHON_BIN" --commit
   fi
 fi
 printf '\nVELA shim created: %s\n' "$SHIM"
 printf 'Add this directory to PATH if you want to run vela directly: %s\n' "$BIN_DIR"
-if [ "${VELA_SKIP_LOCAL_ENV:-0}" != "1" ]; then
-  printf 'VELA local research environment and runtime shims installed. Restart Codex so new skills are discovered.\n'
+if [ "${VELA_SKIP_RUNTIME:-0}" != "1" ]; then
+  printf 'VELA runtime and shims installed. Restart Codex so new skills are discovered.\n'
 fi

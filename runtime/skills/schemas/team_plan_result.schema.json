@@ -1,0 +1,141 @@
+{
+
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+
+  "$id": "https://marcus-ai4ss.github.io/VELA/schemas/team_plan_result.schema.json",
+
+  "type": "object",
+
+  "additionalProperties": true,
+
+  "required": [
+
+    "ok",
+
+    "route_id",
+
+    "clarification_card",
+
+    "should_plan_multi_agent",
+
+    "execution_mode",
+
+    "selected_producers",
+
+    "selected_reviewers",
+
+    "selected_agents",
+
+    "review_agents"
+
+  ],
+
+  "properties": {
+
+    "ok": {
+
+      "type": "boolean"
+
+    },
+
+    "route_id": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "clarification_card": {
+
+      "$ref": "clarification_card.schema.json"
+
+    },
+
+    "should_plan_multi_agent": {
+
+      "type": "boolean"
+
+    },
+
+    "execution_mode": {
+
+      "type": "string",
+
+      "enum": [
+
+        "multi_perspective_reasoning",
+
+        "sequential_multi_agent_execution",
+
+        "parallel_multi_agent_execution"
+
+      ]
+
+    },
+
+    "selected_producers": {
+
+      "type": "array",
+
+      "items": {
+
+        "type": "string",
+
+        "minLength": 1
+
+      },
+
+      "uniqueItems": true
+
+    },
+
+    "selected_reviewers": {
+
+      "type": "array",
+
+      "items": {
+
+        "type": "string",
+
+        "minLength": 1
+
+      },
+
+      "uniqueItems": true
+
+    },
+
+    "selected_agents": {
+
+      "type": "array",
+
+      "items": {
+
+        "type": "string",
+
+        "minLength": 1
+
+      },
+
+      "uniqueItems": true
+
+    },
+
+    "review_agents": {
+
+      "type": "object",
+
+      "additionalProperties": {
+
+        "type": "string",
+
+        "minLength": 1
+
+      }
+
+    }
+
+  }
+
+}

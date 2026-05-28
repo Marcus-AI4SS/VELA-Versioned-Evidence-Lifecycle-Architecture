@@ -1,68 +1,135 @@
 {
+
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+
   "$id": "https://marcus-ai4ss.github.io/VELA/schemas/vela.codex.handoff.v1.schema.json",
+
   "title": "VELA Codex handoff",
+
   "type": "object",
+
   "required": ["schema_version", "handoff_id", "created_at", "scope", "constraints", "expected_output", "review_standard", "completion"],
+
   "additionalProperties": true,
+
   "properties": {
+
     "schema_version": { "const": "vela.codex.handoff.v1" },
+
     "handoff_id": { "type": "string", "minLength": 1 },
+
     "created_at": { "type": "string" },
+
     "created_by": { "type": "string" },
+
     "surface": { "type": "string" },
+
     "mode": { "type": "string" },
+
     "project": {
+
       "type": "object",
+
       "additionalProperties": true
+
     },
+
     "scope": {
+
       "type": "object",
+
       "required": ["task", "relevant_files"],
+
       "additionalProperties": true,
+
       "properties": {
+
         "task": { "type": "string", "minLength": 1 },
+
         "relevant_files": {
+
           "type": "array",
+
           "minItems": 1,
+
           "items": { "type": "string", "minLength": 1 }
+
         },
+
         "excluded_files": {
+
           "type": "array",
+
           "items": { "type": "string", "minLength": 1 }
+
         }
+
       }
+
     },
+
     "constraints": {
+
       "type": "array",
+
       "minItems": 1,
+
       "items": { "type": "string", "minLength": 1 }
+
     },
+
     "expected_output": {
+
       "type": "object",
+
       "required": ["format", "path"],
+
       "additionalProperties": true,
+
       "properties": {
+
         "format": { "type": "string", "minLength": 1 },
+
         "path": { "type": "string", "minLength": 1 }
+
       }
+
     },
+
     "review_standard": {
+
       "type": "array",
+
       "minItems": 1,
+
       "items": { "type": "string", "minLength": 1 }
+
     },
+
     "completion": {
+
       "type": "object",
+
       "required": ["human_review_required"],
+
       "additionalProperties": true,
+
       "properties": {
+
         "validation_commands": {
+
           "type": "array",
+
           "items": { "type": "string", "minLength": 1 }
+
         },
+
         "human_review_required": { "type": "boolean" }
+
       }
+
     }
+
   }
+
 }

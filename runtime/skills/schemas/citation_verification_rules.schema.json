@@ -1,0 +1,301 @@
+{
+
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+
+  "$id": "https://marcus-ai4ss.github.io/VELA/schemas/citation_verification_rules.schema.json",
+
+  "title": "Citation Verification Rules",
+
+  "type": "object",
+
+  "additionalProperties": false,
+
+  "required": [
+
+    "$schema",
+
+    "schema_version",
+
+    "report_path",
+
+    "gate_id",
+
+    "required_reference_fields",
+
+    "pass_requires",
+
+    "formal_reference_policy"
+
+  ],
+
+  "properties": {
+
+    "$schema": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "schema_version": {
+
+      "const": "citation_verification_rules.v1"
+
+    },
+
+    "report_path": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "gate_id": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "required_reference_fields": {
+
+      "type": "array",
+
+      "minItems": 1,
+
+      "items": {
+
+        "type": "string",
+
+        "minLength": 1
+
+      },
+
+      "uniqueItems": true
+
+    },
+
+    "pass_requires": {
+
+      "type": "array",
+
+      "minItems": 1,
+
+      "items": {
+
+        "type": "string",
+
+        "minLength": 1
+
+      },
+
+      "uniqueItems": true
+
+    },
+
+    "formal_reference_policy": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "optional_reference_fields": {
+
+      "type": "array",
+
+      "items": {
+
+        "type": "string",
+
+        "minLength": 1
+
+      },
+
+      "uniqueItems": true
+
+    },
+
+    "doi_waiver_policy": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+
+        "enabled",
+
+        "applies_to",
+
+        "public_academic_indexes",
+
+        "required_evidence_fields",
+
+        "policy"
+
+      ],
+
+      "properties": {
+
+        "enabled": {
+
+          "type": "boolean"
+
+        },
+
+        "applies_to": {
+
+          "type": "array",
+
+          "minItems": 1,
+
+          "items": {
+
+            "type": "string",
+
+            "enum": [
+
+              "user_provided_source",
+
+              "complete_pdf_fulltext",
+
+              "public_academic_index_record"
+
+            ]
+
+          },
+
+          "uniqueItems": true
+
+        },
+
+        "public_academic_indexes": {
+
+          "type": "array",
+
+          "minItems": 1,
+
+          "items": {
+
+            "type": "string",
+
+            "minLength": 1
+
+          },
+
+          "uniqueItems": true
+
+        },
+
+        "required_evidence_fields": {
+
+          "type": "array",
+
+          "minItems": 1,
+
+          "items": {
+
+            "type": "string",
+
+            "minLength": 1
+
+          },
+
+          "uniqueItems": true
+
+        },
+
+        "policy": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        }
+
+      }
+
+    },
+
+    "pdf_fulltext_waiver": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+
+        "enabled",
+
+        "applies_to",
+
+        "required_evidence_fields",
+
+        "policy"
+
+      ],
+
+      "properties": {
+
+        "enabled": {
+
+          "type": "boolean"
+
+        },
+
+        "applies_to": {
+
+          "type": "array",
+
+          "minItems": 1,
+
+          "items": {
+
+            "type": "string",
+
+            "minLength": 1
+
+          },
+
+          "uniqueItems": true
+
+        },
+
+        "required_evidence_fields": {
+
+          "type": "array",
+
+          "minItems": 1,
+
+          "items": {
+
+            "type": "string",
+
+            "minLength": 1
+
+          },
+
+          "uniqueItems": true
+
+        },
+
+        "policy": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        }
+
+      }
+
+    }
+
+  }
+
+}

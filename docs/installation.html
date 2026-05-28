@@ -1,56 +1,109 @@
 <!doctype html>
+
 <html lang="en">
+
   <head>
+
     <meta charset="utf-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Installation · VELA</title>
+
     <meta name="description" content="Installation notes for the VELA workflow environment package.">
+
     <link rel="stylesheet" href="./assets/site.css">
+
   </head>
+
   <body>
+
     <main class="page-shell">
+
       <div class="topbar">
+
         <div class="brand"><span class="brand-mark"></span><span>VELA</span></div>
+
         <div class="lang-switch"><a href="./">Home</a><span class="active">Install</span></div>
+
       </div>
+
       <section class="hero compact">
+
         <div>
+
           <div class="eyebrow">Installation</div>
+
           <h1><span class="sans">Portable by default.</span></h1>
+
           <p>VELA is a repository-based workflow environment. Clone or download it, then open the VELA folder and your research project folder in the Codex environment you already use.</p>
+
           <pre>git clone REPOSITORY_URL vela
+
 cd vela
+
 .\install.ps1 -BootstrapTools</pre>
+
         </div>
+
       </section>
+
       <section class="section grid-2">
+
         <article class="card"><h3>Windows</h3><p>Use <code>install.ps1 -BootstrapTools</code>. VELA uses <code>winget</code> where possible, then installs runtime files into your own <code>.codex</code> and <code>.vela</code>.</p></article>
+
         <article class="card"><h3>macOS</h3><p>Use <code>sh ./install-macos.sh</code>. VELA uses Homebrew where possible, then installs runtime files into <code>~/.codex</code> and <code>~/.vela</code>.</p></article>
+
       </section>
+
       <section class="section">
+
         <div class="section-head">
+
           <h2>Source Package + Runtime</h2>
+
           <p>The cloned VELA folder is the source package. The installed runtime lives in the user's own Codex and VELA homes.</p>
+
         </div>
+
         <div class="grid-3">
+
           <article class="card"><h3>Source</h3><p><code>vela/</code> stays updateable with Git and should not contain private project material.</p></article>
+
           <article class="card"><h3>Codex Runtime</h3><p><code>CODEX_HOME/skills</code> receives the public research skills Codex can discover after restart.</p></article>
+
           <article class="card"><h3>VELA Runtime</h3><p><code>VELA_HOME</code> receives contracts, schemas, profiles, validators, envctl shims, and receipts.</p></article>
+
         </div>
+
       </section>
+
       <section class="section">
+
         <div class="section-head">
+
           <h2>Bootstrap Layer</h2>
+
           <p>Use the explicit bootstrap flag when the machine does not already have the public research toolchain.</p>
+
         </div>
+
         <div class="grid-3">
+
           <article class="card"><h3>Can install or prompt</h3><p>Git, Python 3.13+, PowerShell 7, ripgrep, Node.js LTS, GitHub CLI, and agentmemory. Windows uses winget; macOS uses Homebrew.</p></article>
+
           <article class="card"><h3>Checks only</h3><p>CodeGraph, MCP server vendor setup, Codex plugin status, Zotero, Obsidian, browser sessions, and CNKI permissions.</p></article>
+
           <article class="card"><h3>Never copied</h3><p>Plugin caches, cookies, login state, secrets, private memory stores, Zotero databases, Obsidian vaults, and generated outputs.</p></article>
+
         </div>
-        <pre>.\vela.ps1 local-env bootstrap-tools --include all
-.\vela.ps1 local-env bootstrap-tools --include system --install</pre>
+
+        <pre>.\vela.ps1 runtime bootstrap-tools --include all
+.\vela.ps1 runtime bootstrap-tools --include system --install</pre>
       </section>
+
     </main>
+
   </body>
+
 </html>

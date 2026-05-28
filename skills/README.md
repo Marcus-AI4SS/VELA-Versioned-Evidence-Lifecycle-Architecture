@@ -12,4 +12,4 @@ Core skills:
 - `vela-handoff-builder/`
 - `vela-deliverable-review/`
 
-Legacy research-stack assets were moved to `archive/legacy-research-stack/` so the public VELA surface stays focused on Codex handoffs, project contracts, validation, and audit.
+The full runtime skill set lives under `runtime/skills/plugins/research-autopilot/skills/`; this directory keeps the small VELA-specific entrypoints easy to find.

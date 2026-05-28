@@ -1,0 +1,57 @@
+[paths]
+
+root = "<VELA_RUNTIME_ROOT>/skills"
+
+codex_home = "<CODEX_HOME>"
+
+config_path = "<CODEX_HOME>/config.toml"
+
+skills_dir = "<CODEX_HOME>/skills"
+
+cloud_dir = "<VELA_RUNTIME_ROOT>/skills/cloud"
+
+
+
+[repos]
+
+runtime_root = "<VELA_RUNTIME_ROOT>"
+
+helm_repo_root = "<HELM_REPO_ROOT>"
+
+vela_repo_root = "<VELA_REPO_ROOT>"
+
+
+
+[obsidian]
+
+vault_path = "<OBSIDIAN_VAULT>"
+
+vault_subdir = "VELA Research"
+
+sync_export_dir = "<VELA_RUNTIME_ROOT>/skills/outputs/reports/obsidian-sync"
+
+
+
+[plugin_marketplace]
+
+path = "<VELA_RUNTIME_ROOT>/skills/.agents/plugins/marketplace.json"
+
+home_path = "<AGENTS_HOME>/plugins/marketplace.json"
+
+
+
+[global_route_rules]
+
+language = "zh-CN"
+
+role = "world-class-doctoral-supervisor"
+
+require_realtime_verification = true
+
+formal_citation_requires_doi = true
+
+forbid_unverified_references = true
+
+forbid_ai_hallucinated_citations = true
+
+data_paragraph_framework = "PEEL"

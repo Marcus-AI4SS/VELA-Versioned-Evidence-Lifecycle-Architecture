@@ -1,25 +1,49 @@
 {
+
   "agent_id": "literature-producer",
+
   "display_name": "Literature Agent",
+
   "preferred_model": null,
+
   "role": "producer",
+
   "enabled": true,
+
   "isolation_method": null,
+
   "parallel_safe": null,
+
   "integration_review_required": null,
+
   "capability_tags_subset": null,
+
   "allowed_skills_mcp_subset": null,
+
   "write_scope_subset": [
+
     "outputs/agent-runs/<run_id>/<agent_id>/"
+
   ],
+
   "max_execution_mode": null,
+
   "required_inputs": [
+
     "clarification_card",
+
     "project_truth_sources"
+
   ],
+
   "expected_outputs": [
+
     "summary.md",
+
     "result.json"
+
   ],
+
   "review_gate": "mandatory-review-when-required"
+
 }

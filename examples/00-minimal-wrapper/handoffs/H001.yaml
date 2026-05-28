@@ -1,28 +1,55 @@
 schema_version: vela.codex.handoff.v1
+
 handoff_id: H001
+
 created_at: "2026-04-30T00:00:00Z"
+
 created_by: human
+
 surface: cli
+
 mode: review_only
+
 project:
+
   title: Minimal Wrapper
+
   stage: research_design
+
 scope:
+
   task: Check whether claims/C001.md is supported by evidence/E001.yaml.
+
   relevant_files:
+
     - claims/C001.md
+
     - evidence/E001.yaml
+
   excluded_files:
+
     - private-notes/
+
 constraints:
+
   - Do not add new claims.
+
   - Do not mark pending evidence as fully verified.
+
 expected_output:
+
   format: markdown
+
   path: logs/codex-runs/H001-result.md
+
 review_standard:
+
   - Every support judgment must cite an evidence_id.
+
 completion:
+
   validation_commands:
+
     - python scripts/vela.py handoff lint handoffs/H001.yaml
+
   human_review_required: true

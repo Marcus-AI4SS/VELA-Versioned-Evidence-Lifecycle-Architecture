@@ -1,0 +1,283 @@
+{
+
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+
+  "$id": "https://marcus-ai4ss.github.io/VELA/schemas/memory_status_report.v1.schema.json",
+
+  "title": "Memory Status Report",
+
+  "type": "object",
+
+  "additionalProperties": false,
+
+  "required": [
+
+    "schema_version",
+
+    "generated_at",
+
+    "mode",
+
+    "source_files_written",
+
+    "selected_plan",
+
+    "lightweight_constraints",
+
+    "external_inputs",
+
+    "memory_layers",
+
+    "automation",
+
+    "health_checks",
+
+    "protected_runtime_paths",
+
+    "next_actions"
+
+  ],
+
+  "properties": {
+
+    "schema_version": {
+
+      "const": "memory_status_report.v1"
+
+    },
+
+    "generated_at": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "mode": {
+
+      "type": "string",
+
+      "enum": [
+
+        "proposal_only",
+
+        "controlled_auto_landing"
+
+      ]
+
+    },
+
+    "source_files_written": {
+
+      "type": "boolean"
+
+    },
+
+    "selected_plan": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "lightweight_constraints": {
+
+      "$ref": "#/$defs/string_list"
+
+    },
+
+    "external_inputs": {
+
+      "type": "array",
+
+      "items": {
+
+        "$ref": "#/$defs/external_input_summary"
+
+      }
+
+    },
+
+    "memory_layers": {
+
+      "type": "array",
+
+      "items": {
+
+        "$ref": "#/$defs/layer_summary"
+
+      }
+
+    },
+
+    "automation": {
+
+      "type": "object",
+
+      "additionalProperties": true
+
+    },
+
+    "health_checks": {
+
+      "$ref": "#/$defs/string_list"
+
+    },
+
+    "protected_runtime_paths": {
+
+      "$ref": "#/$defs/string_list"
+
+    },
+
+    "next_actions": {
+
+      "$ref": "#/$defs/string_list"
+
+    },
+
+    "report_written": {
+
+      "type": [
+
+        "string",
+
+        "null"
+
+      ]
+
+    }
+
+  },
+
+  "$defs": {
+
+    "string_list": {
+
+      "type": "array",
+
+      "items": {
+
+        "type": "string",
+
+        "minLength": 1
+
+      },
+
+      "uniqueItems": true
+
+    },
+
+    "external_input_summary": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+
+        "repo",
+
+        "decision",
+
+        "absorbed_count",
+
+        "rejected_count"
+
+      ],
+
+      "properties": {
+
+        "repo": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "decision": {
+
+          "type": "string",
+
+          "enum": [
+
+            "adapt",
+
+            "watch",
+
+            "reject"
+
+          ]
+
+        },
+
+        "absorbed_count": {
+
+          "type": "integer",
+
+          "minimum": 0
+
+        },
+
+        "rejected_count": {
+
+          "type": "integer",
+
+          "minimum": 0
+
+        }
+
+      }
+
+    },
+
+    "layer_summary": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+
+        "id",
+
+        "default_target",
+
+        "auto_promotion_allowed"
+
+      ],
+
+      "properties": {
+
+        "id": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "default_target": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "auto_promotion_allowed": {
+
+          "type": "boolean"
+
+        }
+
+      }
+
+    }
+
+  }
+
+}

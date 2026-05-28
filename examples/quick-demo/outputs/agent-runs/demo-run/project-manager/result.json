@@ -1,17 +1,33 @@
 {
+
   "run_id": "demo-run",
+
   "agent_id": "project-manager",
+
   "status": "active",
+
   "produced_files": [
+
     "outputs/agent-runs/demo-run/project-manager/summary.md"
+
   ],
+
   "produced_deliverable_types": [],
+
   "key_findings": [
+
     "The demo stops at the planning and review boundary."
+
   ],
+
   "open_issues": [
+
     "Citation verification and platform sampling remain pending."
+
   ],
+
   "next_handoff_target": "literature-producer",
+
   "requires_review": false
+
 }

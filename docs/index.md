@@ -1,33 +1,34 @@
 # VELA
 
-VELA = **Versioned Evidence Lifecycle Architecture**. It is a portable project lab, Codex workflow boundary, and sanitized near 1:1 distribution of the local Codex research environment. It gives each project a readable structure before work spreads across files, notes, citations, datasets, and handoffs, and it can install the public research skills, contracts, profiles, validators, and envctl runtime into a user's own Codex environment.
+**Versioned Evidence Lifecycle Architecture**
 
-## Start Here
+VELA is a portable Codex workflow package for evidence-based research projects. It gives each project a readable file structure, schema-checked handoffs, evidence and claim ledgers, validation reports, privacy scans, and a local context file that HELM can read.
 
-- [Getting started](./getting-started.md)
-- [Installation](./installation.md)
-- [Workflow core](./workflow-core.md)
-- [Evidence lifecycle](./evidence-lifecycle.md)
-- [Quality checks](./quality-checks.md)
-- [Handoff contract](./handoff-contract.md)
-- [Skills layer](./skills-layer.md)
-- [Public export](./public-export.md)
-- [Use cases](./use-cases.md)
-- [Integrations](./integrations.md)
-- [FAQ](./faq.md)
+Its operating model is engineering-cybernetic: objectives, state, feedback signals, validation gates, and correction loops are all visible in files.
 
-## Local Research Environment
+## Start
 
-Run the installer for your platform from the repository root:
+```bash
+git clone https://github.com/Marcus-AI4SS/VELA.git vela
+cd vela
+sh ./install.sh --bootstrap-tools
+vela init ../my-research-project --skip-codex-trust
+```
 
-- Windows: `.\install.ps1 -BootstrapTools`
-- macOS: `sh ./install-macos.sh`
-- Linux or generic shell: `sh ./install.sh --bootstrap-tools`
+Windows users can run `.\install.ps1 -BootstrapTools`. macOS users can run `sh ./install-macos.sh`.
 
-Windows bootstrap uses `winget` where possible. macOS bootstrap uses Homebrew where possible. Both install the public VELA runtime into the user's own `CODEX_HOME` and `VELA_HOME`, normally `~/.codex` and `~/.vela`. CodeGraph, MCP server vendors, Codex plugins, browser/CNKI sessions, Zotero, Obsidian, and private memory stores are doctor/manual setup only.
+## What VELA Adds
 
-The distribution excludes desktop app development, distilled-scholar material, browser state, cookies, secrets, caches, generated outputs, and private absolute paths.
+- a project scaffold for materials, evidence, claims, methods, deliverables, handoffs, and logs
+- `AGENTS.md` rules for bounded Codex work
+- `vela.codex.handoff.v1` handoff packets
+- `.vela/context.json` using `vela.project.context.v1`
+- validators for project structure, handoffs, privacy, and sharing readiness
+- engineering-cybernetic governance for objectives, state, feedback, gates, and correction
+- optional runtime skills and `envctl` helpers installed into the user's own Codex environment
 
-## Relationship To HELM
+## VELA + HELM
 
-VELA is the portable project workflow package. HELM = **Hub for Evidence, Logs & Monitoring**, the optional local board. You can use VELA without HELM; HELM can later make the same project state easier to inspect.
+VELA is the workflow package. HELM is the optional local research board. VELA can be used alone; HELM can read VELA project state when `.vela/context.json` is present.
+
+Read the [VELA and HELM interface](./imports/vela-helm-interface.md).

@@ -1,0 +1,304 @@
+{
+  "$schema": "../schemas/conflict_matrix.v1.schema.json",
+  "schema_version": "conflict_matrix.v1",
+  "rules": [
+    {
+      "rule": "single-paper-review",
+      "winner": "academic-paper-review",
+      "losers": [
+        "systematic-literature-review"
+      ],
+      "reason": "单篇论文评审只能走单篇审稿链。"
+    },
+    {
+      "rule": "multi-paper-review",
+      "winner": "systematic-literature-review",
+      "losers": [
+        "academic-paper-review"
+      ],
+      "reason": "多篇综述不能误走单篇论文评审链。"
+    },
+    {
+      "rule": "revision-response-vs-single-paper-review",
+      "winner": "writing-export route through reviewer-response-pack",
+      "losers": [
+        "single-paper-review",
+        "academic-paper-review direct response drafting"
+      ],
+      "reason": "当用户提供审稿意见、response letter、rebuttal、revise and resubmit 或修改稿核验任务时，核心是逐条回复和真实修改追踪，而不是重新评审一篇论文。"
+    },
+    {
+      "rule": "autopilot-entry",
+      "winner": "research-autopilot",
+      "losers": [
+        "project-kickoff-router",
+        "research-project-pilot",
+        "computational-social-science-pilot",
+        "project-ops-manager"
+      ],
+      "reason": "项目路由必须只有一个总入口。"
+    },
+    {
+      "rule": "long-running-experiment-ops",
+      "winner": "long-running-experiment-ops",
+      "losers": [
+        "abm-simulation-lab for runtime supervision",
+        "local-cloud-router for checkpoint recovery",
+        "reproducibility-package for live monitoring"
+      ],
+      "reason": "模型设计、算力选择和复现包整理不能替代长时实验运行监督；断点续跑、状态 stale、worker 调整、面板修复和死机恢复应由专用运维链处理。"
+    },
+    {
+      "rule": "environment-ops-vs-stack-governance",
+      "winner": "environment-ops route through vela-runtime-manager",
+      "losers": [
+        "generic stack-governance for Python/Git/PowerShell repair",
+        "research-autopilot direct ad hoc shell fixes"
+      ],
+      "reason": "Python、Git、PowerShell、Codex config、agent-browser 和 MCP profile 维护属于环境运维子路线；它仍由 vela-runtime-manager 治理，但必须先检查漂移和运行态，再做最小修复。"
+    },
+    {
+      "rule": "project-folder-hygiene-vs-environment-ops",
+      "winner": "project-folder-hygiene",
+      "losers": [
+        "environment-ops for ordinary project clutter",
+        "stack-governance for per-project temporary files",
+        "ad hoc deletion without classification"
+      ],
+      "reason": "当目标是整理某个项目文件夹、清理临时文件、死文件、重复草稿、空目录或交接前收束时，必须先走 project-folder-hygiene 分类和报告；只有修 Codex/Python/Git/MCP 本身才进入 environment-ops。"
+    },
+    {
+      "rule": "configuration-drift",
+      "winner": "profile/catalog/config drift check before mutation",
+      "losers": [
+        "silent config.toml edits",
+        "untracked skill edits",
+        "manual MCP toggles without profile comparison"
+      ],
+      "reason": "涉及配置环境时，必须先比较 profiles、catalog、config.toml、.codex/skills 与插件源目录；发现不一致先说明，再执行明确变更。"
+    },
+    {
+      "rule": "project-retrospective-handoff",
+      "winner": "project-retrospective-evolver -> vela-runtime-manager / obsidian-research-sync",
+      "losers": [
+        "research-autopilot direct skill mutation",
+        "obsidian-research-sync as route decider",
+        "vela-runtime-manager as retrospective summarizer"
+      ],
+      "reason": "项目收尾时，复盘 skill 负责归纳和判断，治理 skill 负责执行已确认变更，Obsidian skill 只负责沉淀耐久笔记，三者不能互相替代。"
+    },
+    {
+      "rule": "evidence-based-literature-workflow-priority",
+      "winner": "evidence-based-literature-workflow",
+      "losers": [
+        "citation-verifier alone",
+        "reference-fulltext-acquisition alone",
+        "systematic-literature-review alone",
+        "writing-reference-capture alone"
+      ],
+      "reason": "当用户明确说结构性阅读、文献核验、证据核验、引文证据、证据句、支撑判断或证据包时，任务不是单点 DOI 核验、单纯全文下载或普通综述，而是从来源、全文、阅读、写作到正文引用证据的连续证据链。"
+    },
+    {
+      "rule": "formal-citation",
+      "winner": "citation-verifier -> zotero-sync",
+      "losers": [
+        "google-scholar-research",
+        "cnki-research",
+        "paper-search-mcp direct use"
+      ],
+      "reason": "发现层不能直接升级成正式参考文献。正式链路必须核验作者、年份、题名和来源；证据材料里出现 DOI 时必须核验。用户提供来源、完整论文 PDF 原文或公开学术检索记录可以作为 DOI 豁免证据；无上述证据的无 DOI 条目不得进入正式参考文献链。"
+    },
+    {
+      "rule": "reference-fulltext-acquisition",
+      "winner": "reference-fulltext-acquisition",
+      "losers": [
+        "cnki-research direct download",
+        "google-scholar-research direct PDF hunt",
+        "zotero-sync as downloader",
+        "ad hoc browser downloads"
+      ],
+      "reason": "全文 PDF 获取必须先建参考文献状态表，经过元数据核验、合法开放源尝试、授权浏览器下载和 PDF 校验，再输出已取得/缺失清单。证据材料里出现 DOI 时必须核验；完整 PDF 原文可作为 DOI 豁免证据之一。CNKI、Scholar、OpenAlex、Semantic Scholar、浏览器和 Zotero 都是工具层，不是统一流程本身。"
+    },
+    {
+      "rule": "social-reading",
+      "winner": "social-platform-reader + chrome-devtools (+ reusable agent-browser templates when repeatable capture is needed)",
+      "losers": [
+        "platform-specific MCP direct-first",
+        "agent-browser direct-first"
+      ],
+      "reason": "社媒研究默认浏览器优先，只读真实可见内容。"
+    },
+    {
+      "rule": "writing-capture",
+      "winner": "writing-reference-capture -> research-docx-export",
+      "losers": [
+        "research-docx-export direct use",
+        "latex-paper-conversion direct use"
+      ],
+      "reason": "写作任务默认先捕获实际用到的论文，完成引用证据核验、Zotero 入库和 Obsidian 项目同步，再进入导出链。证据材料里出现 DOI 时必须核验；用户提供来源、完整 PDF 原文或公开学术检索记录可以作为 DOI 豁免证据。"
+    },
+    {
+      "rule": "manuscript-writing-vs-reference-capture",
+      "winner": "manuscript-writing-studio for drafting, rewriting, polishing, target-journal adaptation, and bilingual manuscript work",
+      "losers": [
+        "writing-reference-capture for sentence polishing",
+        "research-docx-export for manuscript logic repair",
+        "direct Nature-style rewriting without local target declaration",
+        "standalone journal-adapt runtime for target-journal polishing"
+      ],
+      "reason": "论文起草、重写、润色、目标期刊适配和中英转换先由 manuscript-writing-studio 声明语言目标和学科类型；英文期刊、中文期刊、计算社科、传统量化和质性研究不能套用同一套表达规则。目标期刊语料只提供结构和表达证据，不能覆盖事实、结果、引用和作者主张。writing-reference-capture 只在引用和证据性断言被触及时接管正式参考文献链。"
+    },
+    {
+      "rule": "social-science-submission-package",
+      "winner": "social-science-submission-packager",
+      "losers": [
+        "research-docx-export direct use",
+        "reproducibility-package direct use",
+        "figure-table-studio direct use",
+        "academic-paper-review direct use"
+      ],
+      "reason": "当任务目标是形成可投稿的社会科学论文送审包时，必须先由送审包总控 skill 锁定事实源、交付边界和版本同步，再调用写作、复现、图表或审稿子技能。"
+    },
+    {
+      "rule": "revision-package-scope-disambiguation",
+      "winner": "ask clarification unless the artifact scope clearly indicates writing-export or social-science-submission-package",
+      "losers": [
+        "treating every revision package as a response letter",
+        "treating every revision package as a complete submission package"
+      ],
+      "reason": "revision package 如果只涉及审稿意见、rebuttal、response letter、逐条修改或正文润色，进入 writing-export / reviewer-response-pack；如果涉及完整投稿包、改投、重投、格式迁移、图表代码支持文档和版本冻结，进入 social-science-submission-packager。范围不明确时必须先问用户。"
+    },
+    {
+      "rule": "replication-package-scope-disambiguation",
+      "winner": "ask clarification unless the task is clearly analysis execution or submission packaging",
+      "losers": [
+        "running empirical-quant when the user only needs final package freezing",
+        "running submission-packager when the user still needs model diagnostics or robustness checks"
+      ],
+      "reason": "复现包 如果目标是模型运行、诊断、稳健性、表图解释或 Stata/Python 分析链，进入 empirical-quant；如果目标是论文定稿后的代码、数据、表图、说明文件和送审材料打包，进入 social-science-submission-packager。范围不明确时必须先问用户。"
+    },
+    {
+      "rule": "research-figure-design-vs-generic-imagegen",
+      "winner": "research-figure-studio",
+      "losers": [
+        "direct generic imagegen",
+        "unstructured image2 prompt",
+        "figure-table-studio for conceptual scientific figures",
+        "marketing-style diagram prompts"
+      ],
+      "reason": "当用户意图是论文图片、科研图、机制图、概念框架图、流程图、研究设计图或顶刊风格图时，必须先进入 research-figure-studio 锁定图形说明卡和 image2 结构契约；不得因为科研图直接拒绝 image2，也不得让 image2 编造数据或关系。"
+    },
+    {
+      "rule": "academic-honesty-global",
+      "winner": "verified-citation-evidence",
+      "losers": [
+        "unverified-reference",
+        "no-doi-reference",
+        "fabricated-citation"
+      ],
+      "reason": "总路由全局遵守学术诚实规则：不得伪造 DOI。证据材料里出现 DOI 时必须核验。用户提供来源、完整论文 PDF 原文或公开学术检索记录可以作为 DOI 豁免证据；无 DOI 且无上述证据的文献不得作为正式引用出现。"
+    },
+    {
+      "rule": "project-scope-defaults",
+      "winner": "project_scope_rules.json",
+      "losers": [
+        "ad hoc project-vs-nonproject inference",
+        "free-text multi-agent triggers"
+      ],
+      "reason": "项目型任务是否默认进入多 agent，必须由固定 route 分层、clarification card 字段和条件升格规则决定。"
+    },
+    {
+      "rule": "route-confirmation-before-new-chain",
+      "winner": "route confirmation card before entering a new route",
+      "losers": [
+        "silent route switching",
+        "general-research fallback without asking",
+        "starting high-cost tools before user confirms route"
+      ],
+      "reason": "新链条、路线切换、高成本工具链、多 agent 编排、下载链、写入链或运行态配置链，都必须先询问用户确认；语义模糊时先用 1-3 个引导式问题缩小 route 和工具边界。"
+    },
+    {
+      "rule": "research-stage-advance-confirmation",
+      "winner": "research_logic_chain stage prompt and user confirmation",
+      "losers": [
+        "waiting for the user to manually remember the next research step",
+        "silently advancing to the next stage",
+        "treating polishing, review, formatting, and citation annotation as optional afterthoughts"
+      ],
+      "reason": "研究项目应按控制论反馈闭环主动识别当前阶段是否完成，并建议进入下一阶段；但推进必须经用户确认。默认链条覆盖实证/田野材料、文献获取、结构性阅读、PDF 标注、正文写作、图表、审稿、修改、再审、润色、语言复审和格式整理。"
+    },
+    {
+      "rule": "presentation-vs-paper-figure-boundary",
+      "winner": "research-presentation-studio for slide decks",
+      "losers": [
+        "research-figure-studio taking ordinary PPT work",
+        "figure-table-studio taking whole deck design",
+        "Presentations plugin without local slide manifest",
+        "guizang web deck template as citation or paper figure gate"
+      ],
+      "reason": "研究汇报、答辩、路演、PPTX 和网页演示文稿归 research-presentation-studio；正式论文图表仍归 research-figure-studio / figure-table-studio，引用证据仍归 evidence-based-literature-workflow 和 writing-reference-capture。"
+    },
+    {
+      "rule": "force-single-agent-does-not-cancel-review",
+      "winner": "single producer + mandatory reviewer when required_review_for is hit",
+      "losers": [
+        "force_single_agent disabling reviewer",
+        "single-agent bypass of mandatory review"
+      ],
+      "reason": "force_single_agent 只能压缩 producer 拆分，不能取消命中必审子集后的 reviewer gate。"
+    },
+    {
+      "rule": "dispatch-within-effective-permissions",
+      "winner": "effective_allowed_skills_mcp and effective_write_scope",
+      "losers": [
+        "dispatch-time permission expansion",
+        "output path outside effective write scope"
+      ],
+      "reason": "dispatch card 只是运行时收缩，不得通过 allowed_skills_mcp 或 output path 静默扩权。"
+    },
+    {
+      "rule": "target-specific-review-gates",
+      "winner": "review.<target_agent_id>.md + gate.<target_agent_id>.json",
+      "losers": [
+        "one-reviewer-per-run ambiguity",
+        "global gate without target mapping"
+      ],
+      "reason": "一个 run 中可能有多个 producer 和多个必审产物，review gate 必须按 target 显式建模。"
+    },
+    {
+      "rule": "orchestrator-subordinate-to-autopilot",
+      "winner": "research-autopilot -> research-team-orchestrator",
+      "losers": [
+        "research-team-orchestrator as top-level router",
+        "direct dispatch bootstrap without route selection"
+      ],
+      "reason": "research-team-orchestrator 只负责项目型多 agent 编排与 dispatch 落盘，不能跳过总路由、clarification card 和 profile 选择。"
+    },
+    {
+      "rule": "subagent-first-for-divisible-work",
+      "winner": "explicit subagent task cards with main-agent integration",
+      "losers": [
+        "main context doing all large discovery work",
+        "parallel agents without scoped tasks",
+        "subagent reports without evidence or next actions"
+      ],
+      "reason": "可拆分且上下文重的研究、执行、审稿、环境审计、文件盘点和测试任务，应优先用子 agent 分担；每个 agent 必须有任务卡、边界、迭代要求和证据化报告，主 agent 负责整合和复核。"
+    },
+    {
+      "rule": "pipeline-gates-before-stage-advance",
+      "winner": "research_pipeline_stages + quality_gates + validate_research_pipeline",
+      "losers": [
+        "free-form stage skipping",
+        "manual promotion without gate evidence"
+      ],
+      "reason": "项目推进不能只靠 dispatch 和 reviewer；涉及阶段切换时，必须经过 route 对应的 research pipeline stage 和 gate 检查。"
+    }
+  ],
+  "retired_skills": {
+    "project-kickoff-router": "replaced-by-research-autopilot",
+    "research-project-pilot": "replaced-by-research-autopilot",
+    "computational-social-science-pilot": "replaced-by-research-autopilot",
+    "project-ops-manager": "replaced-by-research-autopilot",
+    "knowledge-base-curator": "replaced-by-obsidian-research-sync"
+  }
+}

@@ -1,6 +1,11 @@
 entries:
+
   - evidence_id: E001
+
     material_id: M001
+
     verification_status: pending
+
     supports:
+
       - C001

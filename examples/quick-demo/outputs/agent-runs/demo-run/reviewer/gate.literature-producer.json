@@ -1,20 +1,39 @@
 {
+
   "run_id": "demo-run",
+
   "review_agent_id": "reviewer",
+
   "target_agent_id": "literature-producer",
+
   "gate_name": "doi_and_metadata_verified",
+
   "decision": "revise",
+
   "blocking_issues": [
+
     "No formal references have passed DOI verification."
+
   ],
+
   "non_blocking_issues": [
+
     "The search boundary is readable and can be reused."
+
   ],
+
   "approved_outputs": [],
+
   "required_actions": [
+
     {
+
       "owner_agent_id": "literature-producer",
+
       "action": "Verify candidate sources before producing synthesis."
+
     }
+
   ]
+
 }

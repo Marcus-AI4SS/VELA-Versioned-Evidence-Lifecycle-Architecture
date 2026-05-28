@@ -1,44 +1,87 @@
 {
+
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+
   "$id": "https://marcus-ai4ss.github.io/VELA/schemas/vela.public_export.manifest.v1.schema.json",
+
   "title": "VELA Public Export Manifest",
+
   "type": "object",
+
   "additionalProperties": true,
+
   "required": [
+
     "schema_version",
+
     "generated_at",
+
     "project",
+
     "source_root",
+
     "output_root",
+
     "included_paths",
+
     "excluded_paths",
+
     "validation_report"
+
   ],
+
   "properties": {
+
     "schema_version": { "const": "vela.public_export.manifest.v1" },
+
     "generated_at": { "type": "string", "minLength": 1 },
+
     "project": {
+
       "type": "object",
+
       "required": ["name"],
+
       "additionalProperties": true,
+
       "properties": {
+
         "id": { "type": "string" },
+
         "name": { "type": "string", "minLength": 1 }
+
       }
+
     },
+
     "source_root": { "type": "string" },
+
     "output_root": { "type": "string" },
+
     "included_paths": {
+
       "type": "array",
+
       "items": { "type": "string" }
+
     },
+
     "excluded_paths": {
+
       "type": "array",
+
       "items": { "type": "string" }
+
     },
+
     "validation_report": {
+
       "type": "object",
+
       "required": ["schema_version", "validator", "scope", "decision", "ok", "errors", "warnings"]
+
     }
+
   }
+
 }

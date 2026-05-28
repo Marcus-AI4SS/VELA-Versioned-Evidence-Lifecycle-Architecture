@@ -1,10 +1,19 @@
 {
+
   "schema_version": "vela.validation.report.v1",
+
   "validator": "project_validate",
+
   "scope": ".",
+
   "decision": "pass",
+
   "ok": true,
+
   "errors": [],
+
   "warnings": [],
+
   "checks": []
+
 }

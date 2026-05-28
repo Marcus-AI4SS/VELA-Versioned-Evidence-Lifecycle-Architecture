@@ -1,57 +1,113 @@
 {
+
   "project_name": "quick-demo",
+
   "route_id": "computational-social-science",
+
   "project_type": "computational-social-science",
+
   "project_scope_class": "always_multi_agent",
+
   "dispatch_run_id": "demo-run",
+
   "dispatch_stage": "planning",
+
   "pipeline_stage": "research_design",
+
   "status": "planned",
+
   "current_owner_agent_id": "project-manager",
+
   "current_owner_display_name": "Project Manager Agent",
+
   "blockers": [
+
     "Platform sampling boundary is not yet defined.",
+
     "Formal citations have not yet been verified."
+
   ],
+
   "next_quality_gates": [
+
     "research_question_defined",
+
     "method_boundary_declared",
+
     "doi_and_metadata_verified",
+
     "data_provenance_verified"
+
   ],
+
   "selected_agents": [
+
     "literature-producer",
+
     "analysis-producer",
+
     "project-manager",
+
     "reviewer"
+
   ],
+
   "selected_producers": [
+
     "literature-producer",
+
     "analysis-producer",
+
     "project-manager"
+
   ],
+
   "selected_reviewers": [
+
     "reviewer"
+
   ],
+
   "review_agents": {
+
     "literature-producer": "reviewer",
+
     "analysis-producer": "reviewer"
+
   },
+
   "milestones": [
+
     {
+
       "id": "route_explained",
+
       "label": "Route explanation completed",
+
       "status": "complete"
+
     },
+
     {
+
       "id": "dispatch_written",
+
       "label": "Dispatch artifact written",
+
       "status": "complete"
+
     },
+
     {
+
       "id": "first_review_gate",
+
       "label": "First reviewer gate pending",
+
       "status": "active"
+
     }
+
   ]
+
 }

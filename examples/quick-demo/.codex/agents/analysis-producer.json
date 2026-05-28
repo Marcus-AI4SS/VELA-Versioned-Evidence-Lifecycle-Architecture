@@ -1,29 +1,57 @@
 {
+
   "agent_id": "analysis-producer",
+
   "display_name": "Analysis Agent",
+
   "preferred_model": null,
+
   "role": "producer",
+
   "enabled": true,
+
   "isolation_method": null,
+
   "parallel_safe": null,
+
   "integration_review_required": null,
+
   "capability_tags_subset": null,
+
   "allowed_skills_mcp_subset": [
+
     "text-analysis",
+
     "digital-trace-pipeline",
+
     "reproducibility-package"
+
   ],
+
   "write_scope_subset": [
+
     "outputs/agent-runs/<run_id>/<agent_id>/"
+
   ],
+
   "max_execution_mode": null,
+
   "required_inputs": [
+
     "material-passport.yaml",
+
     "evidence-ledger.yaml"
+
   ],
+
   "expected_outputs": [
+
     "summary.md",
+
     "result.json"
+
   ],
+
   "review_gate": null
+
 }

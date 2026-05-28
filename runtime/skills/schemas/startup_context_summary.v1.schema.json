@@ -1,0 +1,185 @@
+{
+
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+
+  "$id": "https://marcus-ai4ss.github.io/VELA/schemas/startup_context_summary.v1.schema.json",
+
+  "title": "Startup Context Summary",
+
+  "type": "object",
+
+  "additionalProperties": false,
+
+  "required": [
+
+    "schema_version",
+
+    "generated_at",
+
+    "source_files_written",
+
+    "source_root",
+
+    "total_entry",
+
+    "layer_order",
+
+    "core_rules",
+
+    "runtime_adapters",
+
+    "selected_route_context",
+
+    "do_not_inject_by_default"
+
+  ],
+
+  "properties": {
+
+    "schema_version": {
+
+      "const": "startup_context_summary.v1"
+
+    },
+
+    "generated_at": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "source_files_written": {
+
+      "const": false
+
+    },
+
+    "source_root": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "total_entry": {
+
+      "const": "research-autopilot"
+
+    },
+
+    "layer_order": {
+
+      "$ref": "#/$defs/string_list"
+
+    },
+
+    "core_rules": {
+
+      "$ref": "#/$defs/string_list"
+
+    },
+
+    "runtime_adapters": {
+
+      "type": "array",
+
+      "items": {
+
+        "$ref": "#/$defs/runtime_adapter"
+
+      }
+
+    },
+
+    "selected_route_context": {
+
+      "type": [
+
+        "object",
+
+        "null"
+
+      ],
+
+      "additionalProperties": true
+
+    },
+
+    "do_not_inject_by_default": {
+
+      "$ref": "#/$defs/string_list"
+
+    }
+
+  },
+
+  "$defs": {
+
+    "string_list": {
+
+      "type": "array",
+
+      "minItems": 1,
+
+      "items": {
+
+        "type": "string",
+
+        "minLength": 1
+
+      }
+
+    },
+
+    "runtime_adapter": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+
+        "id",
+
+        "role",
+
+        "boundary"
+
+      ],
+
+      "properties": {
+
+        "id": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "role": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "boundary": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        }
+
+      }
+
+    }
+
+  }
+
+}

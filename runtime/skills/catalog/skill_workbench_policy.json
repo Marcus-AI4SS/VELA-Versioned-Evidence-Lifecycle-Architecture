@@ -1,0 +1,613 @@
+{
+
+  "$schema": "../schemas/skill_workbench_policy.v1.schema.json",
+
+  "schema_version": "skill_workbench_policy.v1",
+
+  "updated_at": "2026-05-27",
+
+  "policy": "Skill maintenance is a governed source-to-runtime workflow. External workbench repositories may contribute manifest, validation, packaging, and public-template patterns, but they must not become a second source of truth beside VELA catalogs, schemas, and validators.",
+
+  "source_review_refs": [
+
+    {
+
+      "upstream": "Jinze-Lee/codex-skills-workbench",
+
+      "repo_url": "https://github.com/Jinze-Lee/codex-skills-workbench",
+
+      "adopted_as": [
+
+        "manifested skill source mapping",
+
+        "source-note preservation",
+
+        "validate-before-install workflow",
+
+        "public-template scrub policy",
+
+        "keyword literature harvest status model",
+
+        "plotting tool selection adapter",
+
+        "R plotting micro-patterns for scatter, raincloud, weighted regression, and rich-text export",
+
+        "PPT image-wall manifest discipline",
+
+        "Chinese thesis DOCX manifest and placeholder workflow as explicit opt-in pattern"
+
+      ]
+
+    },
+
+    {
+
+      "upstream": "wanshuiyin/Auto-claude-code-research-in-sleep",
+
+      "repo_url": "https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep",
+
+      "adopted_as": [
+
+        "skill mirror drift awareness",
+
+        "canonical helper resolver discipline",
+
+        "review trace and resume-state discipline"
+
+      ]
+
+    },
+
+    {
+
+      "upstream": "Imbad0202/academic-research-skills",
+
+      "repo_url": "https://github.com/Imbad0202/academic-research-skills",
+
+      "adopted_as": [
+
+        "frontmatter metadata linting",
+
+        "data-access annotation",
+
+        "quality gate metadata"
+
+      ]
+
+    }
+
+  ],
+
+  "adoption_options": [
+
+    {
+
+      "id": "option_a_install_external_workbench",
+
+      "label": "直接安装外部工作台",
+
+      "decision": "reject_as_default",
+
+      "description": "把外部 codex-skills-workbench 作为本地技能主工作台，并让它直接安装到 Codex runtime。",
+
+      "strengths": [
+
+        "源笔记到 skill 的转换链路清楚",
+
+        "有 manifest 和安装脚本",
+
+        "适合管理独立小 skill 包"
+
+      ],
+
+      "risks": [
+
+        "会形成第二套技能源规则层",
+
+        "可能覆盖 research-autopilot 插件技能镜像",
+
+        "外部目录结构不理解本地 schema、route、profile 和质量门",
+
+        "容易误碰用户受保护的个人 skill"
+
+      ]
+
+    },
+
+    {
+
+      "id": "option_b_contract_first_local_workbench_policy",
+
+      "label": "契约优先采用",
+
+      "decision": "selected",
+
+      "description": "只采用外部工作台的 manifest、source-note、验证和安装边界思路，把它们写成 VELA catalog/schema/validator 规则；运行时仍由 VELA 脚本和 validate_vela_runtime 管理。",
+
+      "strengths": [
+
+        "不破坏 VELA 的 research-autopilot 总入口",
+
+        "能约束未来新增 skill 的源文件、运行时镜像和验证边界",
+
+        "能复用外部工作台的清晰维护模式",
+
+        "能和现有 runtime drift 校验共存"
+
+      ],
+
+      "risks": [
+
+        "需要维护一个新的 policy 文件和 validator",
+
+        "不是完整 GUI 工作台",
+
+        "不能自动把外部 skill 变成可用技能"
+
+      ]
+
+    },
+
+    {
+
+      "id": "option_c_source_notes_for_all_skills",
+
+      "label": "为所有技能建立源笔记镜像",
+
+      "decision": "watch",
+
+      "description": "把每个可编辑 skill 都拆成 source-notes 与 packaged SKILL.md 两层，由 manifest 驱动同步。",
+
+      "strengths": [
+
+        "适合公开模板化发布",
+
+        "便于把长说明和运行包分开维护",
+
+        "能减少直接编辑 runtime skill 的概率"
+
+      ],
+
+      "risks": [
+
+        "会大幅改变当前 research-autopilot 插件目录结构",
+
+        "迁移成本高",
+
+        "短期会增加源文件和 packaged 文件漂移风险"
+
+      ]
+
+    },
+
+    {
+
+      "id": "option_d_runtime_skill_editor",
+
+      "label": "运行时技能编辑器",
+
+      "decision": "reject_as_default",
+
+      "description": "让工具直接读写 <CODEX_HOME>/skills 下的 runtime skill，再反向导出到仓库。",
+
+      "strengths": [
+
+        "看起来修改即时生效",
+
+        "适合一次性个人试验"
+
+      ],
+
+      "risks": [
+
+        "会绕过 VELA source 规则层",
+
+        "会破坏 source-to-runtime 单向同步",
+
+        "会误把缓存和用户私有 skill 当成源文件",
+
+        "审计和回滚困难"
+
+      ]
+
+    }
+
+  ],
+
+  "selected_strategy": "option_b_contract_first_local_workbench_policy",
+
+  "local_boundaries": {
+
+    "source_of_truth": "<VELA_RUNTIME_ROOT>",
+
+    "runtime_mirrors": [
+
+      "<CODEX_HOME>/skills",
+
+      "<CODEX_HOME>/plugins/cache/vela-runtime-local/research-autopilot/0.1.0/skills"
+
+    ],
+
+    "external_repo_policy": "External repositories may be cloned under skills/outputs for review, but no external source directory is installed or treated as canonical until skill-vetter, catalog/schema updates, tests, and runtime sync pass.",
+
+    "protected_runtime_policy": "skills/catalog/protected_runtime_paths.json"
+
+  },
+
+  "package_contracts": [
+
+    {
+
+      "id": "research_autopilot_plugin_skill",
+
+      "scope": "Core research skills owned by the VELA runtime.",
+
+      "canonical_location": "skills/plugins/research-autopilot/skills/<skill>/SKILL.md",
+
+      "runtime_location": "<CODEX_HOME>/skills/<skill>/SKILL.md and plugin cache mirror",
+
+      "required_files": [
+
+        "SKILL.md"
+
+      ],
+
+      "validation": [
+
+        "sync_research_autopilot_skills.ps1 after source edits",
+
+        "validate_vela_runtime runtime drift check",
+
+        "relevant unit tests for touched skill"
+
+      ]
+
+    },
+
+    {
+
+      "id": "standalone_runtime_skill",
+
+      "scope": "User-installed or plugin-exposed Codex skills outside the repository source tree.",
+
+      "canonical_location": "none unless explicitly mirrored into this repository",
+
+      "runtime_location": "<CODEX_HOME>/skills/<skill>",
+
+      "required_files": [
+
+        "SKILL.md"
+
+      ],
+
+      "validation": [
+
+        "read metadata before adoption",
+
+        "do not write unless the user explicitly approves and the protected path policy allows it",
+
+        "port stable changes back to repository source before syncing"
+
+      ]
+
+    },
+
+    {
+
+      "id": "external_candidate_skill",
+
+      "scope": "Third-party repositories reviewed as pattern sources.",
+
+      "canonical_location": "skills/outputs/external-vetting or skills/outputs/x temporary review clone",
+
+      "runtime_location": "not installed by default",
+
+      "required_files": [
+
+        "README or equivalent index",
+
+        "SKILL.md or manifest when present"
+
+      ],
+
+      "validation": [
+
+        "skill-vetter decision",
+
+        "external_adoption_reviews.json entry",
+
+        "external_systems_research.json entry",
+
+        "no unreviewed script execution"
+
+      ]
+
+    },
+
+    {
+
+      "id": "project_local_contract",
+
+      "scope": "Per-project AGENTS.md and .codex/agents definitions.",
+
+      "canonical_location": "<project-root>/AGENTS.md and <project-root>/.codex/agents/*.json",
+
+      "runtime_location": "project directory only",
+
+      "required_files": [
+
+        "AGENTS.md",
+
+        ".codex/agents/*.json"
+
+      ],
+
+      "validation": [
+
+        "envctl init-project ensure-contract",
+
+        "validate_agents_contract when promoted to environment template",
+
+        "project quality gates before multi-agent execution"
+
+      ]
+
+    }
+
+  ],
+
+  "borrowed_patterns": [
+
+    {
+
+      "id": "manifested_skill_inventory",
+
+      "source": "Jinze-Lee/codex-skills-workbench/manifests/skills.json",
+
+      "local_adaptation": "Use skill_catalog.json and this workbench policy as the canonical inventory for local skills, categories, source/runtime boundaries, and invocation posture.",
+
+      "not_adopted": "Do not add a second manifests/skills.json that competes with skill_catalog.json."
+
+    },
+
+    {
+
+      "id": "source_note_preservation",
+
+      "source": "Jinze-Lee/codex-skills-workbench/source-notes and skills/*/references/source-note.md",
+
+      "local_adaptation": "For future public or narrow skills, keep the longer design note in references/ and keep SKILL.md as the activation contract.",
+
+      "not_adopted": "Do not split every current research-autopilot skill into generated source-note packages during this pass."
+
+    },
+
+    {
+
+      "id": "validate_before_install",
+
+      "source": "Jinze-Lee/codex-skills-workbench/scripts/validate-repo.ps1",
+
+      "local_adaptation": "Any source-to-runtime skill sync must run local validators before commit and validate_vela_runtime after sync.",
+
+      "not_adopted": "Do not use the external install-local-skills.ps1 to write the local Codex runtime."
+
+    },
+
+    {
+
+      "id": "public_template_scrub",
+
+      "source": "Jinze-Lee/codex-skills-workbench/docs/public-template.md",
+
+      "local_adaptation": "External promotion or VELA handoff must remove private paths, account identifiers, non-public project names, local output manifests, secrets, and dataset-specific facts.",
+
+      "not_adopted": "Do not treat the private VELA runtime as a publishable template without a separate scrub pass."
+
+    },
+
+    {
+
+      "id": "workbench_keyword_harvest_status_model",
+
+      "source": "Jinze-Lee/codex-skills-workbench/skills/keyword-literature-download",
+
+      "local_adaptation": "Reference-fulltext acquisition and evidence-based literature screening may borrow the no-dedup candidate table, priority table, PDF-only output folder, non-PDF cache separation, retry log, and dedup manifest model.",
+
+      "not_adopted": "Do not install the upstream PubMed/Europe PMC runtime as the default social-science acquisition path; biomedical APIs are used only when the topic calls for them."
+
+    },
+
+    {
+
+      "id": "workbench_plotting_tool_selection",
+
+      "source": "Jinze-Lee/codex-skills-workbench/skills/plotting-tool-selection",
+
+      "local_adaptation": "Figure-table-studio and research-figure-studio choose R, Python, PowerPoint, vector tools, spreadsheets, or image2 from final destination, data shape, modeling need, desktop visibility, and reproducibility requirements.",
+
+      "not_adopted": "Do not add a separate plotting-tool-selection skill that competes with the local figure routes."
+
+    },
+
+    {
+
+      "id": "workbench_r_plot_micro_patterns",
+
+      "source": "Jinze-Lee/codex-skills-workbench R plotting skills",
+
+      "local_adaptation": "Use the scatter, raincloud, weighted-regression, weighted-data, and ggplot2 rich-text notes as optional adapters inside figure-table-studio when a social-science empirical figure needs the same visual form.",
+
+      "not_adopted": "Do not make ecology-specific trait, hypervolume, or phylogeny workflows default social-science skills."
+
+    },
+
+    {
+
+      "id": "workbench_ppt_image_wall_manifest",
+
+      "source": "Jinze-Lee/codex-skills-workbench/skills/ppt-production-guide",
+
+      "local_adaptation": "Presentation work may borrow the figure/table manifest, custom image-wall layout, slide-size-first placement, aspect-ratio preservation, and preview/PDF QA pattern.",
+
+      "not_adopted": "Do not require visible PowerPoint COM automation by default; use it only after the user asks or confirms visible desktop generation."
+
+    },
+
+    {
+
+      "id": "workbench_thesis_docx_manifest_watch",
+
+      "source": "Jinze-Lee/codex-skills-workbench/skills/master-thesis-studio-skill",
+
+      "local_adaptation": "Chinese thesis or long-form Word work can borrow project manifests, decisions logs, figure/table/code/data manifests, placeholder tokens, and template-preserving DOCX output when the user explicitly asks for a thesis studio flow.",
+
+      "not_adopted": "Do not auto-trigger a thesis-specific skill for ordinary论文写作、DOCX导出、中文期刊排版或学术润色。"
+
+    },
+
+    {
+
+      "id": "canonical_helper_resolution",
+
+      "source": "wanshuiyin/Auto-claude-code-research-in-sleep shared integration-contract pattern",
+
+      "local_adaptation": "Skill instructions should call local envctl/scripts through stable repository paths and avoid hard-coded stale helper paths.",
+
+      "not_adopted": "Do not import ARIS helper cache or provider runtime as a new main runtime."
+
+    },
+
+    {
+
+      "id": "frontmatter_metadata_lint",
+
+      "source": "Imbad0202/academic-research-skills scripts/_skill_lint.py and metadata checks",
+
+      "local_adaptation": "Keep task_type, data_access_level, quality_gate_required, stage_scope, and subagent_allowed in skill_catalog/routing metadata and validate them through stack checks.",
+
+      "not_adopted": "Do not require every runtime mirror skill to carry all metadata directly in SKILL.md frontmatter."
+
+    }
+
+  ],
+
+  "required_workflow": [
+
+    {
+
+      "order": 1,
+
+      "id": "candidate_review",
+
+      "action": "Clone or inspect the external candidate in the repository output review area and record source URL, observed commit or archive state, and file inventory.",
+
+      "output": "external review notes or updated external_systems_research.json entry"
+
+    },
+
+    {
+
+      "order": 2,
+
+      "id": "skill_vetting",
+
+      "action": "Classify the candidate as keep, adapt, watch, or reject using task relevance, maintenance, Codex compatibility, permission risk, overlap, and fallback cost.",
+
+      "output": "external_adoption_reviews.json entry"
+
+    },
+
+    {
+
+      "order": 3,
+
+      "id": "local_contract_update",
+
+      "action": "Translate accepted patterns into local catalog, schema, validator, skill, or test changes; never bulk-copy an external runtime.",
+
+      "output": "tracked local source changes"
+
+    },
+
+    {
+
+      "order": 4,
+
+      "id": "runtime_sync",
+
+      "action": "If research-autopilot skills changed, run sync_research_autopilot_skills.ps1 to update standalone and plugin-cache mirrors.",
+
+      "output": "runtime mirrors aligned with source"
+
+    },
+
+    {
+
+      "order": 5,
+
+      "id": "validation_and_commit",
+
+      "action": "Run relevant unit tests, envctl validate targets, mandatory validators, and validate_vela_runtime before committing.",
+
+      "output": "clean worktree or explicit residual risk report"
+
+    }
+
+  ],
+
+  "safety_rules": [
+
+    {
+
+      "id": "no_runtime_first_source_edits",
+
+      "rule": "Do not treat edits under <CODEX_HOME>/skills as canonical environment changes; port durable changes back to repository source first.",
+
+      "failure_action": "Stop and report runtime/source drift; do not sync until the repository source is updated."
+
+    },
+
+    {
+
+      "id": "no_external_install_without_gate",
+
+      "rule": "Do not install, execute, or mirror third-party skill bundles before skill-vetter review, local adaptation decision, and validator coverage.",
+
+      "failure_action": "Keep the candidate in review-only status."
+
+    },
+
+    {
+
+      "id": "no_private_path_publication",
+
+      "rule": "Do not promote local paths, account IDs, cookies, project names, non-public data identifiers, or generated output manifests into public templates or VELA-facing artifacts.",
+
+      "failure_action": "Block promotion and require a scrub report."
+
+    },
+
+    {
+
+      "id": "validate_before_runtime_sync",
+
+      "rule": "Do not sync research-autopilot skill changes into runtime mirrors unless the relevant source files are tracked and local tests or validators cover the changed contract.",
+
+      "failure_action": "Leave runtime untouched and return a source validation blocker."
+
+    },
+
+    {
+
+      "id": "no_protected_skill_mutation",
+
+      "rule": "Do not write, sync, overwrite, clean, or mutate protected runtime skill paths from the public VELA distribution.",
+
+      "failure_action": "Stop and report the protected runtime boundary."
+
+    }
+
+  ]
+
+}

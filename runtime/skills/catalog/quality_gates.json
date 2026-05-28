@@ -1,0 +1,735 @@
+{
+
+  "allowed_decisions": [
+
+    "pending",
+
+    "pass",
+
+    "revise",
+
+    "block",
+
+    "not_applicable"
+
+  ],
+
+  "gates": [
+
+    {
+
+      "id": "research_question_defined",
+
+      "label": "研究问题已定义",
+
+      "blocking": true,
+
+      "description": "研究问题、核心对象、因果或解释目标已经明确，避免项目在无问题定义状态下进入下游执行。",
+
+      "stage_ids": [
+
+        "research_design"
+
+      ],
+
+      "route_ids": [
+
+        "literature-review",
+
+        "social-platform-case",
+
+        "computational-social-science",
+
+        "social-science-submission-package",
+
+        "empirical-quant",
+
+        "text-corpus",
+
+        "network-analysis",
+
+        "general-research",
+
+        "evidence-based-literature-workflow"
+
+      ]
+
+    },
+
+    {
+
+      "id": "method_boundary_declared",
+
+      "label": "方法边界已声明",
+
+      "blocking": true,
+
+      "description": "研究设计已明确边界、识别逻辑、材料范围与不做什么，避免无边界扩张。",
+
+      "stage_ids": [
+
+        "research_design"
+
+      ],
+
+      "route_ids": [
+
+        "literature-review",
+
+        "social-platform-case",
+
+        "computational-social-science",
+
+        "social-science-submission-package",
+
+        "empirical-quant",
+
+        "text-corpus",
+
+        "network-analysis",
+
+        "general-research",
+
+        "evidence-based-literature-workflow"
+
+      ]
+
+    },
+
+    {
+
+      "id": "doi_and_metadata_verified",
+
+      "label": "引用证据与元数据核验通过",
+
+      "blocking": true,
+
+      "description": "正式引用必须完成作者、年份、标题与正式来源核验；证据材料里出现 DOI 时必须核验。无 DOI 条目可以用用户提供来源、完整论文 PDF 原文或公开学术检索记录作为 DOI 豁免证据；无上述证据不得通过。",
+
+      "required_report": "logs/quality-gates/citation-verification-report.json",
+
+      "helper_rules": "catalog/citation_verification_rules.json",
+
+      "stage_ids": [
+
+        "citation_verification"
+
+      ],
+
+      "route_ids": [
+
+        "single-paper-review",
+
+        "literature-review",
+
+        "computational-social-science",
+
+        "social-science-submission-package",
+
+        "writing-export",
+
+        "evidence-based-literature-workflow"
+
+      ]
+
+    },
+
+    {
+
+      "id": "data_provenance_verified",
+
+      "label": "数据来源与材料来源已核实",
+
+      "blocking": true,
+
+      "description": "数据或平台材料的获取来源、时间、方式和可追溯性已记录。",
+
+      "stage_ids": [
+
+        "data_material_acquisition"
+
+      ],
+
+      "route_ids": [
+
+        "social-platform-case",
+
+        "computational-social-science",
+
+        "empirical-quant",
+
+        "text-corpus",
+
+        "network-analysis",
+
+        "evidence-based-literature-workflow"
+
+      ]
+
+    },
+
+    {
+
+      "id": "platform_ethics_checked",
+
+      "label": "平台伦理与权限边界已检查",
+
+      "blocking": true,
+
+      "description": "平台内容读取、登录态可见内容、评论采集或敏感数字踪迹任务已完成伦理与权限边界检查。",
+
+      "stage_ids": [
+
+        "data_material_acquisition"
+
+      ],
+
+      "route_ids": [
+
+        "social-platform-case",
+
+        "computational-social-science",
+
+        "text-corpus"
+
+      ]
+
+    },
+
+    {
+
+      "id": "measurement_validity_checked",
+
+      "label": "测量效度已检查",
+
+      "blocking": true,
+
+      "description": "变量、指标、编码规则或代理测量已说明其有效性与局限。",
+
+      "stage_ids": [
+
+        "analysis_execution"
+
+      ],
+
+      "route_ids": [
+
+        "computational-social-science",
+
+        "empirical-quant",
+
+        "text-corpus",
+
+        "network-analysis"
+
+      ]
+
+    },
+
+    {
+
+      "id": "causal_identification_checked",
+
+      "label": "因果识别已检查",
+
+      "blocking": true,
+
+      "description": "量化研究在使用因果、影响、机制或政策效果表述前，必须先明确估计目标、识别策略、关键假设、诊断检查、稳健性矩阵和表图解释边界；不能把相关关系、预测模型或未诊断的旧默认方法写成因果结论。",
+
+      "required_report": "logs/quality-gates/empirical-quant-report.json",
+
+      "helper_rules": "catalog/empirical_quant_workflow.json",
+
+      "required_checks": [
+
+        "empirical_question_intake",
+
+        "design_family_selected",
+
+        "estimand_or_statistic_declared",
+
+        "identifying_assumption_stated",
+
+        "diagnostics_checklist_planned",
+
+        "causal_identification_red_flags",
+
+        "robustness_matrix_planned",
+
+        "causal_claim_boundary_checked",
+
+        "replication_artifacts_mapped"
+
+      ],
+
+      "stage_ids": [
+
+        "analysis_execution"
+
+      ],
+
+      "route_ids": [
+
+        "empirical-quant",
+
+        "computational-social-science",
+
+        "social-science-submission-package"
+
+      ]
+
+    },
+
+    {
+
+      "id": "coding_consistency_checked",
+
+      "label": "编码一致性已检查",
+
+      "blocking": true,
+
+      "description": "质性编码、文本标签、人工校验或多轮归纳标准已记录并检查一致性。",
+
+      "stage_ids": [
+
+        "analysis_execution"
+
+      ],
+
+      "route_ids": [
+
+        "computational-social-science",
+
+        "text-corpus"
+
+      ]
+
+    },
+
+    {
+
+      "id": "network_edge_defined",
+
+      "label": "网络边定义已明确",
+
+      "blocking": true,
+
+      "description": "网络研究中的节点、边、时间窗口和边形成机制已经明示。",
+
+      "stage_ids": [
+
+        "analysis_execution"
+
+      ],
+
+      "route_ids": [
+
+        "computational-social-science",
+
+        "network-analysis"
+
+      ]
+
+    },
+
+    {
+
+      "id": "abm_parameter_justified",
+
+      "label": "ABM 参数与规则已说明",
+
+      "blocking": true,
+
+      "description": "代理人规则、参数区间、初始化条件和敏感性设计已有明确依据。",
+
+      "stage_ids": [
+
+        "analysis_execution"
+
+      ],
+
+      "route_ids": [
+
+        "computational-social-science"
+
+      ]
+
+    },
+
+    {
+
+      "id": "figure_table_consistency_checked",
+
+      "label": "图表与正文一致性已检查",
+
+      "blocking": true,
+
+      "description": "图、表、正文叙述、结果解释和版本号已经一致；论文级图表还需通过社科出版图表契约，明确图表主张、证据层级、样本口径、不确定性、来源、image2 结构锁定和可编辑输出。",
+
+      "required_report": "logs/quality-gates/figure-table-report.json",
+
+      "helper_rules": "catalog/publication_style_rules.json",
+
+      "required_checks": [
+
+        "figure_claim_contract",
+
+        "panel_evidence_hierarchy",
+
+        "publication_visual_style",
+
+        "caption_source_traceability",
+
+        "top_journal_empirical_graph_conventions",
+
+        "image2_locked_structure_contract",
+
+        "figure_brief_before_rendering",
+
+        "config_block_reproducibility",
+
+        "data_health_before_plotting",
+
+        "process_data_traceability",
+
+        "justified_statistics_annotations",
+
+        "typography_font_size_specification",
+
+        "figure_size_resolution_contract",
+
+        "caption_what_how_so_what",
+
+        "multi_format_export_and_editable_source",
+
+        "renderer_selection_by_deliverable",
+
+        "r_plot_adapter_output_bundle",
+
+        "chart_type_selection_by_evidence_need",
+
+        "figure_table_title_caption_plainness"
+
+      ],
+
+      "stage_ids": [
+
+        "writing_synthesis",
+
+        "review_revision"
+
+      ],
+
+      "route_ids": [
+
+        "research-figure-design",
+
+        "computational-social-science",
+
+        "social-science-submission-package",
+
+        "empirical-quant",
+
+        "text-corpus",
+
+        "network-analysis"
+
+      ]
+
+    },
+
+    {
+
+      "id": "presentation_quality_checked",
+
+      "label": "演示文稿质量已检查",
+
+      "blocking": true,
+
+      "description": "研究汇报、答辩、路演或 PPTX/web deck 已完成叙事骨架、视觉系统、版式、图片槽位、证据边界、预览和可读性检查；瑞士风 HTML deck 必须通过登记版式校验。",
+
+      "required_report": "logs/quality-gates/presentation-quality-report.json",
+
+      "helper_rules": "catalog/research_presentation_workflow.json",
+
+      "required_checks": [
+
+        "style_system_declared",
+
+        "slide_manifest_before_generation",
+
+        "swiss_locked_layout_validated",
+
+        "image_slot_and_screenshot_fidelity_checked",
+
+        "readability_and_navigation_checked",
+
+        "evidence_boundary_checked"
+
+      ],
+
+      "stage_ids": [
+
+        "writing_synthesis",
+
+        "review_revision",
+
+        "package_freeze"
+
+      ],
+
+      "route_ids": [
+
+        "research-presentation"
+
+      ]
+
+    },
+
+    {
+
+      "id": "writing_quality_checked",
+
+      "label": "写作质量已检查",
+
+      "blocking": true,
+
+      "description": "已检查逻辑完整性、空洞表述、引文对位、表达密度、章节职责、主张强度、证据边界、段落控制、目标期刊风格证据边界、去模板化前锁定不可改项与改后二次复查，以及人文社科论文中的问题框架、理论-材料贴合、引文后分析、章节推进、术语一致性和脚注规范。",
+
+      "required_report": "logs/quality-gates/writing-quality-report.json",
+
+      "required_checks": [
+
+        "style_calibration",
+
+        "argument_chain_closure",
+
+        "citation_alignment",
+
+        "empty_phrase_scan",
+
+        "section_logic_reader_flow",
+
+        "language_target_declared",
+
+        "discipline_style_declared",
+
+        "claim_strength_and_boundary",
+
+        "section_job_checked",
+
+        "results_discussion_boundary",
+
+        "polishing_failure_mode_diagnosed",
+
+        "title_abstract_searchability_checked",
+
+        "sentence_paragraph_control",
+
+        "format_container_preserved",
+
+        "minimal_delta_or_rewrite_scope_declared",
+
+        "humanized_surface_without_claim_change",
+
+        "data_bound_results_analysis",
+
+        "venue_migration_checklist",
+
+        "humanities_problem_framing_declared",
+
+        "theory_material_fit_checked",
+
+        "quote_analysis_followup_checked",
+
+        "chapter_progression_checked",
+
+        "terminology_consistency_checked",
+
+        "footnote_format_and_function_checked",
+
+        "target_journal_style_profile_checked",
+
+        "humanization_locked_items_checked",
+
+        "humanization_second_pass_checked"
+
+      ],
+
+      "helper_rules": "catalog/writing_quality_rules.json",
+
+      "stage_ids": [
+
+        "paper_assessment",
+
+        "writing_synthesis",
+
+        "review_revision"
+
+      ],
+
+      "route_ids": [
+
+        "single-paper-review",
+
+        "literature-review",
+
+        "computational-social-science",
+
+        "social-science-submission-package",
+
+        "writing-export",
+
+        "evidence-based-literature-workflow"
+
+      ]
+
+    },
+
+    {
+
+      "id": "peer_review_protocol_checked",
+
+      "label": "审稿协议已检查",
+
+      "blocking": true,
+
+      "description": "单篇审稿、投稿前内审、返修回复和投稿包总审必须按 peer_review_workflow 合同记录模式、已读边界、问题账本、细微逻辑漏洞、角色分歧、返修追踪和阻断项；不得让 reviewer 直接改主产物。",
+
+      "required_report": "logs/quality-gates/peer-review-report.json",
+
+      "helper_rules": "catalog/peer_review_workflow.json",
+
+      "required_checks": [
+
+        "review_run_card",
+
+        "metadata_access_boundary",
+
+        "issue_ledger_complete",
+
+        "subtle_logic_flaw_audit",
+
+        "role_review_or_reasoned_skip",
+
+        "response_tracker_when_revision",
+
+        "integration_decision"
+
+      ],
+
+      "stage_ids": [
+
+        "paper_assessment",
+
+        "review_revision",
+
+        "package_freeze"
+
+      ],
+
+      "route_ids": [
+
+        "single-paper-review",
+
+        "social-science-submission-package",
+
+        "writing-export"
+
+      ]
+
+    },
+
+    {
+
+      "id": "reproducibility_bundle_verified",
+
+      "label": "复现包已核实",
+
+      "blocking": true,
+
+      "description": "脚本、输入输出、环境说明与 rerun 路径已经足以复跑关键结果。",
+
+      "stage_ids": [
+
+        "package_freeze"
+
+      ],
+
+      "route_ids": [
+
+        "computational-social-science",
+
+        "social-science-submission-package",
+
+        "empirical-quant",
+
+        "text-corpus",
+
+        "network-analysis"
+
+      ]
+
+    },
+
+    {
+
+      "id": "final_package_frozen",
+
+      "label": "最终交付包已冻结",
+
+      "blocking": true,
+
+      "description": "最终送审稿、图表、引用、附录和支持材料已进入冻结状态。",
+
+      "stage_ids": [
+
+        "package_freeze"
+
+      ],
+
+      "route_ids": [
+
+        "social-science-submission-package",
+
+        "writing-export",
+
+        "computational-social-science",
+
+        "empirical-quant",
+
+        "text-corpus",
+
+        "network-analysis"
+
+      ]
+
+    },
+
+    {
+
+      "id": "retrospective_recorded",
+
+      "label": "项目复盘已记录",
+
+      "blocking": true,
+
+      "description": "项目结束后的复盘、演化建议和知识沉淀入口已经记录。",
+
+      "stage_ids": [
+
+        "project_retrospective"
+
+      ],
+
+      "route_ids": [
+
+        "project-retrospective"
+
+      ]
+
+    }
+
+  ]
+
+}

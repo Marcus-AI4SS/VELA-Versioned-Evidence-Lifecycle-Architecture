@@ -1,0 +1,259 @@
+{
+
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+
+  "$id": "https://marcus-ai4ss.github.io/VELA/schemas/publication_style_rules.v1.schema.json",
+
+  "title": "Social Science Publication Style Rules",
+
+  "type": "object",
+
+  "additionalProperties": false,
+
+  "required": [
+
+    "$schema",
+
+    "schema_version",
+
+    "updated_at",
+
+    "policy",
+
+    "source_review_ref",
+
+    "figure_table",
+
+    "writing",
+
+    "review_response",
+
+    "data_availability",
+
+    "rejected_defaults"
+
+  ],
+
+  "properties": {
+
+    "$schema": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "schema_version": {
+
+      "const": "publication_style_rules.v1"
+
+    },
+
+    "updated_at": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "policy": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "source_review_ref": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "figure_table": {
+
+      "$ref": "#/$defs/rule_section"
+
+    },
+
+    "writing": {
+
+      "$ref": "#/$defs/rule_section"
+
+    },
+
+    "review_response": {
+
+      "$ref": "#/$defs/rule_section"
+
+    },
+
+    "data_availability": {
+
+      "$ref": "#/$defs/rule_section"
+
+    },
+
+    "rejected_defaults": {
+
+      "$ref": "#/$defs/string_list"
+
+    }
+
+  },
+
+  "$defs": {
+
+    "string_list": {
+
+      "type": "array",
+
+      "items": {
+
+        "type": "string",
+
+        "minLength": 1
+
+      },
+
+      "uniqueItems": true
+
+    },
+
+    "rule_section": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+
+        "owner_skill",
+
+        "target_routes",
+
+        "rules"
+
+      ],
+
+      "properties": {
+
+        "owner_skill": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "target_routes": {
+
+          "$ref": "#/$defs/string_list"
+
+        },
+
+        "rules": {
+
+          "type": "array",
+
+          "minItems": 1,
+
+          "items": {
+
+            "$ref": "#/$defs/rule"
+
+          }
+
+        }
+
+      }
+
+    },
+
+    "rule": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+
+        "id",
+
+        "label",
+
+        "requirement",
+
+        "social_science_adaptation",
+
+        "upstream_inspiration"
+
+      ],
+
+      "properties": {
+
+        "id": {
+
+          "type": "string",
+
+          "minLength": 1,
+
+          "pattern": "^[a-z0-9][a-z0-9_\\-]*$"
+
+        },
+
+        "label": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "requirement": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "social_science_adaptation": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "upstream_inspiration": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "examples": {
+
+          "$ref": "#/$defs/string_list"
+
+        },
+
+        "reject_when": {
+
+          "$ref": "#/$defs/string_list"
+
+        }
+
+      }
+
+    }
+
+  }
+
+}

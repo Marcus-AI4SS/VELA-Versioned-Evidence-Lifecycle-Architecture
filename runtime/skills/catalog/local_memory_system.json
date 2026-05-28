@@ -1,0 +1,963 @@
+{
+
+  "$schema": "../schemas/local_memory_system.v1.schema.json",
+
+  "schema_version": "local_memory_system.v1",
+
+  "generated_at": "2026-05-27",
+
+  "selected_plan": {
+
+    "id": "contract-governed-agentmemory-runtime",
+
+    "name": "VELA 契约治理 + agentmemory 运行态记忆增强",
+
+    "status": "selected",
+
+    "rationale": "VELA repository remains the source-rule layer. agentmemory handles runtime memory capture, retrieval, audit, and deletion; any memory promoted into formal rules must pass schema checks, envctl validators, quality gates, and Git review."
+
+  },
+
+  "design_principles": [
+
+    "记忆先成为候选，再决定是否沉淀。",
+
+    "越用越顺手依靠可验证的偏好、纠错和项目复盘，不依靠无边界吞 transcript。",
+
+    "Source rules live in the VELA Git repository; runtime caches are derived state and cannot override rules.",
+
+    "自动落地只处理低风险、可回滚、有日志、有校验的动作。",
+
+    "运行态记忆可以使用经过验证的 agentmemory 常驻服务，但它只是候选记忆和召回层，不是源规则层。",
+
+    "默认不开启 LLM 压缩、自动上下文注入、全量 transcript 导入和自动规则写入。",
+
+    "代码结构上下文由 codegraph 索引辅助，不替代 rg、validator、代码审查和 Git 历史。",
+
+    "后台服务必须有健康检查、端口边界、数据目录边界和可停止/可删除路径。"
+
+  ],
+
+  "external_inputs": [
+
+    {
+
+      "repo": "384961890-ui/Brain-v1.2.0",
+
+      "decision": "adapt",
+
+      "absorbed_patterns": [
+
+        "healthcheck and stats as first-class status outputs",
+
+        "store/recall/list/forget style tool surface naming",
+
+        "file lock and stale lock awareness for future long-running tools"
+
+      ],
+
+      "rejected_patterns": [
+
+        "Brain MCP as a second memory authority",
+
+        "LanceDB or QMD runtime as a default dependency",
+
+        "destructive forget/cleanup tools without explicit confirmation"
+
+      ]
+
+    },
+
+    {
+
+      "repo": "yyy-yq1/vector-memory-system",
+
+      "decision": "watch",
+
+      "absorbed_patterns": [
+
+        "quality filters before memory admission",
+
+        "heat, occurrence, age and decay metadata",
+
+        "BM25 plus semantic plus RRF as a future optional retrieval idea"
+
+      ],
+
+      "rejected_patterns": [
+
+        "Qdrant or embedding service as a default runtime",
+
+        "automatic transcript ingestion",
+
+        "identity or soul layer as research-environment source truth"
+
+      ]
+
+    },
+
+    {
+
+      "repo": "qslowprofile/OpenClaw-memory-knowledge-Management",
+
+      "decision": "adapt",
+
+      "absorbed_patterns": [
+
+        "persist/private/ephemeral memory policy",
+
+        "formation mode and trust tier metadata",
+
+        "last-status and probe-style self-check reports"
+
+      ],
+
+      "rejected_patterns": [
+
+        "startup hook that writes user-level directories",
+
+        "monolithic migration script as VELA runtime core",
+
+        "automatic repair that mutates source rules without validation"
+
+      ]
+
+    },
+
+    {
+
+      "repo": "rohitg00/agentmemory",
+
+      "decision": "adapt",
+
+      "absorbed_patterns": [
+
+        "persistent memory server shared across sessions and agents",
+
+        "hybrid search, smart search, session history, audit, export, and governance delete interfaces",
+
+        "Codex MCP integration plus lifecycle hooks for session and tool observations",
+
+        "privacy-first defaults that strip secrets and keep LLM compression and context injection opt-in",
+
+        "viewer and health endpoints for observability"
+
+      ],
+
+      "rejected_patterns": [
+
+        "making agentmemory the source-of-truth rule engine",
+
+        "auto-promoting recalled memories into AGENTS, skills, governance kernel, or routing contracts",
+
+        "full transcript import as a default behavior",
+
+        "enabling LLM compression, agent-sdk fallback, or prompt injection without explicit cost and stability review",
+
+        "storing secrets, cookies, captcha states, or private project facts as global rules"
+
+      ]
+
+    }
+
+  ],
+
+  "memory_layers": [
+
+    {
+
+      "id": "ephemeral_session",
+
+      "purpose": "本轮任务的临时路径、失败命令、网页状态和短期上下文。",
+
+      "default_target": "discard",
+
+      "ttl_days": 7,
+
+      "auto_promotion_allowed": false
+
+    },
+
+    {
+
+      "id": "project_memory",
+
+      "purpose": "项目事实、阶段、材料边界和项目内证据链。",
+
+      "default_target": "obsidian",
+
+      "ttl_days": null,
+
+      "auto_promotion_allowed": false
+
+    },
+
+    {
+
+      "id": "private_preference",
+
+      "purpose": "用户协作偏好、语言偏好和仅指向源规则的入口提示。",
+
+      "default_target": "codex_native",
+
+      "ttl_days": 90,
+
+      "auto_promotion_allowed": false
+
+    },
+
+    {
+
+      "id": "procedural_memory",
+
+      "purpose": "可复用流程、路由修正规则、工具调用顺序和质量清单。",
+
+      "default_target": "skill",
+
+      "ttl_days": null,
+
+      "auto_promotion_allowed": false
+
+    },
+
+    {
+
+      "id": "control_memory",
+
+      "purpose": "会改变总路由、权限、验证逻辑或稳定性指标的底层规则。",
+
+      "default_target": "governance_kernel",
+
+      "ttl_days": null,
+
+      "auto_promotion_allowed": false
+
+    },
+
+    {
+
+      "id": "discarded_noise",
+
+      "purpose": "一次性噪声、无证据断言、过时路径、泄密风险项和重复低价值内容。",
+
+      "default_target": "discard",
+
+      "ttl_days": 1,
+
+      "auto_promotion_allowed": false
+
+    }
+
+  ],
+
+  "candidate_pipeline": {
+
+    "steps": [
+
+      "capture",
+
+      "normalize",
+
+      "score",
+
+      "route",
+
+      "review_or_promote",
+
+      "decay_or_forget",
+
+      "correction"
+
+    ],
+
+    "default_candidate_status": "candidate",
+
+    "promotion_rules": [
+
+      "用户明确说以后都这样，才可提高 user_confirmed。",
+
+      "同一模式至少两次跨任务出现，才可从临时信号进入候选。",
+
+      "进入 skill 前必须有最小测试或明确人工确认。",
+
+      "进入 governance_kernel 前必须通过 envctl validate governance。",
+
+      "正式学术引用、论文事实和 DOI 不进入普通记忆，必须走 citation gate。"
+
+    ],
+
+    "hard_block_rules": [
+
+      "包含 secret、token、cookie、账号细节或验证码状态。",
+
+      "把私有内容写入 Git 源仓。",
+
+      "把一次性聊天噪声写成全局规则。",
+
+      "与 AGENTS、governance kernel、citation gate 或 protected runtime paths 冲突。",
+
+      "未核验论文事实试图进入正式引用链。"
+
+    ]
+
+  },
+
+  "retrieval_policy": {
+
+    "enabled_interfaces": [
+
+      "keyword_search",
+
+      "semantic_search_optional_dry_run",
+
+      "cross_session_context_injection_gated",
+
+      "confidence_evaluation",
+
+      "decision_archive",
+
+      "task_tracking",
+
+      "memory_cleanup",
+
+      "conversation_snapshot",
+
+      "task_status",
+
+      "memory_list_delete",
+
+      "agentmemory_smart_search",
+
+      "agentmemory_session_history",
+
+      "agentmemory_governance_delete",
+
+      "codegraph_context_index"
+
+    ],
+
+    "default_retrieval_order": [
+
+      "current_project_truth_sources",
+
+      "active_route_and_stage_state",
+
+      "decision_archive",
+
+      "keyword_search",
+
+      "optional_semantic_search_dry_run",
+
+      "agentmemory_smart_search",
+
+      "codegraph_context_index"
+
+    ],
+
+    "cross_session_injection_policy": [
+
+      "inject only compact summaries, source refs, confidence, and route-stage state",
+
+      "never inject raw full transcripts by default",
+
+      "when route is ambiguous, use injected context only to ask better questions, not to silently switch routes",
+
+      "private or project-specific memories must not become global rules without user confirmation and validator support"
+
+    ],
+
+    "confidence_policy": [
+
+      "every recalled memory must expose source type, age, occurrence count, and confidence band",
+
+      "low-confidence recall should produce a clarification question instead of an automatic action",
+
+      "conflicting memories are routed to decision_archive review rather than merged silently"
+
+    ],
+
+    "task_state_policy": [
+
+      "track current route, lifecycle stage, open blockers, last verified gate, and next recommended stage",
+
+      "task status can guide prompts but cannot override research_pipeline_stages or quality gates",
+
+      "completed project lessons enter evolution_backlog or Obsidian through project-retrospective-evolver"
+
+    ],
+
+    "cleanup_policy": [
+
+      "support list and delete for candidate memories and status reports",
+
+      "expire ephemeral session memories by ttl unless promoted through review",
+
+      "cleanup must preserve git history, validator logs, and protected path records"
+
+    ],
+
+    "interface_controls": [
+
+      {
+
+        "interface": "confidence_evaluation",
+
+        "purpose": "给每条被召回的记忆标明可信度，避免把弱记忆直接当规则使用。",
+
+        "required_fields": [
+
+          "source_ref",
+
+          "source_type",
+
+          "confidence_band",
+
+          "occurrence_count",
+
+          "recency",
+
+          "conflict_status"
+
+        ],
+
+        "safety_rules": [
+
+          "low confidence must ask a clarification question",
+
+          "conflicting recall must enter decision_archive instead of being merged silently"
+
+        ],
+
+        "failure_behavior": "If confidence metadata is missing, treat the recall as a candidate hint only."
+
+      },
+
+      {
+
+        "interface": "decision_archive",
+
+        "purpose": "记录路线选择、规则升格、拒绝和回滚理由，形成可审计决策档案。",
+
+        "required_fields": [
+
+          "decision_id",
+
+          "route_id",
+
+          "source_ref",
+
+          "decision",
+
+          "reason",
+
+          "validator_gate",
+
+          "timestamp"
+
+        ],
+
+        "safety_rules": [
+
+          "durable rule changes must reference a decision record",
+
+          "rejected or conflicting memories must stay visible for review"
+
+        ],
+
+        "failure_behavior": "If no decision record exists, do not promote runtime memory into source rules."
+
+      },
+
+      {
+
+        "interface": "task_tracking",
+
+        "purpose": "记录当前任务链条的开始、暂停、完成、转入下一阶段等状态变化。",
+
+        "required_fields": [
+
+          "task_id",
+
+          "route_id",
+
+          "current_stage",
+
+          "event",
+
+          "timestamp",
+
+          "next_action"
+
+        ],
+
+        "safety_rules": [
+
+          "task tracking is observational and cannot silently start a new route",
+
+          "new chain creation should ask the user for confirmation when intent is ambiguous"
+
+        ],
+
+        "failure_behavior": "If task tracking is absent, continue with current context and ask before opening a new chain."
+
+      },
+
+      {
+
+        "interface": "task_status",
+
+        "purpose": "保存当前路线、研究阶段、阻塞点和下一步建议，帮助新线程快速续接。",
+
+        "required_fields": [
+
+          "route_id",
+
+          "lifecycle_stage",
+
+          "last_verified_gate",
+
+          "open_blockers",
+
+          "next_recommended_stage"
+
+        ],
+
+        "safety_rules": [
+
+          "task status can guide prompts but cannot override pipeline gates",
+
+          "stage transition should ask the user when the intent is ambiguous"
+
+        ],
+
+        "failure_behavior": "If task status is missing, ask the user to confirm the current route and stage."
+
+      },
+
+      {
+
+        "interface": "memory_cleanup",
+
+        "purpose": "支持候选记忆、状态报告和运行态记忆的清理，避免越用越重。",
+
+        "required_fields": [
+
+          "memory_id",
+
+          "scope",
+
+          "delete_reason",
+
+          "user_confirmation",
+
+          "protected_path_check",
+
+          "audit_log_ref"
+
+        ],
+
+        "safety_rules": [
+
+          "delete requires explicit scope and confirmation",
+
+          "cleanup must not delete Git history, validator logs, protected runtime paths, or source contracts"
+
+        ],
+
+        "failure_behavior": "If scope or confirmation is missing, report candidates but do not delete."
+
+      },
+
+      {
+
+        "interface": "agentmemory_governance_delete",
+
+        "purpose": "对 agentmemory 运行态记忆提供可审计删除和导出边界。",
+
+        "required_fields": [
+
+          "agentmemory_id",
+
+          "operation",
+
+          "scope",
+
+          "user_confirmation",
+
+          "audit_log_ref"
+
+        ],
+
+        "safety_rules": [
+
+          "agentmemory deletion cannot mutate source rules",
+
+          "secrets, cookies, captcha states, and account details must not be promoted into durable memory"
+
+        ],
+
+        "failure_behavior": "If the agentmemory service is unhealthy, skip deletion and write a status report."
+
+      },
+
+      {
+
+        "interface": "codegraph_context_index",
+
+        "purpose": "用代码结构索引辅助理解影响范围，但不替代 rg、validator、代码审查和 Git。",
+
+        "required_fields": [
+
+          "query",
+
+          "source_path",
+
+          "result_scope",
+
+          "index_status"
+
+        ],
+
+        "safety_rules": [
+
+          "codegraph may update only ignored index files",
+
+          "codegraph results are context candidates, not authority for source changes"
+
+        ],
+
+        "failure_behavior": "If the index is stale or unavailable, fall back to rg and validators."
+
+      }
+
+    ],
+
+    "optional_semantic_search": {
+
+      "status": "enabled_read_only",
+
+      "allowed_engine_patterns": [
+
+        "local read-only embeddings cache",
+
+        "BM25 plus semantic rerank as a future optional retrieval adapter",
+
+        "QMD-style semantic search only after a separate proposal, benchmark, and validator gate",
+
+        "agentmemory BM25 and optional vector/graph search as a runtime recall adapter",
+
+        "codegraph structural code index as a local context adapter"
+
+      ],
+
+      "hard_limits": [
+
+        "no full transcript ingestion by default",
+
+        "semantic hits are candidates, not source-of-truth rules",
+
+        "no unvetted vector database by default",
+
+        "no unvetted background service by default",
+
+        "agentmemory recall cannot silently switch route or mutate source rules"
+
+      ]
+
+    }
+
+  },
+
+  "scoring_policy": {
+
+    "manual_review_threshold": 0.45,
+
+    "promotion_threshold": 0.75,
+
+    "weights": {
+
+      "evidence": 0.3,
+
+      "recurrence": 0.2,
+
+      "actionability": 0.15,
+
+      "stability": 0.15,
+
+      "scope_fit": 0.1,
+
+      "validator_support": 0.1,
+
+      "privacy_risk": 0.0,
+
+      "conflict_risk": 0.0,
+
+      "staleness": 0.0
+
+    },
+
+    "risk_penalties": {
+
+      "evidence": 0.0,
+
+      "recurrence": 0.0,
+
+      "actionability": 0.0,
+
+      "stability": 0.0,
+
+      "scope_fit": 0.0,
+
+      "validator_support": 0.0,
+
+      "privacy_risk": 1.0,
+
+      "conflict_risk": 1.0,
+
+      "staleness": 1.0
+
+    }
+
+  },
+
+  "automation_policy": {
+
+    "mode": "controlled_auto_landing",
+
+    "default_execution_environment": "local",
+
+    "allowed_auto_actions": [
+
+      "write ignored status reports",
+
+      "append deduplicated observed events to evolution_backlog.json",
+
+      "write local memory status report",
+
+      "commit only allowlisted low-risk changes after gates pass",
+
+      "query agentmemory status and write health summary",
+
+      "use codegraph status for local repository context health"
+
+    ],
+
+    "forbidden_auto_actions": [
+
+      "install external dependencies",
+
+      "change user-level Codex config",
+
+      "write runtime skill cache or plugin cache",
+
+      "ingest full chat transcript by default",
+
+      "start a persistent vector database",
+
+      "auto-promote medium or high risk backlog items",
+
+      "write agentmemory data inside the source repository",
+
+      "enable agentmemory LLM compression or context injection without explicit user approval",
+
+      "let codegraph index become a source-of-truth rule store"
+
+    ],
+
+    "allowed_source_write_scope": [
+
+      "skills/catalog/evolution_backlog.json",
+
+      "skills/catalog/local_memory_system.json",
+
+      "README.md",
+
+      "BUILD-LOGIC.md"
+
+    ],
+
+    "required_gates": [
+
+      "python -m skills.scripts.envctl validate memory",
+
+      "python -m skills.scripts.envctl validate governance",
+
+      "python -m skills.scripts.envctl validate stack",
+
+      "python -m skills.scripts.envctl validate environment-layers"
+
+    ],
+
+    "run_ledger_output_dir": "skills/outputs/reports/automation-ledger",
+
+    "weekly_review_scope": [
+
+      "skills/outputs/reports/governance-daily",
+
+      "skills/outputs/reports/evolution-intake",
+
+      "skills/outputs/reports/local-memory-system",
+
+      "git log --since=7.days"
+
+    ],
+
+    "protected_runtime_paths_ref": "skills/catalog/protected_runtime_paths.json"
+
+  },
+
+  "health_policy": {
+
+    "startup_checks": [
+
+      "current branch contains skills.scripts.envctl",
+
+      "git tracked worktree is clean before write-capable automation",
+
+      "protected runtime paths are recorded by path only",
+
+      "last memory status report is readable",
+
+      "required validators are callable"
+
+    ],
+
+    "status_report_schema": "skills/schemas/memory_status_report.v1.schema.json",
+
+    "probe_style": "observe_verify_report"
+
+  },
+
+  "storage_boundaries": {
+
+    "source_of_truth": [
+
+      "skills/catalog/governance_kernel.json",
+
+      "skills/catalog/memory_admission_policy.json",
+
+      "skills/catalog/local_memory_system.json",
+
+      "skills/catalog/evolution_backlog.json",
+
+      "skills/AGENTS.md",
+
+      "README.md",
+
+      "BUILD-LOGIC.md"
+
+    ],
+
+    "runtime_derivative": [
+
+      "Codex native memory pointers",
+
+      "skills/outputs/reports",
+
+      "runtime skill cache",
+
+      "future optional read-only retrieval cache",
+
+      "agentmemory runtime memory store",
+
+      "codegraph local code index"
+
+    ],
+
+    "forbidden_defaults": [
+
+      "no_vector_database_by_default",
+
+      "no_transcript_ingestion_by_default",
+
+      "no_external_hook_by_default",
+
+      "no_unvetted_background_service_by_default",
+
+      "no_unvetted_vector_database_by_default"
+
+    ]
+
+  },
+
+  "schema_refs": {
+
+    "candidate": "skills/schemas/memory_candidate.v1.schema.json",
+
+    "status_report": "skills/schemas/memory_status_report.v1.schema.json",
+
+    "reconciliation_report": "skills/schemas/memory_reconciliation_report.v1.schema.json"
+
+  },
+
+  "runtime_adapter_policy": {
+
+    "selected_adapter": "agentmemory",
+
+    "status": "enabled",
+
+    "version": "@agentmemory/agentmemory@0.9.22",
+
+    "engine": "iii-engine 0.11.2 via <USER_HOME>/.local/bin/iii.exe",
+
+    "data_root": "<USER_HOME>/.agentmemory/data",
+
+    "ports": [
+
+      "127.0.0.1:3111 REST/MCP HTTP/health",
+
+      "127.0.0.1:3112 streams",
+
+      "127.0.0.1:3113 viewer",
+
+      "127.0.0.1:49134 iii-engine websocket"
+
+    ],
+
+    "codex_integration": [
+
+      "<CODEX_HOME>/config.toml mcp_servers.agentmemory",
+
+      "<CODEX_HOME>/hooks.json resolved agentmemory Codex hooks",
+
+      "agentmemory viewer at http://localhost:3113",
+
+      "runtime data kept outside the active local source tree"
+
+    ],
+
+    "allowed_actions": [
+
+      "session and prompt observation capture",
+
+      "smart search and recall of prior decisions",
+
+      "explicit memory save when user asks to remember",
+
+      "session history, audit, export, and governance delete after confirmation",
+
+      "candidate memory signals for local evolution backlog review"
+
+    ],
+
+    "forbidden_actions": [
+
+      "auto-promote runtime memory into source rules",
+
+      "write AGENTS, skills, schemas, routing, or governance kernel without envctl validators",
+
+      "inject recalled context into a route switch without asking the user",
+
+      "enable LLM compression, automatic prompt injection, or full transcript import by default",
+
+      "store secrets, cookies, account data, captcha state, or private project paths as global memory"
+
+    ],
+
+    "promotion_boundary": "agentmemory is a recall and candidate layer; local_memory_system, memory_admission_policy, governance_kernel, envctl validators, and Git commits decide durable rule promotion.",
+
+    "health_check": "agentmemory status and GET http://127.0.0.1:3111/agentmemory/health must be healthy before relying on recall."
+
+  }
+
+}

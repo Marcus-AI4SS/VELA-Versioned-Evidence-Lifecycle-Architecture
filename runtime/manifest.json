@@ -1,0 +1,55 @@
+{
+
+  "schema_version": "vela.runtime.package.v1",
+  "generated_at": "2026-05-28T10:14:47.397876+00:00",
+
+  "source": {
+    "repository": "VELA",
+    "package": "runtime"
+  },
+  "policy": {
+
+    "intent": "Provide an installable VELA runtime for Codex-based research workflows.",
+    "include": [
+
+      "research routing and workflow contracts",
+
+      "runtime route contracts",
+      "workflow validation contracts",
+      "memory and context rules",
+      "literature acquisition and citation evidence workflows",
+
+      "writing, review, figure, presentation, submission, and quantitative workflows",
+
+      "MCP/profile/toolchain configuration templates",
+
+      "Python requirements and toolchain manifests without vendored runtime binaries",
+
+      "validators, envctl modules, scripts, schemas, and tests"
+
+    ],
+
+    "exclude": [
+
+      "vendored Python/JDK/runtime binaries",
+      "runtime caches and generated outputs",
+      "browser login state, cookies, credentials, and personal secrets",
+      "machine-specific absolute paths"
+    ]
+
+  },
+
+  "layout": {
+
+    "root": "runtime",
+    "runtime_mode": "installable through `vela runtime enable --include core,automation,toolchain --commit`; not automatically copied by `vela init`",
+    "settings_policy": "settings use portable placeholders"
+  },
+
+  "raw_copied_file_count": 266,
+
+  "copied_file_count": 261,
+
+  "total_file_count": 261
+
+}

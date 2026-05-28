@@ -1,5 +1,9 @@
 approval_policy = "on-request"
+
 sandbox_mode = "read-only"
 
+
+
 [vela]
+
 purpose = "Inspect project state, evidence, claims, and handoffs without editing files."

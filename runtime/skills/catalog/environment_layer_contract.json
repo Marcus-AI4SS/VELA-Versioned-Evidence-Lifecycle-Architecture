@@ -1,0 +1,1428 @@
+{
+  "$schema": "../schemas/environment_layer_contract.v1.schema.json",
+  "schema_version": "environment_layer_contract.v1",
+  "generated_at": "2026-05-27",
+  "policy": "VELA runtime uses a layered workflow governance model: execution, tools, context, lifecycle, observability, verification, and governance are explicit and checkable.",
+  "core_methodology_ref": "skills/catalog/governance_kernel.json",
+  "layer_order": [
+    "execution",
+    "tool",
+    "context",
+    "lifecycle",
+    "observability",
+    "verification",
+    "governance"
+  ],
+  "layers": [
+    {
+      "id": "execution",
+      "label": "Execution / 执行层",
+      "plain_meaning": "真正运行命令、写文件、生成输出、启动浏览器或执行自动化的层。",
+      "responsibility": "把已确认的路线变成可回滚、可记录、可复现的本地动作。",
+      "source_contracts": [
+        "skills/catalog/settings.toml",
+        "skills/catalog/protected_runtime_paths.json",
+        "skills/scripts/envctl",
+        "AGENTS.md"
+      ],
+      "primary_components": [
+        "Python",
+        "PowerShell",
+        "Git",
+        "envctl",
+        "Codex runtime skills",
+        "local automations"
+      ],
+      "observability": [
+        "command stdout/stderr",
+        "git status",
+        "automation ledger",
+        "runtime skill drift report"
+      ],
+      "verification": [
+        "git diff --check",
+        "py_compile",
+        "validate_vela_runtime",
+        "protected path checks"
+      ]
+    },
+    {
+      "id": "tool",
+      "label": "Tool / 工具层",
+      "plain_meaning": "MCP、插件、浏览器、Zotero、OpenAlex、CNKI、Google Scholar、Scite、image2 等能力接口。",
+      "responsibility": "作为受控传感器和执行器服务路线，不成为新的总入口。",
+      "source_contracts": [
+        "skills/catalog/route_mcp_activation_policy.json",
+        "skills/catalog/scholar_browser_patterns.json",
+        "skills/catalog/cnki_zotero_workflow.json"
+      ],
+      "primary_components": [
+        "MCP servers",
+        "OpenAI plugins",
+        "Chrome/Playwright",
+        "Zotero",
+        "OpenAlex",
+        "Semantic Scholar",
+        "CNKI",
+        "Google Scholar",
+        "Scite",
+        "image2"
+      ],
+      "observability": [
+        "MCP activation policy",
+        "browser smoke reports",
+        "runtime probe paths"
+      ],
+      "verification": [
+        "route-mcp-policy consistency",
+        "validate_vela_runtime command probes",
+        "tool-specific smoke tests"
+      ]
+    },
+    {
+      "id": "context",
+      "label": "Context / 上下文层",
+      "plain_meaning": "AGENTS、项目事实、材料边界、证据账本、Zotero、Obsidian 和记忆候选。",
+      "responsibility": "保证模型知道当前任务依据什么材料、哪些内容可用、哪些内容不能编。",
+      "source_contracts": [
+        "AGENTS.md",
+        "skills/catalog/memory_admission_policy.json",
+        "skills/catalog/local_memory_system.json",
+        "skills/catalog/citation_verification_rules.json"
+      ],
+      "primary_components": [
+        "project truth sources",
+        "material-passport",
+        "evidence ledger",
+        "Zotero",
+        "Obsidian",
+        "Codex native memory pointers"
+      ],
+      "observability": [
+        "memory status report",
+        "citation evidence records",
+        "Obsidian sync summaries"
+      ],
+      "verification": [
+        "envctl validate memory",
+        "citation gate",
+        "writing-reference-capture",
+        "structured reading checks"
+      ]
+    },
+    {
+      "id": "lifecycle",
+      "label": "Lifecycle / 生命周期层",
+      "plain_meaning": "研究从选题、文献、阅读、标注、写作、绘图、审稿、修改、润色、投稿到复盘的阶段链。",
+      "responsibility": "让 AI 主动确认当前阶段，并在进入下一阶段前询问用户。",
+      "source_contracts": [
+        "skills/catalog/research_pipeline_stages.json",
+        "skills/catalog/project_scope_rules.json",
+        "skills/catalog/peer_review_workflow.json",
+        "skills/catalog/manuscript_writing_workflow.json"
+      ],
+      "primary_components": [
+        "research-autopilot routes",
+        "quality gates",
+        "stage progression prompts",
+        "project-retrospective-evolver"
+      ],
+      "observability": [
+        "stage status",
+        "quality gate reports",
+        "project retrospectives"
+      ],
+      "verification": [
+        "validate_research_pipeline",
+        "stage gate overrides",
+        "project initializer checks"
+      ]
+    },
+    {
+      "id": "observability",
+      "label": "Observability / 可观测层",
+      "plain_meaning": "日志、日报、审计报告、状态报告、失败原因和运行痕迹。",
+      "responsibility": "让环境知道自己做了什么、哪里失败、为什么不能继续。",
+      "source_contracts": [
+        "runtime reports",
+        "skills/outputs/reports",
+        "skills/catalog/evolution_backlog.json",
+        "skills/catalog/local_memory_system.json"
+      ],
+      "primary_components": [
+        "governance daily reports",
+        "evolution intake reports",
+        "memory status reports",
+        "validator envelopes",
+        "automation ledgers"
+      ],
+      "observability": [
+        "validator_result.v1",
+        "summary reports",
+        "git history"
+      ],
+      "verification": [
+        "report schema validation",
+        "weekly review scope",
+        "stack summary"
+      ]
+    },
+    {
+      "id": "verification",
+      "label": "Verification / 校验层",
+      "plain_meaning": "schema、validator、质量门、引用核验、图表一致性、复现包和提交前检查。",
+      "responsibility": "阻断不稳定、不真实、不可复现或越界的输出。",
+      "source_contracts": [
+        "skills/schemas",
+        "skills/catalog/quality_gates.json",
+        "skills/scripts/validate_research_pipeline.py",
+        "skills/scripts/validate_vela_runtime.py"
+      ],
+      "primary_components": [
+        "jsonschema validation",
+        "envctl validate",
+        "quality gates",
+        "unit tests"
+      ],
+      "observability": [
+        "validator envelopes",
+        "failed command list",
+        "quality gate reports"
+      ],
+      "verification": [
+        "validate_subagent_registry",
+        "validate_agents_contract",
+        "validate_research_pipeline",
+        "validate_vela_runtime"
+      ]
+    },
+    {
+      "id": "governance",
+      "label": "Governance / 治理层",
+      "plain_meaning": "Workflow routing, permission boundaries, external adoption rules, protected paths, and rollback policy.",
+      "responsibility": "决定什么能进入系统、谁是入口、哪里可以写、如何演化、如何回滚。",
+      "source_contracts": [
+        "skills/catalog/governance_kernel.json",
+        "skills/catalog/conflict_matrix.json",
+        "skills/catalog/external_adoption_reviews.json",
+        "skills/catalog/environment_layer_contract.json"
+      ],
+      "primary_components": [
+        "research-autopilot",
+        "vela-runtime-manager",
+        "project-retrospective-evolver",
+        "skill-vetter",
+        "envctl"
+      ],
+      "observability": [
+        "conflict matrix",
+        "external adoption review",
+        "cross repo drift report"
+      ],
+      "verification": [
+        "envctl validate governance",
+        "envctl validate environment-layers",
+        "envctl validate drift"
+      ]
+    }
+  ],
+  "route_layer_map": [
+    {
+      "route_id": "stack-governance",
+      "main_layer": "governance",
+      "required_layers": [
+        "execution",
+        "tool",
+        "context",
+        "lifecycle",
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "lifecycle_stages": [
+        "stack_governance"
+      ],
+      "verification_gates": []
+    },
+    {
+      "route_id": "single-paper-review",
+      "main_layer": "verification",
+      "required_layers": [
+        "execution",
+        "tool",
+        "context",
+        "lifecycle",
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "lifecycle_stages": [
+        "citation_verification",
+        "paper_assessment",
+        "writing_synthesis"
+      ],
+      "verification_gates": [
+        "doi_and_metadata_verified",
+        "writing_quality_checked",
+        "peer_review_protocol_checked"
+      ]
+    },
+    {
+      "route_id": "environment-ops",
+      "main_layer": "execution",
+      "required_layers": [
+        "execution",
+        "tool",
+        "context",
+        "lifecycle",
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "lifecycle_stages": [
+        "environment_maintenance"
+      ],
+      "verification_gates": []
+    },
+    {
+      "route_id": "project-folder-hygiene",
+      "main_layer": "lifecycle",
+      "required_layers": [
+        "execution",
+        "tool",
+        "context",
+        "lifecycle",
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "lifecycle_stages": [
+        "environment_maintenance",
+        "package_freeze",
+        "project_retrospective"
+      ],
+      "verification_gates": []
+    },
+    {
+      "route_id": "project-retrospective",
+      "main_layer": "lifecycle",
+      "required_layers": [
+        "execution",
+        "tool",
+        "context",
+        "lifecycle",
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "lifecycle_stages": [
+        "project_retrospective"
+      ],
+      "verification_gates": [
+        "retrospective_recorded"
+      ]
+    },
+    {
+      "route_id": "long-running-experiment-ops",
+      "main_layer": "execution",
+      "required_layers": [
+        "execution",
+        "tool",
+        "context",
+        "lifecycle",
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "lifecycle_stages": [
+        "runtime_supervision"
+      ],
+      "verification_gates": []
+    },
+    {
+      "route_id": "evidence-based-literature-workflow",
+      "main_layer": "context",
+      "required_layers": [
+        "execution",
+        "tool",
+        "context",
+        "lifecycle",
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "lifecycle_stages": [
+        "research_design",
+        "literature_discovery",
+        "citation_verification",
+        "data_material_acquisition",
+        "writing_synthesis",
+        "review_revision"
+      ],
+      "verification_gates": [
+        "research_question_defined",
+        "method_boundary_declared",
+        "doi_and_metadata_verified",
+        "data_provenance_verified",
+        "writing_quality_checked"
+      ]
+    },
+    {
+      "route_id": "literature-review",
+      "main_layer": "context",
+      "required_layers": [
+        "execution",
+        "tool",
+        "context",
+        "lifecycle",
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "lifecycle_stages": [
+        "research_design",
+        "literature_discovery",
+        "citation_verification",
+        "writing_synthesis"
+      ],
+      "verification_gates": [
+        "research_question_defined",
+        "method_boundary_declared",
+        "doi_and_metadata_verified",
+        "writing_quality_checked"
+      ]
+    },
+    {
+      "route_id": "reference-fulltext-acquisition",
+      "main_layer": "tool",
+      "required_layers": [
+        "execution",
+        "tool",
+        "context",
+        "lifecycle",
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "lifecycle_stages": [
+        "literature_discovery",
+        "citation_verification",
+        "data_material_acquisition"
+      ],
+      "verification_gates": [
+        "doi_and_metadata_verified",
+        "data_provenance_verified"
+      ]
+    },
+    {
+      "route_id": "research-figure-design",
+      "main_layer": "lifecycle",
+      "required_layers": [
+        "execution",
+        "tool",
+        "context",
+        "lifecycle",
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "lifecycle_stages": [
+        "writing_synthesis",
+        "review_revision"
+      ],
+      "verification_gates": [
+        "figure_table_consistency_checked"
+      ]
+    },
+    {
+      "route_id": "research-presentation",
+      "main_layer": "lifecycle",
+      "required_layers": [
+        "execution",
+        "tool",
+        "context",
+        "lifecycle",
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "lifecycle_stages": [
+        "writing_synthesis",
+        "review_revision",
+        "package_freeze"
+      ],
+      "verification_gates": [
+        "presentation_quality_checked"
+      ]
+    },
+    {
+      "route_id": "social-platform-case",
+      "main_layer": "tool",
+      "required_layers": [
+        "execution",
+        "tool",
+        "context",
+        "lifecycle",
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "lifecycle_stages": [
+        "research_design",
+        "data_material_acquisition",
+        "analysis_execution",
+        "writing_synthesis"
+      ],
+      "verification_gates": [
+        "research_question_defined",
+        "method_boundary_declared",
+        "data_provenance_verified",
+        "platform_ethics_checked",
+        "measurement_validity_checked",
+        "writing_quality_checked"
+      ]
+    },
+    {
+      "route_id": "computational-social-science",
+      "main_layer": "lifecycle",
+      "required_layers": [
+        "execution",
+        "tool",
+        "context",
+        "lifecycle",
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "lifecycle_stages": [
+        "research_design",
+        "literature_discovery",
+        "data_material_acquisition",
+        "analysis_execution",
+        "writing_synthesis",
+        "package_freeze"
+      ],
+      "verification_gates": [
+        "research_question_defined",
+        "method_boundary_declared",
+        "data_provenance_verified",
+        "measurement_validity_checked",
+        "coding_consistency_checked",
+        "network_edge_defined",
+        "abm_parameter_justified",
+        "writing_quality_checked",
+        "figure_table_consistency_checked",
+        "final_package_frozen",
+        "reproducibility_bundle_verified"
+      ]
+    },
+    {
+      "route_id": "social-science-submission-package",
+      "main_layer": "lifecycle",
+      "required_layers": [
+        "execution",
+        "tool",
+        "context",
+        "lifecycle",
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "lifecycle_stages": [
+        "research_design",
+        "citation_verification",
+        "analysis_execution",
+        "writing_synthesis",
+        "review_revision",
+        "package_freeze"
+      ],
+      "verification_gates": [
+        "research_question_defined",
+        "method_boundary_declared",
+        "doi_and_metadata_verified",
+        "measurement_validity_checked",
+        "writing_quality_checked",
+        "peer_review_protocol_checked",
+        "figure_table_consistency_checked",
+        "final_package_frozen",
+        "reproducibility_bundle_verified"
+      ]
+    },
+    {
+      "route_id": "empirical-quant",
+      "main_layer": "lifecycle",
+      "required_layers": [
+        "execution",
+        "tool",
+        "context",
+        "lifecycle",
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "lifecycle_stages": [
+        "research_design",
+        "data_material_acquisition",
+        "analysis_execution",
+        "writing_synthesis",
+        "package_freeze"
+      ],
+      "verification_gates": [
+        "research_question_defined",
+        "method_boundary_declared",
+        "data_provenance_verified",
+        "measurement_validity_checked",
+        "causal_identification_checked",
+        "writing_quality_checked",
+        "figure_table_consistency_checked",
+        "final_package_frozen",
+        "reproducibility_bundle_verified"
+      ]
+    },
+    {
+      "route_id": "text-corpus",
+      "main_layer": "context",
+      "required_layers": [
+        "execution",
+        "tool",
+        "context",
+        "lifecycle",
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "lifecycle_stages": [
+        "research_design",
+        "data_material_acquisition",
+        "analysis_execution",
+        "writing_synthesis",
+        "package_freeze"
+      ],
+      "verification_gates": [
+        "research_question_defined",
+        "method_boundary_declared",
+        "data_provenance_verified",
+        "measurement_validity_checked",
+        "coding_consistency_checked",
+        "writing_quality_checked",
+        "figure_table_consistency_checked",
+        "final_package_frozen",
+        "reproducibility_bundle_verified"
+      ]
+    },
+    {
+      "route_id": "network-analysis",
+      "main_layer": "lifecycle",
+      "required_layers": [
+        "execution",
+        "tool",
+        "context",
+        "lifecycle",
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "lifecycle_stages": [
+        "research_design",
+        "data_material_acquisition",
+        "analysis_execution",
+        "writing_synthesis",
+        "package_freeze"
+      ],
+      "verification_gates": [
+        "research_question_defined",
+        "method_boundary_declared",
+        "data_provenance_verified",
+        "measurement_validity_checked",
+        "network_edge_defined",
+        "writing_quality_checked",
+        "figure_table_consistency_checked",
+        "final_package_frozen",
+        "reproducibility_bundle_verified"
+      ]
+    },
+    {
+      "route_id": "writing-export",
+      "main_layer": "lifecycle",
+      "required_layers": [
+        "execution",
+        "tool",
+        "context",
+        "lifecycle",
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "lifecycle_stages": [
+        "citation_verification",
+        "writing_synthesis",
+        "review_revision",
+        "package_freeze"
+      ],
+      "verification_gates": [
+        "doi_and_metadata_verified",
+        "writing_quality_checked",
+        "peer_review_protocol_checked",
+        "final_package_frozen"
+      ]
+    },
+    {
+      "route_id": "general-research",
+      "main_layer": "lifecycle",
+      "required_layers": [
+        "execution",
+        "tool",
+        "context",
+        "lifecycle",
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "lifecycle_stages": [
+        "research_design"
+      ],
+      "verification_gates": [
+        "research_question_defined",
+        "method_boundary_declared"
+      ]
+    }
+  ],
+  "skill_layer_map": [
+    {
+      "skill_id": "abm-simulation-lab",
+      "primary_layer": "execution",
+      "secondary_layers": [
+        "tool",
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "role": "leaf",
+      "task_type": "simulation"
+    },
+    {
+      "skill_id": "academic-humanization-studio",
+      "primary_layer": "lifecycle",
+      "secondary_layers": [
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "role": "helper",
+      "task_type": "writing_export"
+    },
+    {
+      "skill_id": "academic-paper-review",
+      "primary_layer": "verification",
+      "secondary_layers": [
+        "context",
+        "observability",
+        "governance"
+      ],
+      "role": "leaf",
+      "task_type": "paper_review"
+    },
+    {
+      "skill_id": "agent-browser",
+      "primary_layer": "tool",
+      "secondary_layers": [
+        "execution",
+        "context",
+        "verification",
+        "governance",
+        "observability"
+      ],
+      "role": "helper",
+      "task_type": "digital_trace_capture"
+    },
+    {
+      "skill_id": "citation-verifier",
+      "primary_layer": "verification",
+      "secondary_layers": [
+        "context",
+        "observability",
+        "governance"
+      ],
+      "role": "leaf",
+      "task_type": "citation_integrity"
+    },
+    {
+      "skill_id": "cnki-research",
+      "primary_layer": "tool",
+      "secondary_layers": [
+        "execution",
+        "context",
+        "verification",
+        "governance",
+        "observability"
+      ],
+      "role": "leaf",
+      "task_type": "literature_discovery"
+    },
+    {
+      "skill_id": "dataset-discovery",
+      "primary_layer": "tool",
+      "secondary_layers": [
+        "execution",
+        "context",
+        "verification",
+        "governance",
+        "observability"
+      ],
+      "role": "leaf",
+      "task_type": "dataset_discovery"
+    },
+    {
+      "skill_id": "digital-trace-pipeline",
+      "primary_layer": "tool",
+      "secondary_layers": [
+        "execution",
+        "context",
+        "verification",
+        "governance",
+        "observability"
+      ],
+      "role": "leaf",
+      "task_type": "digital_trace_capture"
+    },
+    {
+      "skill_id": "evidence-based-literature-workflow",
+      "primary_layer": "verification",
+      "secondary_layers": [
+        "context",
+        "observability",
+        "governance"
+      ],
+      "role": "controller",
+      "task_type": "citation_integrity"
+    },
+    {
+      "skill_id": "figure-table-studio",
+      "primary_layer": "lifecycle",
+      "secondary_layers": [
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "role": "leaf",
+      "task_type": "figure_table"
+    },
+    {
+      "skill_id": "google-scholar-research",
+      "primary_layer": "tool",
+      "secondary_layers": [
+        "execution",
+        "context",
+        "verification",
+        "governance",
+        "observability"
+      ],
+      "role": "leaf",
+      "task_type": "literature_discovery"
+    },
+    {
+      "skill_id": "guizang-ppt-skill",
+      "primary_layer": "lifecycle",
+      "secondary_layers": [
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "role": "leaf",
+      "task_type": "presentation_design"
+    },
+    {
+      "skill_id": "latex-paper-conversion",
+      "primary_layer": "lifecycle",
+      "secondary_layers": [
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "role": "leaf",
+      "task_type": "writing_export"
+    },
+    {
+      "skill_id": "local-cloud-router",
+      "primary_layer": "tool",
+      "secondary_layers": [
+        "execution",
+        "context",
+        "verification",
+        "governance",
+        "observability"
+      ],
+      "role": "helper",
+      "task_type": "cloud_routing"
+    },
+    {
+      "skill_id": "long-running-experiment-ops",
+      "primary_layer": "execution",
+      "secondary_layers": [
+        "tool",
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "role": "helper",
+      "task_type": "runtime_ops"
+    },
+    {
+      "skill_id": "manuscript-writing-studio",
+      "primary_layer": "lifecycle",
+      "secondary_layers": [
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "role": "leaf",
+      "task_type": "writing_export"
+    },
+    {
+      "skill_id": "network-analysis",
+      "primary_layer": "lifecycle",
+      "secondary_layers": [
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "role": "leaf",
+      "task_type": "network_analysis"
+    },
+    {
+      "skill_id": "obsidian-research-sync",
+      "primary_layer": "context",
+      "secondary_layers": [
+        "tool",
+        "verification",
+        "governance",
+        "observability"
+      ],
+      "role": "leaf",
+      "task_type": "knowledge_sync"
+    },
+    {
+      "skill_id": "openalex-landscape",
+      "primary_layer": "tool",
+      "secondary_layers": [
+        "execution",
+        "context",
+        "verification",
+        "governance",
+        "observability"
+      ],
+      "role": "leaf",
+      "task_type": "literature_discovery"
+    },
+    {
+      "skill_id": "pdf",
+      "primary_layer": "verification",
+      "secondary_layers": [
+        "context",
+        "observability",
+        "governance"
+      ],
+      "role": "helper",
+      "task_type": "paper_review"
+    },
+    {
+      "skill_id": "playwright",
+      "primary_layer": "tool",
+      "secondary_layers": [
+        "execution",
+        "context",
+        "verification",
+        "governance",
+        "observability"
+      ],
+      "role": "helper",
+      "task_type": "digital_trace_capture"
+    },
+    {
+      "skill_id": "project-retrospective-evolver",
+      "primary_layer": "lifecycle",
+      "secondary_layers": [
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "role": "controller",
+      "task_type": "project_retrospective"
+    },
+    {
+      "skill_id": "project-folder-hygiene",
+      "primary_layer": "lifecycle",
+      "secondary_layers": [
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "role": "helper",
+      "task_type": "environment_ops"
+    },
+    {
+      "skill_id": "quant-analysis",
+      "primary_layer": "lifecycle",
+      "secondary_layers": [
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "role": "leaf",
+      "task_type": "quant_analysis"
+    },
+    {
+      "skill_id": "reference-fulltext-acquisition",
+      "primary_layer": "tool",
+      "secondary_layers": [
+        "execution",
+        "context",
+        "verification",
+        "governance",
+        "observability"
+      ],
+      "role": "leaf",
+      "task_type": "literature_discovery"
+    },
+    {
+      "skill_id": "reproducibility-package",
+      "primary_layer": "verification",
+      "secondary_layers": [
+        "context",
+        "observability",
+        "governance"
+      ],
+      "role": "leaf",
+      "task_type": "reproducibility"
+    },
+    {
+      "skill_id": "research-autopilot",
+      "primary_layer": "governance",
+      "secondary_layers": [
+        "context",
+        "observability",
+        "verification"
+      ],
+      "role": "entry",
+      "task_type": "orchestration"
+    },
+    {
+      "skill_id": "research-design-studio",
+      "primary_layer": "lifecycle",
+      "secondary_layers": [
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "role": "leaf",
+      "task_type": "research_design"
+    },
+    {
+      "skill_id": "research-docx-export",
+      "primary_layer": "lifecycle",
+      "secondary_layers": [
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "role": "leaf",
+      "task_type": "writing_export"
+    },
+    {
+      "skill_id": "research-figure-studio",
+      "primary_layer": "lifecycle",
+      "secondary_layers": [
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "role": "leaf",
+      "task_type": "figure_table"
+    },
+    {
+      "skill_id": "research-presentation-studio",
+      "primary_layer": "lifecycle",
+      "secondary_layers": [
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "role": "leaf",
+      "task_type": "presentation_design"
+    },
+    {
+      "skill_id": "vela-runtime-manager",
+      "primary_layer": "governance",
+      "secondary_layers": [
+        "context",
+        "observability",
+        "verification"
+      ],
+      "role": "controller",
+      "task_type": "runtime_governance"
+    },
+    {
+      "skill_id": "research-team-orchestrator",
+      "primary_layer": "governance",
+      "secondary_layers": [
+        "context",
+        "observability",
+        "verification"
+      ],
+      "role": "controller",
+      "task_type": "orchestration"
+    },
+    {
+      "skill_id": "reviewer-response-pack",
+      "primary_layer": "lifecycle",
+      "secondary_layers": [
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "role": "leaf",
+      "task_type": "response_revision"
+    },
+    {
+      "skill_id": "semantic-citation-tracer",
+      "primary_layer": "tool",
+      "secondary_layers": [
+        "execution",
+        "context",
+        "verification",
+        "governance",
+        "observability"
+      ],
+      "role": "leaf",
+      "task_type": "literature_discovery"
+    },
+    {
+      "skill_id": "skill-vetter",
+      "primary_layer": "governance",
+      "secondary_layers": [
+        "context",
+        "observability",
+        "verification"
+      ],
+      "role": "helper",
+      "task_type": "skill_vetting"
+    },
+    {
+      "skill_id": "social-platform-reader",
+      "primary_layer": "tool",
+      "secondary_layers": [
+        "execution",
+        "context",
+        "verification",
+        "governance",
+        "observability"
+      ],
+      "role": "leaf",
+      "task_type": "social_evidence"
+    },
+    {
+      "skill_id": "social-science-submission-packager",
+      "primary_layer": "lifecycle",
+      "secondary_layers": [
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "role": "controller",
+      "task_type": "submission_packaging"
+    },
+    {
+      "skill_id": "systematic-literature-review",
+      "primary_layer": "context",
+      "secondary_layers": [
+        "tool",
+        "verification",
+        "governance",
+        "observability"
+      ],
+      "role": "leaf",
+      "task_type": "literature_review"
+    },
+    {
+      "skill_id": "text-analysis",
+      "primary_layer": "lifecycle",
+      "secondary_layers": [
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "role": "leaf",
+      "task_type": "text_analysis"
+    },
+    {
+      "skill_id": "writing-reference-capture",
+      "primary_layer": "verification",
+      "secondary_layers": [
+        "context",
+        "observability",
+        "governance"
+      ],
+      "role": "leaf",
+      "task_type": "writing_capture"
+    },
+    {
+      "skill_id": "zotero-sync",
+      "primary_layer": "verification",
+      "secondary_layers": [
+        "context",
+        "observability",
+        "governance"
+      ],
+      "role": "leaf",
+      "task_type": "citation_integrity"
+    }
+  ],
+  "tool_inventory": [
+    {
+      "id": "chrome-devtools",
+      "kind": "mcp",
+      "layer": "tool",
+      "source": "<CODEX_HOME>/config.toml and route_mcp_activation_policy.json",
+      "use_boundary": "Browser-visible evidence or UI automation sensor; does not bypass login, captcha, copyright, or user confirmation.",
+      "write_boundary": "No source writes unless the active route, user confirmation, and validator gates permit it."
+    },
+    {
+      "id": "figma-dev-mode-mcp",
+      "kind": "mcp",
+      "layer": "tool",
+      "source": "<CODEX_HOME>/config.toml and route_mcp_activation_policy.json",
+      "use_boundary": "Route-scoped sensor or actuator. Must follow route_mcp_activation_policy and cannot become a router.",
+      "write_boundary": "No source writes unless the active route, user confirmation, and validator gates permit it."
+    },
+    {
+      "id": "google-scholar-mcp",
+      "kind": "mcp",
+      "layer": "tool",
+      "source": "<CODEX_HOME>/config.toml and route_mcp_activation_policy.json",
+      "use_boundary": "Academic discovery, metadata, citation, or library sensor; formal claims still pass citation and evidence gates.",
+      "write_boundary": "No source writes unless the active route, user confirmation, and validator gates permit it."
+    },
+    {
+      "id": "openalex-mcp",
+      "kind": "mcp",
+      "layer": "tool",
+      "source": "<CODEX_HOME>/config.toml and route_mcp_activation_policy.json",
+      "use_boundary": "Academic discovery, metadata, citation, or library sensor; formal claims still pass citation and evidence gates.",
+      "write_boundary": "No source writes unless the active route, user confirmation, and validator gates permit it."
+    },
+    {
+      "id": "paper-search-mcp",
+      "kind": "mcp",
+      "layer": "tool",
+      "source": "<CODEX_HOME>/config.toml and route_mcp_activation_policy.json",
+      "use_boundary": "Academic discovery, metadata, citation, or library sensor; formal claims still pass citation and evidence gates.",
+      "write_boundary": "No source writes unless the active route, user confirmation, and validator gates permit it."
+    },
+    {
+      "id": "playwright-mcp",
+      "kind": "mcp",
+      "layer": "tool",
+      "source": "<CODEX_HOME>/config.toml and route_mcp_activation_policy.json",
+      "use_boundary": "Browser-visible evidence or UI automation sensor; does not bypass login, captcha, copyright, or user confirmation.",
+      "write_boundary": "No source writes unless the active route, user confirmation, and validator gates permit it."
+    },
+    {
+      "id": "semantic-scholar-mcp",
+      "kind": "mcp",
+      "layer": "tool",
+      "source": "<CODEX_HOME>/config.toml and route_mcp_activation_policy.json",
+      "use_boundary": "Academic discovery, metadata, citation, or library sensor; formal claims still pass citation and evidence gates.",
+      "write_boundary": "No source writes unless the active route, user confirmation, and validator gates permit it."
+    },
+    {
+      "id": "zotero-mcp",
+      "kind": "mcp",
+      "layer": "tool",
+      "source": "<CODEX_HOME>/config.toml and route_mcp_activation_policy.json",
+      "use_boundary": "Academic discovery, metadata, citation, or library sensor; formal claims still pass citation and evidence gates.",
+      "write_boundary": "No source writes unless the active route, user confirmation, and validator gates permit it."
+    },
+    {
+      "id": "envctl",
+      "kind": "cli",
+      "layer": "execution",
+      "source": "skills/scripts/envctl",
+      "use_boundary": "Typed VELA runtime control CLI.",
+      "write_boundary": "May write only through explicit subcommands and validators."
+    },
+    {
+      "id": "python",
+      "kind": "runtime",
+      "layer": "execution",
+      "source": "project .venv and python/runtime",
+      "use_boundary": "Local scripting runtime for validators and tools.",
+      "write_boundary": "No writes outside the repository unless explicitly approved."
+    },
+    {
+      "id": "powershell",
+      "kind": "runtime",
+      "layer": "execution",
+      "source": "Windows PowerShell / pwsh",
+      "use_boundary": "Windows shell for local orchestration.",
+      "write_boundary": "Use native PowerShell cmdlets and protect resolved paths."
+    },
+    {
+      "id": "git",
+      "kind": "cli",
+      "layer": "observability",
+      "source": "local repository",
+      "use_boundary": "Version history, rollback, status, and traceability.",
+      "write_boundary": "No destructive reset or checkout without explicit request."
+    },
+    {
+      "id": "zotero",
+      "kind": "knowledge_store",
+      "layer": "context",
+      "source": "local Zotero profile",
+      "use_boundary": "Formal library, attachments, notes, and collections.",
+      "write_boundary": "Writes only through Zotero workflow or explicit user instruction."
+    },
+    {
+      "id": "obsidian",
+      "kind": "knowledge_store",
+      "layer": "context",
+      "source": "user vault / Obsidian sync",
+      "use_boundary": "Long-form notes, retrospectives, and project memory.",
+      "write_boundary": "No private material promotion without policy fit."
+    },
+    {
+      "id": "image2",
+      "kind": "plugin",
+      "layer": "tool",
+      "source": "Codex image generation tool",
+      "use_boundary": "Visual generation for diagrams, figures, and product visuals after structure is locked.",
+      "write_boundary": "Cannot generate fabricated data, DOI, citations, or uncontrolled scientific measurements."
+    },
+    {
+      "id": "codex-native-memory",
+      "kind": "knowledge_store",
+      "layer": "context",
+      "source": "Codex native memory",
+      "use_boundary": "Stores only compact entrance preferences and pointers to source rules.",
+      "write_boundary": "No full transcript ingestion or source-of-truth override."
+    },
+    {
+      "id": "agentmemory",
+      "kind": "mcp",
+      "layer": "context",
+      "source": "<CODEX_HOME>/config.toml, @agentmemory/agentmemory@0.9.22, and <USER_HOME>/.agentmemory",
+      "use_boundary": "Runtime recall, session history, memory search, explicit memory save, audit, export, and governance delete; recalled memory remains a candidate signal.",
+      "write_boundary": "May write only to the agentmemory runtime store; cannot write source rules, AGENTS, skills, schemas, routes, or governance kernel without envctl validators and Git review.",
+      "safety_controls": {
+        "source_of_truth_policy": "agentmemory is a runtime recall and candidate layer; local Git contracts, envctl validators, and user-confirmed commits remain the source of truth.",
+        "allowed_write_scope": [
+          "<USER_HOME>/.agentmemory/data",
+          "agentmemory runtime audit/export outputs after explicit request"
+        ],
+        "forbidden_actions": [
+          "write source rules",
+          "write AGENTS, skills, schemas, routes, or governance kernel directly",
+          "auto-promote recalled memory",
+          "store secrets, cookies, account details, captcha state, or private paths as global memory"
+        ],
+        "delete_policy": "governance delete requires explicit scope, user confirmation, and an audit record; it cannot mutate source contracts.",
+        "audit_policy": "agentmemory status, health, export, delete, and promotion decisions must be logged or referenced by local decision_archive before durable changes."
+      }
+    },
+    {
+      "id": "codegraph",
+      "kind": "mcp",
+      "layer": "context",
+      "source": "<CODEX_HOME>/config.toml and ignored project .codegraph index",
+      "use_boundary": "Code structure search, file context, callers/callees, impact, affected tests, and task context generation for local source understanding.",
+      "write_boundary": "May update only ignored .codegraph cache; cannot change source files or replace validators, rg, code review, or Git history.",
+      "safety_controls": {
+        "source_of_truth_policy": "codegraph is an index and context aid only; source files, validators, tests, and Git history remain authoritative.",
+        "allowed_write_scope": [
+          "<VELA_RUNTIME_ROOT>/.codegraph"
+        ],
+        "forbidden_actions": [
+          "change source files",
+          "replace rg, validators, code review, or Git history",
+          "treat index hits as source-of-truth rules"
+        ],
+        "delete_policy": "The ignored .codegraph cache may be deleted or rebuilt without affecting source rules; source files must not be deleted through codegraph workflows.",
+        "audit_policy": "codegraph status and query results are context evidence only and must be paired with validator/test output before source changes."
+      }
+    }
+  ],
+  "memory_optimization": {
+    "decision": "adopt_runtime_adapter",
+    "adopted_from_screenshot": [
+      "perception-cognition-memory-execution-output-feedback mental model is mapped to context, lifecycle, execution, observability, verification, and governance layers",
+      "keyword search, semantic search, cross-session context injection, confidence evaluation, decision archive, task tracking, memory cleanup, conversation snapshots, task status, and list/delete are useful interface ideas",
+      "typed memory objects and confidence scores are preferred over prompt-only memory",
+      "skill as cognitive core and MCP as access layer matches the local Plugin / Skill / MCP split",
+      "agentmemory runtime service as a vetted memory adapter",
+      "codegraph local code structure index as a context adapter"
+    ],
+    "not_adopted": [
+      "automatic full transcript ingestion",
+      "memory becoming a second router or source of truth",
+      "QMD or a separate vector database as the default memory authority",
+      "startup hooks that mutate source rules without envctl validators",
+      "agentmemory or codegraph becoming a second router or source of truth"
+    ],
+    "local_contract_ref": "skills/catalog/local_memory_system.json",
+    "required_interfaces": [
+      "keyword_search",
+      "semantic_search_optional_dry_run",
+      "cross_session_context_injection_gated",
+      "confidence_evaluation",
+      "decision_archive",
+      "task_tracking",
+      "memory_cleanup",
+      "conversation_snapshot",
+      "task_status",
+      "memory_list_delete",
+      "agentmemory_smart_search",
+      "agentmemory_session_history",
+      "agentmemory_governance_delete",
+      "codegraph_context_index"
+    ],
+    "adopted_from_agentmemory": [
+      "persistent cross-session memory server for coding agents",
+      "MCP smart search, save, sessions, audit, export, and governance delete tools",
+      "Codex lifecycle hooks for session start, prompt submit, tool use, compact, and stop observations",
+      "viewer and health endpoints as memory observability",
+      "LLM compression and context injection are opt-in rather than default"
+    ],
+    "runtime_boundaries": [
+      "agentmemory is the runtime recall layer, not the local rule source",
+      "local_memory_system and memory_admission_policy decide durable promotion",
+      "recalled context may trigger a clarification question but cannot silently change route",
+      "no full transcript import, LLM compression, prompt injection, or source mutation by default",
+      "agentmemory data root must stay outside the active local source tree",
+      "codegraph index is ignored cache and cannot be used as rule authority"
+    ]
+  },
+  "conflict_audit": {
+    "route_conflict_source": "skills/catalog/conflict_matrix.json",
+    "tool_conflict_source": "skills/catalog/route_mcp_activation_policy.json",
+    "skill_conflict_source": "skills/catalog/skill_catalog.json",
+    "required_checks": [
+      "every active route has a layer map",
+      "every active skill has a layer map",
+      "every route MCP appears in tool inventory",
+      "route skills and helper skills exist in skill catalog",
+      "new chain confirmation remains governed by conflict_matrix",
+      "memory retrieval does not override source-of-truth rules"
+    ]
+  },
+  "governance_assertions": [
+    "research-autopilot remains the only total router",
+    "workflow governance remains the core methodology and governance kernel",
+    "runtime governance remains explicit, versioned, and validator-backed",
+    "HELM and runtime caches are consumers, not source-of-truth layers",
+    "MCP and plugins are tools, not autonomous governance authorities",
+    "project and citation facts must remain evidence-gated",
+    "all low-risk automation still needs logs, validators, and git traceability",
+    "agentmemory recall candidates must be scored, reviewed, and routed before becoming durable rules",
+    "codegraph is a code-context cache and not a governance authority"
+  ]
+}

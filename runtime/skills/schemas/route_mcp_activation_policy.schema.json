@@ -1,0 +1,145 @@
+{
+
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+
+  "$id": "https://marcus-ai4ss.github.io/VELA/schemas/route_mcp_activation_policy.schema.json",
+
+  "title": "Route MCP Activation Policy",
+
+  "type": "object",
+
+  "additionalProperties": false,
+
+  "required": [
+
+    "$schema",
+
+    "schema_version",
+
+    "generated_at",
+
+    "routes"
+
+  ],
+
+  "properties": {
+
+    "$schema": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "schema_version": {
+
+      "const": "route_mcp_activation_policy.v1"
+
+    },
+
+    "generated_at": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "routes": {
+
+      "type": "array",
+
+      "minItems": 1,
+
+      "items": {
+
+        "$ref": "#/$defs/route_policy"
+
+      }
+
+    }
+
+  },
+
+  "$defs": {
+
+    "string_list": {
+
+      "type": "array",
+
+      "items": {
+
+        "type": "string",
+
+        "minLength": 1
+
+      },
+
+      "uniqueItems": true
+
+    },
+
+    "route_policy": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+
+        "route_id",
+
+        "required_mcp",
+
+        "optional_mcp",
+
+        "activation_needed_mcp",
+
+        "notes"
+
+      ],
+
+      "properties": {
+
+        "route_id": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "required_mcp": {
+
+          "$ref": "#/$defs/string_list"
+
+        },
+
+        "optional_mcp": {
+
+          "$ref": "#/$defs/string_list"
+
+        },
+
+        "activation_needed_mcp": {
+
+          "$ref": "#/$defs/string_list"
+
+        },
+
+        "notes": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        }
+
+      }
+
+    }
+
+  }
+
+}

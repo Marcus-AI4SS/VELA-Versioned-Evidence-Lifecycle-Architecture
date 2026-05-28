@@ -1,0 +1,1171 @@
+{
+
+  "$schema": "../schemas/publication_style_rules.v1.schema.json",
+
+  "schema_version": "publication_style_rules.v1",
+
+  "updated_at": "2026-05-27",
+
+  "policy": "Use high-impact journal craft and target-journal style evidence as style and audit layers for social-science work. Scientific-figure and manuscript-writing standards are absorbed as local contracts, but they do not replace Chinese journal conventions, humanities/social-science evidence logic, route control, image2 boundaries, citation verification, reproducibility contracts, or author-owned claims.",
+
+  "source_review_ref": "skills/catalog/external_adoption_reviews.json#Yuan1z0825/nature-skills; skills/catalog/external_adoption_reviews.json#myzhao0114-del/scientific-figure-skill; skills/catalog/external_adoption_reviews.json#Leey21/awesome-ai-research-writing; skills/catalog/external_adoption_reviews.json#ganzhi-black/humanities-thesis-skill; skills/catalog/external_adoption_reviews.json#brycewang-stanford/Awesome-Agent-Skills-for-Empirical-Research; skills/catalog/external_adoption_reviews.json#WantongC/journal-adapt-writing-skill",
+
+  "figure_table": {
+
+    "owner_skill": "research-figure-studio",
+
+    "target_routes": [
+
+      "research-figure-design",
+
+      "computational-social-science",
+
+      "social-science-submission-package",
+
+      "empirical-quant",
+
+      "text-corpus",
+
+      "network-analysis"
+
+    ],
+
+    "rules": [
+
+      {
+
+        "id": "figure_claim_contract",
+
+        "label": "图表先定义要证明的结论",
+
+        "requirement": "绘图前必须写清图表要支撑的中心判断、分析单位、样本范围、时间窗口、变量口径和审稿风险。",
+
+        "social_science_adaptation": "社科图表不能只追求漂亮，必须说明它服务于理论命题、识别策略、测量效度、机制解释、异质性或稳健性中的哪一个环节。",
+
+        "upstream_inspiration": "nature-figure 的 figure contract 和 visual argument 规则。",
+
+        "examples": [
+
+          "回归系数图先说明核心解释变量、参照组和置信区间含义。",
+
+          "事件研究图先说明处理时点、基准期、平行趋势和动态效应解释。",
+
+          "网络图先说明节点、边、窗口和布局是否只用于展示。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "panel_evidence_hierarchy",
+
+        "label": "多面板图按证据层级组织",
+
+        "requirement": "多面板图必须形成主面板和支持面板的证据层级；每个面板回答一个不可被其他面板替代的问题。",
+
+        "social_science_adaptation": "优先组织成 描述事实 -> 主要估计 -> 机制或异质性 -> 稳健性 的证据链，避免把多个相似模型堆成视觉拼盘。",
+
+        "upstream_inspiration": "nature-figure 的 overview -> deviation -> relationship 和 unique panel question 规则。",
+
+        "examples": [
+
+          "Panel A 展示样本和趋势，Panel B 展示主效应，Panel C 展示机制，Panel D 展示稳健性。",
+
+          "文本分析图可以用主题分布、时间变化和代表性语料片段形成层级。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "publication_visual_style",
+
+        "label": "白底、克制配色和可编辑矢量输出",
+
+        "requirement": "论文图默认白底，使用克制配色；同一概念在所有面板中保持同一色系；优先输出可编辑 SVG/PDF，PNG 只作预览或投稿辅助。",
+
+        "social_science_adaptation": "社科图表常用于黑白打印、审稿 PDF 和后续编辑，需避免高饱和多色、重复图例和不可编辑文字。",
+
+        "upstream_inspiration": "nature-figure 的 typography、palette、SVG first、legend economy 和 direct labelling 规则。",
+
+        "examples": [
+
+          "同一政策组、处理组或模型族在所有面板中保持一致颜色。",
+
+          "优先使用直接标签或共享图例，避免每个子图重复图例。",
+
+          "回归表和图注要记录数据来源、模型设定和不确定性含义。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "caption_source_traceability",
+
+        "label": "图注承担证据链",
+
+        "requirement": "图注或表注必须说明展示对象、单位、样本、模型或统计口径、误差条含义、数据来源和可复现脚本位置。",
+
+        "social_science_adaptation": "投稿图表必须能让审稿人不回看代码也能理解图表证据，不得用图表美化掩盖样本、口径或模型差异。",
+
+        "upstream_inspiration": "nature-figure 把 statistics、n、source data 和 review risk 纳入图表契约的做法。",
+
+        "examples": [
+
+          "误差条明确为 95% 置信区间、标准误或标准差。",
+
+          "表注说明固定效应、聚类标准误、控制变量组和样本限制。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "top_journal_empirical_graph_conventions",
+
+        "label": "遵守社科顶刊图形惯例",
+
+        "requirement": "论文图默认使用白底、克制配色、统一字体、清晰坐标、明确单位、可读图例和可黑白阅读设计；多面板图要使用简短、有实质含义的面板标签。",
+
+        "social_science_adaptation": "社科顶刊图通常服务于理论主张、识别逻辑、机制解释或稳健性展示；图形应降低审稿人理解成本，而不是增加视觉噪音。",
+
+        "upstream_inspiration": "ASR、SMR、AJPS、AEA、APSA 和本机 AJS/ASR/SMR/PNAS 样本中的图形惯例。",
+
+        "examples": [
+
+          "系数图必须标出参照组、估计值、置信区间和变量口径。",
+
+          "研究设计图必须说明样本进入、排除、测量和模型输出。",
+
+          "机制图的箭头必须有真实含义，不能只作装饰。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "image2_locked_structure_contract",
+
+        "label": "image2 可用但必须先锁定结构",
+
+        "requirement": "科研图不得因为使用 image2 而被直接拒绝；但在调用 image2 前必须锁定图型、面板、可见文字、箭头关系、配色和禁止编造项。",
+
+        "social_science_adaptation": "机制图、概念框架图、研究流程图和非数值科研插图可以用 image2 生成；精确数据图必须先由代码或可编辑工具控制数据和坐标。",
+
+        "upstream_inspiration": "Nature-style figure contract 与本地用户对 image2 科研图工作流的明确要求。",
+
+        "examples": [
+
+          "先写出所有中文标签，再生成白底多面板机制图。",
+
+          "不得让 image2 生成样本量、p 值、坐标轴刻度或 DOI。",
+
+          "若 image2 文字错误，保留视觉结构并用 SVG、HTML、PPT 或编辑工具修正文字。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "figure_brief_before_rendering",
+
+        "label": "渲染前必须有图形说明卡",
+
+        "requirement": "正式绘图前必须形成 figure brief，至少包括图的用途、论文主张、图型、数据或概念依据、面板计划、文字标签、连接线、渲染工具和风险检查。",
+
+        "social_science_adaptation": "这可以防止不同线程把同一科研图画成不同含义，也能让顶刊审稿关心的样本、变量、证据和边界提前显性化。",
+
+        "upstream_inspiration": "nature-figure 的 figure contract、AJPS 的多面板均衡要求和社科顶刊图注自解释要求。",
+
+        "examples": [
+
+          "图 1 是理论机制图，依据是本文理论框架，不含经验数值。",
+
+          "图 2 是事件研究图，依据是项目数据和 Stata/Python 输出。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "config_block_reproducibility",
+
+        "label": "配置区前置",
+
+        "requirement": "结构化数据科研图的脚本必须在顶部集中声明输入路径、输出目录、字体 fallback、输出格式、显著性阈值、误差线类型、数字精度、单栏/双栏尺寸和 DPI。",
+
+        "social_science_adaptation": "社科经验图常经历多轮模型和图表版本调整；配置区前置可以保证同一项目的字体、字号、误差线、p 值显示和输出格式不随线程随机漂移。",
+
+        "upstream_inspiration": "scientific-figure-skill 的 configuration block 和 centralized plotting defaults。",
+
+        "examples": [
+
+          "脚本顶部统一设置中文 SimSun/Songti fallback、英文 Times New Roman fallback、base 10 pt、tick 9 pt、DPI 300。",
+
+          "显著性阈值、误差线类型和输出格式不散落在绘图函数内部。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "data_health_before_plotting",
+
+        "label": "画数据图前先做数据体检",
+
+        "requirement": "Excel、CSV 或表格数据进入正式科研图前，必须先检查行列、字段类型、缺失、重复、描述统计、异常值、分布；回归或多预测变量图还要检查相关和 VIF 风险。",
+
+        "social_science_adaptation": "社科图表经常被误用来放大脏数据或弱测量，数据体检可以在画图前阻断缺失率过高、样本过小、共线性严重或变量口径混乱的问题。",
+
+        "upstream_inspiration": "scientific-figure-skill 的 00_data_health.md 规则。",
+
+        "examples": [
+
+          "关键变量缺失超过阈值时先报告，不直接画主结果图。",
+
+          "模型图涉及多个连续变量时，至少说明相关或 VIF 风险。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "process_data_traceability",
+
+        "label": "每张图有过程数据留痕",
+
+        "requirement": "正式经验图必须保留原始读取、清洗后、聚合后、统计检验和每张图对应的数据 sidecar；审稿人追问任一数字时，应能定位到文件、sheet 和列。",
+
+        "social_science_adaptation": "社科审稿常要求复核样本口径、变量变换和模型输出；图表不能只留下最终 PNG，应保留 process_data 和脚本路径。",
+
+        "upstream_inspiration": "scientific-figure-skill 的 process_data/ 和 fig_NN_data.xlsx 规则。",
+
+        "examples": [
+
+          "fig_02_coefficient_plot.pdf 对应 process_data/fig_02_data.xlsx。",
+
+          "显著性星号对应 process_data/05_statistical_tests.xlsx。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "justified_statistics_annotations",
+
+        "label": "统计标注必须有研究设计依据",
+
+        "requirement": "只有真实组间比较、模型估计或明确设计需要时才加显著性、p 值或误差条；误差条必须写明 SD、SEM、标准误或置信区间，p 值小于 0.001 时写 p < 0.001。",
+
+        "social_science_adaptation": "社科论文常见的系数图、事件研究图和边际效应图应优先说明估计量和不确定性；不要把普通趋势图、散点图或单分布图强行加星号。",
+
+        "upstream_inspiration": "scientific-figure-skill 的 statistics.md、p-value formatting 和 significance annotation guardrails。",
+
+        "examples": [
+
+          "配对与独立样本无法判断时先问用户，不擅自选择 t 检验。",
+
+          "事件研究图说明置信区间和参照期，而不是只给星号。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "typography_font_size_specification",
+
+        "label": "字体字号有明确规格",
+
+        "requirement": "正式图默认使用 serif 体系：中文 fallback 为 SimSun、Songti SC、Source Han Serif SC、Noto Serif CJK SC、serif；英文 fallback 为 Times New Roman、Liberation Serif、DejaVu Serif、serif。基础字号 10 pt，轴标题 10 pt，刻度和图例 9 pt，图注 9 pt，面板标签和显著性标注 10 pt。",
+
+        "social_science_adaptation": "社科图表常在 Word、PDF、PPT 和投稿系统之间流转，字体字号必须稳定、可读、可替换；目标期刊有模板时可以调整，但必须记录取舍。",
+
+        "upstream_inspiration": "scientific-figure-skill 的 chart_style.md、config_template.md 和 pdf_layout.md 字体字号默认值。",
+
+        "examples": [
+
+          "中文图使用宋体类 fallback，英文变量标签使用 Times 类 fallback。",
+
+          "显著性星号不应大于主图文字；图例不应压过坐标轴。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "figure_size_resolution_contract",
+
+        "label": "图幅和分辨率有规格",
+
+        "requirement": "正式图默认区分单栏约 3.5 x 2.6 inch、双栏约 7.2 x 4.0 inch；PNG/JPG 预览不低于 300 DPI，投稿和后续编辑优先保留 PDF、SVG、PPT 或脚本。",
+
+        "social_science_adaptation": "社科论文图常需要嵌入正文和附录，尺寸必须服务版面与可读性；JPG 只能作为兼容格式，不能替代可编辑或矢量来源。",
+
+        "upstream_inspiration": "scientific-figure-skill 的 single-column/double-column sizing、DPI 和 multi-format export 默认值。",
+
+        "examples": [
+
+          "单栏系数图保持 9 pt 刻度可读，不为了塞入过多变量而压缩字号。",
+
+          "多面板图优先双栏尺寸或拆分为主图和附录图。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "caption_what_how_so_what",
+
+        "label": "图注说明展示、方法和结论",
+
+        "requirement": "正式图注必须包含 what、how、so what：展示对象，汇总或检验方法，读者应得出的有边界结论；不得只复述坐标轴。",
+
+        "social_science_adaptation": "社科图注还应说明单位、样本、时间窗口、模型或统计口径、误差条含义、数据来源和脚本位置；结论不能超过图中证据。",
+
+        "upstream_inspiration": "scientific-figure-skill 的 three-part caption rule。",
+
+        "examples": [
+
+          "Figure 2. Coefficients from the baseline fixed-effects model... Whiskers denote 95% confidence intervals... The effect is concentrated after the policy shock.",
+
+          "中文图注同样需要展示对象、方法口径和边界结论。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "multi_format_export_and_editable_source",
+
+        "label": "多格式和可编辑来源一起交付",
+
+        "requirement": "正式经验图默认保留高质量图件、预览图、绘图数据 sidecar、统计检验表和脚本；PDF/PNG/JPG 可以作为兼容组合，但本地投稿链优先保留 PDF/SVG/PPT 或脚本。",
+
+        "social_science_adaptation": "这避免论文改稿时只能重画图片，也让送审包、复现包和图文一致性检查能追溯版本。",
+
+        "upstream_inspiration": "scientific-figure-skill 的 figures/pdf、figures/png、figures/jpg 和 process_data 目录约定。",
+
+        "examples": [
+
+          "交付时列出 figures/pdf、figures/png、process_data 和脚本路径。",
+
+          "仅有 JPG 的图不能作为最终送审图表通过。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "renderer_selection_by_deliverable",
+
+        "label": "按交付目标选择制图工具",
+
+        "requirement": "正式制图前必须根据最终用途、数据形态、统计建模需求、是否需要可见桌面自动化、复现要求和协作约束，选择 R、Python、PowerPoint、矢量工具、表格软件或 image2。",
+
+        "social_science_adaptation": "社科经验图优先使用可复现代码；机制图、概念图和研究流程图可使用 image2；展示型 PPT 图墙可以用 PowerPoint 或 presentation 工具，但不能替代论文图表的源数据和脚本。",
+
+        "upstream_inspiration": "codex-skills-workbench 的 plotting-tool-selection 与 ppt-production-guide。",
+
+        "examples": [
+
+          "回归系数图用 R/Python 生成，并保留模型摘要。",
+
+          "答辩图片墙按 slide size、行列、边距和图注 manifest 排版。",
+
+          "概念机制图先锁定文字和箭头，再用 image2 或可编辑矢量工具。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "r_plot_adapter_output_bundle",
+
+        "label": "R/ggplot 图表要连同统计和导出诊断交付",
+
+        "requirement": "散点图、雨云图、加权回归图或使用 ggplot 富文本的图表，应同时交付图件、统计或模型摘要、会话或包版本、文字渲染导出检查和可复现脚本。",
+
+        "social_science_adaptation": "社科图表不能只给一张好看的图；权重、分组、显著性、异常值、缺失和不确定性都要在图注、表注或交付说明中可追溯。",
+
+        "upstream_inspiration": "codex-skills-workbench 的 r-scatter-plot-spec、raincloud-plot-guide、weighted-regression-plot 和 ggplot2-richtext-fixes。",
+
+        "examples": [
+
+          "雨云图说明分组样本量、缺失、原始点、分布层和摘要统计。",
+
+          "加权回归图说明权重含义，并比较必要的非加权结果。",
+
+          "上标、下标和数学符号必须检查导出文件，而不只看预览。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "chart_type_selection_by_evidence_need",
+
+        "label": "按证据任务选择图型",
+
+        "requirement": "推荐或绘制实验、经验或统计图前，必须先判断图表要表达的是性能对比、趋势收敛、分类评估、矩阵关系、分布、构成、权衡还是多面板证据链，再选择柱状图、横向条形图、帕累托图、折线图、散点拟合图、ROC/PR、热力图、小提琴图、箱线图、分面图或组合图。",
+
+        "social_science_adaptation": "社科图型选择应服务于理论命题、识别逻辑、变量关系、样本分布、异质性、机制或稳健性；不要为了视觉新奇使用不适合数据结构的商业图表。",
+
+        "upstream_inspiration": "awesome-ai-research-writing 的实验绘图推荐 prompt，经本地化后作为证据任务到图型的选择规则。",
+
+        "examples": [
+
+          "长方法名或多类别比较优先横向条形图，而不是倾斜标签的纵向柱状图。",
+
+          "两个指标存在精度与成本权衡时优先帕累托前沿图。",
+
+          "多次实验或估计不确定性存在时优先显示置信区间或误差线。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "figure_table_title_caption_plainness",
+
+        "label": "图题表题简洁且不越界",
+
+        "requirement": "图题和表题应直接说明对象、比较或结果类型，避免 The figure shows、This table presents 等冗余开头；表题优先使用 Comparison with、Results on、Ablation 或对应社科表述，但不得把标题写成超过证据的结论。",
+
+        "social_science_adaptation": "中文社科图题表题应保持术语准确和可检索；英文题名可使用 Title Case 或 sentence case，但必须与期刊格式一致，并在图注或表注中补足单位、样本、方法和边界。",
+
+        "upstream_inspiration": "awesome-ai-research-writing 的生成图标题和生成表标题 prompt。",
+
+        "examples": [
+
+          "表题写作“核心变量与家庭背景的回归结果”，不要写成“数字化能力显著提升教育机会”。",
+
+          "英文图题可写“Predicted Probabilities by Cohort”，但因果解释应放在正文和图注中。"
+
+        ]
+
+      }
+
+    ]
+
+  },
+
+  "writing": {
+
+    "owner_skill": "manuscript-writing-studio",
+
+    "target_routes": [
+
+      "single-paper-review",
+
+      "literature-review",
+
+      "computational-social-science",
+
+      "social-science-submission-package",
+
+      "writing-export"
+
+    ],
+
+    "rules": [
+
+      {
+
+        "id": "section_logic_reader_flow",
+
+        "label": "先修论证结构，再润色句子",
+
+        "requirement": "正式写作先检查章节职责和读者路径，再做句子润色；结构坏掉时不得用流畅语言掩盖论证缺口。",
+
+        "social_science_adaptation": "社科论文的主线应能回答 研究问题为何重要 -> 现有解释缺口 -> 本文材料和方法 -> 关键证据 -> 理论或经验边界。",
+
+        "upstream_inspiration": "nature-writing 和 nature-polishing 的 article architecture、hourglass 和 logic-first polishing 规则。",
+
+        "examples": [
+
+          "摘要至少交代问题、缺口、方法或材料、关键发现和边界。",
+
+          "引言不能只堆文献，必须逐步收束到本文的问题和贡献。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "language_target_declared",
+
+        "label": "先声明语言目标",
+
+        "requirement": "正式写作或润色前必须判断文本面向中文期刊、英文期刊还是中英转换；英文期刊可以积极借鉴 Nature-style 结构和句法，中文期刊默认遵守本地中文社科写作规则。",
+
+        "social_science_adaptation": "中文 CSSCI、中文学位论文和中文报告强调问题意识、理论脉络、概念密度和 PEEL 论证；不得机械套用英文短句、英文摘要节奏或英文 novelty 表达。",
+
+        "upstream_inspiration": "nature-writing 和 nature-polishing 的 target-reader first 规则，经本地化后拆成中文、英文和双语三类目标。",
+
+        "examples": [
+
+          "英文 SSCI 投稿摘要可以压缩为 context -> gap -> method -> finding -> contribution。",
+
+          "中文 CSSCI 引言保留理论谱系和现实问题，但仍要收束到明确研究缺口。"
+
+        ],
+
+        "reject_when": [
+
+          "未说明目标语言却直接套用英文期刊风格。",
+
+          "中文稿只做逐句英式短句化而破坏概念密度。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "discipline_target_declared",
+
+        "label": "先区分学科和文章类型",
+
+        "requirement": "写作前必须区分人文社科默认稿、计算社会科学或方法技术型稿、传统量化稿、质性或解释性稿；不同类型使用不同的结构和证据边界。",
+
+        "social_science_adaptation": "计算社科和方法技术型论文可以更多借鉴技术论文的 pipeline、方法模块、benchmark 和复现表达；传统量化和质性研究以理论、变量、识别、材料、解释链和边界为主。",
+
+        "upstream_inspiration": "nature-writing 的 method module 和 results evidence ladder，被改造为社科分类型写作规则。",
+
+        "examples": [
+
+          "计算社科方法段可以按数据采集、预处理、模型、评估和复现组织。",
+
+          "质性研究方法段应说明案例选择、材料边界、编码或解释程序，不使用统计显著性话语。"
+
+        ],
+
+        "reject_when": [
+
+          "把理工科实验论文结构当作传统量化或质性研究的默认模板。",
+
+          "用技术细节掩盖理论问题、测量效度或伦理边界。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "abstract_mini_paper",
+
+        "label": "摘要像一篇压缩论文",
+
+        "requirement": "摘要必须交代问题、缺口、材料或方法、核心发现、贡献和边界；不能只写背景和意义，也不能写入尚未核验的结果或引文。",
+
+        "social_science_adaptation": "英文摘要更强调紧凑顺序和可检索性；中文摘要可保留理论定位和研究对象，但仍要让读者看到证据基础和主张边界。",
+
+        "upstream_inspiration": "nature-writing 的 abstract mini-paper 规则。",
+
+        "examples": [
+
+          "摘要中出现因果语言时，必须能对应识别设计或明确降级。",
+
+          "质性摘要要说明材料类型和解释边界，而不是只写理论意义。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "introduction_funnel_with_social_problem",
+
+        "label": "引言从问题收束到本文答案",
+
+        "requirement": "引言应按 领域重要性 -> 既有解释或争论 -> 未解决缺口 -> 本文材料和方法 -> 主要发现 -> 贡献边界 的顺序收束。",
+
+        "social_science_adaptation": "中文稿可以更充分交代理论脉络和现实情境；英文稿更快进入 gap 和 contribution。无论语言如何，缺口不能只是“研究较少”，必须说明为什么现有解释不足。",
+
+        "upstream_inspiration": "nature-writing 的 introduction funnel 和 scale-down logic。",
+
+        "examples": [
+
+          "传统量化论文的 gap 应落到理论解释、测量、识别或样本边界。",
+
+          "计算社科论文的 gap 可以落到数据粒度、方法透明度或可复现性。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "claim_strength_and_boundary",
+
+        "label": "主张强度与证据匹配",
+
+        "requirement": "每个核心判断都要校准因果、机制、代表性和外推边界；没有对应证据时必须降级为相关、提示、可能解释或限制。",
+
+        "social_science_adaptation": "尤其检查把相关写成因果、把平台样本写成总体、把局部机制写成普遍规律、把探索性文本结果写成已证实结论。",
+
+        "upstream_inspiration": "nature-polishing 的 hedging calibration 和 overclaim detection 规则。",
+
+        "examples": [
+
+          "没有识别设计时使用 相关、关联、相伴变化，不使用 导致、证明。",
+
+          "单平台数据必须说明平台、时期和样本边界。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "results_discussion_boundary",
+
+        "label": "结果和讨论分工清楚",
+
+        "requirement": "结果段报告发现、证据和必要的模型或材料解释；讨论段再处理理论意义、机制解释、与文献关系、局限和未来研究。",
+
+        "social_science_adaptation": "传统量化结果要避免把稳健性或异质性解释成无限外推；质性结果要让材料片段与解释链相邻；计算社科结果要说明指标、误差和模型比较。",
+
+        "upstream_inspiration": "nature-writing 和 nature-polishing 的 Results are not Discussion 规则。",
+
+        "examples": [
+
+          "结果段可以写“估计值在加入控制后仍为正”，但理论解释应在讨论段展开。",
+
+          "讨论段不能重复表格读数，而要说明发现改变了哪一条解释链。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "polishing_diagnosis_before_editing",
+
+        "label": "润色前先诊断问题类型",
+
+        "requirement": "润色前先判断问题属于论证缺口、证据不足、段落顺序、术语不稳、语言冗余还是目标期刊风格；不能直接把文本改顺后掩盖问题。",
+
+        "social_science_adaptation": "社科论文常见风险是主张过强、引用支撑错位、变量或材料边界不清、中文概念被英文改写稀释；这些必须先标记，再润色。",
+
+        "upstream_inspiration": "nature-polishing 的 diagnose before editing 和 AI boundary 规则。",
+
+        "examples": [
+
+          "如果段落没有证据，输出阻断项，不直接补一个看似合理的发现。",
+
+          "如果英文润色改变了因果强度，必须回退或显式标注。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "sentence_paragraph_control",
+
+        "label": "句子和段落服务于一个论点",
+
+        "requirement": "英文正式稿优先使用 10 到 30 词的句子；中文正式稿保持高语义密度。每段只承载一个控制性论点，并给出证据、解释和连接。",
+
+        "social_science_adaptation": "保留 PEEL 闭环，用短句拆开变量、模型、证据和解释，避免在一句话里塞入背景、方法、结果和评价。",
+
+        "upstream_inspiration": "nature-polishing 的 sentence and paragraph control 规则。",
+
+        "examples": [
+
+          "结果段先报告发现，再解释识别或机制含义。",
+
+          "讨论段先说明发现改变了什么理解，再说明边界和未来工作。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "format_sensitive_translation_container",
+
+        "label": "翻译要区分 LaTeX、Word 和纯文本",
+
+        "requirement": "中英转换、润色或改写前必须声明输出容器：LaTeX 输出保留命令并转义特殊字符；Word 或纯文本输出不得带 Markdown、LaTeX 转义或代码块；英译中理解稿可以清理引用命令但不能改变原文含义。",
+
+        "social_science_adaptation": "中文社科论文翻译成英文时，应先重建主张、证据和边界，再按目标语言表达；不得逐句硬译导致概念稀释，也不得为了英文流畅改变论证强度。",
+
+        "upstream_inspiration": "awesome-ai-research-writing 的中转英-latex、中转英-word、英转中-latex 和中转中-word prompt。",
+
+        "examples": [
+
+          "LaTeX 中 95% 应写作 95\\%，但 Word 输出应保持 95%。",
+
+          "Word 正文不得输出 Markdown 标题、加粗符号或代码围栏。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "minimal_delta_or_rewrite_scope_declared",
+
+        "label": "先声明是微调还是重写",
+
+        "requirement": "缩写、扩写、轻度润色和结构重写必须区分；微调只能小幅压缩或扩展，不得删除实验参数、变量定义、限定条件、引用边界或不确定性标记。",
+
+        "social_science_adaptation": "社科论文常把限定条件写在从句、括号或表注中，微调时不能为了简洁删掉样本、时间、平台、模型、材料来源或因果边界。",
+
+        "upstream_inspiration": "awesome-ai-research-writing 的缩写、扩写和表达润色 prompt。",
+
+        "examples": [
+
+          "用户只要求“缩短一点”时，只做句法压缩并给出 delta log。",
+
+          "如果段落逻辑坏了，先说明已超出微调范围，再进入结构修复。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "humanized_surface_without_claim_change",
+
+        "label": "去机器化表达不得改主张",
+
+        "requirement": "去 AI 味、降 AIGC、humanize 或 deslop 只能移除空洞词、机械连接、过度排比、华丽但无信息的词、不自然句式和模板化节奏；必须先列 locked-items ledger，改后做 second-pass audit。不得改变研究问题、变量、结果、引用支撑、因果强度或局限，也不得把检测分数作为目标。",
+
+        "social_science_adaptation": "中文稿应避免公文腔、口号化和翻译腔；英文稿避免机械过渡和高频 AI 词。若原文已自然严谨，应保留原文并说明通过。",
+
+        "upstream_inspiration": "awesome-ai-research-writing 的去 AI 味（LaTeX 英文）和去 AI 味（Word 中文）prompt。",
+
+        "examples": [
+
+          "删除“值得注意的是”这类空转连接词时，不删除后面的证据限定。",
+
+          "英文中避免 leverage、delve 等泛化词，但专业术语不能随意替换。",
+
+          "英文稿先标记 vague attribution、inflated novelty、causal overclaiming、generic conclusions，再做表层改写。",
+
+          "中文稿按定位扫描、诊断分类、差异化改写、五维自评、二次复查处理，不加错别字或口语噪声。"
+
+        ],
+
+        "reject_when": [
+
+          "用户要求保证绕过检测系统。",
+
+          "改写需要改变结果、引用、变量、估计值或论证边界。",
+
+          "为了像人工写作而加入错别字、口语填充或无依据情绪判断。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "data_bound_results_analysis",
+
+        "label": "结果分析只能来自输入数据",
+
+        "requirement": "写实验分析、结果段或数据解读时，所有趋势、对比、提升、稳健性和权衡判断必须严格来自用户给出的表格、模型输出、图表或可核验数据；没有明显趋势时必须如实说明。",
+
+        "social_science_adaptation": "社科结果写作不能把描述性差异写成因果，也不能用 p 值替代完整证据链；定量、文本、网络或质性材料都必须说明单位、样本和边界。",
+
+        "upstream_inspiration": "awesome-ai-research-writing 的实验分析 prompt。",
+
+        "examples": [
+
+          "没有给出多次实验或置信区间时，不能声称结果稳定。",
+
+          "回归表只显示相关时，正文不得写“导致”。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "target_journal_style_profile_checked",
+
+        "label": "目标期刊风格必须有证据卡",
+
+        "requirement": "投稿前按目标期刊润色时，先确认目标期刊、目标语言、学科类型和可读语料；优先用 5 到 8 篇目标期刊近作生成论文风格卡和期刊风格画像，再逐节修改。",
+
+        "social_science_adaptation": "社科投稿常同时受中文/英文、CSSCI/SSCI、方法类型和期刊口味约束；目标期刊画像只能校准结构、语气、段落顺序和表达强度，不能改变事实、结果、引用、变量或材料边界。",
+
+        "upstream_inspiration": "journal-adapt-writing-skill 的 primary corpus, paper style card, style profile, dynamic writing skill, one-section-at-a-time revision, and revision log pattern。",
+
+        "examples": [
+
+          "英文 SSCI 稿可用目标期刊近 5 到 8 篇同方法论文校准引言开头、贡献位置、讨论范围和 hedging。",
+
+          "中文 CSSCI 稿如果没有目标期刊全文语料，必须标注为无目标期刊画像，只做本地社科规则下的保守润色。",
+
+          "若风格建议会改变因果强度、估计值解释或引用支撑，必须回到证据或写作质量门。"
+
+        ],
+
+        "reject_when": [
+
+          "只有标题、摘要或检索元数据却生成期刊风格画像。",
+
+          "把目标期刊语料中的内容、句子或发现改写进用户论文。",
+
+          "为了像目标期刊而改变事实、结果、引用或作者主张。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "venue_migration_checklist",
+
+        "label": "改投前先做目标要求清单",
+
+        "requirement": "换会议、改投别家或模板迁移前，必须列出目标期刊/会议的页数、字数、匿名、结构、伦理、数据代码、图表、补充材料、引用格式和 checklist 要求，再区分机械格式迁移和实质修改。",
+
+        "social_science_adaptation": "社科改投常涉及中文/英文、CSSCI/SSCI、期刊理论口味、方法透明度和伦理说明差异；不得只替换模板后宣称已完成改投。",
+
+        "upstream_inspiration": "awesome-ai-research-writing 对 20-ml-paper-writing 的换会议/改投别家场景总结。",
+
+        "examples": [
+
+          "从会议论文改投期刊时，先检查篇幅、附录、数据可得性和匿名要求。",
+
+          "从英文会议转中文期刊时，先调整问题意识、理论谱系和文献结构，而不是只翻译正文。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "humanities_problem_framing_declared",
+
+        "label": "人文论文先澄清问题框架",
+
+        "requirement": "遇到写论文、选题、没有新意、理论和文本脱节、章节逻辑等任务时，先确认论文类型、研究对象、核心困惑、论点方向、理论工具、材料边界和预期长度，再进入写作。",
+
+        "social_science_adaptation": "这条规则主要服务文学、历史、哲学、传播、新闻、文化研究和解释性社科论文；传统量化和计算社科也可借鉴“先问清对象和问题”的 intake，但不替代变量、数据和识别检查。",
+
+        "upstream_inspiration": "humanities-thesis-skill 的 Stage 0 structured questioning。",
+
+        "examples": [
+
+          "用户只说“帮我写论文”时，先问论文类型、研究对象和核心问题。",
+
+          "已有草稿但主线散乱时，先判断是对象不清、问题不清、论点不清还是材料和理论脱节。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "theory_material_fit_checked",
+
+        "label": "理论必须落到材料",
+
+        "requirement": "每个理论概念都要说明定义、适用性和材料落点；理论不能作为装饰性框架，历史背景也不能替代解释。",
+
+        "social_science_adaptation": "人文社科写作应从文本细节、史料、案例、访谈、田野资料或数据张力出发，再选择理论工具；如果材料无法支撑理论，应降级、换框架或回到材料重读。",
+
+        "upstream_inspiration": "humanities-thesis-skill 的 theory-as-tool and material-as-destination rule。",
+
+        "examples": [
+
+          "不要先写三页福柯概念再突然转入文本；应说明哪个材料细节需要“规训”概念解释。",
+
+          "历史背景用于说明语境，真正的论证仍要落在材料与问题的关系上。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "quote_analysis_followup_checked",
+
+        "label": "引文之后必须分析",
+
+        "requirement": "直接引文、材料摘录和文献观点后必须紧接解释、比较、机制说明或边界判断；不能把引文本身当作论证完成。",
+
+        "social_science_adaptation": "文学细读、史料分析、访谈材料和政策文本都适用。定量论文引用文献观点时，也必须说明该观点如何支撑变量、机制、假设或解释边界。",
+
+        "upstream_inspiration": "humanities-thesis-skill 的 close-reading and quote-followed-by-analysis rules。",
+
+        "examples": [
+
+          "长引文之后至少说明关键词、叙述角度、概念张力或与本文论点的关系。",
+
+          "引用某篇文献的观点后，应说明本文继承、修正或反驳它的哪一部分。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "chapter_progression_checked",
+
+        "label": "章节必须递进",
+
+        "requirement": "章节结构必须回答：上一章证明了什么、还留下什么问题、本章如何推进、章末怎样把张力交给下一章。",
+
+        "social_science_adaptation": "人文社科长文不能只是三个并列观察或三个案例堆叠；量化和质性论文也应避免结果、机制、稳健性或案例章节彼此孤立。",
+
+        "upstream_inspiration": "humanities-thesis-skill 的 progressive chapter and transition paragraph contract。",
+
+        "examples": [
+
+          "章节开头可从上一章未解释的张力进入，而不是重新写一段泛泛背景。",
+
+          "章末过渡要说明下一章为什么必要，而不是只写“综上”。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "terminology_consistency_checked",
+
+        "label": "术语和译名保持一致",
+
+        "requirement": "核心理论概念、变量、材料类型和中英译名必须保持一致；无法确认的术语要标记待核验，不自行创造稳定译名。",
+
+        "social_science_adaptation": "中文人文社科稿常有西方理论和中国语境术语并存，必须建立术语决定；英文投稿或英文摘要要按目标学界通行用法重建表达。",
+
+        "upstream_inspiration": "humanities-thesis-skill 的 terminology-bilingual and terminology consistency checks。",
+
+        "examples": [
+
+          "同一稿中不要把 aura 交替写成灵晕、灵韵、灵光而不说明。",
+
+          "变量名、概念名和图表标签要与正文同一套术语。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "footnote_format_and_function_checked",
+
+        "label": "脚注有格式也有功能",
+
+        "requirement": "脚注必须区分出处、补充说明和防御性说明；GB/T 7714、Chicago、MLA 或目标期刊格式不得混用，空脚注、缺页码和缺文献类型标识必须阻断。",
+
+        "social_science_adaptation": "中文人文社科和 CSSCI 写作常依赖脚注推进证据链，脚注不是装饰；正文引用和文末参考文献仍要回到 citation-verifier、Zotero 和 writing-reference-capture。",
+
+        "upstream_inspiration": "humanities-thesis-skill 的 formatting-guide and footnote rules。",
+
+        "examples": [
+
+          "书籍、期刊、学位论文和论文集条目要保留类型标识、出版信息和页码。",
+
+          "同一篇论文不要同时使用脚注体例和文内夹注体例，除非目标格式明确要求。"
+
+        ]
+
+      }
+
+    ]
+
+  },
+
+  "review_response": {
+
+    "owner_skill": "reviewer-response-pack",
+
+    "target_routes": [
+
+      "social-science-submission-package",
+
+      "writing-export",
+
+      "single-paper-review"
+
+    ],
+
+    "rules": [
+
+      {
+
+        "id": "comment_tracker_required",
+
+        "label": "审稿意见必须可追踪",
+
+        "requirement": "编辑意见和每位审稿人的每条意见必须保留原意、稳定编号、严重程度、问题类型、拟采取动作、缺失信息和修改位置。",
+
+        "social_science_adaptation": "社科返修至少分类为 理论定位、文献遗漏、识别策略、测量效度、样本和数据、稳健性、机制解释、伦理和可复现、写作呈现。",
+
+        "upstream_inspiration": "nature-response 的 point-by-point tracker、comment taxonomy 和 readiness state 规则。",
+
+        "examples": [
+
+          "R1.2 标记为 major / identification / ACCEPT_ANALYSIS。",
+
+          "R2.1 标记为 medium / literature / ADD_CITATION_VERIFIED。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "action_mapping_no_fabrication",
+
+        "label": "回复动作不能伪造完成情况",
+
+        "requirement": "回复只能映射到真实已做或可确认的修改、分析、图表、引用、澄清、降级主张、部分采纳、基于证据的不同意、作者待补或阻断。",
+
+        "social_science_adaptation": "社科论文中优先使用 ACCEPT_ANALYSIS、ACCEPT_FIGURE_TABLE、ADD_CITATION_VERIFIED、CLARIFY_EXISTING、SOFTEN_CLAIM、AUTHOR_INPUT_NEEDED 和 BLOCKING；不要默认承诺新实验。",
+
+        "upstream_inspiration": "nature-response 的 action mapping 和 factuality red lines。",
+
+        "examples": [
+
+          "没有真实稳健性结果时不能写 已补充稳健性检验。",
+
+          "没有行号时保留 manuscript_location 占位，不能编造页码。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "disagreement_with_evidence",
+
+        "label": "不同意也要先承认问题",
+
+        "requirement": "不同意审稿意见时先承认其合理关切，再用研究问题、数据边界、识别逻辑或论文范围说明为何不完全采纳，并补充边界或澄清。",
+
+        "social_science_adaptation": "不得把时间、经费或方便性作为主要理由；若审稿人误读，优先检查论文表达是否造成误读。",
+
+        "upstream_inspiration": "nature-response 的 tone-and-stance 和 difficult cases 规则。",
+
+        "examples": [
+
+          "对超出研究范围的新数据要求，可给出范围理由、替代证据和限制说明。",
+
+          "对不适用的模型要求，可说明理论问题和数据结构为何不支持该模型。"
+
+        ]
+
+      }
+
+    ]
+
+  },
+
+  "data_availability": {
+
+    "owner_skill": "reproducibility-package",
+
+    "target_routes": [
+
+      "computational-social-science",
+
+      "social-science-submission-package",
+
+      "empirical-quant",
+
+      "text-corpus",
+
+      "network-analysis"
+
+    ],
+
+    "rules": [
+
+      {
+
+        "id": "dataset_to_claim_mapping",
+
+        "label": "数据可得性服务于结论复核",
+
+        "requirement": "所有支撑正文和附录结果的数据、代码、模型输出、图表源数据和二手数据都要映射到访问路径或限制说明。",
+
+        "social_science_adaptation": "社科数据常包含隐私、平台协议、授权数据库或第三方限制；可受限，但必须说明限制原因、控制方、申请路径和可公开的元数据。",
+
+        "upstream_inspiration": "nature-data 的 dataset inventory、access route 和 FAIR metadata 规则。",
+
+        "examples": [
+
+          "公开数据记录仓库、版本、下载日期和许可证。",
+
+          "受限数据记录伦理审批、使用协议和可复现替代材料。"
+
+        ]
+
+      },
+
+      {
+
+        "id": "code_and_material_boundary",
+
+        "label": "数据、代码、材料和协议分开说明",
+
+        "requirement": "数据可得性、代码可得性、材料来源、网页证据和伦理边界应分层记录，不能混成一句 available on request。",
+
+        "social_science_adaptation": "平台材料、访谈、网页截图、付费数据库和 Zotero 文献附件都应按访问层级分别处理。",
+
+        "upstream_inspiration": "nature-data 的 separate data, code, materials, protocols 规则。",
+
+        "examples": [
+
+          "公开代码进入复现包，受限原始数据只保留变量字典和模拟数据。",
+
+          "网页证据保留 URL、时间、截图或可见页面快照。"
+
+        ]
+
+      }
+
+    ]
+
+  },
+
+  "rejected_defaults": [
+
+    "不把 Nature/CNS 期刊范围当成本地社科写作的默认投稿目标。",
+
+    "不把医学、材料、图像实验或湿实验审稿标准当作社科论文的默认审查标准。",
+
+    "不默认新增 PubMed、MeSH 或生物医学检索优先级。",
+
+    "不整包安装 nature-skills，也不让它成为新的主路由。",
+
+    "不整包安装 humanities-thesis-skill，也不把它的检索脚本作为本地文献获取或引用核验入口。",
+
+    "不绕过本地 citation-verifier、Zotero、Obsidian、质量门和项目复现链。",
+
+    "不把目标期刊风格画像当作事实、结果、引用或 DOI 核验依据。"
+
+  ]
+
+}

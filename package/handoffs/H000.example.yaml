@@ -1,29 +1,57 @@
 schema_version: vela.codex.handoff.v1
+
 handoff_id: H000
+
 created_at: "2026-04-30T00:00:00Z"
+
 created_by: human
+
 surface: cli
+
 mode: review_only
+
 project:
+
   title: Example project
+
   stage: research_design
+
 scope:
+
   task: Check whether the named claim is supported by the named evidence files.
+
   relevant_files:
+
     - claims/C001.md
+
     - evidence/E001.yaml
+
   excluded_files:
+
     - private-notes/
+
 constraints:
+
   - Do not add new claims.
+
   - Do not treat materials as verified evidence.
+
 expected_output:
+
   format: markdown
+
   path: logs/codex-runs/H000-result.md
+
 review_standard:
+
   - Every support judgment must cite an evidence_id.
+
   - Uncertain support must be marked partial or needs_review.
+
 completion:
+
   validation_commands:
+
     - vela handoff lint handoffs/H000.example.yaml
+
   human_review_required: true

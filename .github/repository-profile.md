@@ -16,21 +16,17 @@ Alternative if you want the Codex context visible in the URL:
 vela-codex-workflow
 ```
 
-The repository slug cannot be changed by editing files. Rename it from:
+Repository renames must be done from GitHub:
 
 ```text
 Settings -> General -> Repository name
 ```
-
-After renaming, update the local remote URL to the new GitHub URL.
 
 ## Repository Description
 
 VELA is a portable research workflow environment for Codex: structure materials, evidence, claims, methods, deliverables, and handoffs without depending on a desktop app.
 
 ## Homepage
-
-Current URL:
 
 ```text
 https://marcus-ai4ss.github.io/VELA/
@@ -53,17 +49,16 @@ obsidian
 
 ## Social Preview
 
-Upload this image in GitHub repository settings:
+Use a current VELA visual asset from:
 
 ```text
-docs/assets/brand/vela-brand-board-reference.png
+docs/assets/brand/
 ```
 
-GitHub CLI is not authenticated in this local environment, so these repository-level settings may need to be applied through the GitHub web UI:
+Recommended GitHub settings:
 
 ```text
 Settings -> General -> Social preview
-Settings -> General -> Features / Pages
+Settings -> Pages
 About panel -> Description / Website / Topics
 ```
-

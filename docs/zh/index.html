@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>VELA · Versioned Evidence Lifecycle Architecture</title>
-    <meta name="description" content="VELA 是面向 Codex 的便携式项目工作包：Versioned Evidence Lifecycle Architecture。">
+    <meta name="description" content="VELA 是面向 Codex 研究项目的便携式工作流包。">
     <link rel="stylesheet" href="../assets/site.css">
   </head>
   <body>
@@ -22,82 +22,78 @@
           <img class="hero-mark" src="../assets/brand/vela-workflow-mark.png" alt="VELA 分层帆形标志">
           <div class="eyebrow">Versioned Evidence Lifecycle Architecture</div>
           <h1>VELA</h1>
-          <p>VELA 给 Codex 一个可携带的项目实验室：文件夹、规则、交接模板、证据结构、本地检查和 HELM 可读状态。</p>
+          <p>面向 Codex 研究项目的便携式工作流包：项目结构、交接提示、证据台账、验证、隐私扫描和 HELM 可读状态。</p>
+          <p class="hero-note">以工程控制论为底层方法：目标、状态、反馈、验证和校正都落在文件里。</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="../getting-started.html">开始使用 VELA</a>
-            <a class="button" href="../installation.html">下载说明</a>
+            <a class="button button-primary" href="../getting-started.html">开始</a>
+            <a class="button" href="../installation.html">安装</a>
+            <a class="button" href="../handoff-contract.html">交接契约</a>
             <a class="button" href="../imports.html">连接 HELM</a>
-            <a class="button" href="https://github.com/Marcus-AI4SS/HELM">HELM 仓库</a>
           </div>
-        </div>
-      </section>
-
-      <section class="section identity-strip">
-        <div>
-          <div class="eyebrow">统一产品语言</div>
-          <h2>VELA 和 HELM 是一套工作流里的两个分工，不是同一个工具。</h2>
-        </div>
-        <div class="brand-pair">
-          <article class="role-card active">
-            <strong>VELA</strong>
-            <span>Versioned Evidence Lifecycle Architecture</span>
-            <p>准备可携带的项目结构和有边界的 Codex 工作。</p>
-          </article>
-          <article class="role-card">
-            <strong>HELM</strong>
-            <span>Hub for Evidence, Logs &amp; Monitoring</span>
-            <p>读取本地状态，并把它变成清楚的项目看板。</p>
-          </article>
         </div>
       </section>
 
       <section class="section">
         <div class="section-head">
           <h2>VELA 提供什么</h2>
-          <p>一套不依赖桌面 app 也能运行的项目结构和工作方法。</p>
+          <p>让 Codex 在清楚的项目边界里工作，而不是依赖零散聊天记录。</p>
         </div>
         <div class="grid-4">
-          <article class="card"><h3>项目实验室</h3><p><code>vela init</code> 创建项目文件夹、AGENTS 规则、模板、日志和机器可读状态。</p></article>
-          <article class="card"><h3>证据生命周期</h3><p>材料和证据分开；来源、访问、核验、权利或伦理字段可见后，材料才进入证据层。</p></article>
-          <article class="card"><h3>Codex 工作流边界</h3><p>交接必须说明任务、文件、约束、预期输出、复核标准和验证上下文。</p></article>
-          <article class="card"><h3>HELM 连接</h3><p>HELM 可以读取同一套项目状态作为看板，但 VELA 不依赖 HELM。</p></article>
+          <article class="card"><h3>项目结构</h3><p><code>materials</code>、<code>evidence</code>、<code>claims</code>、<code>methods</code>、<code>deliverables</code>、<code>handoffs</code>、<code>logs</code>。</p></article>
+          <article class="card"><h3>Codex 规则</h3><p><code>AGENTS.md</code> 和命令模板让任务范围可读、可复核。</p></article>
+          <article class="card"><h3>证据生命周期</h3><p>材料、证据、主张和交付物分层管理。</p></article>
+          <article class="card"><h3>控制循环</h3><p>目标、状态、反馈信号、验证门和校正动作都保存在项目文件中。</p></article>
         </div>
       </section>
 
       <section class="section">
         <div class="section-head">
-          <h2>VELA 和 HELM 怎么协作</h2>
-          <p>VELA 不需要 HELM 也能安装使用。HELM 不需要 VELA 也能运行。组合使用时，两者通过显式本地文件交换状态，而不是依赖隐藏 app 状态。</p>
-        </div>
-        <div class="grid-2">
-          <article class="card"><h3>VELA → HELM</h3><p>VELA 写出 <code>vela.project.context.v1</code>，让 HELM 展示路径、状态、证据计数、文件、阻塞和本地检查。</p></article>
-          <article class="card"><h3>HELM → Codex / VELA</h3><p>HELM 准备可复制的 <code>helm.codex.handoff.v1</code> 说明。只有用户显式保存或导出时，VELA 才应写入项目。</p></article>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-head">
-          <h2>从这里开始</h2>
+          <h2>安装</h2>
         </div>
         <div class="grid-3">
-          <article class="card"><h3>1. 安装</h3><p>Windows 用 <code>install.ps1 -BootstrapTools</code>；macOS 用 <code>sh ./install-macos.sh</code>；Linux 用 <code>sh ./install.sh --bootstrap-tools</code>。</p></article>
-          <article class="card"><h3>2. 初始化</h3><p>运行 <code>vela init my-project</code>，生成可读取的本地项目上下文。</p></article>
-          <article class="card"><h3>3. 交给 Codex</h3><p>创建有边界任务，检查格式，渲染提示，然后回到 Codex 执行。</p></article>
+          <article class="card"><h3>Windows</h3><pre>git clone https://github.com/Marcus-AI4SS/VELA.git vela
+cd vela
+.\install.ps1 -BootstrapTools</pre></article>
+          <article class="card"><h3>macOS</h3><pre>git clone https://github.com/Marcus-AI4SS/VELA.git vela
+cd vela
+sh ./install-macos.sh</pre></article>
+          <article class="card"><h3>Linux / shell</h3><pre>git clone https://github.com/Marcus-AI4SS/VELA.git vela
+cd vela
+sh ./install.sh --bootstrap-tools</pre></article>
         </div>
       </section>
+
       <section class="section">
         <div class="section-head">
-          <h2>环境配置边界</h2>
-          <p>VELA 安装公开工作流层，并检查用户运行态；不会复制私人机器状态。</p>
+          <h2>使用</h2>
         </div>
         <div class="grid-3">
-          <article class="card"><h3>可安装或提示</h3><p>Windows 走 winget；macOS 走 Homebrew；检查 Git、Python 3.13+、PowerShell 7、ripgrep、Node.js、GitHub CLI、agentmemory。</p></article>
-          <article class="card"><h3>只检查</h3><p>CodeGraph、MCP vendor、Codex 插件、Zotero、Obsidian、浏览器/CNKI 会话、私有记忆库。</p></article>
-          <article class="card"><h3>双层结构</h3><p>clone 的仓库是源包；<code>~/.codex</code> 和 <code>~/.vela</code> 是本机运行态。</p></article>
+          <article class="card"><h3>1. 初始化</h3><p><code>vela init my-project</code> 创建项目结构和 <code>.vela/context.json</code>。</p></article>
+          <article class="card"><h3>2. 交给 Codex</h3><p>创建、检查并渲染一个有边界的 Codex 任务。</p></article>
+          <article class="card"><h3>3. 验证</h3><p>分享前运行项目验证和隐私扫描。</p></article>
         </div>
       </section>
-      <footer>VELA = Versioned Evidence Lifecycle Architecture。HELM = Hub for Evidence, Logs &amp; Monitoring。</footer>
 
+      <section class="section identity-strip">
+        <div>
+          <div class="eyebrow">可选组合</div>
+          <h2>VELA 和 HELM 是两个独立工具，通过显式文件接口协作。</h2>
+        </div>
+        <div class="brand-pair">
+          <article class="role-card active">
+            <strong>VELA</strong>
+            <span>工作流包</span>
+            <p>创建并验证可携带的研究项目状态。</p>
+          </article>
+          <article class="role-card">
+            <strong>HELM</strong>
+            <span>本地研究看板</span>
+            <p>读取项目状态，并帮助准备 Codex 交接。</p>
+          </article>
+        </div>
+      </section>
+
+      <footer>VELA = Versioned Evidence Lifecycle Architecture。</footer>
     </main>
   </body>
 </html>

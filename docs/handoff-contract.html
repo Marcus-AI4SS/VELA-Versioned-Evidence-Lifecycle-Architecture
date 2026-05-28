@@ -1,35 +1,69 @@
 <!doctype html>
+
 <html lang="en">
+
   <head>
+
     <meta charset="utf-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Handoff Contract · VELA</title>
+
     <meta name="description" content="VELA Codex handoff contract.">
+
     <link rel="stylesheet" href="./assets/site.css">
+
   </head>
+
   <body>
+
     <main class="page-shell">
+
       <div class="topbar">
+
         <div class="brand"><span class="brand-mark"></span><span>VELA</span></div>
+
         <div class="lang-switch"><span class="active">English</span><a href="./">Home</a></div>
+
       </div>
+
       <section class="hero">
+
         <div>
+
           <div class="eyebrow">Codex handoff</div>
+
           <h1><span class="sans">Small tasks, explicit contracts.</span></h1>
+
           <p>A VELA handoff is a schema-checked task packet for Codex. It names the task, relevant files, constraints, expected output, review standard, validation commands, and human review status.</p>
+
           <div class="hero-actions">
+
             <a class="button button-primary" href="./getting-started.html">Start using VELA</a>
-            <a class="button" href="./public-export.html">Public export</a>
+
+            <a class="button" href="./quality-checks.md">Quality checks</a>
+
           </div>
+
         </div>
+
         <div class="hero-visual symbol"><img src="./assets/brand/vela-workflow-mark.png" alt="VELA layered sail mark"></div>
+
       </section>
+
       <section class="section grid-3">
+
         <article class="card"><h3>Create</h3><p><code>vela handoff new --project . --template claim-check</code></p></article>
+
         <article class="card"><h3>Lint</h3><p><code>vela handoff lint handoffs/H001.yaml</code> validates <code>vela.codex.handoff.v1</code>.</p></article>
+
         <article class="card"><h3>Render</h3><p><code>vela handoff render</code> creates a bounded prompt and fails when lint fails.</p></article>
+
       </section>
+
     </main>
+
   </body>
+
 </html>

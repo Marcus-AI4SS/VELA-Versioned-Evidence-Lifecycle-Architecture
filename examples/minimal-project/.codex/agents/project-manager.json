@@ -1,29 +1,57 @@
 {
+
   "agent_id": "project-manager",
+
   "display_name": "Project Manager Agent",
+
   "preferred_model": null,
+
   "role": "manager",
+
   "enabled": true,
+
   "isolation_method": null,
+
   "parallel_safe": null,
+
   "integration_review_required": null,
+
   "capability_tags_subset": null,
+
   "allowed_skills_mcp_subset": [
+
     "research-stack-manager",
+
     "project-retrospective-evolver"
+
   ],
+
   "write_scope_subset": [
+
     "outputs/agent-runs/<run_id>/<agent_id>/"
+
   ],
+
   "max_execution_mode": "sequential_multi_agent_execution",
+
   "required_inputs": [
+
     "route_id",
+
     "clarification_card",
+
     "dispatch_contract"
+
   ],
+
   "expected_outputs": [
+
     "summary.md",
+
     "result.json"
+
   ],
+
   "review_gate": null
+
 }

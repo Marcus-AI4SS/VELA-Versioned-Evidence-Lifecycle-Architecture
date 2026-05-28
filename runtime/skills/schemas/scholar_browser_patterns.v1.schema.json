@@ -1,0 +1,487 @@
+{
+
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+
+  "$id": "https://marcus-ai4ss.github.io/VELA/schemas/scholar_browser_patterns.v1.schema.json",
+
+  "title": "Scholar Browser Patterns",
+
+  "type": "object",
+
+  "additionalProperties": false,
+
+  "required": [
+
+    "$schema",
+
+    "schema_version",
+
+    "generated_at",
+
+    "policy",
+
+    "systems"
+
+  ],
+
+  "properties": {
+
+    "$schema": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "schema_version": {
+
+      "const": "scholar_browser_patterns.v1"
+
+    },
+
+    "generated_at": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "policy": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+
+        "default_route",
+
+        "allowed_role",
+
+        "forbidden_role",
+
+        "must_stop_for"
+
+      ],
+
+      "properties": {
+
+        "default_route": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "allowed_role": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "forbidden_role": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "must_stop_for": {
+
+          "$ref": "#/$defs/string_list"
+
+        }
+
+      }
+
+    },
+
+    "systems": {
+
+      "type": "array",
+
+      "minItems": 2,
+
+      "items": {
+
+        "$ref": "#/$defs/system"
+
+      }
+
+    }
+
+  },
+
+  "$defs": {
+
+    "string_list": {
+
+      "type": "array",
+
+      "items": {
+
+        "type": "string",
+
+        "minLength": 1
+
+      },
+
+      "uniqueItems": true
+
+    },
+
+    "field": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+
+        "name",
+
+        "selector",
+
+        "purpose"
+
+      ],
+
+      "properties": {
+
+        "name": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "selector": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "purpose": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "required": {
+
+          "type": "boolean"
+
+        }
+
+      }
+
+    },
+
+    "action": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+
+        "id",
+
+        "purpose",
+
+        "method",
+
+        "notes"
+
+      ],
+
+      "properties": {
+
+        "id": {
+
+          "type": "string",
+
+          "pattern": "^[a-z0-9][a-z0-9_-]*$"
+
+        },
+
+        "purpose": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "method": {
+
+          "enum": [
+
+            "navigate_plus_evaluate_script",
+
+            "evaluate_script_only",
+
+            "direct_cdp",
+
+            "metadata_export_only",
+
+            "manual_user_step"
+
+          ]
+
+        },
+
+        "selectors_or_params": {
+
+          "$ref": "#/$defs/string_list"
+
+        },
+
+        "notes": {
+
+          "$ref": "#/$defs/string_list"
+
+        }
+
+      }
+
+    },
+
+    "system": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+
+        "system_id",
+
+        "upstream",
+
+        "repo_url",
+
+        "decision",
+
+        "absorbed_into",
+
+        "accepted_patterns",
+
+        "rejected_patterns",
+
+        "entry_urls",
+
+        "primary_keys",
+
+        "captcha_detection",
+
+        "local_smoke_test",
+
+        "result_fields",
+
+        "actions"
+
+      ],
+
+      "properties": {
+
+        "system_id": {
+
+          "enum": [
+
+            "cnki",
+
+            "google_scholar"
+
+          ]
+
+        },
+
+        "upstream": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "repo_url": {
+
+          "type": "string",
+
+          "format": "uri"
+
+        },
+
+        "decision": {
+
+          "enum": [
+
+            "adapt",
+
+            "watch",
+
+            "reject"
+
+          ]
+
+        },
+
+        "absorbed_into": {
+
+          "$ref": "#/$defs/string_list"
+
+        },
+
+        "accepted_patterns": {
+
+          "$ref": "#/$defs/string_list"
+
+        },
+
+        "rejected_patterns": {
+
+          "$ref": "#/$defs/string_list"
+
+        },
+
+        "entry_urls": {
+
+          "$ref": "#/$defs/string_list"
+
+        },
+
+        "primary_keys": {
+
+          "$ref": "#/$defs/string_list"
+
+        },
+
+        "captcha_detection": {
+
+          "$ref": "#/$defs/string_list"
+
+        },
+
+        "local_smoke_test": {
+
+          "type": "object",
+
+          "additionalProperties": false,
+
+          "required": [
+
+            "tested_at",
+
+            "environment",
+
+            "result",
+
+            "passed_checks",
+
+            "blocked_checks",
+
+            "not_tested_checks"
+
+          ],
+
+          "properties": {
+
+            "tested_at": {
+
+              "type": "string",
+
+              "minLength": 1
+
+            },
+
+            "environment": {
+
+              "type": "string",
+
+              "minLength": 1
+
+            },
+
+            "result": {
+
+              "enum": [
+
+                "pass",
+
+                "partial",
+
+                "blocked"
+
+              ]
+
+            },
+
+            "passed_checks": {
+
+              "$ref": "#/$defs/string_list"
+
+            },
+
+            "blocked_checks": {
+
+              "$ref": "#/$defs/string_list"
+
+            },
+
+            "not_tested_checks": {
+
+              "$ref": "#/$defs/string_list"
+
+            }
+
+          }
+
+        },
+
+        "result_fields": {
+
+          "type": "array",
+
+          "minItems": 1,
+
+          "items": {
+
+            "$ref": "#/$defs/field"
+
+          }
+
+        },
+
+        "actions": {
+
+          "type": "array",
+
+          "minItems": 1,
+
+          "items": {
+
+            "$ref": "#/$defs/action"
+
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+}

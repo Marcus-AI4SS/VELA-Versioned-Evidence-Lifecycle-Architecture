@@ -1,55 +1,45 @@
-# Project Structure
+# Architecture
 
-VELA does not require a hidden database. A project should be readable as files and folders.
+VELA has three layers:
 
-## Runtime Shape
-
-```text
-my-research-project/
-  .codex/
-  .vela/
-  materials/
-  evidence/
-  claims/
-  methods/
-  deliverables/
-  handoffs/
-  logs/
-```
-
-`vela init` materializes this shape from `package/.vela/initializer-manifest.json`, then writes `.vela/context.json` through the VELA context contract. The initializer is schema-driven so new project files and directories can be reviewed without hunting through Python code.
-
-## Installed Environment Shape
-
-Every VELA user gets a source package plus a local runtime:
-
-```text
-vela/                         # cloned or downloaded source package
-~/.codex/skills/              # public VELA research skills installed for Codex
-~/.vela/research-stack/       # contracts, schemas, profiles, validators, envctl modules
-~/.vela/bin/                  # vela/envctl shims
-~/.vela/state/                # install receipts and doctor state
-```
-
-`CODEX_HOME` and `VELA_HOME` can override the runtime targets. This is the same source/runtime split used by the original local environment, but without copying private machine state.
-
-## Repository Shape
-
-| Path | Role |
+| Layer | Files |
 | --- | --- |
-| `package/` | Starter package copied into a user project |
-| `package/.vela/initializer-manifest.json` | Schema-driven source for starter directories and files |
-| `schemas/` | Machine-readable VELA/HELM contracts and initializer schemas |
-| `scripts/vela.py` | CLI entrypoint |
-| `scripts/vela_initializer.py` | Manifest loader, renderer, path guard, and materializer |
-| `scripts/vela_contract.py` | Context, validation, and HELM-readable state contract |
-| `scripts/init_research_project.py` | Thin wrapper that combines Git setup, manifest materialization, starter package install, Codex trust, and context export |
-| `skills/` | Optional VELA Codex skill entrypoints |
+| Project package | `package/`, copied into a research project by `vela init` |
+| Runtime package | `runtime/`, installed only when the user wants VELA-managed skills and `envctl` helpers |
+| Public contracts | `schemas/`, used by the CLI, HELM, and validators |
 
-## What To Keep Private
+Across those layers, VELA uses an engineering-cybernetic control loop: declare the research objective, observe project state, collect feedback, run gates, and apply bounded corrections.
 
-Keep raw private data, credentials, account traces, personal notes, and restricted source material inside your own project storage. Do not place them in a public copy of VELA.
+## Project Layer
 
-## What HELM Reads
+`vela init` creates a project with:
 
-If you use HELM, it should read the project state you already maintain. HELM is a view over the work, not the only place where the work exists.
+```text
+materials/
+evidence/
+claims/
+methods/
+deliverables/
+handoffs/
+logs/
+.codex/
+.vela/context.json
+AGENTS.md
+```
+
+The project layer is portable. It can be committed, zipped, reviewed, or opened by HELM.
+
+## Runtime Layer
+
+The optional runtime installs into the user's home directory:
+
+```text
+~/.vela/
+~/.codex/skills/
+```
+
+It contains public skills, profiles, validators, and shims. External services remain user-managed.
+
+## Interface Layer
+
+VELA writes `.vela/context.json` using `vela.project.context.v1`. HELM can read that context and prepare `helm.codex.handoff.v1` notes.

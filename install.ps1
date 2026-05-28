@@ -2,8 +2,8 @@ param(
   [string]$Python = "python",
   [switch]$BootstrapTools,
   [switch]$SkipDependencyInstall,
-  [switch]$SkipLocalEnvironment,
-  [switch]$ForceLocalEnvironment
+  [switch]$SkipRuntime,
+  [switch]$ForceRuntime
 )
 
 $ErrorActionPreference = "Stop"
@@ -103,12 +103,12 @@ $Receipt | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $StateD
 & $Python $Script doctor
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 if ($BootstrapTools) {
-  & $Python $Script local-env bootstrap-tools --include all --install --yes
+  & $Python $Script runtime bootstrap-tools --include all --install --yes
   if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 }
-if (-not $SkipLocalEnvironment) {
-  $LocalEnvArgs = @($Script, "local-env", "install-runtime", "--include", "core,automation,toolchain", "--python", $Python, "--commit")
-  if ($ForceLocalEnvironment) {
+if (-not $SkipRuntime) {
+  $LocalEnvArgs = @($Script, "runtime", "enable", "--include", "core,automation,toolchain", "--python", $Python, "--commit")
+  if ($ForceRuntime) {
     $LocalEnvArgs += "--force-core"
   }
   & $Python @LocalEnvArgs
@@ -117,6 +117,6 @@ if (-not $SkipLocalEnvironment) {
 Write-Host ""
 Write-Host "VELA shim created: $Shim"
 Write-Host "Add this directory to PATH if you want to run 'vela' directly: $BinDir"
-if (-not $SkipLocalEnvironment) {
-  Write-Host "VELA local research environment and runtime shims installed. Restart Codex so new skills are discovered."
+if (-not $SkipRuntime) {
+  Write-Host "VELA runtime and shims installed. Restart Codex so new skills are discovered."
 }

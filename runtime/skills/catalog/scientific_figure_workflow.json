@@ -1,0 +1,1275 @@
+{
+
+  "$schema": "../schemas/scientific_figure_workflow.v1.schema.json",
+
+  "schema_version": "scientific_figure_workflow.v1",
+
+  "updated_at": "2026-05-27",
+
+  "policy": "科研绘图工作流采用 scientific-figure-skill 的规范性内容，但不新增重复主 skill、不整包安装外部仓库。真实数据图表由 figure-table-studio 负责，机制图、概念图、流程图和 image2 结构图由 research-figure-studio 负责；共同遵守本合同的数据体检、过程数据留痕、统计标注、图注、导出和风险边界。",
+
+  "source_review_refs": [
+
+    {
+
+      "upstream": "myzhao0114-del/scientific-figure-skill",
+
+      "repo_url": "https://github.com/myzhao0114-del/scientific-figure-skill",
+
+      "adopted_as": [
+
+        "configuration_block_first",
+
+        "data_health_before_plotting",
+
+        "process_data_traceability",
+
+        "justified_statistics_annotations",
+
+        "caption_what_how_so_what",
+
+        "multi_format_export"
+
+      ]
+
+    },
+
+    {
+
+      "upstream": "Yuan1z0825/nature-skills",
+
+      "repo_url": "https://github.com/Yuan1z0825/nature-skills",
+
+      "adopted_as": [
+
+        "figure_claim_contract",
+
+        "visual_argument_hierarchy",
+
+        "editable_publication_outputs",
+
+        "review_ready_caption_and_notes"
+
+      ]
+
+    },
+
+    {
+
+      "upstream": "Jinze-Lee/codex-skills-workbench",
+
+      "repo_url": "https://github.com/Jinze-Lee/codex-skills-workbench",
+
+      "adopted_as": [
+
+        "plotting_tool_selection_by_deliverable",
+
+        "r_scatter_plot_output_bundle",
+
+        "raincloud_distribution_plot_adapter",
+
+        "weighted_regression_plot_interpretation_check",
+
+        "ggplot2_richtext_export_diagnostics"
+
+      ]
+
+    },
+
+    {
+
+      "upstream": "Leey21/awesome-ai-research-writing",
+
+      "repo_url": "https://github.com/Leey21/awesome-ai-research-writing",
+
+      "adopted_as": [
+
+        "architecture_figure_prompt_constraints",
+
+        "chart_type_recommendation_by_evidence_task",
+
+        "figure_title_plainness",
+
+        "table_title_plainness",
+
+        "data_bound_result_analysis"
+
+      ]
+
+    }
+
+  ],
+
+  "adoption_options": [
+
+    {
+
+      "id": "option_a_install_upstream_skill",
+
+      "label": "直接安装外部 scientific-figure skill",
+
+      "decision": "reject_as_default",
+
+      "description": "把外部仓库克隆到 Codex skills 目录并让它成为独立技能。",
+
+      "strengths": [
+
+        "上线最快",
+
+        "保留原作者完整提示词和参考文件",
+
+        "适合一次性试用"
+
+      ],
+
+      "risks": [
+
+        "与本地 research-figure-studio 和 figure-table-studio 重复",
+
+        "会绕开本地质量门和社科出版风格合同",
+
+        "外部 agents/openai.yaml 的隐式触发可能改变本地路由",
+
+        "无法统一约束 image2 与真实数据图边界"
+
+      ]
+
+    },
+
+    {
+
+      "id": "option_b_text_only_absorption",
+
+      "label": "只把规则写进现有 skill 文本",
+
+      "decision": "reject_as_default",
+
+      "description": "把数据体检、字体、配色、图注等文字规则追加到本地绘图 skill。",
+
+      "strengths": [
+
+        "改动小",
+
+        "不会增加命令或 schema",
+
+        "能快速改善提示词"
+
+      ],
+
+      "risks": [
+
+        "不同线程执行尺度仍不一致",
+
+        "无法检查质量门是否覆盖关键规范",
+
+        "后续演化时容易和 publication_style_rules 脱节"
+
+      ]
+
+    },
+
+    {
+
+      "id": "option_c_contract_first_integration",
+
+      "label": "合同先行并入现有绘图链",
+
+      "decision": "selected",
+
+      "description": "新增 scientific_figure_workflow schema/catalog/validator，把外部仓库的规范性内容并入 research-figure-studio、figure-table-studio 和 publication_style_rules。",
+
+      "strengths": [
+
+        "保留现有总路由和 image2 规则",
+
+        "真实数据图与概念机制图边界清楚",
+
+        "数据体检、过程数据、统计标注、图注和导出格式可被 validator 检查",
+
+        "适合后续加入更多期刊风格预设"
+
+      ],
+
+      "risks": [
+
+        "需要维护一个新合同和 validator",
+
+        "正式数据图会比临时出图多一步数据体检",
+
+        "某些外部默认如四边框需要按社科期刊风格条件化"
+
+      ]
+
+    },
+
+    {
+
+      "id": "option_d_new_local_scientific_figure_skill",
+
+      "label": "新建本地 scientific-figure skill",
+
+      "decision": "watch",
+
+      "description": "在本地新增一个独立 skill，专门处理 Excel/CSV 到科研图和报告。",
+
+      "strengths": [
+
+        "用户意图直观",
+
+        "可以完整保留表格数据出图流程",
+
+        "适合未来把统计图生成做成独立产品化能力"
+
+      ],
+
+      "risks": [
+
+        "与 figure-table-studio 高度重叠",
+
+        "增加路由歧义",
+
+        "需要重新处理论文图、数据图、image2 图之间的边界"
+
+      ]
+
+    },
+
+    {
+
+      "id": "option_e_runtime_prompt_only",
+
+      "label": "只保留成运行态提示模板",
+
+      "decision": "reject_as_default",
+
+      "description": "不改VELA 仓库，只在对话里提示画图时参考该仓库风格。",
+
+      "strengths": [
+
+        "零代码变更",
+
+        "适合一次性实验"
+
+      ],
+
+      "risks": [
+
+        "不能解决用户反馈的随机性问题",
+
+        "无法进入 daily audit 或质量门",
+
+        "不能约束后续线程"
+
+      ]
+
+    }
+
+  ],
+
+  "selected_strategy": "option_c_contract_first_integration",
+
+  "workflow_modes": [
+
+    {
+
+      "id": "empirical_tabular_figure",
+
+      "label": "结构化数据科研图",
+
+      "owner_skill": "figure-table-studio",
+
+      "trigger_signals": [
+
+        "Excel 出图",
+
+        "CSV 画图",
+
+        "回归图",
+
+        "箱线图",
+
+        "柱状图加显著性",
+
+        "趋势图",
+
+        "统计图",
+
+        "论文结果图"
+
+      ],
+
+      "required_steps": [
+
+        "configuration_block",
+
+        "isolated_output_directory",
+
+        "data_health_report",
+
+        "process_data_export",
+
+        "justified_statistics",
+
+        "publication_rendering",
+
+        "caption_contract",
+
+        "delivery_summary"
+
+      ],
+
+      "renderer_policy": "真实数据图、统计图、模型输出图和表格默认使用确定性代码或可编辑工具，image2 只能辅助布局，不能生成数值、坐标、误差线或显著性。",
+
+      "outputs": [
+
+        "00_data_health.md",
+
+        "figures/pdf",
+
+        "figures/png",
+
+        "figures/jpg",
+
+        "process_data",
+
+        "caption_or_figure_note"
+
+      ]
+
+    },
+
+    {
+
+      "id": "conceptual_mechanism_figure",
+
+      "label": "概念机制与流程图",
+
+      "owner_skill": "research-figure-studio",
+
+      "trigger_signals": [
+
+        "机制图",
+
+        "概念框架图",
+
+        "流程图",
+
+        "研究设计图",
+
+        "理论图",
+
+        "image2 科研图"
+
+      ],
+
+      "required_steps": [
+
+        "figure_brief",
+
+        "publication_rendering",
+
+        "caption_contract",
+
+        "delivery_summary"
+
+      ],
+
+      "renderer_policy": "概念图、机制图和流程图可使用 image2，但必须先锁定面板、文字、箭头、配色和禁止编造项；文字错误必须用可编辑工具修正。",
+
+      "outputs": [
+
+        "final_figure",
+
+        "editable_source_when_possible",
+
+        "figure_brief",
+
+        "caption_or_figure_note",
+
+        "audit_checklist"
+
+      ]
+
+    },
+
+    {
+
+      "id": "mixed_paper_figure_set",
+
+      "label": "论文图组",
+
+      "owner_skill": "research-figure-studio + figure-table-studio",
+
+      "trigger_signals": [
+
+        "论文图组",
+
+        "多面板图",
+
+        "投稿图表",
+
+        "送审图表",
+
+        "顶刊图表"
+
+      ],
+
+      "required_steps": [
+
+        "figure_brief",
+
+        "configuration_block",
+
+        "isolated_output_directory",
+
+        "data_health_report",
+
+        "process_data_export",
+
+        "justified_statistics",
+
+        "publication_rendering",
+
+        "caption_contract",
+
+        "report_bundle",
+
+        "delivery_summary"
+
+      ],
+
+      "renderer_policy": "先由 research-figure-studio 锁定图组论证功能和面板层级，再由 figure-table-studio 处理经验数据面板；概念面板可 image2，数据面板必须确定性渲染。",
+
+      "outputs": [
+
+        "figure_brief",
+
+        "00_data_health.md",
+
+        "process_data",
+
+        "multi_format_figures",
+
+        "caption_set",
+
+        "figure_audit_report"
+
+      ]
+
+    },
+
+    {
+
+      "id": "quick_discussion_figure",
+
+      "label": "讨论草图",
+
+      "owner_skill": "research-figure-studio",
+
+      "trigger_signals": [
+
+        "草图",
+
+        "先画个示意",
+
+        "快速看看",
+
+        "讨论用图"
+
+      ],
+
+      "required_steps": [
+
+        "figure_brief",
+
+        "publication_rendering",
+
+        "delivery_summary"
+
+      ],
+
+      "renderer_policy": "可放宽完整报告要求，但必须说明假设、不得制造经验数值，后续进入论文或投稿时必须升级为正式模式。",
+
+      "outputs": [
+
+        "preview_figure",
+
+        "assumptions"
+
+      ]
+
+    }
+
+  ],
+
+  "workflow_steps": [
+
+    {
+
+      "id": "figure_brief",
+
+      "label": "图形说明卡",
+
+      "requirement": "渲染前锁定图的用途、论文主张、图型、数据或概念依据、面板计划、文字、箭头、配色、渲染器和风险检查。",
+
+      "applies_to_modes": [
+
+        "conceptual_mechanism_figure",
+
+        "mixed_paper_figure_set",
+
+        "quick_discussion_figure"
+
+      ],
+
+      "outputs": [
+
+        "figure_brief"
+
+      ],
+
+      "blockers": [
+
+        "图的主张不明",
+
+        "箭头或面板关系没有含义",
+
+        "图会暗示未经证实的因果或经验结论"
+
+      ]
+
+    },
+
+    {
+
+      "id": "configuration_block",
+
+      "label": "脚本配置前置",
+
+      "requirement": "正式数据绘图脚本必须在顶部集中声明输入路径、输出目录、字体 fallback、输出格式、显著性阈值、误差线类型、数字精度和图尺寸。",
+
+      "applies_to_modes": [
+
+        "empirical_tabular_figure",
+
+        "mixed_paper_figure_set"
+
+      ],
+
+      "outputs": [
+
+        "analysis_script_config"
+
+      ],
+
+      "blockers": [
+
+        "路径、字体、显著性阈值或导出格式散落在脚本各处",
+
+        "输出目录与原始数据目录相同且未说明风险"
+
+      ]
+
+    },
+
+    {
+
+      "id": "isolated_output_directory",
+
+      "label": "独立输出目录",
+
+      "requirement": "正式绘图输出默认写入项目 outputs 下的专门目录，并包含 figures 和 process_data 子目录，不写回原始数据目录。",
+
+      "applies_to_modes": [
+
+        "empirical_tabular_figure",
+
+        "mixed_paper_figure_set"
+
+      ],
+
+      "outputs": [
+
+        "output_directory",
+
+        "figures_directory",
+
+        "process_data_directory"
+
+      ],
+
+      "blockers": [
+
+        "会覆盖原始数据",
+
+        "输出目录不可追踪",
+
+        "图件和过程数据混在同一层"
+
+      ]
+
+    },
+
+    {
+
+      "id": "data_health_report",
+
+      "label": "绘图前数据体检",
+
+      "requirement": "从 Excel/CSV 等结构化数据生成正式图表前，先检查行列、类型、缺失、重复、描述统计、异常值、分布和必要时的相关/VIF。",
+
+      "applies_to_modes": [
+
+        "empirical_tabular_figure",
+
+        "mixed_paper_figure_set"
+
+      ],
+
+      "outputs": [
+
+        "00_data_health.md"
+
+      ],
+
+      "blockers": [
+
+        "关键变量缺失率过高却继续画图",
+
+        "回归或模型任务存在严重共线性却未声明",
+
+        "样本量不足却生成统计显著性判断"
+
+      ]
+
+    },
+
+    {
+
+      "id": "process_data_export",
+
+      "label": "过程数据留痕",
+
+      "requirement": "保存原始读取、清洗后、聚合后、统计检验和每张图对应的数据 sidecar，让图中每个数字都能追溯到文件、sheet 和列。",
+
+      "applies_to_modes": [
+
+        "empirical_tabular_figure",
+
+        "mixed_paper_figure_set"
+
+      ],
+
+      "outputs": [
+
+        "process_data/01_raw_loaded.xlsx",
+
+        "process_data/02_cleaned.xlsx",
+
+        "process_data/fig_NN_data.xlsx"
+
+      ],
+
+      "blockers": [
+
+        "无法解释图中数字来源",
+
+        "清洗或聚合过程没有留档",
+
+        "统计结果只写在图上没有原始检验表"
+
+      ]
+
+    },
+
+    {
+
+      "id": "justified_statistics",
+
+      "label": "统计标注有依据",
+
+      "requirement": "只有真实组间比较或明确设计需要时才运行显著性检验；误差条、置信区间、p 值、星号和 ns 必须说明测试方法和样本含义。",
+
+      "applies_to_modes": [
+
+        "empirical_tabular_figure",
+
+        "mixed_paper_figure_set"
+
+      ],
+
+      "outputs": [
+
+        "process_data/05_statistical_tests.xlsx",
+
+        "statistics_note"
+
+      ],
+
+      "blockers": [
+
+        "趋势图、散点图或单分布图被随意加 p 值",
+
+        "paired 与 independent 样本不明却直接选检验",
+
+        "p 值被写成 0.0000",
+
+        "误差条没有说明 SD、SEM 或 95% CI"
+
+      ]
+
+    },
+
+    {
+
+      "id": "publication_rendering",
+
+      "label": "出版风格渲染",
+
+      "requirement": "默认白底、克制配色、字体一致、坐标单位明确、数字精度统一、黑白可读；按目标期刊决定是否使用四边框或更轻量坐标轴。",
+
+      "applies_to_modes": [
+
+        "empirical_tabular_figure",
+
+        "conceptual_mechanism_figure",
+
+        "mixed_paper_figure_set",
+
+        "quick_discussion_figure"
+
+      ],
+
+      "outputs": [
+
+        "publication_ready_figure"
+
+      ],
+
+      "blockers": [
+
+        "配色花哨或不可黑白阅读",
+
+        "坐标轴无单位",
+
+        "文字不可读",
+
+        "图内标题和图注重复表达"
+
+      ]
+
+    },
+
+    {
+
+      "id": "caption_contract",
+
+      "label": "三段式图注",
+
+      "requirement": "正式图注必须回答 what、how、so what：展示什么、如何汇总或检验、读者应得出什么结论；不能只重复坐标轴。",
+
+      "applies_to_modes": [
+
+        "empirical_tabular_figure",
+
+        "conceptual_mechanism_figure",
+
+        "mixed_paper_figure_set"
+
+      ],
+
+      "outputs": [
+
+        "caption_or_figure_note"
+
+      ],
+
+      "blockers": [
+
+        "图注只有描述没有解释",
+
+        "统计图注没有样本、误差条或检验说明",
+
+        "图注写出图中并未支持的结论"
+
+      ]
+
+    },
+
+    {
+
+      "id": "report_bundle",
+
+      "label": "报告式打包",
+
+      "requirement": "用户要求正式报告或图组交付时，将图件、图注、数据体检和关键过程数据整理成报告或清单。",
+
+      "applies_to_modes": [
+
+        "mixed_paper_figure_set"
+
+      ],
+
+      "outputs": [
+
+        "report.pdf",
+
+        "figure_audit_report"
+
+      ],
+
+      "blockers": [
+
+        "报告没有图注",
+
+        "图片拉伸变形",
+
+        "图件和过程数据无法对应"
+
+      ]
+
+    },
+
+    {
+
+      "id": "delivery_summary",
+
+      "label": "交付说明",
+
+      "requirement": "交付时说明分析对象、图件展示内容、输出文件位置、过程数据位置、仍需人工判断的统计或投稿风险。",
+
+      "applies_to_modes": [
+
+        "empirical_tabular_figure",
+
+        "conceptual_mechanism_figure",
+
+        "mixed_paper_figure_set",
+
+        "quick_discussion_figure"
+
+      ],
+
+      "outputs": [
+
+        "delivery_summary"
+
+      ],
+
+      "blockers": [
+
+        "只给图片不说明假设或来源",
+
+        "不说明哪些数值来自数据、哪些是概念结构",
+
+        "投稿风险未交代"
+
+      ]
+
+    }
+
+  ],
+
+  "typography_contract": {
+
+    "font_policy": "正式论文图默认使用 serif 体系，并按中英文字体 fallback 解析实际可用字体；不得硬编码本机不存在的字体。中文优先宋体/宋体类，英文优先 Times New Roman/Times 类；混排时同时声明中英 fallback，并设置 axes.unicode_minus=false。",
+
+    "cn_serif_fallback": [
+
+      "SimSun",
+
+      "Songti SC",
+
+      "Source Han Serif SC",
+
+      "Noto Serif CJK SC",
+
+      "serif"
+
+    ],
+
+    "en_serif_fallback": [
+
+      "Times New Roman",
+
+      "Liberation Serif",
+
+      "DejaVu Serif",
+
+      "serif"
+
+    ],
+
+    "matplotlib_font_sizes_pt": {
+
+      "base": 10,
+
+      "axes_title": 11,
+
+      "axis_label": 10,
+
+      "tick_label": 9,
+
+      "legend": 9,
+
+      "caption": 9,
+
+      "panel_label": 10,
+
+      "annotation": 9,
+
+      "significance_mark": 10
+
+    },
+
+    "report_font_sizes_pt": {
+
+      "title": 18,
+
+      "metadata": 10,
+
+      "caption": 9,
+
+      "page_number": 9
+
+    },
+
+    "figure_sizes_in": {
+
+      "single_column": [
+
+        3.5,
+
+        2.6
+
+      ],
+
+      "double_column": [
+
+        7.2,
+
+        4.0
+
+      ]
+
+    },
+
+    "dpi": 300,
+
+    "layout_rules": [
+
+      "图内标题默认关闭，标题和结论放在图注或正文中。",
+
+      "坐标轴标题 10 pt，刻度 9 pt，图例 9 pt；多面板标签 10 pt 且位置一致。",
+
+      "图注正文默认 9 pt；正式报告标题页 18 pt，元数据 10 pt。",
+
+      "显著性标注默认 10 pt，不因视觉强调而大于主图文字。",
+
+      "单栏图默认约 3.5 x 2.6 inch，双栏图默认约 7.2 x 4.0 inch；复杂社科多面板图可按目标期刊版面调整，但必须保留可读字号。",
+
+      "PNG/JPG 预览不低于 300 DPI；投稿或编辑优先保留 PDF/SVG/PPT 或脚本。"
+
+    ]
+
+  },
+
+  "style_rules": [
+
+    {
+
+      "id": "config_block_reproducibility",
+
+      "label": "配置区前置保证可复现",
+
+      "requirement": "路径、字体、输出格式、显著性阈值、误差线和数字精度集中在脚本配置区。",
+
+      "owner": "figure-table-studio",
+
+      "check": "正式数据图的脚本或交付说明必须能指出配置区。"
+
+    },
+
+    {
+
+      "id": "data_health_before_plotting",
+
+      "label": "先体检数据再画图",
+
+      "requirement": "结构化数据图必须先生成数据体检或等价摘要。",
+
+      "owner": "figure-table-studio",
+
+      "check": "输出中存在 00_data_health.md 或说明为何不适用。"
+
+    },
+
+    {
+
+      "id": "process_data_traceability",
+
+      "label": "过程数据可追溯",
+
+      "requirement": "每张经验图都要保留绘图数据 sidecar 和关键中间表。",
+
+      "owner": "figure-table-studio",
+
+      "check": "process_data 中存在 fig_NN_data 或等价可追踪数据。"
+
+    },
+
+    {
+
+      "id": "justified_statistics_annotations",
+
+      "label": "统计标注必须有设计依据",
+
+      "requirement": "显著性标注、误差条和 p 值只有在研究设计支持时出现，并在图注中说明。",
+
+      "owner": "figure-table-studio",
+
+      "check": "有统计标注时必须存在统计检验表或方法说明。"
+
+    },
+
+    {
+
+      "id": "typography_font_fallback",
+
+      "label": "中英文字体 fallback",
+
+      "requirement": "中文、英文和负号显示要有可用字体 fallback；不得硬编码本机不存在的字体。",
+
+      "owner": "research-figure-studio + figure-table-studio",
+
+      "check": "交付脚本或图形说明中记录字体策略。"
+
+    },
+
+    {
+
+      "id": "typography_font_size_specification",
+
+      "label": "字体字号有明确规格",
+
+      "requirement": "正式图表默认遵守 typography_contract：基础字号 10 pt，轴标题 10 pt，刻度和图例 9 pt，图注 9 pt，显著性标注 10 pt；任何调整必须服务于目标期刊版面和可读性。",
+
+      "owner": "research-figure-studio + figure-table-studio",
+
+      "check": "figure brief、脚本配置或交付说明中记录字体、字号和目标版面。"
+
+    },
+
+    {
+
+      "id": "figure_size_resolution_contract",
+
+      "label": "图幅和分辨率有规格",
+
+      "requirement": "正式图默认提供单栏或双栏尺寸约束，PNG/JPG 不低于 300 DPI，论文交付优先保留可编辑或矢量来源。",
+
+      "owner": "research-figure-studio + figure-table-studio",
+
+      "check": "输出清单记录尺寸、DPI、矢量或可编辑来源。"
+
+    },
+
+    {
+
+      "id": "axis_units_numeric_precision",
+
+      "label": "坐标单位和数字精度",
+
+      "requirement": "数值坐标有单位或说明无量纲；刻度、p 值和科学计数法遵守统一精度。",
+
+      "owner": "figure-table-studio",
+
+      "check": "轴标题、表注或图注说明单位与精度。"
+
+    },
+
+    {
+
+      "id": "caption_what_how_so_what",
+
+      "label": "图注说明展示、方法和结论",
+
+      "requirement": "正式图注必须包含 what、how、so what，不得只复述坐标轴。",
+
+      "owner": "research-figure-studio + figure-table-studio",
+
+      "check": "交付时存在图注或 figure note。"
+
+    },
+
+    {
+
+      "id": "multi_format_export_and_editable_source",
+
+      "label": "多格式和可编辑输出",
+
+      "requirement": "正式经验图默认保留 PDF/PNG/JPG 或等价高质量格式，并尽量保留 SVG/PPT/脚本等可编辑来源。",
+
+      "owner": "research-figure-studio + figure-table-studio",
+
+      "check": "输出清单列出高分辨率图、预览图和可编辑来源。"
+
+    },
+
+    {
+
+      "id": "renderer_selection_by_deliverable",
+
+      "label": "按交付目标选择绘图工具",
+
+      "requirement": "绘图前根据最终用途、数据形态、统计建模需求、是否需要可见桌面自动化、复现要求和协作约束，选择 R、Python、PowerPoint、矢量工具、表格软件或 image2。",
+
+      "owner": "research-figure-studio + figure-table-studio",
+
+      "check": "figure brief 或交付说明中说明为什么选当前渲染工具，以及哪些工具被排除。"
+
+    },
+
+    {
+
+      "id": "r_plot_family_output_bundle",
+
+      "label": "R 统计图要和统计输出一起交付",
+
+      "requirement": "散点图、雨云图、加权回归图或类似 R/ggplot 经验图应同时输出图件、统计或模型摘要、会话信息和可复现脚本；显著性和权重解释必须有设计依据。",
+
+      "owner": "figure-table-studio",
+
+      "check": "交付目录包含图件、统计或模型摘要、session/package 记录，且图注说明权重、分组、模型或不确定性。"
+
+    },
+
+    {
+
+      "id": "ggplot_text_export_diagnostics",
+
+      "label": "ggplot 富文本和导出要实测",
+
+      "requirement": "使用上标、下标、数学表达式、Markdown/HTML 标签或特殊符号时，必须区分 plotmath、Unicode 和 ggtext 方案，并测试保存后的导出文件；不能只看 RStudio 预览。",
+
+      "owner": "figure-table-studio",
+
+      "check": "批量出图前存在小样本导出诊断或在交付说明中说明文字渲染已按目标格式检查。"
+
+    },
+
+    {
+
+      "id": "chart_type_selection_by_evidence_need",
+
+      "label": "图型按证据任务选择",
+
+      "requirement": "绘图前先判断任务是比较、趋势、分类评估、矩阵关系、分布、构成、权衡还是多面板证据链，再选择最简单且最可审稿的学术图型。",
+
+      "owner": "research-figure-studio + figure-table-studio",
+
+      "check": "figure brief 或交付说明中说明图型选择理由和被排除的替代图型。"
+
+    },
+
+    {
+
+      "id": "figure_table_title_caption_plainness",
+
+      "label": "图题表题简洁且不越界",
+
+      "requirement": "图题表题直接说明对象、比较或结果类型，不使用空泛开头，不把标题写成超过图表证据的结论。",
+
+      "owner": "research-figure-studio + figure-table-studio",
+
+      "check": "图题、表题、图注和正文主张强度一致。"
+
+    }
+
+  ],
+
+  "output_contract": {
+
+    "default_output_root": "<project_root>/outputs/figures/<run_slug>",
+
+    "required_files": [
+
+      "00_data_health.md",
+
+      "caption_or_figure_note",
+
+      "figure_audit_report"
+
+    ],
+
+    "required_directories": [
+
+      "figures/pdf",
+
+      "figures/png",
+
+      "figures/jpg",
+
+      "process_data"
+
+    ],
+
+    "required_formats": [
+
+      "pdf",
+
+      "png",
+
+      "jpg"
+
+    ],
+
+    "report_path_template": "logs/quality-gates/figure-table-report.json"
+
+  },
+
+  "safety_rules": [
+
+    {
+
+      "id": "no_fake_empirical_values",
+
+      "rule": "不得让 image2、模板或手工美化生成样本量、坐标值、p 值、误差条、DOI、来源或模型结果。",
+
+      "failure_action": "停止交付，回到确定性代码、原始数据或用户确认的概念图说明。"
+
+    },
+
+    {
+
+      "id": "statistics_require_design",
+
+      "rule": "显著性检验、星号和误差条必须由研究设计和数据结构支持；paired 与 independent 不明时先问用户。",
+
+      "failure_action": "删除统计标注或把结果降级为描述性图。"
+
+    },
+
+    {
+
+      "id": "style_defaults_are_not_journal_law",
+
+      "rule": "外部仓库的四边框等 house style 只能作为默认候选；目标期刊或社科惯例要求更轻坐标轴时，以本地 publication_style_rules 和用户目标为准。",
+
+      "failure_action": "记录风格取舍理由，避免把外部默认硬套到所有社科图。"
+
+    },
+
+    {
+
+      "id": "raw_data_not_overwritten",
+
+      "rule": "绘图流程不得把输出写回原始数据目录或覆盖用户原件，除非用户明确要求且已说明风险。",
+
+      "failure_action": "改用项目 outputs 下的独立输出目录。"
+
+    }
+
+  ]
+
+}

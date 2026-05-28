@@ -1,0 +1,821 @@
+{
+
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+
+  "$id": "https://marcus-ai4ss.github.io/VELA/schemas/scientific_figure_workflow.v1.schema.json",
+
+  "title": "Scientific Figure Workflow Contract",
+
+  "type": "object",
+
+  "additionalProperties": false,
+
+  "required": [
+
+    "$schema",
+
+    "schema_version",
+
+    "updated_at",
+
+    "policy",
+
+    "source_review_refs",
+
+    "adoption_options",
+
+    "selected_strategy",
+
+    "workflow_modes",
+
+    "workflow_steps",
+
+    "typography_contract",
+
+    "style_rules",
+
+    "output_contract",
+
+    "safety_rules"
+
+  ],
+
+  "properties": {
+
+    "$schema": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "schema_version": {
+
+      "const": "scientific_figure_workflow.v1"
+
+    },
+
+    "updated_at": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "policy": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "source_review_refs": {
+
+      "type": "array",
+
+      "minItems": 1,
+
+      "items": {
+
+        "$ref": "#/$defs/source_ref"
+
+      }
+
+    },
+
+    "adoption_options": {
+
+      "type": "array",
+
+      "minItems": 2,
+
+      "items": {
+
+        "$ref": "#/$defs/adoption_option"
+
+      }
+
+    },
+
+    "selected_strategy": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "workflow_modes": {
+
+      "type": "array",
+
+      "minItems": 1,
+
+      "items": {
+
+        "$ref": "#/$defs/workflow_mode"
+
+      }
+
+    },
+
+    "workflow_steps": {
+
+      "type": "array",
+
+      "minItems": 1,
+
+      "items": {
+
+        "$ref": "#/$defs/workflow_step"
+
+      }
+
+    },
+
+    "typography_contract": {
+
+      "$ref": "#/$defs/typography_contract"
+
+    },
+
+    "style_rules": {
+
+      "type": "array",
+
+      "minItems": 1,
+
+      "items": {
+
+        "$ref": "#/$defs/style_rule"
+
+      }
+
+    },
+
+    "output_contract": {
+
+      "$ref": "#/$defs/output_contract"
+
+    },
+
+    "safety_rules": {
+
+      "type": "array",
+
+      "minItems": 1,
+
+      "items": {
+
+        "$ref": "#/$defs/safety_rule"
+
+      }
+
+    }
+
+  },
+
+  "$defs": {
+
+    "string_list": {
+
+      "type": "array",
+
+      "items": {
+
+        "type": "string",
+
+        "minLength": 1
+
+      },
+
+      "uniqueItems": true
+
+    },
+
+    "source_ref": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+
+        "upstream",
+
+        "repo_url",
+
+        "adopted_as"
+
+      ],
+
+      "properties": {
+
+        "upstream": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "repo_url": {
+
+          "type": "string",
+
+          "format": "uri"
+
+        },
+
+        "adopted_as": {
+
+          "$ref": "#/$defs/string_list"
+
+        }
+
+      }
+
+    },
+
+    "adoption_option": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+
+        "id",
+
+        "label",
+
+        "decision",
+
+        "description",
+
+        "strengths",
+
+        "risks"
+
+      ],
+
+      "properties": {
+
+        "id": {
+
+          "type": "string",
+
+          "pattern": "^[a-z0-9][a-z0-9_\\-]*$"
+
+        },
+
+        "label": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "decision": {
+
+          "enum": [
+
+            "selected",
+
+            "adapt",
+
+            "watch",
+
+            "reject_as_default"
+
+          ]
+
+        },
+
+        "description": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "strengths": {
+
+          "$ref": "#/$defs/string_list"
+
+        },
+
+        "risks": {
+
+          "$ref": "#/$defs/string_list"
+
+        }
+
+      }
+
+    },
+
+    "workflow_mode": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+
+        "id",
+
+        "label",
+
+        "owner_skill",
+
+        "trigger_signals",
+
+        "required_steps",
+
+        "renderer_policy",
+
+        "outputs"
+
+      ],
+
+      "properties": {
+
+        "id": {
+
+          "type": "string",
+
+          "pattern": "^[a-z0-9][a-z0-9_\\-]*$"
+
+        },
+
+        "label": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "owner_skill": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "trigger_signals": {
+
+          "$ref": "#/$defs/string_list"
+
+        },
+
+        "required_steps": {
+
+          "$ref": "#/$defs/string_list"
+
+        },
+
+        "renderer_policy": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "outputs": {
+
+          "$ref": "#/$defs/string_list"
+
+        }
+
+      }
+
+    },
+
+    "workflow_step": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+
+        "id",
+
+        "label",
+
+        "requirement",
+
+        "applies_to_modes",
+
+        "outputs",
+
+        "blockers"
+
+      ],
+
+      "properties": {
+
+        "id": {
+
+          "type": "string",
+
+          "pattern": "^[a-z0-9][a-z0-9_\\-]*$"
+
+        },
+
+        "label": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "requirement": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "applies_to_modes": {
+
+          "$ref": "#/$defs/string_list"
+
+        },
+
+        "outputs": {
+
+          "$ref": "#/$defs/string_list"
+
+        },
+
+        "blockers": {
+
+          "$ref": "#/$defs/string_list"
+
+        }
+
+      }
+
+    },
+
+    "style_rule": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+
+        "id",
+
+        "label",
+
+        "requirement",
+
+        "owner",
+
+        "check"
+
+      ],
+
+      "properties": {
+
+        "id": {
+
+          "type": "string",
+
+          "pattern": "^[a-z0-9][a-z0-9_\\-]*$"
+
+        },
+
+        "label": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "requirement": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "owner": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "check": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        }
+
+      }
+
+    },
+
+    "typography_contract": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+
+        "font_policy",
+
+        "cn_serif_fallback",
+
+        "en_serif_fallback",
+
+        "matplotlib_font_sizes_pt",
+
+        "report_font_sizes_pt",
+
+        "figure_sizes_in",
+
+        "dpi",
+
+        "layout_rules"
+
+      ],
+
+      "properties": {
+
+        "font_policy": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "cn_serif_fallback": {
+
+          "$ref": "#/$defs/string_list"
+
+        },
+
+        "en_serif_fallback": {
+
+          "$ref": "#/$defs/string_list"
+
+        },
+
+        "matplotlib_font_sizes_pt": {
+
+          "type": "object",
+
+          "additionalProperties": {
+
+            "type": "number",
+
+            "exclusiveMinimum": 0
+
+          },
+
+          "required": [
+
+            "base",
+
+            "axes_title",
+
+            "axis_label",
+
+            "tick_label",
+
+            "legend",
+
+            "caption",
+
+            "panel_label",
+
+            "annotation",
+
+            "significance_mark"
+
+          ]
+
+        },
+
+        "report_font_sizes_pt": {
+
+          "type": "object",
+
+          "additionalProperties": {
+
+            "type": "number",
+
+            "exclusiveMinimum": 0
+
+          },
+
+          "required": [
+
+            "title",
+
+            "metadata",
+
+            "caption",
+
+            "page_number"
+
+          ]
+
+        },
+
+        "figure_sizes_in": {
+
+          "type": "object",
+
+          "additionalProperties": {
+
+            "type": "array",
+
+            "prefixItems": [
+
+              {
+
+                "type": "number",
+
+                "exclusiveMinimum": 0
+
+              },
+
+              {
+
+                "type": "number",
+
+                "exclusiveMinimum": 0
+
+              }
+
+            ],
+
+            "items": false,
+
+            "minItems": 2,
+
+            "maxItems": 2
+
+          },
+
+          "required": [
+
+            "single_column",
+
+            "double_column"
+
+          ]
+
+        },
+
+        "dpi": {
+
+          "type": "integer",
+
+          "minimum": 300
+
+        },
+
+        "layout_rules": {
+
+          "$ref": "#/$defs/string_list"
+
+        }
+
+      }
+
+    },
+
+    "output_contract": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+
+        "default_output_root",
+
+        "required_files",
+
+        "required_directories",
+
+        "required_formats",
+
+        "report_path_template"
+
+      ],
+
+      "properties": {
+
+        "default_output_root": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "required_files": {
+
+          "$ref": "#/$defs/string_list"
+
+        },
+
+        "required_directories": {
+
+          "$ref": "#/$defs/string_list"
+
+        },
+
+        "required_formats": {
+
+          "$ref": "#/$defs/string_list"
+
+        },
+
+        "report_path_template": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        }
+
+      }
+
+    },
+
+    "safety_rule": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+
+        "id",
+
+        "rule",
+
+        "failure_action"
+
+      ],
+
+      "properties": {
+
+        "id": {
+
+          "type": "string",
+
+          "pattern": "^[a-z0-9][a-z0-9_\\-]*$"
+
+        },
+
+        "rule": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        },
+
+        "failure_action": {
+
+          "type": "string",
+
+          "minLength": 1
+
+        }
+
+      }
+
+    }
+
+  }
+
+}

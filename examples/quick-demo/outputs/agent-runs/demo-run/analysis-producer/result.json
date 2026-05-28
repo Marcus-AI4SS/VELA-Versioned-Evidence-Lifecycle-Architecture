@@ -1,19 +1,37 @@
 {
+
   "run_id": "demo-run",
+
   "agent_id": "analysis-producer",
+
   "status": "blocked",
+
   "produced_files": [
+
     "outputs/agent-runs/demo-run/analysis-producer/summary.md"
+
   ],
+
   "produced_deliverable_types": [
+
     "comment_analysis_report"
+
   ],
+
   "key_findings": [
+
     "Analysis should wait until platform sampling and provenance are defined."
+
   ],
+
   "open_issues": [
+
     "No platform sample has been captured."
+
   ],
+
   "next_handoff_target": "project-manager",
+
   "requires_review": false
+
 }

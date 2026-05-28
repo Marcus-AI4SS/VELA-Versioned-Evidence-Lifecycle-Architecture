@@ -1,58 +1,115 @@
 {
+
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+
   "$id": "https://marcus-ai4ss.github.io/VELA/schemas/vela.validation.report.v1.schema.json",
+
   "title": "VELA Validation Report",
+
   "type": "object",
+
   "additionalProperties": true,
+
   "required": [
+
     "schema_version",
+
     "validator",
+
     "scope",
+
     "decision",
+
     "ok",
+
     "errors",
+
     "warnings"
+
   ],
+
   "properties": {
+
     "schema_version": {
+
       "const": "vela.validation.report.v1"
+
     },
+
     "validator": {
+
       "type": "string",
+
       "minLength": 1
+
     },
+
     "scope": {
+
       "type": "string"
+
     },
+
     "decision": {
+
       "type": "string",
+
       "enum": [
+
         "pass",
+
         "needs_review",
+
         "fail"
+
       ]
+
     },
+
     "ok": {
+
       "type": "boolean"
+
     },
+
     "errors": {
+
       "type": "array",
+
       "items": {
+
         "type": "string"
+
       }
+
     },
+
     "warnings": {
+
       "type": "array",
+
       "items": {
+
         "type": "string"
+
       }
+
     },
+
     "checks": {
+
       "type": "array",
+
       "items": {
+
         "type": "object",
+
         "additionalProperties": true
+
       }
+
     }
+
   }
+
 }

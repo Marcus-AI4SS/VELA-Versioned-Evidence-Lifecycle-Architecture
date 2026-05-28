@@ -1,31 +1,61 @@
 {
+
   "status": "pending",
+
   "checked_deliverable": null,
+
   "target_paths": [],
+
   "checks": {
+
     "style_calibration": {
+
       "decision": "pending",
+
       "notes": []
+
     },
+
     "argument_chain_closure": {
+
       "decision": "pending",
+
       "notes": []
+
     },
+
     "citation_alignment": {
+
       "decision": "pending",
+
       "notes": []
+
     },
+
     "empty_phrase_scan": {
+
       "decision": "pending",
+
       "hits": [],
+
       "notes": []
+
     }
+
   },
+
   "banned_phrases": [
+
     "总而言之",
+
     "双刃剑",
+
     "多维度视角"
+
   ],
+
   "generated_by": null,
+
   "updated_at": null
+
 }

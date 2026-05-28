@@ -1,0 +1,251 @@
+{
+
+  "$schema": "../schemas/prompt_catalog_lite.schema.json",
+
+  "schema_version": "prompt_catalog_lite.v1",
+
+  "generated_at": "2026-05-09",
+
+  "prompts": [
+
+    {
+
+      "id": "route-card-control-objective",
+
+      "version": "2026-05-09",
+
+      "owner": "research-autopilot",
+
+      "scope": "route selection",
+
+      "purpose": "Force task routing to state objective, route, profile, skills, MCP sensors, quality gates, and next action before execution.",
+
+      "source_file": "skills/plugins/research-autopilot/skills/research-autopilot/SKILL.md",
+
+      "failure_modes": [
+
+        "tool-first execution without route",
+
+        "profile selection omitted",
+
+        "quality gate omitted"
+
+      ],
+
+      "evaluation_notes": [
+
+        "Route output should be inspectable before high-risk work.",
+
+        "A route card that cannot name its gates is treated as incomplete."
+
+      ]
+
+    },
+
+    {
+
+      "id": "subagent-context-control-bindings",
+
+      "version": "2026-05-09",
+
+      "owner": "research-team-orchestrator",
+
+      "scope": "multi-agent dispatch",
+
+      "purpose": "Put each selected agent's control objectives, controlled variables, feedback signals, stability metrics, and rollback policy into its context packet.",
+
+      "source_file": "skills/scripts/envctl/dispatch.py",
+
+      "failure_modes": [
+
+        "agent runs without control objective",
+
+        "reviewer receives no rollback policy",
+
+        "subagent output cannot be tied back to the governance kernel"
+
+      ],
+
+      "evaluation_notes": [
+
+        "validate_agents_contract and validate_subagent_registry must pass.",
+
+        "Generated context packets must include a Control Bindings section."
+
+      ]
+
+    },
+
+    {
+
+      "id": "citation-verification-gate",
+
+      "version": "2026-05-09",
+
+      "owner": "writing-reference-capture",
+
+      "scope": "formal academic reference gate",
+
+      "purpose": "Block formal references unless author, year, title, source, verification basis, verification status, and verification source are recorded. DOI must be verified when present in evidence; user-provided sources, complete paper PDFs, and public academic index records can waive the must-have-DOI requirement.",
+
+      "source_file": "skills/catalog/citation_verification_rules.json",
+
+      "failure_modes": [
+
+        "citation gate marked pass without report",
+
+        "reference has neither verified DOI nor approved DOI-waiver evidence",
+
+        "local source evidence promoted into formal bibliography without PDF or source verification"
+
+      ],
+
+      "evaluation_notes": [
+
+        "validate_research_pipeline checks the report path and pass semantics.",
+
+        "User-provided sources, complete paper PDFs, and public academic index records can support a documented DOI waiver; public platform pages remain source evidence unless formal metadata is verified."
+
+      ]
+
+    },
+
+    {
+
+      "id": "format-sensitive-manuscript-translation",
+
+      "version": "2026-05-27",
+
+      "owner": "manuscript-writing-studio",
+
+      "scope": "Chinese-English manuscript rewriting",
+
+      "purpose": "Before translation or polishing, bind the output to LaTeX, Word, DOCX, or plain text so escaping, command preservation, Markdown avoidance, and back-translation checks do not drift.",
+
+      "source_file": "skills/catalog/manuscript_writing_workflow.json",
+
+      "failure_modes": [
+
+        "LaTeX output loses commands or special-character escaping",
+
+        "Word output contains Markdown, code fences, or LaTeX escaping",
+
+        "translation improves fluency by changing claim strength"
+
+      ],
+
+      "evaluation_notes": [
+
+        "Derived from Leey21/awesome-ai-research-writing at commit c07628b.",
+
+        "The prompt pattern is an adapter; local citation and writing gates still control final delivery."
+
+      ]
+
+    },
+
+    {
+
+      "id": "micro-revision-delta-control",
+
+      "version": "2026-05-27",
+
+      "owner": "manuscript-writing-studio",
+
+      "scope": "shorten, expand, and light polishing",
+
+      "purpose": "Keep small edits small: preserve facts, variables, results, citations, uncertainty, and boundaries, and emit a delta log instead of silently rewriting the argument.",
+
+      "source_file": "skills/catalog/writing_quality_rules.json",
+
+      "failure_modes": [
+
+        "small shorten request deletes evidence or constraints",
+
+        "expand request invents rationale, data, or citations",
+
+        "humanization changes the claim instead of only the surface"
+
+      ],
+
+      "evaluation_notes": [
+
+        "Applies when the user asks for 缩写, 扩写, 轻度润色, or 去 AI 味.",
+
+        "If structure is broken, route to argument repair instead of pretending it is a micro edit."
+
+      ]
+
+    },
+
+    {
+
+      "id": "venue-migration-checklist",
+
+      "version": "2026-05-27",
+
+      "owner": "social-science-submission-packager",
+
+      "scope": "change of conference, journal transfer, or resubmission",
+
+      "purpose": "Treat 改投 and 换会议 as a package migration task that maps target requirements before changing templates, text, figures, references, or submission files.",
+
+      "source_file": "skills/catalog/manuscript_writing_workflow.json",
+
+      "failure_modes": [
+
+        "template changed but target checklist, page limits, or ethics/data requirements ignored",
+
+        "substantive manuscript changes mixed with mechanical format migration",
+
+        "new venue requirements marked ready without evidence"
+
+      ],
+
+      "evaluation_notes": [
+
+        "The package is not ready until citation, writing, peer-review, figure-table, reproducibility, and freeze checks are satisfied as applicable.",
+
+        "Target-specific facts must be supplied by the user or verified from official instructions before final migration."
+
+      ]
+
+    },
+
+    {
+
+      "id": "adaptive-evolution-event",
+
+      "version": "2026-05-09",
+
+      "owner": "project-retrospective-evolver",
+
+      "scope": "environment self-evolution",
+
+      "purpose": "Convert project friction into an evolution event with source, severity, target, controller, gates, status, and rollback.",
+
+      "source_file": "skills/catalog/evolution_backlog.json",
+
+      "failure_modes": [
+
+        "durable lesson stored only in chat",
+
+        "skill changed without retrospective signal",
+
+        "adaptation cannot be reverted"
+
+      ],
+
+      "evaluation_notes": [
+
+        "envctl validate governance must pass after backlog changes.",
+
+        "Status stays observed unless the corresponding schema, validator, doc, or automation actually changed."
+
+      ]
+
+    }
+
+  ]
+
+}

@@ -1,132 +1,263 @@
 {
+
   "$schema": "../../schemas/vela.project.initializer.v1.schema.json",
+
   "schema_version": "vela.project.initializer.v1",
+
   "generated_at": "2026-05-05T00:00:00Z",
+
   "directories": [
+
     "materials",
+
     "evidence",
+
     "claims",
+
     "methods",
+
     "deliverables",
+
     "handoffs",
+
     "handoffs/helm",
+
     "logs",
+
     "logs/codex-runs",
+
     "logs/privacy-scans",
+
     "logs/quality-gates",
+
     "logs/project-state",
+
     ".codex",
+
     ".codex/commands",
+
     ".codex/profiles",
+
     ".vela"
+
   ],
+
   "files": [
+
     {
+
       "path": ".gitignore",
+
       "kind": "text",
+
       "content": ".venv/\n__pycache__/\n.ipynb_checkpoints/\noutputs/\nartifacts/\npublic-export/\n*.log\n*.tmp\n.env\n.env.*\n"
+
     },
+
     {
+
       "path": "README.md",
+
       "kind": "text",
+
       "content": "# {project_name}\n\nThis project was initialized from VELA.\n\n## What you get\n\n- A Git repository when Git is available\n- Project-level AGENTS.md\n- .codex command and profile templates for bounded Codex work\n- Materials, evidence, claims, methods, deliverables, handoffs, and logs directories\n- .vela/context.json for HELM and other local readers\n\n## Recommended next step\n\nRun `vela validate . --repair-context`, then create the first bounded Codex handoff with `vela handoff new --project .`.\n"
+
     },
+
     {
+
       "path": "AGENTS.md",
+
       "kind": "text",
+
       "content": "# AGENTS\n\nThis project uses the VELA workflow wrapper.\n\n## VELA Contract\n\n- Keep materials, evidence, claims, methods, deliverables, and handoffs separate.\n- Do not treat collected material as verified evidence.\n- Do not mark a claim as supported unless it links to named evidence.\n- Do not expose private paths, credentials, local machine details, or personal notes.\n- Do not rewrite the whole project unless the active handoff explicitly asks for it.\n\n## Before Acting\n\n1. Read the current handoff packet.\n2. Identify only the files relevant to that handoff.\n3. State assumptions if the handoff is underspecified.\n4. Prefer small edits over broad rewrites.\n\n## Definition Of Done\n\nA task is complete only when the expected output is produced, changed files are listed, validation commands are run or skipped with a reason, and unsupported claims or privacy risks are reported.\n\n```yaml\nproject_truth_sources:\n  - research-map.md\n  - findings-memory.md\n  - material-passport.yaml\n  - evidence-ledger.yaml\n```\n"
+
     },
+
     {
+
       "path": "research-map.md",
+
       "kind": "text",
+
       "content": "# Research Map\n\n- Research question:\n- Active route:\n- Current stage:\n- Expected deliverables:\n"
+
     },
+
     {
+
       "path": "findings-memory.md",
+
       "kind": "text",
+
       "content": "# Findings Memory\n\n- Confirmed facts:\n- Rejected paths:\n- Pending verification:\n"
+
     },
+
     {
+
       "path": "material-passport.yaml",
+
       "kind": "text",
+
       "content": "project_name: {project_name}\nroute_id: {route_hint_yaml}\ncurrent_stage: research_design\ndata_access_level: public_open\nmaterials: []\nethics_notes: []\ntruth_sources:\n  - research-map.md\n  - findings-memory.md\n  - material-passport.yaml\n  - evidence-ledger.yaml\n"
+
     },
+
     {
+
       "path": "evidence-ledger.yaml",
+
       "kind": "text",
+
       "content": "entries: []\n"
+
     },
+
     {
+
       "path": "logs/quality-gates/pipeline-status.json",
+
       "kind": "json",
+
       "content": {
+
         "route_id": "{route_hint_json}",
+
         "current_stage": "research_design",
+
         "completed_stages": [],
+
         "gate_decisions": {},
+
         "allowed_to_advance": false
+
       }
+
     },
+
     {
+
       "path": "logs/quality-gates/writing-quality-report.json",
+
       "kind": "json",
+
       "content": {
+
         "status": "pending",
+
         "checked_deliverable": null,
+
         "target_paths": [],
+
         "checks": {
+
           "style_calibration": {
+
             "decision": "pending",
+
             "notes": []
+
           },
+
           "argument_chain_closure": {
+
             "decision": "pending",
+
             "notes": []
+
           },
+
           "citation_alignment": {
+
             "decision": "pending",
+
             "notes": []
+
           },
+
           "empty_phrase_scan": {
+
             "decision": "pending",
+
             "hits": [],
+
             "notes": []
+
           }
+
         },
+
         "banned_phrases": [
+
           "总而言之",
+
           "双刃剑",
+
           "多维度视角"
+
         ],
+
         "generated_by": null,
+
         "updated_at": null
+
       }
+
     },
+
     {
+
       "path": "logs/project-state/current.json",
+
       "kind": "json",
+
       "content": {
+
         "project_name": "{project_name}",
+
         "route_id": "{route_hint_json}",
+
         "project_type": null,
+
         "pipeline_stage": "research_design",
+
         "status": "initialized",
+
         "blockers": [],
+
         "next_quality_gates": [],
+
         "milestones": [
+
           {
+
             "id": "project_initialized",
+
             "label": "Project initialized",
+
             "status": "complete"
+
           }
+
         ]
+
       }
+
     },
+
     {
+
       "path": "logs/project-state/history.md",
+
       "kind": "text",
+
       "content": "# Project State History\n\n- Project initialized.\n"
+
     }
+
   ],
+
   "project_agents": {}
+
 }

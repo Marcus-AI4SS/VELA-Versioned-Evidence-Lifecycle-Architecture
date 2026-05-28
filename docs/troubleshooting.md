@@ -18,4 +18,4 @@ Rewrite the handoff so it states the task, relevant files, constraints, expected
 
 ## Text appears garbled
 
-Source files, project JSON, and generated readable files should be UTF-8. Avoid tools that save shared project files as ANSI or legacy encodings.
+Source files, project JSON, and generated readable files should be UTF-8. Avoid tools that save shared project files as ANSI or outdated encodings.

@@ -1,60 +1,119 @@
 {
+
   "schema_version": "vela.project.context.v1",
+
   "producer": "VELA",
+
   "consumer": "HELM",
+
   "generated_at": "2026-04-30T00:00:00Z",
+
   "project": {
+
     "id": "minimal-wrapper",
+
     "name": "Minimal Wrapper",
+
     "title": "Minimal Wrapper",
+
     "root": ".",
+
     "stage": "research_design",
+
     "status": "initialized"
+
   },
+
   "paths": {
+
     "materials": "materials",
+
     "evidence": "evidence",
+
     "claims": "claims",
+
     "methods": "methods",
+
     "deliverables": "deliverables",
+
     "handoffs": "handoffs",
+
     "handoffs_helm": "handoffs/helm",
+
     "logs": "logs"
+
   },
+
   "status": {
+
     "phase": "research_design",
+
     "blocked": false,
+
     "last_updated": "2026-04-30T00:00:00Z",
+
     "label": "initialized"
+
   },
+
   "truth_files": [
+
     { "name": "research-map.md", "path": "research-map.md", "exists": true },
+
     { "name": "findings-memory.md", "path": "findings-memory.md", "exists": true },
+
     { "name": "material-passport.yaml", "path": "material-passport.yaml", "exists": true },
+
     { "name": "evidence-ledger.yaml", "path": "evidence-ledger.yaml", "exists": true }
+
   ],
+
   "counts": {
+
     "materials": 1,
+
     "evidence": 1,
+
     "claims": 1,
+
     "deliverables": 0,
+
     "handoffs": 2
+
   },
+
   "evidence": {
+
     "items": 1,
+
     "verified": 0,
+
     "pending": 1
+
   },
+
   "quality": {
+
     "blockers": [],
+
     "warnings": [],
+
     "validators": []
+
   },
+
   "helm": {
+
     "import_ready": true,
+
     "handoff_dir": "handoffs/helm",
+
     "handoff_policy": "explicit_user_export_only"
+
   },
+
   "deliverables": [],
+
   "handoffs": []
+
 }

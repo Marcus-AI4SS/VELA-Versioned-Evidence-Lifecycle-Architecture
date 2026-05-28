@@ -1,5 +1,9 @@
 blank_issues_enabled: true
+
 contact_links:
+
   - name: Docs
+
     url: https://marcus-ai4ss.github.io/VELA/
+
     about: Read the public documentation before filing an issue.

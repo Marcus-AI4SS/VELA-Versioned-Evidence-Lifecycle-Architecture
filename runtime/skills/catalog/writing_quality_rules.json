@@ -1,0 +1,717 @@
+{
+
+  "report_path": "logs/quality-gates/writing-quality-report.json",
+
+  "peel_required_when_data_analysis": true,
+
+  "checks": [
+
+    {
+
+      "id": "style_calibration",
+
+      "label": "风格校准",
+
+      "blocking": true,
+
+      "description": "文本必须使用高语义密度的学术语言，避免口号式、模板式和空泛修辞。"
+
+    },
+
+    {
+
+      "id": "argument_chain_closure",
+
+      "label": "论证链闭环",
+
+      "blocking": true,
+
+      "description": "涉及分析结果的段落必须形成 Point -> Evidence -> Explanation -> Link 的闭环。"
+
+    },
+
+    {
+
+      "id": "citation_alignment",
+
+      "label": "引文对位",
+
+      "blocking": true,
+
+      "description": "关键经验判断、理论归纳和事实性断言必须与已核验文献、图表或材料证据对位。"
+
+    },
+
+    {
+
+      "id": "empty_phrase_scan",
+
+      "label": "空洞表述扫描",
+
+      "blocking": true,
+
+      "description": "应扫描并清除低信息密度、AI 味明显或不具学术贡献的空洞表述，包括机械连接词、夸大创新、泛化判断、模糊归因、模板化段首段尾和节奏过于整齐的句群。"
+
+    },
+
+    {
+
+      "id": "section_logic_reader_flow",
+
+      "label": "章节职责与读者路径",
+
+      "blocking": true,
+
+      "description": "正式写作必须先检查章节职责、读者理解顺序和论证收束路径；结构不成立时不得只做句子润色。"
+
+    },
+
+    {
+
+      "id": "language_target_declared",
+
+      "label": "语言目标声明",
+
+      "blocking": true,
+
+      "description": "写作或润色前必须声明是中文期刊、英文期刊还是中英转换；英文期刊可参考 Nature-style，中文期刊默认以本地中文社科规则为主。"
+
+    },
+
+    {
+
+      "id": "discipline_style_declared",
+
+      "label": "学科类型声明",
+
+      "blocking": true,
+
+      "description": "必须区分人文社科默认稿、计算社科或方法技术型稿、传统量化稿、质性或解释性稿；不得把理工科模板当作全部社科论文默认结构。"
+
+    },
+
+    {
+
+      "id": "claim_strength_and_boundary",
+
+      "label": "主张强度与证据边界",
+
+      "blocking": true,
+
+      "description": "核心判断必须和证据强度匹配，特别检查因果、机制、代表性、外推范围、创新性和政策含义是否越界。"
+
+    },
+
+    {
+
+      "id": "section_job_checked",
+
+      "label": "章节职责检查",
+
+      "blocking": true,
+
+      "description": "标题、摘要、引言、综述、方法、结果、讨论和结论必须分别完成自己的职责，不得用综述替代引言、用结果替代讨论或用结论新增证据。"
+
+    },
+
+    {
+
+      "id": "results_discussion_boundary",
+
+      "label": "结果与讨论边界",
+
+      "blocking": true,
+
+      "description": "结果段只报告证据和必要说明；理论意义、机制解释、局限和未来研究应进入讨论段，二者不得混杂。"
+
+    },
+
+    {
+
+      "id": "polishing_failure_mode_diagnosed",
+
+      "label": "润色前问题诊断",
+
+      "blocking": true,
+
+      "description": "润色前必须判断问题是论证、证据、段落、术语还是句子风格；结构和证据未过关时不得只做语言美化。"
+
+    },
+
+    {
+
+      "id": "title_abstract_searchability_checked",
+
+      "label": "标题摘要可检索性",
+
+      "blocking": true,
+
+      "description": "标题和摘要必须清楚呈现研究对象、关系或机制、材料或方法、核心发现和边界，并避免口号式或过度创新表述。"
+
+    },
+
+    {
+
+      "id": "sentence_paragraph_control",
+
+      "label": "句子与段落控制",
+
+      "blocking": true,
+
+      "description": "每个段落必须有一个控制性论点；英文正式稿优先使用 10 到 30 词的句子，中文正式稿保持高语义密度并完成 PEEL 闭环。"
+
+    },
+
+    {
+
+      "id": "format_container_preserved",
+
+      "label": "输出容器格式保持",
+
+      "blocking": true,
+
+      "description": "中英转换、润色或导出必须区分 LaTeX、Word、DOCX 和纯文本：LaTeX 保留命令并转义特殊字符；Word/纯文本不得带 Markdown 或错误转义。"
+
+    },
+
+    {
+
+      "id": "minimal_delta_or_rewrite_scope_declared",
+
+      "label": "修改幅度已声明",
+
+      "blocking": true,
+
+      "description": "缩写、扩写、轻度润色和结构重写必须区分；微调不得删除数据、变量、引用、限定条件、边界或不确定性。"
+
+    },
+
+    {
+
+      "id": "humanized_surface_without_claim_change",
+
+      "label": "去机器化表达不改主张",
+
+      "blocking": true,
+
+      "description": "去 AI 味、去翻译腔或语言自然化只能处理措辞、节奏、衔接和句群密度，不得改变研究主张、证据强度、引用支撑、变量、模型结果、不确定性或局限；不得承诺绕过任何检测系统。"
+
+    },
+
+    {
+
+      "id": "data_bound_results_analysis",
+
+      "label": "结果分析受数据约束",
+
+      "blocking": true,
+
+      "description": "实验分析、结果段和数据解读中的趋势、比较、提升和稳健性判断必须来自用户提供或可核验的数据；证据不足时应降级或报告缺口。"
+
+    },
+
+    {
+
+      "id": "target_journal_style_profile_checked",
+
+      "label": "目标期刊风格证据检查",
+
+      "blocking": true,
+
+      "description": "如果用户要求投稿前按目标期刊润色，必须确认目标期刊、可读目标期刊语料、期刊风格画像或用户批准的保守 fallback；不得从标题、摘要、元数据、失败 OCR 或部分文本生成期刊画像，也不得让风格建议改变事实、结果、引用或证据边界。"
+
+    },
+
+    {
+
+      "id": "venue_migration_checklist",
+
+      "label": "改投迁移清单",
+
+      "blocking": true,
+
+      "description": "换会议、改投别家或模板迁移必须先检查目标要求、篇幅、匿名、伦理、数据代码、图表、补充材料、引用格式和 checklist，不得只换模板就标记 ready。"
+
+    },
+
+    {
+
+      "id": "humanities_problem_framing_declared",
+
+      "label": "人文论文问题框架已声明",
+
+      "blocking": true,
+
+      "description": "人文社科论文写作或修改前必须确认论文类型、研究对象、核心问题、论点方向、理论工具、材料边界和预期长度；缺失时先询问，不直接起草。"
+
+    },
+
+    {
+
+      "id": "theory_material_fit_checked",
+
+      "label": "理论与材料贴合检查",
+
+      "blocking": true,
+
+      "description": "理论概念必须落到具体文本、材料、案例、田野资料或数据片段；不得先铺理论再牵强套材料，也不得让历史背景替代解释。"
+
+    },
+
+    {
+
+      "id": "quote_analysis_followup_checked",
+
+      "label": "引文后分析检查",
+
+      "blocking": true,
+
+      "description": "直接引文、材料摘录或文献观点后必须有解释、比较、机理或边界分析；不得引用后直接跳到新话题。"
+
+    },
+
+    {
+
+      "id": "chapter_progression_checked",
+
+      "label": "章节推进检查",
+
+      "blocking": true,
+
+      "description": "章节之间必须形成递进关系：上一章留下的问题、下一章承接的张力、本章推进的论点和章末过渡都要可见。"
+
+    },
+
+    {
+
+      "id": "terminology_consistency_checked",
+
+      "label": "术语一致性检查",
+
+      "blocking": true,
+
+      "description": "同一理论概念和中英术语在全文中保持一致；保留必要的术语表或翻译决定，不能在同一文稿中随意替换译名。"
+
+    },
+
+    {
+
+      "id": "footnote_format_and_function_checked",
+
+      "label": "脚注格式与功能检查",
+
+      "blocking": true,
+
+      "description": "人文社科脚注必须区分出处、补充说明和防御性说明；空脚注、格式混用、缺少页码或文献类型标识都不能进入定稿。"
+
+    },
+
+    {
+
+      "id": "humanization_locked_items_checked",
+
+      "label": "去模板化前锁定不可改项",
+
+      "blocking": true,
+
+      "description": "进行降 AIGC、去 AI 味、humanize 或 deslop 前，必须列出不可改动的事实、数据、引用、变量、估计值、不确定性、局限、原文引句和作者定义术语。"
+
+    },
+
+    {
+
+      "id": "humanization_second_pass_checked",
+
+      "label": "去模板化后二次复查",
+
+      "blocking": true,
+
+      "description": "去模板化改写后必须复核主张、证据、引用、变量、结果、局限和语气强度是否漂移，并说明剩余表层风险；检测分数不能作为通过标准。"
+
+    }
+
+  ],
+
+  "banned_phrases": [
+
+    "总而言之",
+
+    "双刃剑",
+
+    "多维度视角"
+
+  ],
+
+  "recommended_watch_phrases": [
+
+    "赋能",
+
+    "全方位",
+
+    "系统性提升",
+
+    "值得注意的是",
+
+    "不可忽视的是"
+
+  ],
+
+  "route_focus": {
+
+    "writing-export": {
+
+      "required_checks": [
+
+        "style_calibration",
+
+        "argument_chain_closure",
+
+        "citation_alignment",
+
+        "empty_phrase_scan",
+
+        "section_logic_reader_flow",
+
+        "language_target_declared",
+
+        "discipline_style_declared",
+
+        "claim_strength_and_boundary",
+
+        "section_job_checked",
+
+        "results_discussion_boundary",
+
+        "polishing_failure_mode_diagnosed",
+
+        "title_abstract_searchability_checked",
+
+        "sentence_paragraph_control",
+
+        "format_container_preserved",
+
+        "minimal_delta_or_rewrite_scope_declared",
+
+        "humanized_surface_without_claim_change",
+
+        "data_bound_results_analysis",
+
+        "venue_migration_checklist",
+
+        "humanities_problem_framing_declared",
+
+        "theory_material_fit_checked",
+
+        "quote_analysis_followup_checked",
+
+        "chapter_progression_checked",
+
+        "terminology_consistency_checked",
+
+        "footnote_format_and_function_checked",
+
+        "target_journal_style_profile_checked",
+
+        "humanization_locked_items_checked",
+
+        "humanization_second_pass_checked"
+
+      ],
+
+      "target_deliverables": [
+
+        "paper_draft",
+
+        "revision_package",
+
+        "submission_package",
+
+        "docx_export",
+
+        "latex_export"
+
+      ]
+
+    },
+
+    "social-science-submission-package": {
+
+      "required_checks": [
+
+        "style_calibration",
+
+        "argument_chain_closure",
+
+        "citation_alignment",
+
+        "empty_phrase_scan",
+
+        "section_logic_reader_flow",
+
+        "language_target_declared",
+
+        "discipline_style_declared",
+
+        "claim_strength_and_boundary",
+
+        "section_job_checked",
+
+        "results_discussion_boundary",
+
+        "polishing_failure_mode_diagnosed",
+
+        "title_abstract_searchability_checked",
+
+        "sentence_paragraph_control",
+
+        "format_container_preserved",
+
+        "minimal_delta_or_rewrite_scope_declared",
+
+        "humanized_surface_without_claim_change",
+
+        "data_bound_results_analysis",
+
+        "venue_migration_checklist",
+
+        "humanities_problem_framing_declared",
+
+        "theory_material_fit_checked",
+
+        "quote_analysis_followup_checked",
+
+        "chapter_progression_checked",
+
+        "terminology_consistency_checked",
+
+        "footnote_format_and_function_checked",
+
+        "target_journal_style_profile_checked",
+
+        "humanization_locked_items_checked",
+
+        "humanization_second_pass_checked"
+
+      ],
+
+      "target_deliverables": [
+
+        "paper_draft",
+
+        "revision_package",
+
+        "submission_package",
+
+        "figures_tables"
+
+      ]
+
+    },
+
+    "literature-review": {
+
+      "required_checks": [
+
+        "style_calibration",
+
+        "citation_alignment",
+
+        "empty_phrase_scan",
+
+        "section_logic_reader_flow",
+
+        "language_target_declared",
+
+        "discipline_style_declared",
+
+        "claim_strength_and_boundary",
+
+        "section_job_checked",
+
+        "polishing_failure_mode_diagnosed",
+
+        "sentence_paragraph_control",
+
+        "format_container_preserved",
+
+        "minimal_delta_or_rewrite_scope_declared",
+
+        "humanized_surface_without_claim_change",
+
+        "data_bound_results_analysis",
+
+        "venue_migration_checklist",
+
+        "humanities_problem_framing_declared",
+
+        "theory_material_fit_checked",
+
+        "quote_analysis_followup_checked",
+
+        "chapter_progression_checked",
+
+        "terminology_consistency_checked",
+
+        "footnote_format_and_function_checked",
+
+        "humanization_locked_items_checked",
+
+        "humanization_second_pass_checked"
+
+      ],
+
+      "target_deliverables": [
+
+        "annotated_bibliography",
+
+        "literature_synthesis",
+
+        "docx_export"
+
+      ]
+
+    },
+
+    "single-paper-review": {
+
+      "required_checks": [
+
+        "style_calibration",
+
+        "argument_chain_closure",
+
+        "citation_alignment",
+
+        "empty_phrase_scan",
+
+        "section_logic_reader_flow",
+
+        "language_target_declared",
+
+        "discipline_style_declared",
+
+        "claim_strength_and_boundary",
+
+        "section_job_checked",
+
+        "results_discussion_boundary",
+
+        "polishing_failure_mode_diagnosed",
+
+        "sentence_paragraph_control",
+
+        "format_container_preserved",
+
+        "minimal_delta_or_rewrite_scope_declared",
+
+        "humanized_surface_without_claim_change",
+
+        "data_bound_results_analysis",
+
+        "venue_migration_checklist",
+
+        "humanities_problem_framing_declared",
+
+        "theory_material_fit_checked",
+
+        "quote_analysis_followup_checked",
+
+        "chapter_progression_checked",
+
+        "terminology_consistency_checked",
+
+        "footnote_format_and_function_checked",
+
+        "humanization_locked_items_checked",
+
+        "humanization_second_pass_checked"
+
+      ],
+
+      "target_deliverables": [
+
+        "docx_export"
+
+      ]
+
+    },
+
+    "evidence-based-literature-workflow": {
+
+      "required_checks": [
+
+        "style_calibration",
+
+        "argument_chain_closure",
+
+        "citation_alignment",
+
+        "empty_phrase_scan",
+
+        "section_logic_reader_flow",
+
+        "language_target_declared",
+
+        "discipline_style_declared",
+
+        "claim_strength_and_boundary",
+
+        "section_job_checked",
+
+        "results_discussion_boundary",
+
+        "polishing_failure_mode_diagnosed",
+
+        "title_abstract_searchability_checked",
+
+        "sentence_paragraph_control",
+
+        "format_container_preserved",
+
+        "minimal_delta_or_rewrite_scope_declared",
+
+        "humanized_surface_without_claim_change",
+
+        "data_bound_results_analysis",
+
+        "venue_migration_checklist",
+
+        "humanities_problem_framing_declared",
+
+        "theory_material_fit_checked",
+
+        "quote_analysis_followup_checked",
+
+        "chapter_progression_checked",
+
+        "terminology_consistency_checked",
+
+        "footnote_format_and_function_checked",
+
+        "humanization_locked_items_checked",
+
+        "humanization_second_pass_checked"
+
+      ],
+
+      "target_deliverables": [
+
+        "annotated_bibliography",
+
+        "literature_synthesis",
+
+        "paper_draft",
+
+        "revision_package",
+
+        "submission_package",
+
+        "docx_export"
+
+      ]
+
+    }
+
+  }
+
+}

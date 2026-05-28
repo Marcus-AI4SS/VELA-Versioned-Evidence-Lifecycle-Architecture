@@ -1,0 +1,789 @@
+{
+
+  "$schema": "../schemas/research_presentation_workflow.v1.schema.json",
+
+  "schema_version": "research_presentation_workflow.v1",
+
+  "updated_at": "2026-05-27",
+
+  "policy": "研究汇报、答辩、路演、课程展示和论文转演示文稿统一由 research-presentation-studio 管理。网页演示的视觉执行默认委托给原版 guizang-ppt-skill runtime skill：电子杂志风用于人文叙事与行业观察，瑞士国际主义用于数据、技术、方法和结构化研究汇报。research-presentation-studio 只负责本地研究流程衔接、主题选择、证据边界、PPTX 衔接和质量复核，不改造 guizang-ppt-skill 的视觉系统。正式论文图表仍由 research-figure-studio 和 figure-table-studio 管理，演示文稿不得替代引用、数据和图表核验。",
+
+  "source_review_refs": [
+
+    {
+
+      "upstream": "op7418/guizang-ppt-skill",
+
+      "repo_url": "https://github.com/op7418/guizang-ppt-skill",
+
+      "commit": "6bfa520b86ed5a3dffdac0a3323155e2b6f516b6",
+
+      "decision": "install_and_delegate",
+
+      "adopted_as": [
+
+        "installed original runtime skill at $CODEX_HOME/skills/guizang-ppt-skill",
+
+        "single-file HTML web deck execution skill",
+
+        "style A electronic magazine and e-ink visual system",
+
+        "style B Swiss International visual system",
+
+        "Swiss locked layout validation script",
+
+        "screenshot framing and image generation prompt discipline",
+
+        "presentation QA checklist and browser preview loop"
+
+      ],
+
+      "not_adopted": [
+
+        "using web deck output as the only PPTX route",
+
+        "letting presentation templates override formal paper figure contracts",
+
+        "copying upstream into research-presentation-studio as a maintained fork",
+
+        "modifying upstream visual rules inside the VELA research workflow",
+
+        "copying upstream as a second top-level router",
+
+        "assuming Claude Code ask_question APIs exist in Codex"
+
+      ]
+
+    }
+
+  ],
+
+  "visual_systems": [
+
+    {
+
+      "id": "style_a_magazine_eink",
+
+      "label": "电子杂志 × 电子墨水",
+
+      "default_when": [
+
+        "人文社科分享",
+
+        "行业观察",
+
+        "故事化演讲",
+
+        "私享会",
+
+        "需要杂志感但不以密集数据为主"
+
+      ],
+
+      "theme_options": [
+
+        {
+
+          "id": "monocle_default",
+
+          "label": "墨水经典 / Monocle default",
+
+          "default_when": [
+
+            "不知道选哪套",
+
+            "通用分享",
+
+            "商业发布",
+
+            "科技产品"
+
+          ]
+
+        },
+
+        {
+
+          "id": "indigo_porcelain",
+
+          "label": "靛蓝瓷 / Indigo Porcelain",
+
+          "default_when": [
+
+            "科技研究",
+
+            "数据分享",
+
+            "工程文化",
+
+            "深度内容"
+
+          ]
+
+        },
+
+        {
+
+          "id": "forest_ink",
+
+          "label": "森林墨 / Forest Ink",
+
+          "default_when": [
+
+            "自然",
+
+            "可持续",
+
+            "文化",
+
+            "非虚构内容"
+
+          ]
+
+        },
+
+        {
+
+          "id": "kraft_paper",
+
+          "label": "牛皮纸 / Kraft Paper",
+
+          "default_when": [
+
+            "怀旧",
+
+            "人文阅读",
+
+            "历史文学",
+
+            "独立杂志感"
+
+          ]
+
+        },
+
+        {
+
+          "id": "dune",
+
+          "label": "沙丘 / Dune",
+
+          "default_when": [
+
+            "艺术设计",
+
+            "创意",
+
+            "时尚",
+
+            "画廊手册"
+
+          ]
+
+        }
+
+      ],
+
+      "template_path": "$CODEX_HOME/skills/guizang-ppt-skill/assets/template.html",
+
+      "reference_files": [
+
+        "$CODEX_HOME/skills/guizang-ppt-skill/references/themes.md",
+
+        "$CODEX_HOME/skills/guizang-ppt-skill/references/layouts.md",
+
+        "$CODEX_HOME/skills/guizang-ppt-skill/references/components.md",
+
+        "$CODEX_HOME/skills/guizang-ppt-skill/references/checklist.md"
+
+      ],
+
+      "must_follow": [
+
+        "标题、正文、元数据分工清楚",
+
+        "生成前必须让用户从本风格的 5 套主题中选择一套；用户未选时只能使用推荐主题并记录原因",
+
+        "图片按标准比例进入槽位",
+
+        "主题节奏必须有明暗和 hero/正文变化",
+
+        "不用 emoji 替代图标",
+
+        "先用版式骨架再填内容"
+
+      ],
+
+      "reject_when": [
+
+        "用户要求正式 PPTX 可编辑交付且不接受 HTML",
+
+        "内容主要是复杂表格或正式论文统计图",
+
+        "多人协同编辑优先"
+
+      ]
+
+    },
+
+    {
+
+      "id": "style_b_swiss_international",
+
+      "label": "瑞士国际主义",
+
+      "default_when": [
+
+        "数据汇报",
+
+        "技术路线",
+
+        "方法说明",
+
+        "产品发布",
+
+        "计算社会科学或工具链展示",
+
+        "用户要求 Swiss Style、极简、网格、Helvetica 风格"
+
+      ],
+
+      "theme_options": [
+
+        {
+
+          "id": "ikb",
+
+          "label": "克莱因蓝 / IKB",
+
+          "default_when": [
+
+            "不知道选哪套",
+
+            "AI 科技",
+
+            "商业发布",
+
+            "设计分享"
+
+          ]
+
+        },
+
+        {
+
+          "id": "lemon",
+
+          "label": "柠檬黄 / Lemon",
+
+          "default_when": [
+
+            "年轻活力",
+
+            "消费零售",
+
+            "运动",
+
+            "Y2K 复古"
+
+          ]
+
+        },
+
+        {
+
+          "id": "lemon_green",
+
+          "label": "柠檬绿 / Lemon Green",
+
+          "default_when": [
+
+            "生态",
+
+            "可持续",
+
+            "新兴科技",
+
+            "未来感"
+
+          ]
+
+        },
+
+        {
+
+          "id": "safety_orange",
+
+          "label": "安全橙 / Safety Orange",
+
+          "default_when": [
+
+            "工业",
+
+            "警示",
+
+            "汽车",
+
+            "紧迫决策"
+
+          ]
+
+        }
+
+      ],
+
+      "template_path": "$CODEX_HOME/skills/guizang-ppt-skill/assets/template-swiss.html",
+
+      "reference_files": [
+
+        "$CODEX_HOME/skills/guizang-ppt-skill/references/themes-swiss.md",
+
+        "$CODEX_HOME/skills/guizang-ppt-skill/references/swiss-layout-lock.md",
+
+        "$CODEX_HOME/skills/guizang-ppt-skill/references/layouts-swiss.md",
+
+        "$CODEX_HOME/skills/guizang-ppt-skill/references/swiss-map-component.md",
+
+        "$CODEX_HOME/skills/guizang-ppt-skill/references/checklist.md"
+
+      ],
+
+      "must_follow": [
+
+        "一份 deck 只使用一个强调色",
+
+        "生成前必须让用户从本风格的 4 套主题中选择一套；用户未选时只能使用推荐主题并记录原因",
+
+        "正文页从 S01-S22 登记版式选择",
+
+        "每页写 data-layout",
+
+        "大字轻字重，小字足够粗且可读",
+
+        "直角、无阴影、无圆角、无渐变",
+
+        "交付前运行 validate-swiss-deck.mjs"
+
+      ],
+
+      "reject_when": [
+
+        "需要柔和叙事照片感且数据结构不强",
+
+        "用户明确指定非瑞士风",
+
+        "需要 Word/论文正文图表而不是演示页"
+
+      ]
+
+    }
+
+  ],
+
+  "workflow_steps": [
+
+    {
+
+      "id": "confirm_route_and_scope",
+
+      "label": "确认演示文稿链条",
+
+      "purpose": "在新链条开始前确认用户要的是演示文稿、网页 deck、PPTX，还是论文图表。",
+
+      "required_actions": [
+
+        "最多问 1-3 个关键问题：目标受众、时长或页数、输出格式、是否按 guizang 两套视觉系统",
+
+        "若用户已经给出明确要求，直接记录假设并开工",
+
+        "发现论文图表或正式投稿图需求时转给 research-figure-studio 或 figure-table-studio"
+
+      ],
+
+      "outputs": [
+
+        "route confirmation card",
+
+        "scope assumptions"
+
+      ]
+
+    },
+
+    {
+
+      "id": "story_spine_and_slide_plan",
+
+      "label": "叙事骨架和页表",
+
+      "purpose": "先确定讲述顺序，再进入具体页面。",
+
+      "required_actions": [
+
+        "建立 hook、context、core、shift、takeaway 的叙事骨架",
+
+        "形成页码、主题、版式、图片槽位、证据来源和输出格式表",
+
+        "为研究汇报保留研究问题、方法、数据、发现、局限和下一步"
+
+      ],
+
+      "outputs": [
+
+        "slide_manifest",
+
+        "evidence_spine"
+
+      ]
+
+    },
+
+    {
+
+      "id": "visual_system_selection",
+
+      "label": "选择视觉系统和主题",
+
+      "purpose": "在电子杂志风和瑞士国际主义之间做明确选择，并让用户从对应主题清单中选择配色。",
+
+      "required_actions": [
+
+        "人文叙事、行业观察和图文分享默认 style_a_magazine_eink",
+
+        "数据、技术、方法、产品和结构化汇报默认 style_b_swiss_international",
+
+        "确认视觉系统后，必须展示该系统的主题清单：电子杂志风 5 套，瑞士国际主义 4 套",
+
+        "除非用户明确授权直接推荐，否则不得跳过主题选择",
+
+        "记录为什么没有选择另一套视觉系统"
+
+      ],
+
+      "outputs": [
+
+        "style_decision",
+
+        "theme_decision"
+
+      ]
+
+    },
+
+    {
+
+      "id": "asset_and_image_plan",
+
+      "label": "素材和配图计划",
+
+      "purpose": "把截图、照片、图表和 image2 配图纳入可审查资产链。",
+
+      "required_actions": [
+
+        "用户截图优先保真和程序化适配，不默认重画",
+
+        "需要配图时可调用 image2，但先锁定用途、比例、文字语言和禁止生成项",
+
+        "图片放入同级 images 目录，按页号和语义命名"
+
+      ],
+
+      "outputs": [
+
+        "image_manifest",
+
+        "screenshot_framing_notes"
+
+      ]
+
+    },
+
+    {
+
+      "id": "generate_deck",
+
+      "label": "生成演示文稿",
+
+      "purpose": "按输出模式生成 HTML deck、PPTX，或两者结合。",
+
+      "required_actions": [
+
+        "HTML deck 委托原版 guizang-ppt-skill runtime skill 执行；不要在 research-presentation-studio 内维护改造版模板",
+
+        "PPTX 使用官方 Presentations 插件，但仍沿用同一页表、配色、字体和版式纪律",
+
+        "不要从零发明页面结构；优先复用 guizang-ppt-skill 的原始 22P Swiss 版式和 Style A 版式骨架"
+
+      ],
+
+      "outputs": [
+
+        "index.html or deck.pptx",
+
+        "images folder",
+
+        "slide_manifest"
+
+      ]
+
+    },
+
+    {
+
+      "id": "preview_and_quality_review",
+
+      "label": "预览和质量复核",
+
+      "purpose": "交付前用浏览器或渲染预览检查内容和审美。",
+
+      "required_actions": [
+
+        "HTML deck 用浏览器逐页预览",
+
+        "Swiss deck 必须运行 $CODEX_HOME/skills/guizang-ppt-skill/scripts/validate-swiss-deck.mjs",
+
+        "检查文字可读、页码正确、截图不变形、图片不压底、导航可用",
+
+        "研究汇报还要检查证据来源和引用边界"
+
+      ],
+
+      "outputs": [
+
+        "presentation-quality-report",
+
+        "preview screenshots when useful"
+
+      ]
+
+    }
+
+  ],
+
+  "output_modes": [
+
+    {
+
+      "id": "web_deck_html",
+
+      "label": "单文件网页演示",
+
+      "owner_tool": "guizang-ppt-skill runtime skill",
+
+      "default_for": [
+
+        "视觉风格优先",
+
+        "横向翻页网页演示",
+
+        "发布会风格展示",
+
+        "快速本地预览"
+
+      ],
+
+      "required_artifacts": [
+
+        "index.html",
+
+        "images/",
+
+        "slide_manifest",
+
+        "quality report"
+
+      ]
+
+    },
+
+    {
+
+      "id": "pptx_deck",
+
+      "label": "PowerPoint 演示文稿",
+
+      "owner_tool": "Presentations plugin",
+
+      "default_for": [
+
+        "用户明确要求 PPTX",
+
+        "需要可编辑交付",
+
+        "需要会议或课堂上传"
+
+      ],
+
+      "required_artifacts": [
+
+        "deck.pptx",
+
+        "slide_manifest",
+
+        "quality report"
+
+      ]
+
+    },
+
+    {
+
+      "id": "hybrid_html_plus_pptx",
+
+      "label": "网页原型加 PPTX 交付",
+
+      "owner_tool": "research-presentation-studio + Presentations plugin",
+
+      "default_for": [
+
+        "先追求高质量视觉原型",
+
+        "最终仍需 PPTX",
+
+        "需要截图或图墙资产复用"
+
+      ],
+
+      "required_artifacts": [
+
+        "index.html",
+
+        "deck.pptx",
+
+        "images/",
+
+        "conversion notes",
+
+        "quality report"
+
+      ]
+
+    }
+
+  ],
+
+  "local_tool_mapping": {
+
+    "owner_skill": "research-presentation-studio",
+
+    "upstream_runtime_skill": "guizang-ppt-skill",
+
+    "official_pptx_tool": "presentations@openai-primary-runtime",
+
+    "web_deck_template_root": "$CODEX_HOME/skills/guizang-ppt-skill",
+
+    "image_generation_policy": "image2 is allowed for presentation visuals when structure, ratio, language, and no-fabrication constraints are locked first.",
+
+    "browser_preview_policy": "Use the in-app browser or Chrome/Playwright preview for HTML deck verification when a local file or server target exists."
+
+  },
+
+  "quality_rules": [
+
+    {
+
+      "id": "style_system_declared",
+
+      "rule": "每份演示文稿必须声明使用电子杂志风、瑞士国际主义、PPTX 重建，或混合交付，并记录所选主题。",
+
+      "check": "slide_manifest contains visual_system, theme, and output_mode."
+
+    },
+
+    {
+
+      "id": "theme_choice_recorded",
+
+      "rule": "生成前必须让用户从对应视觉系统的主题清单中选择一套；若使用推荐主题，必须记录推荐理由。",
+
+      "check": "slide_manifest records theme_decision_source as user_selected or recommended_with_reason."
+
+    },
+
+    {
+
+      "id": "slide_manifest_before_generation",
+
+      "rule": "生成页面前必须有页码、主题、版式、图片槽位和证据边界。",
+
+      "check": "manifest covers every planned slide."
+
+    },
+
+    {
+
+      "id": "swiss_locked_layout_validated",
+
+      "rule": "瑞士国际主义正文页必须使用登记版式并运行校验脚本。",
+
+      "check": "node $CODEX_HOME/skills/guizang-ppt-skill/scripts/validate-swiss-deck.mjs index.html passes for Swiss HTML deck."
+
+    },
+
+    {
+
+      "id": "image_slot_and_screenshot_fidelity_checked",
+
+      "rule": "图片和截图先匹配目标槽位；需要保真的截图不得被 image2 重画。",
+
+      "check": "image_manifest records ratio, slot, source, and processing choice."
+
+    },
+
+    {
+
+      "id": "readability_and_navigation_checked",
+
+      "rule": "交付前必须检查文字可读性、页码、翻页、底部导航和投屏字号。",
+
+      "check": "presentation-quality-report records visual preview."
+
+    }
+
+  ],
+
+  "safety_rules": [
+
+    {
+
+      "id": "no_presentation_as_citation_gate",
+
+      "rule": "演示文稿不能替代引用核验、全文证据链、Zotero 或正式参考文献检查。",
+
+      "failure_action": "Return to evidence-based-literature-workflow or writing-reference-capture."
+
+    },
+
+    {
+
+      "id": "no_fake_data_or_claims_in_slides",
+
+      "rule": "不得为版式好看而编造数据、案例、机构、论文、DOI、样本量或结果。",
+
+      "failure_action": "Mark the slide as blocked and request source material or remove the claim."
+
+    },
+
+    {
+
+      "id": "no_paper_figure_contract_bypass",
+
+      "rule": "正式论文图表不能因要放入 PPT 而绕过 scientific_figure_workflow。",
+
+      "failure_action": "Delegate data figures to figure-table-studio and conceptual paper figures to research-figure-studio."
+
+    },
+
+    {
+
+      "id": "no_external_runtime_takeover",
+
+      "rule": "上游 guizang-ppt-skill 作为原版 runtime skill 负责网页演示视觉执行，但不成为研究环境总路由，也不替代证据、文献、图表和投稿工作流。",
+
+      "failure_action": "Keep research-presentation-studio as route owner, keep guizang-ppt-skill unmodified, and validate with envctl."
+
+    }
+
+  ]
+
+}

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>VELA · Versioned Evidence Lifecycle Architecture</title>
-    <meta name="description" content="VELA is a portable Codex workflow package: Versioned Evidence Lifecycle Architecture.">
+    <meta name="description" content="VELA is a portable Codex workflow package for evidence-based research projects.">
     <link rel="stylesheet" href="./assets/site.css">
   </head>
   <body>
@@ -22,84 +22,78 @@
           <img class="hero-mark" src="./assets/brand/vela-workflow-mark.png" alt="VELA layered sail mark">
           <div class="eyebrow">Versioned Evidence Lifecycle Architecture</div>
           <h1>VELA</h1>
-          <p>VELA gives Codex a portable workflow wrapper: folders, AGENTS rules, schema-checked handoffs, evidence structure, validation reports, privacy scan, public export, and HELM-readable local context.</p>
+          <p>A portable Codex workflow package for evidence-based research projects: structure, handoffs, evidence ledgers, validation, privacy scans, and HELM-readable state.</p>
+          <p class="hero-note">Built around engineering-cybernetic loops: objective, state, feedback, validation, correction.</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="./getting-started.html">Start using VELA</a>
-            <a class="button" href="./installation.html">Download notes</a>
+            <a class="button button-primary" href="./getting-started.html">Start</a>
+            <a class="button" href="./installation.html">Install</a>
             <a class="button" href="./handoff-contract.html">Handoff contract</a>
-            <a class="button" href="./public-export.html">Public export</a>
             <a class="button" href="./imports.html">Connect HELM</a>
           </div>
         </div>
       </section>
 
+      <section class="section">
+        <div class="section-head">
+          <h2>What VELA Adds</h2>
+          <p>Codex gets a bounded project workspace instead of loose conversation state.</p>
+        </div>
+        <div class="grid-4">
+          <article class="card"><h3>Project scaffold</h3><p><code>materials</code>, <code>evidence</code>, <code>claims</code>, <code>methods</code>, <code>deliverables</code>, <code>handoffs</code>, and <code>logs</code>.</p></article>
+          <article class="card"><h3>Codex rules</h3><p><code>AGENTS.md</code> files and command templates keep work scoped and reviewable.</p></article>
+          <article class="card"><h3>Evidence lifecycle</h3><p>Collected material, verified evidence, claims, and deliverables stay separate.</p></article>
+          <article class="card"><h3>Control loop</h3><p>Objectives, state, feedback signals, validation gates, and corrections are visible in files.</p></article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>Install</h2>
+        </div>
+        <div class="grid-3">
+          <article class="card"><h3>Windows</h3><pre>git clone https://github.com/Marcus-AI4SS/VELA.git vela
+cd vela
+.\install.ps1 -BootstrapTools</pre></article>
+          <article class="card"><h3>macOS</h3><pre>git clone https://github.com/Marcus-AI4SS/VELA.git vela
+cd vela
+sh ./install-macos.sh</pre></article>
+          <article class="card"><h3>Linux / shell</h3><pre>git clone https://github.com/Marcus-AI4SS/VELA.git vela
+cd vela
+sh ./install.sh --bootstrap-tools</pre></article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>Use</h2>
+        </div>
+        <div class="grid-3">
+          <article class="card"><h3>1. Initialize</h3><p><code>vela init my-project</code> creates the project structure and <code>.vela/context.json</code>.</p></article>
+          <article class="card"><h3>2. Hand off</h3><p>Create, lint, and render a bounded Codex task.</p></article>
+          <article class="card"><h3>3. Validate</h3><p>Run project validation and privacy scan before exporting work.</p></article>
+        </div>
+      </section>
+
       <section class="section identity-strip">
         <div>
-          <div class="eyebrow">Shared product language</div>
-          <h2>VELA and HELM are one workflow pair with two separate jobs.</h2>
+          <div class="eyebrow">Optional pair</div>
+          <h2>VELA and HELM are independent tools with a shared file interface.</h2>
         </div>
         <div class="brand-pair">
           <article class="role-card active">
             <strong>VELA</strong>
-            <span>Versioned Evidence Lifecycle Architecture</span>
-            <p>Prepares portable project structure and bounded Codex work.</p>
+            <span>Workflow package</span>
+            <p>Creates and validates portable research project state.</p>
           </article>
           <article class="role-card">
             <strong>HELM</strong>
-            <span>Hub for Evidence, Logs &amp; Monitoring</span>
-            <p>Reads local state and turns it into a clear dashboard.</p>
+            <span>Local research board</span>
+            <p>Reads project state and helps prepare Codex handoffs.</p>
           </article>
         </div>
       </section>
 
-      <section class="section">
-        <div class="section-head">
-          <h2>What VELA Gives Codex</h2>
-          <p>A portable workflow package that stays useful even when no desktop app is installed.</p>
-        </div>
-        <div class="grid-4">
-          <article class="card"><h3>Project Wrapper</h3><p><code>vela init</code> creates project folders, AGENTS rules, Codex command templates, profiles, logs, and machine-readable state.</p></article>
-          <article class="card"><h3>Evidence Lifecycle</h3><p>Materials stay separate from evidence until source, access, verification, and rights or ethics fields are visible.</p></article>
-          <article class="card"><h3>Schema Handoffs</h3><p>Handoffs name the task, files, constraints, expected output, review standard, and human review status.</p></article>
-          <article class="card"><h3>Export Checks</h3><p><code>privacy scan</code> and <code>export public</code> help keep local paths, credentials, and private material out of shared outputs.</p></article>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-head">
-          <h2>How VELA And HELM Work Together</h2>
-          <p>VELA can be installed without HELM. HELM can run without VELA. Together they exchange explicit local files rather than hidden app state.</p>
-        </div>
-        <div class="grid-2">
-          <article class="card"><h3>VELA → HELM</h3><p>VELA writes <code>vela.project.context.v1</code> so HELM can show paths, status, evidence counts, files, blockers, and local checks.</p></article>
-          <article class="card"><h3>HELM → Codex / VELA</h3><p>HELM prepares <code>helm.codex.handoff.v1</code> as a copyable Codex note. VELA stores it only after an explicit user save or export.</p></article>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-head">
-          <h2>Start Here</h2>
-        </div>
-        <div class="grid-3">
-          <article class="card"><h3>1. Install</h3><p>Windows uses <code>install.ps1 -BootstrapTools</code>. macOS uses <code>sh ./install-macos.sh</code>. Linux uses <code>sh ./install.sh --bootstrap-tools</code>.</p></article>
-          <article class="card"><h3>2. Initialize</h3><p>Run <code>vela init my-project</code> to create a project with a readable local context file.</p></article>
-          <article class="card"><h3>3. Hand Off</h3><p>Create a bounded task, lint it, render a prompt, and take that task back to Codex.</p></article>
-          <article class="card"><h3>4. Validate</h3><p>Run project validation, privacy scan, and public export checks before sharing work.</p></article>
-        </div>
-      </section>
-      <section class="section">
-        <div class="section-head">
-          <h2>Environment Requirements</h2>
-          <p>VELA installs the public workflow layer and checks the user runtime boundary. It does not copy private machine state.</p>
-        </div>
-        <div class="grid-3">
-          <article class="card"><h3>Public tools</h3><p>Windows bootstrap uses winget. macOS bootstrap uses Homebrew. Both check Git, Python 3.13+, PowerShell 7, ripgrep, Node.js, GitHub CLI, and agentmemory.</p></article>
-          <article class="card"><h3>Doctor only</h3><p>CodeGraph, MCP vendors, Codex plugins, Zotero, Obsidian, browser/CNKI sessions, and private memory stores stay local.</p></article>
-          <article class="card"><h3>Two layers</h3><p>The repo is the source package. <code>~/.codex</code> and <code>~/.vela</code> hold the installed runtime.</p></article>
-        </div>
-      </section>
-      <footer>VELA = Versioned Evidence Lifecycle Architecture. HELM = Hub for Evidence, Logs &amp; Monitoring.</footer>
-
+      <footer>VELA = Versioned Evidence Lifecycle Architecture.</footer>
     </main>
   </body>
 </html>

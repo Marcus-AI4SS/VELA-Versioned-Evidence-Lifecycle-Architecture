@@ -1,0 +1,285 @@
+{
+
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+
+  "$id": "https://marcus-ai4ss.github.io/VELA/schemas/memory_reconciliation_report.v1.schema.json",
+
+  "title": "Memory Reconciliation Report",
+
+  "type": "object",
+
+  "additionalProperties": false,
+
+  "required": [
+
+    "schema_version",
+
+    "generated_at",
+
+    "source_files_written",
+
+    "mode",
+
+    "source_of_truth",
+
+    "agentmemory",
+
+    "automation_reports",
+
+    "evolution_backlog",
+
+    "reconciliation",
+
+    "next_actions"
+
+  ],
+
+  "properties": {
+
+    "schema_version": {
+
+      "const": "memory_reconciliation_report.v1"
+
+    },
+
+    "generated_at": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "source_files_written": {
+
+      "type": "boolean"
+
+    },
+
+    "mode": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "source_of_truth": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "agentmemory": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+
+        "configured",
+
+        "checked",
+
+        "healthy",
+
+        "summary"
+
+      ],
+
+      "properties": {
+
+        "configured": {
+
+          "type": "boolean"
+
+        },
+
+        "checked": {
+
+          "type": "boolean"
+
+        },
+
+        "healthy": {
+
+          "type": [
+
+            "boolean",
+
+            "null"
+
+          ]
+
+        },
+
+        "summary": {
+
+          "type": "string"
+
+        }
+
+      }
+
+    },
+
+    "automation_reports": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+
+        "governance_daily_count",
+
+        "latest_governance_daily",
+
+        "evolution_intake_count",
+
+        "latest_evolution_intake"
+
+      ],
+
+      "properties": {
+
+        "governance_daily_count": {
+
+          "type": "integer",
+
+          "minimum": 0
+
+        },
+
+        "latest_governance_daily": {
+
+          "type": [
+
+            "string",
+
+            "null"
+
+          ]
+
+        },
+
+        "evolution_intake_count": {
+
+          "type": "integer",
+
+          "minimum": 0
+
+        },
+
+        "latest_evolution_intake": {
+
+          "type": [
+
+            "string",
+
+            "null"
+
+          ]
+
+        }
+
+      }
+
+    },
+
+    "evolution_backlog": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+
+        "event_count",
+
+        "open_count",
+
+        "implemented_count",
+
+        "by_status"
+
+      ],
+
+      "properties": {
+
+        "event_count": {
+
+          "type": "integer",
+
+          "minimum": 0
+
+        },
+
+        "open_count": {
+
+          "type": "integer",
+
+          "minimum": 0
+
+        },
+
+        "implemented_count": {
+
+          "type": "integer",
+
+          "minimum": 0
+
+        },
+
+        "by_status": {
+
+          "type": "object",
+
+          "additionalProperties": {
+
+            "type": "integer",
+
+            "minimum": 0
+
+          }
+
+        }
+
+      }
+
+    },
+
+    "reconciliation": {
+
+      "type": "array",
+
+      "items": {
+
+        "type": "string",
+
+        "minLength": 1
+
+      }
+
+    },
+
+    "next_actions": {
+
+      "type": "array",
+
+      "items": {
+
+        "type": "string",
+
+        "minLength": 1
+
+      }
+
+    }
+
+  }
+
+}

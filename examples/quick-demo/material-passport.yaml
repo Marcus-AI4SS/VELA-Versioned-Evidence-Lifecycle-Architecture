@@ -1,16 +1,31 @@
 project_name: quick-demo
+
 route_id: computational-social-science
+
 current_stage: research_design
+
 data_access_level: public_open
+
 materials:
+
   - type: platform_evidence
+
     status: boundary_not_finalized
+
   - type: bibliography
+
     status: doi_verification_pending
+
 ethics_notes:
+
   - Only browser-visible public platform material is in scope.
+
 truth_sources:
+
   - research-map.md
+
   - findings-memory.md
+
   - material-passport.yaml
+
   - evidence-ledger.yaml

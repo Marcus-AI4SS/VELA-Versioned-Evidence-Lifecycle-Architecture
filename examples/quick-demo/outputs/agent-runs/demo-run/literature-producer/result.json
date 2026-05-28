@@ -1,20 +1,37 @@
 {
-  "run_id": "demo-run",
-  "agent_id": "literature-producer",
-  "status": "needs_review",
-  "produced_files": [
-    "outputs/agent-runs/demo-run/literature-producer/summary.md"
-  ],
-  "produced_deliverable_types": [
-    "annotated_bibliography"
-  ],
-  "key_findings": [
-    "The project needs verified literature before synthesis."
-  ],
-  "open_issues": [
-    "No formal citations are approved yet."
-  ],
-  "next_handoff_target": "reviewer",
-  "requires_review": true
-}
 
+  "run_id": "demo-run",
+
+  "agent_id": "literature-producer",
+
+  "status": "needs_review",
+
+  "produced_files": [
+
+    "outputs/agent-runs/demo-run/literature-producer/summary.md"
+
+  ],
+
+  "produced_deliverable_types": [
+
+    "annotated_bibliography"
+
+  ],
+
+  "key_findings": [
+
+    "The project needs verified literature before synthesis."
+
+  ],
+
+  "open_issues": [
+
+    "No formal citations are approved yet."
+
+  ],
+
+  "next_handoff_target": "reviewer",
+
+  "requires_review": true
+
+}

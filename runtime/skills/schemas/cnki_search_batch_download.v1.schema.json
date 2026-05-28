@@ -1,0 +1,205 @@
+{
+
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+
+  "$id": "https://marcus-ai4ss.github.io/VELA/schemas/cnki_search_batch_download.v1.schema.json",
+
+  "title": "CNKI Search Batch Download Report",
+
+  "type": "object",
+
+  "additionalProperties": true,
+
+  "required": [
+
+    "schema_version",
+
+    "generated_at",
+
+    "workflow_id",
+
+    "ok",
+
+    "mode",
+
+    "source_files_written",
+
+    "query",
+
+    "search_type",
+
+    "sort",
+
+    "limit",
+
+    "pages",
+
+    "cleanup",
+
+    "discovery",
+
+    "download",
+
+    "errors"
+
+  ],
+
+  "properties": {
+
+    "schema_version": {
+
+      "const": "cnki_search_batch_download.v1"
+
+    },
+
+    "generated_at": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "workflow_id": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "ok": {
+
+      "type": "boolean"
+
+    },
+
+    "mode": {
+
+      "const": "direct_cdp_discover_then_download"
+
+    },
+
+    "source_files_written": {
+
+      "const": false
+
+    },
+
+    "query": {
+
+      "type": [
+
+        "string",
+
+        "null"
+
+      ]
+
+    },
+
+    "search_type": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "sort": {
+
+      "enum": [
+
+        "relevance",
+
+        "date",
+
+        "cited",
+
+        "download",
+
+        "composite"
+
+      ]
+
+    },
+
+    "requested_author": {
+
+      "type": [
+
+        "string",
+
+        "null"
+
+      ]
+
+    },
+
+    "requested_affiliation": {
+
+      "type": [
+
+        "string",
+
+        "null"
+
+      ]
+
+    },
+
+    "limit": {
+
+      "type": "integer",
+
+      "minimum": 1
+
+    },
+
+    "pages": {
+
+      "type": "integer",
+
+      "minimum": 1
+
+    },
+
+    "cleanup": {
+
+      "type": "boolean"
+
+    },
+
+    "discovery": {
+
+      "type": "object"
+
+    },
+
+    "download": {
+
+      "type": [
+
+        "object",
+
+        "null"
+
+      ]
+
+    },
+
+    "errors": {
+
+      "type": "array",
+
+      "items": {
+
+        "type": "string"
+
+      }
+
+    }
+
+  }
+
+}

@@ -1,0 +1,17 @@
+{
+
+  "version": "3.13.13 (tags/v3.13.13:01104ce, Apr  7 2026, 19:25:48) [MSC v.1944 64 bit (AMD64)]",
+
+  "executable": "<USER_HOME>\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+
+  "base_prefix": "<USER_HOME>\\AppData\\Local\\Programs\\Python\\Python313",
+
+  "prefix": "<USER_HOME>\\AppData\\Local\\Programs\\Python\\Python313",
+
+  "platform": "Windows-11-10.0.26200-SP0",
+
+  "user_site": "<USER_HOME>\\AppData\\Roaming\\Python\\Python313\\site-packages",
+
+  "site_packages": "<USER_HOME>\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages"
+
+}

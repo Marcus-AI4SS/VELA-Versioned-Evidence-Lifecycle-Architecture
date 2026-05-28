@@ -1,13 +1,25 @@
 project_name: minimal-project
+
 route_id: literature-review
+
 current_stage: research_design
+
 data_access_level: public_open
+
 materials:
+
   - type: bibliography
+
     status: planned
+
 ethics_notes: []
+
 truth_sources:
+
   - research-map.md
+
   - findings-memory.md
+
   - material-passport.yaml
+
   - evidence-ledger.yaml

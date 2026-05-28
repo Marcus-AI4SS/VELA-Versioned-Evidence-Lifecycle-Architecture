@@ -1,44 +1,87 @@
 run_id: demo-run
+
 project_type: computational-social-science
+
 route_id: computational-social-science
+
 stage: planning
+
 execution_mode: sequential_multi_agent_execution
+
 isolation_method: project-level-canonical-output-dirs
+
 agents:
+
   - literature-producer
+
   - analysis-producer
+
   - project-manager
+
   - reviewer
+
 agent_context_packet:
+
   literature-producer: .codex/context-packets/demo-run/literature-producer.md
+
   analysis-producer: .codex/context-packets/demo-run/analysis-producer.md
+
   project-manager: .codex/context-packets/demo-run/project-manager.md
+
   reviewer: .codex/context-packets/demo-run/reviewer.md
+
 allowed_skills_mcp:
+
   literature-producer:
+
     - google-scholar-research
+
     - openalex-landscape
+
     - semantic-citation-tracer
+
     - citation-verifier
+
   analysis-producer:
+
     - text-analysis
+
     - digital-trace-pipeline
+
     - reproducibility-package
+
   project-manager:
+
     - research-stack-manager
+
   reviewer:
+
     - citation-verifier
+
     - academic-paper-review
+
 agent_output_path:
+
   literature-producer: outputs/agent-runs/demo-run/literature-producer/
+
   analysis-producer: outputs/agent-runs/demo-run/analysis-producer/
+
   project-manager: outputs/agent-runs/demo-run/project-manager/
+
   reviewer: outputs/agent-runs/demo-run/reviewer/
+
 review_agents:
+
   literature-producer: reviewer
+
 quality_gate: research_question_defined
+
 handoff_log: logs/agent-handoffs/demo-run.md
+
 gate_log: logs/quality-gates/demo-run.md
+
 conflict_resolution: project-manager
+
 merge_owner: project-manager
+
 user_veto_window: confirmed-in-thread

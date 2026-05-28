@@ -1,36 +1,35 @@
 # Privacy Boundaries
 
-This public repository is intentionally filtered before publication.
+VELA is designed as a public workflow package. It keeps reusable rules, schemas, validators, examples, and documentation in the repository, while user data stays in the user's own project and runtime.
 
 ## Excluded By Default
 
-- private SSH keys and credential material
-- cloud server logs and operator notes
-- Codex local trust state
-- local runtime blobs, caches, and outputs
-- personal application documents
-- user-specific repair scripts for one machine
+- credentials, tokens, cookies, and SSH keys
+- account sessions and browser state
+- Codex trust state and plugin caches
+- runtime caches, generated outputs, and machine-specific repair scripts
+- personal notes, private datasets, and unpublished project material
 
-## Redaction Rules
+## Portable Defaults
 
-- replace machine-specific absolute paths with portable placeholders
-- replace local usernames and private repo traces with public-facing metadata
-- remove direct host, tunnel, and key references
-- keep research rules and workflow structure, but not private operational details
+- use relative paths or documented placeholders
+- keep examples free of user names and absolute machine paths
+- keep integrations opt-in when they require user accounts or local databases
+- keep research rules and workflow structure reusable across machines
 
 ## Public Contract
 
 What stays public:
 
-- routing logic
-- schemas
-- orchestrator and validator logic
-- public-facing plugin metadata
-- docs, examples, and templates
+- workflow structure
+- schemas and validators
+- install scripts and runtime manifests
+- public examples and docs
+- reusable skill and routing metadata
 
-What does not stay public:
+What stays outside the repository:
 
 - secrets
-- operator-only infra traces
-- private application materials
-- local-only configuration state
+- private project material
+- personal account state
+- generated runtime data

@@ -1,0 +1,2101 @@
+{
+
+  "$schema": "../schemas/manuscript_writing_workflow.v1.schema.json",
+
+  "schema_version": "manuscript_writing_workflow.v1",
+
+  "updated_at": "2026-05-27",
+
+  "policy": "Manuscript writing and polishing use a contract-first workflow. Nature-style writing craft is adapted for English high-impact journal work and technical computational social-science manuscripts, and target-journal corpus signals can guide pre-submission style adaptation after readability review. Chinese journals, CSSCI writing, traditional quantitative work, and qualitative research keep the local social-science standard as the primary rule; no style layer can override facts, evidence, citations, results, or author decisions.",
+
+  "source_review_refs": [
+
+    {
+
+      "upstream": "Yuan1z0825/nature-skills",
+
+      "repo_url": "https://github.com/Yuan1z0825/nature-skills",
+
+      "commit": "d6fe5146afcb28f37f3ef2fba0fe56e696ad8153",
+
+      "adopted_as": [
+
+        "article architecture before sentence polishing",
+
+        "section-specific writing contracts for title, abstract, introduction, methods, results, discussion, and conclusion",
+
+        "logic-first polishing diagnosis",
+
+        "claim-evidence-boundary calibration",
+
+        "reader-flow and paragraph-control checks",
+
+        "Chinese-to-English rebuild before English polish"
+
+      ],
+
+      "not_adopted": [
+
+        "bulk installing the nature-* skill bundle",
+
+        "Nature/CNS house style as the default social-science journal target",
+
+        "biomedical, materials, image-experiment, or wet-lab standards as default gates",
+
+        "PubMed or MeSH as default discovery priority",
+
+        "English-language style rules overriding Chinese journal conventions"
+
+      ]
+
+    },
+
+    {
+
+      "upstream": "Jinze-Lee/codex-skills-workbench",
+
+      "repo_url": "https://github.com/Jinze-Lee/codex-skills-workbench",
+
+      "commit": "7aa34a5039d52a062152db56eabcd3b72893c851",
+
+      "adopted_as": [
+
+        "long-form writing intake with project facts and asset inventory",
+
+        "chapter plan before chapter prose",
+
+        "decisions log for user confirmations and assumptions",
+
+        "figure, table, formula, code, data, and reference manifests",
+
+        "placeholder protocol for figures, tables, equations, symbols, and references",
+
+        "template-preserving DOCX workflow as explicit opt-in pattern"
+
+      ],
+
+      "not_adopted": [
+
+        "auto-triggering a thesis studio for ordinary paper writing",
+
+        "bundled Word templates as local defaults",
+
+        "Word XML script runtime as the default docx export path",
+
+        "manual reference numbering that bypasses citation verification",
+
+        "example data, example figures, or simulated results without explicit user permission"
+
+      ]
+
+    },
+
+    {
+
+      "upstream": "Leey21/awesome-ai-research-writing",
+
+      "repo_url": "https://github.com/Leey21/awesome-ai-research-writing",
+
+      "commit": "c07628b453309a1fb131ee105b2f01190162bc6c",
+
+      "adopted_as": [
+
+        "format-sensitive Chinese-English rewriting for LaTeX versus Word",
+
+        "back-translation or logic-flow check after bilingual rewriting",
+
+        "micro shorten and expand operations with explicit delta logs",
+
+        "minimal-change Chinese and English polishing thresholds",
+
+        "AI-style surface cleanup without changing claims",
+
+        "logic redline check that reports only blocking issues",
+
+        "data-bound experiment or result analysis paragraphs",
+
+        "plain academic figure and table title generation",
+
+        "reviewer-perspective final audit with fatal-versus-fixable distinction",
+
+        "conference or journal venue migration checklist as a submission-package adapter"
+
+      ],
+
+      "not_adopted": [
+
+        "copying the prompt bundle verbatim as local runtime instructions",
+
+        "OpenSkills installation as a local stack management path",
+
+        "current model ranking or provider preference as environment policy",
+
+        "CS or LLM conference assumptions as default social-science manuscript structure",
+
+        "arXiv translator runtime as a default local paper-writing tool",
+
+        "letting a prompt template bypass citation verification, figure gates, or package freeze checks"
+
+      ]
+
+    },
+
+    {
+
+      "upstream": "brycewang-stanford/Awesome-Agent-Skills-for-Empirical-Research",
+
+      "repo_url": "https://github.com/brycewang-stanford/Awesome-Agent-Skills-for-Empirical-Research",
+
+      "commit": "e03ff8cf62f1ce8739c4181cead149da5dd84b11",
+
+      "adopted_as": [
+
+        "claim-preserving academic humanization as a surface audit",
+
+        "Chinese academic de-template scan for mechanical connectives, inflated novelty, and low-density phrases",
+
+        "English academic humanizer checks for vague attribution, excessive hedging, causal overclaiming, and generic conclusions",
+
+        "second-pass audit after polishing",
+
+        "detector-evasion boundary: improve authorial academic prose without promising to bypass detection",
+
+        "detect-first then rewrite-second academic humanization workflow",
+
+        "Chinese five-step de-template loop: locate, classify, rewrite, self-check, second-pass review",
+
+        "English severity audit for vague attribution, inflated novelty, causal overclaiming, formulaic transitions, generic conclusions, and rhythm uniformity",
+
+        "locked-items ledger before any surface rewrite"
+
+      ],
+
+      "not_adopted": [
+
+        "bulk installing external humanizer, deslop, stop-slop, avoid-ai-writing, or Chinese de-AIGC skills as competing runtime routes",
+
+        "treating AIGC score reduction as more important than academic integrity",
+
+        "changing claims, evidence, citations, variables, model results, or uncertainty for surface style",
+
+        "copying detector-specific tactics as local policy",
+
+        "using an external humanizer skill to bypass local writing quality, citation, or peer-review gates",
+
+        "optimizing manuscripts for a detector score instead of writing quality and evidence integrity",
+
+        "adding fake human imperfection, typos, colloquial looseness, or unsupported stylistic noise"
+
+      ]
+
+    },
+
+    {
+
+      "upstream": "ganzhi-black/humanities-thesis-skill",
+
+      "repo_url": "https://github.com/ganzhi-black/humanities-thesis-skill",
+
+      "commit": "9f9c97162e250df8d6c214b828bb973828a2a780",
+
+      "adopted_as": [
+
+        "humanities thesis intake before drafting",
+
+        "research object, problem, thesis direction, theory, type, and length confirmation",
+
+        "theory-as-tool and material-as-destination writing rule",
+
+        "close-reading and material-first chapter opening discipline",
+
+        "chapter progression and transition paragraph checks",
+
+        "quote-followed-by-analysis requirement",
+
+        "humanities literature review grouped by argument function",
+
+        "terminology consistency and bilingual glossary check",
+
+        "footnote function and format checks"
+
+      ],
+
+      "not_adopted": [
+
+        "bulk installing the upstream humanities-thesis skill",
+
+        "using upstream search.py as a replacement for local literature acquisition, CNKI, Google Scholar, Zotero, or citation-verifier chains",
+
+        "copying long terminology or theorist tables as verified references",
+
+        "treating title, abstract, or metadata-only search results as sufficient paper content evidence",
+
+        "Claude Code or OpenClaw platform instructions as local Codex runtime policy"
+
+      ]
+
+    },
+
+    {
+
+      "upstream": "WantongC/journal-adapt-writing-skill",
+
+      "repo_url": "https://github.com/WantongC/journal-adapt-writing-skill",
+
+      "commit": "cc79265b0acc21bc488c4c3004d89113cf19335a",
+
+      "adopted_as": [
+
+        "target-journal corpus as a dynamic style evidence layer for pre-submission polishing",
+
+        "priority order: manuscript facts and claims, user instructions, target-journal corpus, secondary corpus or exemplars, then static base rules",
+
+        "5-8 readable target-journal papers as the preferred primary style corpus when available",
+
+        "conversion and readability gate before any style extraction",
+
+        "paper style cards and aggregated journal style profile before revision",
+
+        "section-by-section diagnosis, journal-fit score, revision log, and conflict log",
+
+        "temporary dynamic writing skill as a project artifact rather than a global runtime skill"
+
+      ],
+
+      "not_adopted": [
+
+        "installing journal-adapt as a competing top-level runtime skill",
+
+        "using unread, partial, or failed PDF conversions as style evidence",
+
+        "copying, quoting, or paraphrasing target-journal corpus prose into the user manuscript",
+
+        "letting journal style override manuscript facts, evidence, citations, results, equations, variables, or author decisions",
+
+        "treating target-journal style evidence as DOI verification or citation evidence",
+
+        "auto-installing the upstream recommended external static writing skills"
+
+      ]
+
+    }
+
+  ],
+
+  "adoption_options": [
+
+    {
+
+      "id": "option_a_direct_install",
+
+      "label": "Directly install upstream nature-writing and nature-polishing",
+
+      "decision": "reject_as_default",
+
+      "description": "Installing the upstream skills would duplicate local routing and import English STEM assumptions as runtime defaults.",
+
+      "strengths": [
+
+        "fast to expose upstream commands",
+
+        "keeps upstream wording close to its source"
+
+      ],
+
+      "risks": [
+
+        "duplicates local writing and evidence workflows",
+
+        "may treat English high-impact journal prose as universal",
+
+        "may make STEM paper sections the default for humanities and social-science work"
+
+      ]
+
+    },
+
+    {
+
+      "id": "option_b_contract_first_social_science_integration",
+
+      "label": "Adapt writing craft into a local manuscript contract",
+
+      "decision": "selected",
+
+      "description": "Add a local schema, catalog, validator, route entry, and skill that distinguish language target and discipline target before drafting or polishing.",
+
+      "strengths": [
+
+        "keeps research-autopilot as the single route",
+
+        "makes English/Chinese and STEM/social-science differences explicit",
+
+        "turns polishing into a checkable workflow instead of loose prompt advice",
+
+        "lets citation capture and evidence verification remain mandatory when references are touched"
+
+      ],
+
+      "risks": [
+
+        "requires validators and routing to stay synchronized",
+
+        "adds one more source contract that must be maintained"
+
+      ]
+
+    },
+
+    {
+
+      "id": "option_c_english_journal_preset_only",
+
+      "label": "Keep Nature style only as an optional English preset",
+
+      "decision": "watch",
+
+      "description": "Use the upstream rules only when the user explicitly asks for Nature-style English polishing.",
+
+      "strengths": [
+
+        "low risk for Chinese journal work",
+
+        "easy to explain"
+
+      ],
+
+      "risks": [
+
+        "underuses useful article-architecture and logic-diagnosis rules",
+
+        "does not improve default writing quality for computational social-science manuscripts"
+
+      ]
+
+    },
+
+    {
+
+      "id": "option_d_no_change",
+
+      "label": "Leave writing under citation capture only",
+
+      "decision": "reject_as_default",
+
+      "description": "Keep using writing-reference-capture as the main writing surface.",
+
+      "strengths": [
+
+        "no new files",
+
+        "no routing migration"
+
+      ],
+
+      "risks": [
+
+        "mixes reference capture with manuscript craft",
+
+        "cannot express language and discipline differences",
+
+        "keeps polishing rules scattered across prose documents"
+
+      ]
+
+    }
+
+  ],
+
+  "selected_strategy": "option_b_contract_first_social_science_integration",
+
+  "language_targets": [
+
+    {
+
+      "id": "cn_humanities_social_science",
+
+      "label": "中文人文社科或 CSSCI 写作",
+
+      "default_posture": "Local Chinese social-science writing rules are primary; Nature-style English rhythm is not imported as default.",
+
+      "style_rules": [
+
+        "先确认目标是中文期刊、中文学位论文、中文报告还是中文投稿修改稿",
+
+        "保留中文学术写作的概念密度、问题意识、文献脉络和理论定位",
+
+        "涉及数据分析的段落继续遵守 PEEL 闭环",
+
+        "句子可以比英文更长，但每段必须只有一个控制性论点",
+
+        "不得用英文期刊的短句节奏机械改写中文段落"
+
+      ],
+
+      "reject_when": [
+
+        "用户要求英文期刊投稿润色",
+
+        "目标期刊明确要求英文高影响期刊结构和表达",
+
+        "项目目标是英文摘要、英文 cover letter 或英文 response letter"
+
+      ]
+
+    },
+
+    {
+
+      "id": "en_high_impact_journal",
+
+      "label": "英文高影响期刊写作",
+
+      "default_posture": "Nature-style craft can be used aggressively for structure, section moves, sentence economy, and reader-flow control.",
+
+      "style_rules": [
+
+        "先把核心主张、证据、边界和 novelty 限定写清楚，再做语言润色",
+
+        "摘要写成 compact mini-paper，不堆背景",
+
+        "引言按 context -> problem -> gap -> approach -> key finding -> contribution 收束",
+
+        "结果段只报告证据和必要解释，讨论段再处理意义、机制和边界",
+
+        "英文句子优先 10 到 30 词，避免多重从句和空泛强调"
+
+      ],
+
+      "reject_when": [
+
+        "用户明确要求中文期刊风格",
+
+        "目标是中文 CSSCI 或中文学位论文正文",
+
+        "英语只是工作草稿且尚无明确投稿目标"
+
+      ]
+
+    },
+
+    {
+
+      "id": "bilingual_transition",
+
+      "label": "中英转换和双语过渡",
+
+      "default_posture": "Do not translate sentence by sentence. Rebuild the argument map first, then write in the target language.",
+
+      "style_rules": [
+
+        "先把中文主张、证据、变量、方法、边界拆成 claim-evidence-boundary 表",
+
+        "英文稿按目标期刊读者重组段落，不逐句硬译",
+
+        "中文回译或双语摘要要保持概念一致，不为了流畅改变主张强度",
+
+        "关键术语必须建立中英对照表"
+
+      ],
+
+      "reject_when": [
+
+        "没有原文、目标语言或输出用途",
+
+        "用户要求只做参考文献核验或 PDF 下载"
+
+      ]
+
+    }
+
+  ],
+
+  "discipline_targets": [
+
+    {
+
+      "id": "humanities_social_science",
+
+      "label": "人文社科默认标准",
+
+      "primary_standard": "Local social-science logic controls the manuscript: research question, theory, literature gap, data/materials, method or interpretation, evidence, boundary, ethics, and citation integrity.",
+
+      "adapted_from_nature": [
+
+        "section responsibilities",
+
+        "reader-flow control",
+
+        "claim-evidence-boundary matching",
+
+        "logic-first polishing",
+
+        "compact abstract and introduction funnel"
+
+      ],
+
+      "do_not_import": [
+
+        "wet-lab experimental section defaults",
+
+        "biomedical review checklists",
+
+        "method-module claims without a real method contribution",
+
+        "Nature/CNS novelty language when the paper targets a Chinese or field-specific journal"
+
+      ]
+
+    },
+
+    {
+
+      "id": "computational_social_science_or_method",
+
+      "label": "计算社会科学或方法技术型论文",
+
+      "primary_standard": "Local social-science standards remain primary, but technical clarity, pipeline description, data processing transparency, robustness, and reproducibility can borrow more from STEM writing craft.",
+
+      "adapted_from_nature": [
+
+        "method module decomposition",
+
+        "pipeline and benchmark clarity",
+
+        "results evidence ladder",
+
+        "figure-to-claim alignment",
+
+        "data and code availability separation"
+
+      ],
+
+      "do_not_import": [
+
+        "claiming algorithmic novelty without benchmark or ablation evidence",
+
+        "using technical detail to hide weak theory",
+
+        "dropping measurement validity, ethics, or platform boundary"
+
+      ]
+
+    },
+
+    {
+
+      "id": "traditional_quantitative_social_science",
+
+      "label": "传统量化研究",
+
+      "primary_standard": "Use local journal conventions for theory, hypothesis, data, variable construction, identification or model choice, robustness, heterogeneity, and boundary statements.",
+
+      "adapted_from_nature": [
+
+        "clear abstract sequence",
+
+        "results-vs-discussion separation",
+
+        "paragraph-level reader flow",
+
+        "overclaim reduction"
+
+      ],
+
+      "do_not_import": [
+
+        "turning ordinary regression results into discovery-claim language",
+
+        "treating p values as the whole evidence chain",
+
+        "forcing STEM figure-panel logic where tables or coefficient plots are clearer"
+
+      ]
+
+    },
+
+    {
+
+      "id": "qualitative_or_interpretive_social_science",
+
+      "label": "质性或解释性研究",
+
+      "primary_standard": "Use local qualitative logic: case selection, material boundary, coding or interpretation procedure, thick evidence, alternative interpretation, and reflexive limitation.",
+
+      "adapted_from_nature": [
+
+        "reader-flow and section-job discipline",
+
+        "claim boundary calibration",
+
+        "evidence hierarchy across excerpts, cases, and interpretation",
+
+        "plain but precise paragraph control"
+
+      ],
+
+      "do_not_import": [
+
+        "statistical significance language",
+
+        "experimental control language",
+
+        "pipeline-only method framing",
+
+        "removing necessary contextual explanation for the sake of English brevity"
+
+      ]
+
+    }
+
+  ],
+
+  "workflow_modes": [
+
+    {
+
+      "id": "draft_section",
+
+      "label": "起草论文段落或章节",
+
+      "trigger_signals": [
+
+        "写一段",
+
+        "写作",
+
+        "帮我写摘要",
+
+        "写引言",
+
+        "写讨论",
+
+        "draft section",
+
+        "manuscript"
+
+      ],
+
+      "required_inputs": [
+
+        "target_language",
+
+        "discipline_target",
+
+        "section_id",
+
+        "core_claim",
+
+        "evidence_or_materials",
+
+        "boundary_or_uncertainty"
+
+      ],
+
+      "required_steps": [
+
+        "declare language and discipline target",
+
+        "select section contract",
+
+        "build claim-evidence-boundary map",
+
+        "draft by section moves",
+
+        "run writing-quality checks"
+
+      ],
+
+      "outputs": [
+
+        "drafted section",
+
+        "claim-evidence-boundary note",
+
+        "remaining evidence or citation blockers"
+
+      ]
+
+    },
+
+    {
+
+      "id": "rewrite_structure",
+
+      "label": "重构段落、章节或论文主线",
+
+      "trigger_signals": [
+
+        "重写",
+
+        "改写",
+
+        "逻辑不顺",
+
+        "结构调整",
+
+        "restructure",
+
+        "rewrite"
+
+      ],
+
+      "required_inputs": [
+
+        "current_text",
+
+        "target_language",
+
+        "discipline_target",
+
+        "intended_claim",
+
+        "evidence_or_materials"
+
+      ],
+
+      "required_steps": [
+
+        "diagnose structural failure before editing",
+
+        "separate background, claim, evidence, explanation, and boundary",
+
+        "reorder paragraphs by reader-flow",
+
+        "only polish sentences after argument repair"
+
+      ],
+
+      "outputs": [
+
+        "rewritten text",
+
+        "before-after logic diagnosis",
+
+        "unresolved evidence gaps"
+
+      ]
+
+    },
+
+    {
+
+      "id": "polish_language",
+
+      "label": "润色中文或英文论文语言",
+
+      "trigger_signals": [
+
+        "润色",
+
+        "语言优化",
+
+        "英文润色",
+
+        "中文润色",
+
+        "polish",
+
+        "copyedit"
+
+      ],
+
+      "required_inputs": [
+
+        "current_text",
+
+        "target_language",
+
+        "discipline_target",
+
+        "publication_or_audience",
+
+        "non_negotiable_terms"
+
+      ],
+
+      "required_steps": [
+
+        "declare whether the request is Chinese, English, or bilingual",
+
+        "diagnose whether the issue is logic, evidence, paragraph flow, terminology, or sentence style",
+
+        "avoid changing claims, evidence, citations, and results without explicit marking",
+
+        "return revision notes with risk flags"
+
+      ],
+
+      "outputs": [
+
+        "polished text",
+
+        "revision notes",
+
+        "risk flags for claims or citations"
+
+      ]
+
+    },
+
+    {
+
+      "id": "translate_rebuild",
+
+      "label": "中英互译并重建学术表达",
+
+      "trigger_signals": [
+
+        "翻译",
+
+        "中译英",
+
+        "英译中",
+
+        "双语",
+
+        "translate",
+
+        "bilingual"
+
+      ],
+
+      "required_inputs": [
+
+        "source_text",
+
+        "target_language",
+
+        "target_journal_or_context",
+
+        "term_glossary",
+
+        "core_claim"
+
+      ],
+
+      "required_steps": [
+
+        "extract argument map before translation",
+
+        "preserve claim strength and evidence boundary",
+
+        "reconstruct in target-language academic convention",
+
+        "report terminology decisions"
+
+      ],
+
+      "outputs": [
+
+        "translated and rebuilt text",
+
+        "term glossary",
+
+        "claim-strength notes"
+
+      ]
+
+    },
+
+    {
+
+      "id": "format_sensitive_translation",
+
+      "label": "区分 LaTeX 和 Word 的中英转换",
+
+      "trigger_signals": [
+
+        "中转英",
+
+        "英转中",
+
+        "LaTeX 翻译",
+
+        "Word 翻译",
+
+        "论文翻译",
+
+        "format-sensitive translation"
+
+      ],
+
+      "required_inputs": [
+
+        "source_text",
+
+        "target_language",
+
+        "target_container",
+
+        "target_journal_or_context",
+
+        "term_glossary"
+
+      ],
+
+      "required_steps": [
+
+        "declare whether output targets LaTeX, Word, plain text, or DOCX",
+
+        "preserve LaTeX commands and escape LaTeX special characters only for LaTeX output",
+
+        "strip or avoid Markdown syntax for Word/plain-text output",
+
+        "rebuild the argument in the target language instead of sentence-by-sentence polishing when needed",
+
+        "return a back-translation or logic-flow note when it helps verify meaning"
+
+      ],
+
+      "outputs": [
+
+        "format-correct translated text",
+
+        "terminology decisions",
+
+        "back-translation or logic-flow note"
+
+      ]
+
+    },
+
+    {
+
+      "id": "micro_revision",
+
+      "label": "微幅缩写、扩写或轻改",
+
+      "trigger_signals": [
+
+        "缩写",
+
+        "压缩",
+
+        "扩写",
+
+        "少量增加",
+
+        "微调",
+
+        "shorten",
+
+        "expand"
+
+      ],
+
+      "required_inputs": [
+
+        "current_text",
+
+        "target_language",
+
+        "target_container",
+
+        "allowed_delta",
+
+        "non_negotiable_terms"
+
+      ],
+
+      "required_steps": [
+
+        "state whether the request is micro-edit, rewrite, or structural repair",
+
+        "preserve all facts, variables, results, citations, and uncertainty markers",
+
+        "keep the delta small unless the user explicitly asks for structural rewriting",
+
+        "produce a modification log that names what was compressed, expanded, or left unchanged"
+
+      ],
+
+      "outputs": [
+
+        "revised text",
+
+        "delta log",
+
+        "claim-preservation note"
+
+      ]
+
+    },
+
+    {
+
+      "id": "humanized_surface_check",
+
+      "label": "去除机器化表达但不改主张",
+
+      "trigger_signals": [
+
+        "去 AI 味",
+
+        "去AI味",
+
+        "humanize",
+
+        "翻译腔",
+
+        "不像人写",
+
+        "AI 痕迹",
+
+        "降AI率",
+
+        "降低AI率",
+
+        "降 AIGC 检测率",
+
+        "去机器味",
+
+        "去模板化",
+
+        "academic humanization",
+
+        "deslop",
+
+        "avoid AI writing"
+
+      ],
+
+      "required_inputs": [
+
+        "current_text",
+
+        "target_language",
+
+        "discipline_target",
+
+        "publication_or_audience",
+
+        "claim_boundary",
+
+        "edit_strength_detect_only_light_or_rewrite",
+
+        "locked_items_ledger",
+
+        "output_container"
+
+      ],
+
+      "required_steps": [
+
+        "scan for empty rhetoric, mechanical transitions, overused AI phrases, translationese, and needless parallelism",
+
+        "change only wording, rhythm, and paragraph flow unless the user authorizes argument repair",
+
+        "keep technical terms, claims, evidence, citations, and uncertainty unchanged",
+
+        "if the text is already natural and rigorous, return it unchanged with a pass note",
+
+        "choose detect-only or rewrite mode before editing",
+
+        "write a locked-items ledger for facts, data, citations, variables, estimates, uncertainty, limitations, quotations, and author-defined terms",
+
+        "run Chinese five-step surface audit when the target is Chinese academic prose",
+
+        "run English severity audit for vague attribution, inflated novelty, causal overclaiming, formulaic transitions, generic conclusions, and rhythm uniformity when the target is English academic prose",
+
+        "preserve legitimate academic phrases when they carry real logical or evidentiary work",
+
+        "run a second-pass audit after revision and report any remaining surface risks",
+
+        "state explicitly that no detector-bypass guarantee is made"
+
+      ],
+
+      "outputs": [
+
+        "cleaned text or unchanged pass",
+
+        "AI-surface issue log",
+
+        "claim-change risk note",
+
+        "locked-items ledger",
+
+        "severity-coded issue ledger",
+
+        "humanization change log",
+
+        "second-pass humanization audit",
+
+        "detector-boundary note"
+
+      ]
+
+    },
+
+    {
+
+      "id": "venue_migration",
+
+      "label": "换会议、改投或投稿格式迁移",
+
+      "trigger_signals": [
+
+        "换会议",
+
+        "改投",
+
+        "改投别家",
+
+        "格式迁移",
+
+        "会议模板",
+
+        "期刊模板",
+
+        "venue migration",
+
+        "resubmission"
+
+      ],
+
+      "required_inputs": [
+
+        "current_manuscript_or_project",
+
+        "current_venue_or_format",
+
+        "target_venue_or_journal",
+
+        "target_template_or_author_guidelines",
+
+        "page_word_figure_table_limits"
+
+      ],
+
+      "required_steps": [
+
+        "lock the source manuscript and preserve a rollback copy",
+
+        "map target venue requirements for length, anonymization, structure, checklist, ethics, data, code, figures, tables, and supplementary materials",
+
+        "migrate content without inventing results, citations, analyses, author details, or reviewer claims",
+
+        "separate mechanical template changes from substantive writing changes",
+
+        "run citation, writing, figure-table, peer-review, reproducibility, and package-freeze checks before calling it ready"
+
+      ],
+
+      "outputs": [
+
+        "venue migration plan",
+
+        "target checklist",
+
+        "converted manuscript or patch plan",
+
+        "unresolved target-requirement blockers"
+
+      ]
+
+    },
+
+    {
+
+      "id": "target_journal_adaptation",
+
+      "label": "目标期刊适配润色",
+
+      "trigger_signals": [
+
+        "目标期刊适配",
+
+        "按期刊风格修改",
+
+        "投稿前润色",
+
+        "期刊风格",
+
+        "投这个期刊",
+
+        "journal adapt",
+
+        "target journal",
+
+        "journal style",
+
+        "submission polish"
+
+      ],
+
+      "required_inputs": [
+
+        "current_manuscript_or_section",
+
+        "target_journal_or_writing_destination",
+
+        "primary_target_journal_corpus_or_missing_reason",
+
+        "target_language",
+
+        "discipline_target",
+
+        "citation_status",
+
+        "figure_table_status"
+
+      ],
+
+      "required_steps": [
+
+        "lock manuscript facts, claims, results, citations, equations, variables, and author-defined terms as the highest priority",
+
+        "record user instructions and intended submission destination before style extraction",
+
+        "use 5-8 fully readable target-journal papers as primary style evidence when available",
+
+        "reject unreadable, partial, failed, or metadata-only corpus files from style extraction",
+
+        "extract paper style cards that describe only structure, rhetorical moves, section order, voice, tense, and register",
+
+        "aggregate a journal style profile with recurring patterns, conflict table, red flags, and human review notes",
+
+        "use secondary field papers and user or lab exemplars only as lower-priority support when target-journal evidence is thin",
+
+        "revise one section at a time with diagnosis, journal-fit score, applied rules, preserved items, and conflict log",
+
+        "send changed citation claims, figure/table wording, data statements, or result interpretations back to the corresponding local gates"
+
+      ],
+
+      "outputs": [
+
+        "journal adaptation intake card",
+
+        "paper style card list",
+
+        "journal style profile",
+
+        "section diagnosis with journal-fit score",
+
+        "journal-adapted revised text",
+
+        "revision log with preserved-item and conflict records",
+
+        "remaining blockers"
+
+      ]
+
+    },
+
+    {
+
+      "id": "final_quality_audit",
+
+      "label": "定稿前写作质量检查",
+
+      "trigger_signals": [
+
+        "定稿",
+
+        "投稿前检查",
+
+        "最后检查",
+
+        "final polish",
+
+        "submission polish"
+
+      ],
+
+      "required_inputs": [
+
+        "full_manuscript_or_section",
+
+        "target_language",
+
+        "discipline_target",
+
+        "citation_status",
+
+        "figure_table_status",
+
+        "target_journal_or_writing_destination",
+
+        "journal_style_profile_or_not_needed_reason"
+
+      ],
+
+      "required_steps": [
+
+        "run writing_quality_rules checks",
+
+        "confirm citation capture when references are touched",
+
+        "confirm figure/table text consistency when figures are touched",
+
+        "list blockers separately from optional improvements",
+
+        "decide whether target-journal adaptation is needed before final surface polishing",
+
+        "if a journal style profile is used, confirm it came only from readable corpus files and did not change claims or evidence"
+
+      ],
+
+      "outputs": [
+
+        "writing-quality audit",
+
+        "blocking issues",
+
+        "safe polishing suggestions",
+
+        "target-journal adaptation status",
+
+        "style evidence limitations"
+
+      ]
+
+    },
+
+    {
+
+      "id": "humanities_thesis_problem_framing",
+
+      "label": "人文社科论文选题和主线澄清",
+
+      "trigger_signals": [
+
+        "写论文",
+
+        "选题",
+
+        "没有新意",
+
+        "理论和文本脱节",
+
+        "章节逻辑",
+
+        "论文结构",
+
+        "人文论文",
+
+        "学位论文"
+
+      ],
+
+      "required_inputs": [
+
+        "paper_type",
+
+        "research_object",
+
+        "main_confusion_or_problem",
+
+        "available_materials_or_texts",
+
+        "read_literature_or_theory",
+
+        "expected_length_or_target"
+
+      ],
+
+      "required_steps": [
+
+        "ask for missing object, problem, thesis direction, theory, paper type, and expected length before drafting",
+
+        "classify the failure mode as object-without-question, question-without-argument, theory-without-material, scattered-notes, or draft-repair",
+
+        "build a provisional thesis sentence that is arguable, demonstrable, and directional",
+
+        "map theory concepts to specific material evidence instead of starting from abstract theory",
+
+        "route missing literature or citation evidence to evidence-based-literature-workflow"
+
+      ],
+
+      "outputs": [
+
+        "problem-framing card",
+
+        "provisional thesis direction",
+
+        "material-theory fit note",
+
+        "missing literature or evidence blockers"
+
+      ]
+
+    }
+
+  ],
+
+  "section_contracts": [
+
+    {
+
+      "id": "title",
+
+      "label": "标题",
+
+      "section_job": "Make the object, mechanism or relation, scope, and contribution searchable without overclaiming.",
+
+      "move_order": [
+
+        "name the empirical or theoretical object",
+
+        "show the relation or mechanism",
+
+        "declare scope when needed",
+
+        "avoid slogan, metaphor, or unsupported causal promise"
+
+      ],
+
+      "social_science_adaptation": "中文标题可保留概念密度；英文标题优先可检索、短而具体。计算社科标题可以点出方法，但不能让方法掩盖问题。",
+
+      "quality_checks": [
+
+        "searchability",
+
+        "scope clarity",
+
+        "no unsupported causal wording"
+
+      ]
+
+    },
+
+    {
+
+      "id": "abstract",
+
+      "label": "摘要",
+
+      "section_job": "Summarize the problem, gap, material or method, core finding, contribution, and boundary as a mini-paper.",
+
+      "move_order": [
+
+        "context and problem",
+
+        "specific gap",
+
+        "data, material, or method",
+
+        "core finding",
+
+        "contribution and boundary"
+
+      ],
+
+      "social_science_adaptation": "中文摘要可更强调理论问题和研究对象；英文摘要更强调 compact sequence。不得把未核验引用、未完成分析或过度政策含义写进摘要。",
+
+      "quality_checks": [
+
+        "contains problem and gap",
+
+        "contains evidence basis",
+
+        "claim strength matches evidence"
+
+      ]
+
+    },
+
+    {
+
+      "id": "introduction",
+
+      "label": "引言",
+
+      "section_job": "Lead the reader from field-level importance to the exact research gap and the paper's answer.",
+
+      "move_order": [
+
+        "field stake",
+
+        "existing explanation or debate",
+
+        "unresolved gap",
+
+        "this paper's material and method",
+
+        "main finding",
+
+        "contribution and boundary"
+
+      ],
+
+      "social_science_adaptation": "中文社科引言通常更重视问题意识、理论脉络和现实语境；英文高影响期刊引言更重视快速收束。传统量化和质性研究不得把方法技术写成唯一贡献。",
+
+      "quality_checks": [
+
+        "gap is not merely topic absence",
+
+        "contribution is specific",
+
+        "reader can predict the paper's evidence path"
+
+      ]
+
+    },
+
+    {
+
+      "id": "literature_review",
+
+      "label": "文献综述",
+
+      "section_job": "Organize prior work by theoretical problem, mechanism, method, or empirical debate rather than listing papers.",
+
+      "move_order": [
+
+        "define review scope",
+
+        "group literature by problem or mechanism",
+
+        "identify convergence and disagreement",
+
+        "show the missing link",
+
+        "link to the present design"
+
+      ],
+
+      "social_science_adaptation": "中文综述可更完整交代理论谱系；英文综述应更快服务 gap。所有正式引用仍由 evidence-based-literature-workflow 和 writing-reference-capture 接管。",
+
+      "quality_checks": [
+
+        "not paper-by-paper summary",
+
+        "verified references only",
+
+        "explicit link to research design"
+
+      ]
+
+    },
+
+    {
+
+      "id": "methods",
+
+      "label": "方法、数据或材料",
+
+      "section_job": "Explain what evidence is used, why it can answer the question, and what it cannot support.",
+
+      "move_order": [
+
+        "data or material source",
+
+        "case or sample boundary",
+
+        "measurement or coding",
+
+        "model, identification, interpretation, or pipeline",
+
+        "robustness, ethics, and limitations"
+
+      ],
+
+      "social_science_adaptation": "计算社科和方法论文可以借鉴模块化 pipeline；传统量化研究优先解释变量、模型和识别；质性研究优先解释材料、案例选择、编码和解释程序。",
+
+      "quality_checks": [
+
+        "method matches question",
+
+        "measurement validity declared",
+
+        "ethics and access boundary declared"
+
+      ]
+
+    },
+
+    {
+
+      "id": "results",
+
+      "label": "结果",
+
+      "section_job": "Report findings in the order that supports the argument, without drifting into broad discussion.",
+
+      "move_order": [
+
+        "state the specific finding",
+
+        "present the evidence",
+
+        "explain model or material basis",
+
+        "connect to hypothesis or question",
+
+        "reserve broad implications for discussion"
+
+      ],
+
+      "social_science_adaptation": "传统量化结果优先主模型、机制/异质性和稳健性；计算社科结果还要解释指标、误差和模型比较；质性结果应以材料片段和解释链支撑主张。",
+
+      "quality_checks": [
+
+        "results do not over-discuss",
+
+        "evidence is visible",
+
+        "uncertainty is named"
+
+      ]
+
+    },
+
+    {
+
+      "id": "discussion",
+
+      "label": "讨论",
+
+      "section_job": "Explain what the evidence changes in theory, empirical understanding, method, or practice, while naming boundaries.",
+
+      "move_order": [
+
+        "central advance",
+
+        "relationship to prior work",
+
+        "mechanism or interpretation",
+
+        "limitations",
+
+        "future work or implication"
+
+      ],
+
+      "social_science_adaptation": "中文论文可更充分展开理论意义；英文高影响期刊要避免重复结果。没有证据支持时，只能写可能解释或研究启示。",
+
+      "quality_checks": [
+
+        "does not repeat results mechanically",
+
+        "limitations are specific",
+
+        "implications do not exceed evidence"
+
+      ]
+
+    },
+
+    {
+
+      "id": "conclusion",
+
+      "label": "结论",
+
+      "section_job": "Close the paper by restating the bounded answer, contribution, and remaining uncertainty.",
+
+      "move_order": [
+
+        "answer the research question",
+
+        "name contribution",
+
+        "state boundary",
+
+        "close without new evidence"
+
+      ],
+
+      "social_science_adaptation": "中文结论可以适度写现实启示，但不得把启示写成未被证实的政策处方；英文结论保持短而具体。",
+
+      "quality_checks": [
+
+        "no new evidence",
+
+        "bounded answer",
+
+        "no slogan ending"
+
+      ]
+
+    },
+
+    {
+
+      "id": "humanities_thesis_chapter",
+
+      "label": "人文社科论文章节",
+
+      "section_job": "Advance one argumentative step from material evidence to interpretation, then hand a remaining tension to the next chapter.",
+
+      "move_order": [
+
+        "start from a material detail, previous chapter tension, or specific unresolved question",
+
+        "state the chapter claim",
+
+        "analyze quotations, cases, archive items, field materials, or textual details",
+
+        "connect the analysis to the theory concept only after the material is visible",
+
+        "close by naming what this chapter proves and what remains to be explained"
+
+      ],
+
+      "social_science_adaptation": "人文社科章节不能只是平行材料陈列，也不能先铺大段理论背景再找材料套进去。理论是工具，材料是落点；历史背景只能提供语境，不能替代解释。",
+
+      "quality_checks": [
+
+        "research object, question, and thesis direction are visible",
+
+        "theory concept lands on specific material",
+
+        "quotes are followed by analysis",
+
+        "chapter ending creates a real transition"
+
+      ]
+
+    }
+
+  ],
+
+  "polishing_levels": [
+
+    {
+
+      "id": "level_1_argument_repair",
+
+      "label": "论证修复",
+
+      "purpose": "Fix broken logic before sentence-level polish.",
+
+      "actions": [
+
+        "identify missing claim, evidence, explanation, or link",
+
+        "separate result from interpretation",
+
+        "downgrade unsupported causal or novelty claims",
+
+        "mark missing evidence or citation blockers"
+
+      ],
+
+      "blockers": [
+
+        "no core claim",
+
+        "no evidence or material",
+
+        "claim contradicts available data",
+
+        "citation support is unknown"
+
+      ]
+
+    },
+
+    {
+
+      "id": "level_2_paragraph_flow",
+
+      "label": "段落流动",
+
+      "purpose": "Make paragraphs readable while preserving the argument.",
+
+      "actions": [
+
+        "make each paragraph carry one controlling idea",
+
+        "move background before claim only when needed",
+
+        "place evidence next to the claim it supports",
+
+        "add transitions that name logic, not decoration"
+
+      ],
+
+      "blockers": [
+
+        "multiple unrelated claims in one paragraph",
+
+        "paragraph has no evidence",
+
+        "transition hides a logical gap"
+
+      ]
+
+    },
+
+    {
+
+      "id": "level_3_sentence_style",
+
+      "label": "句子和术语",
+
+      "purpose": "Improve precision, density, and readability after logic passes.",
+
+      "actions": [
+
+        "remove empty phrases",
+
+        "keep terms consistent",
+
+        "shorten English sentences when they exceed the reader's working memory",
+
+        "keep Chinese clauses dense but not overloaded"
+
+      ],
+
+      "blockers": [
+
+        "sentence polish changes claim strength",
+
+        "translation changes terminology",
+
+        "language fluency deletes uncertainty or boundary"
+
+      ]
+
+    },
+
+    {
+
+      "id": "level_4_submission_surface",
+
+      "label": "投稿表层检查",
+
+      "purpose": "Check the final surface after evidence, citations, figures, and section logic pass.",
+
+      "actions": [
+
+        "check title, abstract, keywords, captions, and headings together",
+
+        "confirm citations touched by editing go back to writing-reference-capture",
+
+        "confirm figure/table wording matches final evidence",
+
+        "list remaining blockers before optional style preferences",
+
+        "check whether the target journal style profile or target requirement is available when the user requests journal-specific polishing",
+
+        "separate target-journal style improvements from citation, figure, data, and result changes"
+
+      ],
+
+      "blockers": [
+
+        "citation changed without verification",
+
+        "figure or table wording no longer matches its source",
+
+        "target journal or language requirement is unknown",
+
+        "journal-specific polish requested but no target journal, corpus, style profile, or user-approved fallback is available",
+
+        "target-journal style suggestion would alter facts, evidence, results, equations, variables, citations, or author intent"
+
+      ]
+
+    }
+
+  ],
+
+  "output_contract": {
+
+    "quality_gate_report": "logs/quality-gates/writing-quality-report.json",
+
+    "default_outputs": [
+
+      "route and target declaration",
+
+      "revised or drafted manuscript text",
+
+      "claim-evidence-boundary notes",
+
+      "writing-quality checklist result",
+
+      "remaining citation, evidence, or author-input blockers"
+
+    ],
+
+    "optional_outputs": [
+
+      "before-after paragraph map",
+
+      "term glossary",
+
+      "journal-style delta note",
+
+      "Chinese-English reconstruction note",
+
+      "response-letter wording note",
+
+      "long-form project fact manifest",
+
+      "chapter plan",
+
+      "figure/table/formula/reference placeholder map",
+
+      "decisions log",
+
+      "format-sensitive translation note",
+
+      "micro-revision delta log",
+
+      "AI-surface issue log",
+
+      "venue migration checklist",
+
+      "journal adaptation intake card",
+
+      "paper style cards",
+
+      "journal style profile",
+
+      "journal-fit section diagnosis",
+
+      "journal adaptation revision log",
+
+      "locked-items ledger",
+
+      "severity-coded humanization issue ledger",
+
+      "second-pass humanization audit",
+
+      "detector-boundary note"
+
+    ]
+
+  },
+
+  "safety_rules": [
+
+    {
+
+      "id": "no_fabricated_evidence_or_references",
+
+      "rule": "Never invent data, sample size, results, references, DOI, journal status, or source quotations during writing or polishing.",
+
+      "failure_action": "Stop and route the missing item to evidence-based-literature-workflow, citation-verifier, reference-fulltext-acquisition, or user input."
+
+    },
+
+    {
+
+      "id": "no_universal_nature_default",
+
+      "rule": "Nature-style English journal writing is a selectable craft preset, not the default for Chinese journals, CSSCI work, or all social-science manuscripts.",
+
+      "failure_action": "Re-declare the target language and discipline, then rerun the section contract."
+
+    },
+
+    {
+
+      "id": "no_stem_default_for_social_science",
+
+      "rule": "STEM method-module or wet-lab conventions cannot override humanities and social-science theory, evidence, interpretation, ethics, and citation rules.",
+
+      "failure_action": "Switch to the proper discipline target and explain which upstream pattern was rejected."
+
+    },
+
+    {
+
+      "id": "no_sentence_polish_over_broken_logic",
+
+      "rule": "If the paragraph lacks a claim, evidence, explanation, or boundary, the system must repair or report the logic issue before sentence polishing.",
+
+      "failure_action": "Return a blocking logic diagnosis instead of a polished but misleading text."
+
+    },
+
+    {
+
+      "id": "citation_capture_when_references_touched",
+
+      "rule": "When polishing adds, removes, reorders, or changes citation-bearing claims, writing-reference-capture and citation evidence rules remain mandatory.",
+
+      "failure_action": "Send the changed citation claims to writing-reference-capture before final delivery."
+
+    },
+
+    {
+
+      "id": "no_auto_thesis_studio_for_ordinary_papers",
+
+      "rule": "Chinese thesis-style DOCX manifest, placeholder, and template-writeback workflows are explicit opt-in patterns; do not auto-trigger them for ordinary manuscript drafting, journal polishing, or simple Word export.",
+
+      "failure_action": "Stay in manuscript-writing-studio or research-docx-export unless the user explicitly asks for a thesis-studio workflow."
+
+    },
+
+    {
+
+      "id": "no_prompt_template_overrides_contracts",
+
+      "rule": "External prompt templates can provide wording and workflow patterns, but they must not override local citation verification, figure/table gates, social-science writing standards, or submission-package freeze checks.",
+
+      "failure_action": "Treat the prompt as an adapter pattern only, then rerun the local manuscript, evidence, figure, or package contract."
+
+    },
+
+    {
+
+      "id": "no_theory_material_forced_fit",
+
+      "rule": "Humanities and interpretive social-science writing must not force a fashionable theory onto materials before a concrete research object, problem, and material tension are visible.",
+
+      "failure_action": "Return to the humanities thesis intake, restate the material evidence, and rebuild the theory-material fit note."
+
+    },
+
+    {
+
+      "id": "no_metadata_only_literature_analysis",
+
+      "rule": "A paper's argument, evidence, quotation, or limitation cannot be analyzed from title, abstract, keyword, citation count, or search-result metadata alone.",
+
+      "failure_action": "Mark the source as candidate-only or metadata-only, then route full-text acquisition or structured reading before using it in the manuscript."
+
+    },
+
+    {
+
+      "id": "no_unread_corpus_style_extraction",
+
+      "rule": "Target-journal style extraction can use only fully readable full-text corpus files; title, abstract, metadata, partial OCR, failed conversion, or search-result snippets cannot support a journal style profile.",
+
+      "failure_action": "Mark the corpus item as excluded or candidate-only, then ask for readable text, replace the paper, or proceed with an explicit user-approved fallback."
+
+    },
+
+    {
+
+      "id": "no_journal_style_over_claim_integrity",
+
+      "rule": "Target-journal style evidence may change framing, order, emphasis, transitions, and register, but must not alter manuscript facts, evidence, citations, results, equations, variables, figures, tables, or author decisions.",
+
+      "failure_action": "Stop the revision, report the conflict, and route the affected claim, citation, result, or figure/table wording to the proper local gate before continuing."
+
+    },
+
+    {
+
+      "id": "no_detector_metric_as_goal",
+
+      "rule": "AIGC, detector, or similarity numbers cannot become the manuscript objective. The local target is rigorous, authorial, evidence-faithful academic prose that preserves facts, data, citations, variables, estimates, uncertainty, limitations, and author intent.",
+
+      "failure_action": "Reframe the request as academic writing-quality cleanup and report detector-related concerns only as non-guaranteed external signals."
+
+    },
+
+    {
+
+      "id": "no_fake_human_noise",
+
+      "rule": "Do not add typos, colloquial fillers, false uncertainty, decorative synonyms, emotional noise, or artificial imperfection to make academic prose appear human.",
+
+      "failure_action": "Remove the noise and return to claim-preserving academic surface cleanup."
+
+    }
+
+  ]
+
+}

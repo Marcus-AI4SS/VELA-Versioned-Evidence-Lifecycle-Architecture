@@ -2,171 +2,131 @@
   <img src="./docs/assets/brand/vela-workflow-mark.png" alt="VELA 分层帆形标志" width="132">
   <h1>VELA</h1>
   <p><strong>Versioned Evidence Lifecycle Architecture</strong></p>
-  <p><em>面向 Codex 科研工作的便携式项目工作包</em></p>
+  <p><em>面向 Codex 研究项目的便携式工作流包</em></p>
   <p>
     <a href="./README.md">English</a>
     · <a href="https://marcus-ai4ss.github.io/VELA/">Pages</a>
     · <a href="./docs/getting-started.md">快速开始</a>
+    · <a href="./docs/installation.md">安装</a>
     · <a href="./docs/imports/vela-helm-interface.md">HELM 接口</a>
-    · <a href="./docs/workflow-core.md">工作流核心</a>
-    · <a href="./docs/evidence-lifecycle.md">证据生命周期</a>
-    · <a href="./docs/quality-checks.md">质量检查</a>
+    · <a href="./docs/faq.md">FAQ</a>
   </p>
 </div>
 
-VELA = **Versioned Evidence Lifecycle Architecture**。它给 Codex 一个有边界、证据感知、可复核的科研任务操作层，封装项目结构、`AGENTS.md` 指令、Codex 交接合约、证据台账、验证报告和 HELM 可读状态。
+VELA 给 Codex 一个文件化的研究工作流：项目目录、`AGENTS.md` 规则、schema 校验的交接包、证据台账、主张检查、验证报告、隐私扫描，以及 HELM 可读取的本地上下文文件。
 
-它不是桌面 app，不是聊天界面，不是论文生成器，也不是隐藏自动执行的 agent。VELA 准备有边界的任务，Codex 执行，用户复核；[HELM](https://github.com/Marcus-AI4SS/HELM) 是可选的 Hub for Evidence, Logs & Monitoring，可以读取同一套项目状态。
+当你希望 Codex 在清楚的项目边界里工作，而不是依赖零散聊天记录时，可以使用 VELA。它不是桌面 app、论文生成器、文献管理器或后台自动化服务。
 
-## 本地科研环境发行版
+VELA 的底层方法论来自工程控制论：每个研究项目都显式记录目标、状态、反馈信号、验证门和可回滚的校正循环。
 
-`research-stack/local-environment/` 是对当前本地 Codex 科研环境的近 1:1 脱敏复刻发行版，包含研究路由、工程控制论控制核、七层环境治理、记忆规则、工作流目录、MCP/profile 模板、validators、tests、envctl 模块、公开科研 skills 和工具链清单。
+## VELA 提供什么
 
-它明确排除桌面 app 开发链和蒸馏/学者面板链，也不包含浏览器登录态、cookies、密钥、缓存、生成物或个人绝对路径。`vela local-env install` 会把公开科研 skills 安装到 `CODEX_HOME/skills`，把 contracts、schemas、profiles 和 envctl runtime 放到 `VELA_HOME/research-stack/local-environment`，并创建 `envctl` 入口。`vela init` 仍只负责初始化单个研究项目。
+| 层级 | 内容 |
+| --- | --- |
+| 项目结构 | `materials/`、`evidence/`、`claims/`、`methods/`、`deliverables/`、`handoffs/`、`logs/`、`.codex/`、`.vela/context.json` |
+| Codex 指令 | 根目录和目录级 `AGENTS.md`、命令模板、有边界的 handoff prompt |
+| 证据工作流 | 材料收集、证据提升、主张链接、交付物复核分开处理 |
+| 治理模型 | 工程控制论式目标、状态、反馈、验证门和校正循环 |
+| 验证检查 | JSON Schema、handoff lint、项目验证、隐私扫描、分享前检查 |
+| 可选运行层 | 安装到用户自己 Codex 环境里的公开 research skills、route profiles、validators 和 `envctl` 工具 |
+| HELM 联动 | 写出 `vela.project.context.v1`，让 HELM 读取项目状态，但不依赖 HELM |
 
-## 环境配置要求
+## 快速开始
 
-VELA 的目标是让别人 clone 仓库后尽量接近“一键配置”，但它只能自动安装公开、可再分发、可由用户本机确认的工具。全新 Windows 机器建议先运行 `.\install.ps1 -BootstrapTools`；macOS 用户建议运行 `sh ./install-macos.sh`，它会通过 Homebrew 补齐公开工具链；已有工具链的机器可以直接运行对应平台的安装脚本。
+按平台选择安装方式：
 
-| 组件 | 用途 | VELA 当前行为 |
-| --- | --- | --- |
-| Git | clone、仓库审计、发布工作流 | Windows 用 `winget`；macOS 用 Homebrew |
-| Python 3.13+ | VELA CLI、validators、envctl、schema 检查 | 安装脚本运行前必须可用；Windows 用 `winget`；macOS 用 Homebrew |
-| PowerShell 7 (`pwsh`) | 跨平台 runtime 脚本 | Windows 用 `winget`；macOS 用 Homebrew |
-| ripgrep (`rg`) | 快速搜索、隐私扫描、仓库检查 | Windows 用 `winget`；macOS 用 Homebrew |
-| Node.js LTS / npm | 可选 JS 工具、agentmemory 安装路径 | Windows 用 `winget`；macOS 用 Homebrew |
-| GitHub CLI (`gh`) | 可选 GitHub 仓库和发布检查 | Windows 用 `winget`；macOS 用 Homebrew |
-| agentmemory | 可选本地记忆管理 runtime | 检查并可用 npm 安装工具本体；绝不导出记忆数据 |
-| CodeGraph | 可选项目级代码索引 | 只检查/引导；每个项目需要单独初始化索引 |
-| MCP servers | Codex 可选工具 profile | 只提供 profile、doctor 和配置检查；凭据留在用户本机 |
-| Codex 插件 | Browser、GitHub、Superpowers、Research Autopilot 等能力 | 由用户在 Codex runtime 中安装；VELA 不分发插件缓存 |
-| Zotero / Obsidian / 浏览器登录 / CNKI 会话 | 可选外部研究工作流 | 绝不复制，只说明边界并做 doctor 检查 |
+| 平台 | 命令 |
+| --- | --- |
+| Windows | `.\install.ps1 -BootstrapTools` |
+| macOS | `sh ./install-macos.sh` |
+| Linux / shell | `sh ./install.sh --bootstrap-tools` |
 
-`.\install.ps1` 默认只安装 VELA 自己能公开发行的部分：公开 research skills、contracts、schemas、catalog、profiles、validators、tests、envctl 模块、工具链清单和 shim。它不会把你的插件缓存、登录态、私有记忆库、Zotero 数据库或 Obsidian vault 复制给别人。
-
-其他用户安装后也会形成两层结构：clone 下来的 `vela/` 是源包；本机运行态默认安装到 `~/.codex` 和 `~/.vela`。`CODEX_HOME` 和 `VELA_HOME` 可以覆盖目标目录。
-
-## 五分钟开始
+Windows 示例：
 
 ```powershell
 git clone https://github.com/Marcus-AI4SS/VELA.git vela
 cd vela
 .\install.ps1 -BootstrapTools
-.\vela.ps1 local-env doctor
-.\vela.ps1 local-env bootstrap-tools --include all
 .\vela.ps1 init ..\my-research-project --skip-codex-trust
 cd ..\my-research-project
 ..\vela\vela.ps1 handoff new --template claim-check
 ..\vela\vela.ps1 handoff lint handoffs\H001.yaml
+..\vela\vela.ps1 handoff render handoffs\H001.yaml --out handoffs\H001.prompt.md
 ..\vela\vela.ps1 validate . --repair-context
 ..\vela\vela.ps1 privacy scan .
 ```
 
-macOS：
+macOS 示例：
 
 ```bash
 git clone https://github.com/Marcus-AI4SS/VELA.git vela
 cd vela
 sh ./install-macos.sh
-~/.vela/bin/vela local-env doctor-runtime --include core,automation,toolchain
+~/.vela/bin/vela init ../my-research-project --skip-codex-trust
 ```
 
-生成的项目会包含 `materials/`、`evidence/`、`claims/`、`methods/`、`deliverables/`、`handoffs/`、`logs/`、`.codex/` 和 `.vela/context.json`。
+## 环境要求
 
-## VELA 帮你解决什么
+VELA 推荐安装这些公开工具：
 
-| 需求 | VELA 提供什么 |
+| 组件 | 用途 |
 | --- | --- |
-| 启动项目时不丢结构 | 给研究问题、范围、来源和预期交付物一个清楚位置 |
-| 保持证据诚实 | 区分已收集材料和已核验证据的生命周期 |
-| 和 Codex 协作但不失控 | 交接提示必须说明任务、文件、约束、预期输出和已知缺口 |
-| 接入 HELM | 通过 `.vela/context.json` 暴露 `vela.project.context.v1` |
-| 准备可分享产物 | 在交付物离开项目之前暴露无支持主张和私人材料风险 |
+| Git | clone 和更新 VELA |
+| Python 3.13+ | 运行 CLI、validators 和 schema checks |
+| PowerShell 7 / POSIX shell | 运行跨平台辅助脚本 |
+| ripgrep | 快速搜索和隐私扫描 |
+| Node.js / npm | 可选 JavaScript 工具 |
+| GitHub CLI | 可选仓库检查 |
+| agentmemory、CodeGraph、MCP servers、Codex plugins、Zotero、Obsidian | 可选集成；VELA 只做检测和配置提示，用户数据与凭据留在本机 |
 
-## 工作流分层
+安装后通常有两层：
 
-| 层级 | 放什么 | 不要混同为 |
-| --- | --- | --- |
-| Materials | DOI、URL、文件、数据集、笔记、截图 | 证据 |
-| Evidence | 带来源、访问时间、核验状态、伦理或权利说明的材料 | 阅读清单 |
-| Claims | 候选主张和已有支持的主张 | 最终发现 |
-| Methods | 假设、编码规则、分析计划、可复现说明 | 结果 |
-| Deliverables | 报告、简报、图表、状态说明 | 原始项目状态 |
-| Handoffs | 给 Codex 或合作者的有边界任务 | 整个项目外包 |
+| 位置 | 作用 |
+| --- | --- |
+| clone 下来的 `vela/` 仓库 | 可用 Git 更新的源包 |
+| `~/.vela` 和 `~/.codex` | 本机运行入口、安装回执、skills 和检查结果 |
 
-## 一个合格的 Codex 交接
+## 核心命令
 
-```yaml
-schema_version: vela.codex.handoff.v1
-handoff_id: H001
-created_at: "2026-05-05T00:00:00Z"
-created_by: human
-surface: cli
-mode: review_only
-scope:
-  task: 检查某个 claim 是否被指定 evidence 支持
-  relevant_files:
-    - claims/C001.md
-    - evidence/E001.yaml
-constraints:
-  - 不新增主张
-expected_output:
-  format: markdown
-  path: logs/codex-runs/H001-result.md
-review_standard:
-  - 每个支撑判断必须指向 evidence_id
-completion:
-  validation_commands:
-    - vela handoff lint handoffs/H001.yaml
-  human_review_required: true
+```bash
+vela init <project>
+vela doctor
+vela handoff new --template claim-check
+vela handoff lint handoffs/H001.yaml
+vela handoff render handoffs/H001.yaml --out handoffs/H001.prompt.md
+vela validate <project> --repair-context
+vela privacy scan <project>
 ```
-
-交接应该足够小，并且必须通过 schema 校验。Codex 需要获得完成任务所需的上下文，而不是获得重写整个项目的开放授权。
 
 ## VELA 与 HELM
 
-| 产品 | 角色 | 能否独立存在 |
-| --- | --- | --- |
-| **VELA** = Versioned Evidence Lifecycle Architecture | 便携式项目实验室、工作流边界和 Codex 工作包 | 可以 |
-| **HELM** = Hub for Evidence, Logs & Monitoring | 展示状态、证据、日志、文件、本地检查和 Codex 说明的本地看板 | 可以 |
+VELA 和 HELM 是两个独立产品，共享显式文件接口。
 
-只需要可移植工作流时，单独使用 VELA。需要本地可视化看板时，再接入 HELM。
+| 产品 | 角色 |
+| --- | --- |
+| VELA | 创建并验证可携带的研究工作流包 |
+| HELM | 读取本地项目状态，并以桌面看板展示 |
 
-共享导入契约有两个方向：
-
-- `vela.project.context.v1`：VELA 暴露项目状态，供 HELM 读取。
-- `helm.codex.handoff.v1`：HELM 准备有边界的 Codex 交接包，供用户复制回 Codex；只有在用户显式保存或导出时，VELA 才应把它存入项目。
-
-见 [VELA 与 HELM 导入接口](./docs/imports/vela-helm-interface.md)。
-
-## 继续阅读
-
-- [快速开始](./docs/getting-started.md)
-- [Codex wrapper contract](./docs/codex-wrapper.md)
-- [工作流核心](./docs/workflow-core.md)
-- [项目结构](./docs/architecture.md)
-- [证据生命周期](./docs/evidence-lifecycle.md)
-- [质量检查](./docs/quality-checks.md)
-- [Handoff contract](./docs/handoff-contract.md)
-- [公共导出](./docs/public-export.md)
-- [VELA 与 HELM 导入接口](./docs/imports/vela-helm-interface.md)
-- [使用场景](./docs/use-cases.md)
-- [可选集成](./docs/integrations.md)
-- [FAQ](./docs/faq.md)
+VELA 写出 `.vela/context.json`，schema 为 `vela.project.context.v1`。HELM 可以读取它，并准备 `helm.codex.handoff.v1` 交接说明。两者可以单独使用，也可以组合使用。
 
 ## 仓库结构
 
 | 路径 | 用途 |
 | --- | --- |
-| `docs/` | 公开文档、GitHub Pages 和确认后的视觉资产 |
-| `docs/imports/` | VELA 与 HELM 的导入契约 |
-| `docs/sync-log/` | 本地跨仓同步记录 |
-| `research-stack/local-environment/` | 近 1:1 的本地科研环境脱敏发行版，排除桌面 app 和蒸馏链 |
-| `archive/legacy-research-stack/` | 历史私有环境资产，不再属于 VELA runtime |
-| `examples/` | 可检查的最小项目和快速演示 |
-| `package/` | `vela init` 复制到研究项目里的 starter package |
-| `package/.vela/initializer-manifest.json` | 默认项目目录和文件的 schema-driven 初始化清单 |
-| `schemas/` | context、handoff、initializer 和 validation 的机器可读 schema |
-| `scripts/` | CLI、schema-driven 初始化、验证和本地维护辅助脚本 |
-| `skills/` | 公开 VELA Codex skill 入口 |
-| `tests/` | runtime contract 测试 |
+| `package/` | `vela init` 复制到项目里的 starter files |
+| `runtime/` | 可选 VELA runtime：公开 skills、profiles、validators、schemas 和辅助脚本 |
+| `schemas/` | context、handoff、initializer、runtime、validation 的机器可读契约 |
+| `scripts/` | VELA CLI 和产品脚本 |
+| `skills/` | 轻量 VELA skill 入口 |
+| `examples/` | 最小项目和 demo handoff |
+| `docs/` | 公开文档和 GitHub Pages |
+| `tests/` | 产品契约测试 |
+
+## 继续阅读
+
+- [快速开始](./docs/getting-started.md)
+- [安装说明](./docs/installation.md)
+- [工作流核心](./docs/workflow-core.md)
+- [证据生命周期](./docs/evidence-lifecycle.md)
+- [Handoff contract](./docs/handoff-contract.md)
+- [VELA 与 HELM 接口](./docs/imports/vela-helm-interface.md)

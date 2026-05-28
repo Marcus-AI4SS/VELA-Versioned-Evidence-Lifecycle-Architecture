@@ -1,5 +1,9 @@
 entries:
+
   - id: seed-001
+
     type: note
+
     status: planned
+
     source: research-map.md
