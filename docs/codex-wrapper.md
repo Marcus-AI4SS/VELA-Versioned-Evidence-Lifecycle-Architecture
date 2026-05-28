@@ -24,7 +24,7 @@ The center of VELA is the Codex handoff packet plus the files that make the hand
 
 - `logs/quality-gates/` and `logs/project-state/` keep project status inspectable.
 
-- `.vela/context.json` exposes the current state to HELM and other readers.
+- `.vela/context.json` exposes the current state to documented local readers.
 
 
 
@@ -62,7 +62,7 @@ VELA defaults to rendering prompts and validation reports. It should not silentl
 
 | Audit | Preserve logs, quality reports, prompts, and human-review records |
 
-| HELM interface | Write `.vela/context.json` for read-only dashboard import |
+| Machine context | Write `.vela/context.json` for read-only local import |
 
 
 

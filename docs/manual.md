@@ -1,95 +1,118 @@
 # VELA Manual
 
-Updated: 2026-04-26
+Updated: 2026-05-28
 
-VELA is a portable research workflow environment for Codex. It is a file-based working method, not a desktop app and not an automation service.
+VELA, Versioned Evidence Lifecycle Architecture, is a portable Codex workflow package for evidence-based research projects. It gives each project readable folders, `AGENTS.md` rules, schema-checked handoffs, evidence and claim ledgers, validation reports, privacy scans, runtime logs, and governed memory/evolution loops.
 
-## What VELA Is
+VELA is not a desktop app, paper generator, citation manager, or background automation service. Its operating model is engineering cybernetics: objectives, state, feedback, validation, and correction must be visible in files, checks, and version history.
 
-VELA gives a research project a stable structure before work spreads across conversations, notes, files, references, datasets, and deliverables.
+![VELA engineering cybernetics and seven-layer structure](./assets/overview/01-engineering-cybernetics-seven-layers.png)
+
+## What VELA Does
+
+| Problem | VELA response |
+| --- | --- |
+| Research context gets lost across chats and files | Project `AGENTS.md`, handoffs, logs, and `.vela/context.json` preserve bounded state |
+| Raw material is mistaken for evidence | `materials/` and `evidence/` stay separate |
+| Claims cannot be traced | `claims/` records support relations |
+| Tools drift over time | Runtime doctor checks installed tools and optional integrations |
+| Memory becomes uncontrolled | Memory is only a candidate signal; durable rules require validation, tests, and commits |
+
+## Seven Layers
+
+![VELA architecture](./assets/overview/02-vela-architecture.png)
+
+| Layer | Purpose |
+| --- | --- |
+| 01 Task and boundary | Define objectives, scope, constraints, and review standard |
+| 02 Tools and interfaces | Connect Git, Python, MCP servers, agentmemory, CodeGraph, Zotero, Obsidian, and other user-owned tools |
+| 03 Context and evidence | Separate materials, evidence, claims, methods, and deliverables |
+| 04 Research stage | Keep design, literature, reading, writing, figures, and review as visible stages |
+| 05 Runtime logs | Capture operations, failures, checks, and repairs |
+| 06 Reliability checks | Run schemas, validators, tests, privacy scans, and handoff linting |
+| 07 Environment governance | Decide which rules can persist through versioned commits |
+
+## Install
+
+| Platform | Command |
+| --- | --- |
+| Windows | `.\install.ps1 -BootstrapTools` |
+| macOS | `sh ./install-macos.sh` |
+| Linux / shell | `sh ./install.sh --bootstrap-tools` |
+
+Windows:
+
+```powershell
+git clone https://github.com/Marcus-AI4SS/VELA.git vela
+cd vela
+.\install.ps1 -BootstrapTools
+.\vela.ps1 doctor
+```
+
+macOS:
+
+```bash
+git clone https://github.com/Marcus-AI4SS/VELA.git vela
+cd vela
+sh ./install-macos.sh
+~/.vela/bin/vela doctor
+```
+
+VELA normally has two layers: the cloned source package and the local runtime under the user's `~/.vela` and `~/.codex`. User accounts, browser sessions, credentials, Zotero libraries, and private data remain outside VELA.
+
+## Use
+
+![VELA usage roadmap](./assets/overview/04-vela-usage-roadmap.png)
+
+```bash
+vela init my-research-project --skip-codex-trust
+cd my-research-project
+vela handoff new --template claim-check
+vela handoff lint handoffs/H001.yaml
+vela handoff render handoffs/H001.yaml --out handoffs/H001.prompt.md
+vela validate . --repair-context
+vela privacy scan .
+```
+
+## Memory And Evolution
+
+![VELA memory and self-evolution governance](./assets/overview/03-memory-evolution-governance.png)
+
+VELA can turn runtime logs, handoffs, evidence ledgers, and tool feedback into candidate improvements. It does not allow memory to become source-of-truth by itself. Durable rules must pass schema checks, validators, tests, human review, and versioned commits.
+
+## Project Structure
 
 ```text
 my-research-project/
+  AGENTS.md
   materials/
   evidence/
   claims/
   methods/
   deliverables/
   handoffs/
+  logs/
+  .codex/
+  .vela/context.json
 ```
 
-Use those folders as working boundaries:
+## Common Commands
 
-- `materials/`: collected sources, files, URLs, screenshots, datasets, notes.
-- `evidence/`: verified material with source, access time, status, and rights or ethics notes.
-- `claims/`: candidate claims and supported claims.
-- `methods/`: assumptions, coding rules, analysis plans, reproducibility notes.
-- `deliverables/`: reports, briefs, tables, figures, status notes.
-- `handoffs/`: bounded tasks for Codex or collaborators.
+| Goal | Command |
+| --- | --- |
+| Check runtime | `vela doctor` |
+| Initialize project | `vela init <project>` |
+| Create handoff | `vela handoff new --template claim-check` |
+| Lint handoff | `vela handoff lint handoffs/H001.yaml` |
+| Render Codex prompt | `vela handoff render handoffs/H001.yaml --out handoffs/H001.prompt.md` |
+| Validate project | `vela validate <project> --repair-context` |
+| Privacy scan | `vela privacy scan <project>` |
+| Install runtime | `vela runtime install --include core,automation,toolchain` |
 
-## What VELA Is Not
+## Boundaries
 
-- Not a chat interface.
-- Not the HELM local board app.
-- Not a black-box paper generator.
-- Not a promise that unverified material is evidence.
-
-## First Use
-
-Clone or download the public repository:
-
-```powershell
-git clone REPOSITORY_URL vela
-cd vela
-```
-
-`REPOSITORY_URL` is the URL of the VELA repository you are viewing. If the GitHub repository has been renamed, use the new URL shown in the browser.
-
-Create your research project folder next to the VELA package, not inside a public copy of the repository.
-
-## Evidence Discipline
-
-A material becomes evidence only after the project records:
-
-- source locator;
-- access time;
-- verification status;
-- rights or ethics note;
-- claim supported;
-- explanation of how it supports that claim.
-
-This distinction is the main reason VELA exists. It prevents a reading list, a screenshot folder, or a model summary from being treated as verified evidence.
-
-## Codex Handoff Template
-
-Use a small handoff before asking Codex to work:
-
-```markdown
-Task:
-Relevant files:
-Constraints:
-Expected output:
-Known gaps:
-Review standard:
-```
-
-The handoff should be narrow enough that a reviewer can tell whether Codex stayed inside scope.
-
-## Relationship To HELM
-
-VELA and HELM are separate products:
-
-| Product | Role | Can stand alone? |
-| --- | --- | --- |
-| VELA | Versioned Evidence Lifecycle Architecture | Yes |
-| HELM | Hub for Evidence, Logs & Monitoring | Yes |
-
-HELM can later read VELA project state for status, evidence, deliverables, environment health, and handoff readiness. VELA remains usable without HELM.
-
-## Repository Areas
-
-- `docs/`: public documentation and Pages site.
-- `docs/assets/brand/`: approved visual assets.
-- `examples/`: small project examples.
-- `scripts/`: setup and validation helpers.
-- `skills/`: Codex skill, profile, schema, and template layer used by the workflow package.
+- VELA generates structure, prompts, contracts, and checks.
+- VELA does not run `codex exec` by default.
+- VELA does not copy browser sessions, cookies, credentials, private libraries, or user data.
+- Doctor checks distinguish installed, missing, optional, and user-configured tools.
+- Memory provides candidate signals; schemas, validators, tests, and Git commits decide durable rules.

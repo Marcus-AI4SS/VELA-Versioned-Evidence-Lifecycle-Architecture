@@ -1,161 +1,129 @@
 <!doctype html>
-
 <html lang="en">
-
   <head>
-
     <meta charset="utf-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>VELA Manual</title>
-
-    <meta name="description" content="A concise manual for VELA, the portable research workflow environment for Codex.">
-
+    <meta name="description" content="VELA product guide and user manual.">
     <link rel="stylesheet" href="./assets/site.css">
-
   </head>
-
   <body>
-
     <main class="page-shell">
-
       <div class="topbar">
-
-        <div class="brand"><span class="brand-mark"></span><span>VELA</span></div>
-
+        <a class="brand" href="./"><span class="brand-mark"></span><span>VELA</span></a>
         <div class="lang-switch">
-
           <span class="active">English</span>
-
           <a href="./zh/manual.html">简体中文</a>
-
         </div>
-
       </div>
 
-
-
-      <section class="hero">
-
+      <section class="hero compact">
         <div>
-
-          <div class="eyebrow">Manual</div>
-
-          <h1>Use files as research state.</h1>
-
-          <p>VELA keeps materials, evidence, claims, methods, deliverables, and Codex handoffs separate enough to review. It is a workflow package, not a desktop app.</p>
-
+          <div class="eyebrow">Product guide · Updated 2026-05-28</div>
+          <h1><span class="sans">VELA</span> Manual</h1>
+          <p>VELA is a portable Codex workflow package for evidence-based research projects. It turns objectives, state, feedback, validation, correction, memory, and evolution into reviewable project files.</p>
           <div class="hero-actions">
-
-            <a class="button button-primary" href="./getting-started.html">Get Started</a>
-
-            <a class="button" href="./workflow-core.md">Workflow Core</a>
-
+            <a class="button button-primary" href="./installation.html">Install</a>
+            <a class="button" href="./getting-started.html">Getting started</a>
+            <a class="button" href="./manual.md">Markdown</a>
           </div>
-
         </div>
-
-        <div class="hero-visual">
-
-          <img src="./assets/brand/vela-helm-relationship-board-reference.png" alt="VELA and HELM relationship board">
-
-        </div>
-
       </section>
 
+      <section class="section wide-visual">
+        <img src="./assets/overview/01-engineering-cybernetics-seven-layers.png" alt="VELA engineering cybernetics and seven-layer structure">
+      </section>
 
+      <section class="section grid-3">
+        <article class="card"><h3>What VELA is</h3><p>A file-based workflow wrapper for Codex research projects: project folders, rules, handoffs, evidence ledgers, checks, and runtime logs.</p></article>
+        <article class="card"><h3>What VELA is not</h3><p>Not a desktop app, paper generator, citation manager, hidden automation service, or replacement for user-owned tools and data.</p></article>
+        <article class="card"><h3>Operating logic</h3><p>Engineering cybernetics: objectives, state, feedback, validation, and correction remain visible in files and version history.</p></article>
+      </section>
 
       <section class="section">
-
         <div class="section-head">
-
-          <h2>Project Shape</h2>
-
-          <p>Start with a readable folder structure. Keep private project data outside public repository copies.</p>
-
+          <h2>Seven Layers</h2>
+          <p>VELA separates research work so that tools, evidence, logs, validation, and durable rules do not collapse into one opaque process.</p>
         </div>
+        <table>
+          <tr><th>Layer</th><th>Purpose</th></tr>
+          <tr><td>01 Task and boundary</td><td>Define objectives, scope, constraints, and review standard.</td></tr>
+          <tr><td>02 Tools and interfaces</td><td>Connect Git, Python, MCP servers, agentmemory, CodeGraph, Zotero, Obsidian, and other user-owned tools.</td></tr>
+          <tr><td>03 Context and evidence</td><td>Separate materials, evidence, claims, methods, and deliverables.</td></tr>
+          <tr><td>04 Research stage</td><td>Keep design, literature, reading, writing, figures, and review as visible stages.</td></tr>
+          <tr><td>05 Runtime logs</td><td>Capture operations, failures, checks, and repairs.</td></tr>
+          <tr><td>06 Reliability checks</td><td>Run schemas, validators, tests, privacy scans, and handoff linting.</td></tr>
+          <tr><td>07 Environment governance</td><td>Decide which rules can persist through versioned commits.</td></tr>
+        </table>
+      </section>
 
+      <section class="section wide-visual">
+        <img src="./assets/overview/02-vela-architecture.png" alt="VELA architecture">
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>Install</h2>
+          <p>VELA normally has two layers: the cloned source package and a local runtime under the user's <code>~/.vela</code> and <code>~/.codex</code>.</p>
+        </div>
         <div class="grid-3">
-
-          <article class="card"><h3>Materials</h3><p>Collected sources, URLs, files, screenshots, datasets, and notes.</p></article>
-
-          <article class="card"><h3>Evidence</h3><p>Verified material with source, access time, status, and rights or ethics notes.</p></article>
-
-          <article class="card"><h3>Claims</h3><p>Candidate and supported statements that must remain linked to evidence.</p></article>
-
-          <article class="card"><h3>Methods</h3><p>Assumptions, coding rules, analysis plans, and reproducibility notes.</p></article>
-
-          <article class="card"><h3>Deliverables</h3><p>Reports, briefs, tables, figures, and status notes.</p></article>
-
-          <article class="card"><h3>Handoffs</h3><p>Bounded tasks for Codex or collaborators with constraints and known gaps.</p></article>
-
+          <article class="card"><h3>Windows</h3><pre>git clone https://github.com/Marcus-AI4SS/VELA.git vela
+cd vela
+.\install.ps1 -BootstrapTools
+.\vela.ps1 doctor</pre></article>
+          <article class="card"><h3>macOS</h3><pre>git clone https://github.com/Marcus-AI4SS/VELA.git vela
+cd vela
+sh ./install-macos.sh
+~/.vela/bin/vela doctor</pre></article>
+          <article class="card"><h3>Linux / shell</h3><pre>git clone https://github.com/Marcus-AI4SS/VELA.git vela
+cd vela
+sh ./install.sh --bootstrap-tools
+vela doctor</pre></article>
         </div>
-
       </section>
 
-
+      <section class="section wide-visual">
+        <img src="./assets/overview/04-vela-usage-roadmap.png" alt="VELA usage roadmap">
+      </section>
 
       <section class="section">
+        <div class="section-head"><h2>Common Commands</h2></div>
+        <table>
+          <tr><th>Goal</th><th>Command</th></tr>
+          <tr><td>Check runtime</td><td><code>vela doctor</code></td></tr>
+          <tr><td>Initialize project</td><td><code>vela init &lt;project&gt;</code></td></tr>
+          <tr><td>Create handoff</td><td><code>vela handoff new --template claim-check</code></td></tr>
+          <tr><td>Lint handoff</td><td><code>vela handoff lint handoffs/H001.yaml</code></td></tr>
+          <tr><td>Render prompt</td><td><code>vela handoff render handoffs/H001.yaml --out handoffs/H001.prompt.md</code></td></tr>
+          <tr><td>Validate project</td><td><code>vela validate &lt;project&gt; --repair-context</code></td></tr>
+          <tr><td>Privacy scan</td><td><code>vela privacy scan &lt;project&gt;</code></td></tr>
+        </table>
+      </section>
 
-        <div class="section-head">
+      <section class="section wide-visual">
+        <img src="./assets/overview/03-memory-evolution-governance.png" alt="VELA memory and self-evolution governance">
+      </section>
 
-          <h2>Codex Handoff</h2>
-
-          <p>Keep prompts narrow enough that review is possible.</p>
-
-        </div>
-
+      <section class="section grid-2">
         <article class="card">
-
-          <pre><code>Task:
-
-Relevant files:
-
-Constraints:
-
-Expected output:
-
-Known gaps:
-
-Review standard:</code></pre>
-
+          <h3>Memory Boundary</h3>
+          <ul class="guide-list">
+            <li>Runtime logs, handoffs, evidence ledgers, and tool feedback become candidate signals.</li>
+            <li>agentmemory can recall preferences and prior experience.</li>
+            <li>Memory cannot become source-of-truth by itself.</li>
+          </ul>
         </article>
-
+        <article class="card">
+          <h3>Evolution Boundary</h3>
+          <ul class="guide-list">
+            <li>Durable rules require schema checks, validators, tests, review, and commits.</li>
+            <li>VELA does not copy browser sessions, credentials, private libraries, or user data.</li>
+            <li>Doctor checks distinguish installed, missing, optional, and user-configured tools.</li>
+          </ul>
+        </article>
       </section>
 
-
-
-      <section class="section">
-
-        <div class="section-head">
-
-          <h2>VELA And HELM</h2>
-
-          <p>VELA can run alone. HELM can later read the same project state as an optional local board.</p>
-
-        </div>
-
-        <div class="grid-2">
-
-          <article class="card"><h3>VELA</h3><p>Portable research workflow environment for Codex.</p></article>
-
-          <article class="card"><h3>HELM</h3><p>Local board for status, evidence, deliverables, environment health, and handoff readiness.</p></article>
-
-        </div>
-
-      </section>
-
-
-
-      <div class="footer-note">
-
-        Markdown version: <a href="./manual.md">docs/manual.md</a>.
-
-      </div>
-
+      <footer>Markdown version: <a href="./manual.md">docs/manual.md</a>.</footer>
     </main>
-
   </body>
-
 </html>

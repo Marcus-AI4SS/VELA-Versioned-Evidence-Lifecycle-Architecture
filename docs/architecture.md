@@ -6,7 +6,7 @@ VELA has three layers:
 | --- | --- |
 | Project package | `package/`, copied into a research project by `vela init` |
 | Runtime package | `runtime/`, installed only when the user wants VELA-managed skills and `envctl` helpers |
-| Public contracts | `schemas/`, used by the CLI, HELM, and validators |
+| Public contracts | `schemas/`, used by the CLI, documented readers, and validators |
 
 Across those layers, VELA uses an engineering-cybernetic control loop: declare the research objective, observe project state, collect feedback, run gates, and apply bounded corrections.
 
@@ -27,7 +27,7 @@ logs/
 AGENTS.md
 ```
 
-The project layer is portable. It can be committed, zipped, reviewed, or opened by HELM.
+The project layer is portable. It can be committed, zipped, reviewed, or opened by documented local readers.
 
 ## Runtime Layer
 
@@ -42,4 +42,4 @@ It contains public skills, profiles, validators, and shims. External services re
 
 ## Interface Layer
 
-VELA writes `.vela/context.json` using `vela.project.context.v1`. HELM can read that context and prepare `helm.codex.handoff.v1` notes.
+VELA writes `.vela/context.json` using `vela.project.context.v1`. Readers must treat missing fields as unknown rather than success, and any write-back must be explicit and user-controlled.

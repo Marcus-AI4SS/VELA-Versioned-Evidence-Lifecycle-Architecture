@@ -22,15 +22,20 @@
           <img class="hero-mark" src="../assets/brand/vela-workflow-mark.png" alt="VELA 分层帆形标志">
           <div class="eyebrow">Versioned Evidence Lifecycle Architecture</div>
           <h1>VELA</h1>
-          <p>面向 Codex 研究项目的便携式工作流包：项目结构、交接提示、证据台账、验证、隐私扫描和 HELM 可读状态。</p>
+          <p>面向 Codex 研究项目的便携式工作流包：项目结构、交接提示、证据台账、验证、隐私扫描和机器可读项目状态。</p>
           <p class="hero-note">以工程控制论为底层方法：目标、状态、反馈、验证和校正都落在文件里。</p>
           <div class="hero-actions">
             <a class="button button-primary" href="../getting-started.html">开始</a>
             <a class="button" href="../installation.html">安装</a>
+            <a class="button" href="./manual.html">说明书</a>
             <a class="button" href="../handoff-contract.html">交接契约</a>
-            <a class="button" href="../imports.html">连接 HELM</a>
           </div>
         </div>
+      </section>
+
+      <section class="section wide-visual">
+        <img src="../assets/overview/01-engineering-cybernetics-seven-layers.png" alt="VELA 工程控制论与七层结构">
+        <p class="caption">VELA 把工程控制论闭环落实为七层研究工作流。</p>
       </section>
 
       <section class="section">
@@ -43,7 +48,14 @@
           <article class="card"><h3>Codex 规则</h3><p><code>AGENTS.md</code> 和命令模板让任务范围可读、可复核。</p></article>
           <article class="card"><h3>证据生命周期</h3><p>材料、证据、主张和交付物分层管理。</p></article>
           <article class="card"><h3>控制循环</h3><p>目标、状态、反馈信号、验证门和校正动作都保存在项目文件中。</p></article>
+          <article class="card"><h3>记忆治理</h3><p>日志和交接包进入候选改进；长期规则必须经过检查、测试和提交。</p></article>
         </div>
+      </section>
+
+      <section class="section grid-3">
+        <article class="visual-card"><img src="../assets/overview/02-vela-architecture.png" alt="VELA 整体架构"></article>
+        <article class="visual-card"><img src="../assets/overview/03-memory-evolution-governance.png" alt="VELA 记忆管理与自我演化治理"></article>
+        <article class="visual-card"><img src="../assets/overview/04-vela-usage-roadmap.png" alt="VELA 使用路线图"></article>
       </section>
 
       <section class="section">
@@ -74,23 +86,9 @@ sh ./install.sh --bootstrap-tools</pre></article>
         </div>
       </section>
 
-      <section class="section identity-strip">
-        <div>
-          <div class="eyebrow">可选组合</div>
-          <h2>VELA 和 HELM 是两个独立工具，通过显式文件接口协作。</h2>
-        </div>
-        <div class="brand-pair">
-          <article class="role-card active">
-            <strong>VELA</strong>
-            <span>工作流包</span>
-            <p>创建并验证可携带的研究项目状态。</p>
-          </article>
-          <article class="role-card">
-            <strong>HELM</strong>
-            <span>本地研究看板</span>
-            <p>读取项目状态，并帮助准备 Codex 交接。</p>
-          </article>
-        </div>
+      <section class="section card">
+        <h3>可选看板联动</h3>
+        <p>VELA 可以通过显式本地文件与 HELM 联动，但 VELA 本身是独立工作流包。</p>
       </section>
 
       <footer>VELA = Versioned Evidence Lifecycle Architecture。</footer>

@@ -6,18 +6,30 @@
   <p>
     <a href="./README.md">English</a>
     · <a href="https://marcus-ai4ss.github.io/VELA/">Pages</a>
+    · <a href="./docs/manual.zh-CN.md">说明书</a>
     · <a href="./docs/getting-started.md">快速开始</a>
     · <a href="./docs/installation.md">安装</a>
-    · <a href="./docs/imports/vela-helm-interface.md">HELM 接口</a>
     · <a href="./docs/faq.md">FAQ</a>
   </p>
 </div>
 
-VELA 给 Codex 一个文件化的研究工作流：项目目录、`AGENTS.md` 规则、schema 校验的交接包、证据台账、主张检查、验证报告、隐私扫描，以及 HELM 可读取的本地上下文文件。
+VELA 给 Codex 一个文件化的研究工作流：项目目录、`AGENTS.md` 规则、schema 校验的交接包、证据台账、主张检查、验证报告、隐私扫描，以及机器可读的项目上下文。
 
 当你希望 Codex 在清楚的项目边界里工作，而不是依赖零散聊天记录时，可以使用 VELA。它不是桌面 app、论文生成器、文献管理器或后台自动化服务。
 
 VELA 的底层方法论来自工程控制论：每个研究项目都显式记录目标、状态、反馈信号、验证门和可回滚的校正循环。
+
+可选联动：VELA 可以通过显式本地文件与 HELM 看板配合使用，但 VELA 本身不依赖 HELM。
+
+## 四张图看懂 VELA
+
+![VELA 工程控制论与七层结构](./docs/assets/overview/01-engineering-cybernetics-seven-layers.png)
+
+![VELA 源包、运行层、项目与工具架构](./docs/assets/overview/02-vela-architecture.png)
+
+![VELA 记忆管理与自我演化治理](./docs/assets/overview/03-memory-evolution-governance.png)
+
+![VELA 使用路线图](./docs/assets/overview/04-vela-usage-roadmap.png)
 
 ## VELA 提供什么
 
@@ -28,8 +40,9 @@ VELA 的底层方法论来自工程控制论：每个研究项目都显式记录
 | 证据工作流 | 材料收集、证据提升、主张链接、交付物复核分开处理 |
 | 治理模型 | 工程控制论式目标、状态、反馈、验证门和校正循环 |
 | 验证检查 | JSON Schema、handoff lint、项目验证、隐私扫描、分享前检查 |
+| 记忆与演化 | 运行日志、交接包、证据台账和工具反馈进入候选改进；长期规则必须经过验证、测试和版本提交 |
 | 可选运行层 | 安装到用户自己 Codex 环境里的公开 research skills、route profiles、validators 和 `envctl` 工具 |
-| HELM 联动 | 写出 `vela.project.context.v1`，让 HELM 读取项目状态，但不依赖 HELM |
+| 机器上下文 | `.vela/context.json` 暴露当前项目状态，供有文档约束的本地读取器使用 |
 
 ## 快速开始
 
@@ -98,17 +111,6 @@ vela validate <project> --repair-context
 vela privacy scan <project>
 ```
 
-## VELA 与 HELM
-
-VELA 和 HELM 是两个独立产品，共享显式文件接口。
-
-| 产品 | 角色 |
-| --- | --- |
-| VELA | 创建并验证可携带的研究工作流包 |
-| HELM | 读取本地项目状态，并以桌面看板展示 |
-
-VELA 写出 `.vela/context.json`，schema 为 `vela.project.context.v1`。HELM 可以读取它，并准备 `helm.codex.handoff.v1` 交接说明。两者可以单独使用，也可以组合使用。
-
 ## 仓库结构
 
 | 路径 | 用途 |
@@ -126,7 +128,7 @@ VELA 写出 `.vela/context.json`，schema 为 `vela.project.context.v1`。HELM �
 
 - [快速开始](./docs/getting-started.md)
 - [安装说明](./docs/installation.md)
+- [说明书](./docs/manual.zh-CN.md)
 - [工作流核心](./docs/workflow-core.md)
 - [证据生命周期](./docs/evidence-lifecycle.md)
 - [Handoff contract](./docs/handoff-contract.md)
-- [VELA 与 HELM 接口](./docs/imports/vela-helm-interface.md)

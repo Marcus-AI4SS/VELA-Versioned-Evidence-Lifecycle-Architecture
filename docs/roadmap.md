@@ -24,4 +24,4 @@
 
 
 
-VELA will remain usable without HELM.
+VELA will remain a standalone workflow package.

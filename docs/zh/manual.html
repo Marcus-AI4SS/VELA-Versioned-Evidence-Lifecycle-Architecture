@@ -3,79 +3,127 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>VELA 总说明书</title>
-    <meta name="description" content="VELA 面向 Codex 的便携式项目工作包说明。">
+    <title>VELA 介绍资料与使用说明书</title>
+    <meta name="description" content="VELA 公开版介绍资料与使用说明书。">
     <link rel="stylesheet" href="../assets/site.css">
   </head>
   <body>
     <main class="page-shell">
       <div class="topbar">
-        <div class="brand"><span class="brand-mark"></span><span>VELA</span></div>
+        <a class="brand" href="./"><span class="brand-mark"></span><span>VELA</span></a>
         <div class="lang-switch">
           <a href="../manual.html">English</a>
           <span class="active">简体中文</span>
         </div>
       </div>
 
-      <section class="hero">
+      <section class="hero compact">
         <div>
-          <div class="eyebrow">总说明书</div>
-          <h1>用文件承载研究状态。</h1>
-          <p>VELA 是 Versioned Evidence Lifecycle Architecture。它将材料、证据、主张、方法、交付物和 Codex 交接分开管理，使研究过程可读、可复核。</p>
+          <div class="eyebrow">介绍资料与使用说明书 · 更新于 2026-05-28</div>
+          <h1><span class="sans">VELA</span> 说明书</h1>
+          <p>VELA 是面向 Codex 研究项目的便携式工作流包。它把目标、状态、反馈、验证、校正、记忆和演化沉淀为可审查的项目文件。</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="./getting-started.html">快速开始</a>
-            <a class="button" href="../workflow-core.md">工作流核心</a>
+            <a class="button button-primary" href="../installation.html">安装</a>
+            <a class="button" href="../getting-started.html">快速开始</a>
+            <a class="button" href="../manual.zh-CN.md">Markdown</a>
           </div>
         </div>
-        <div class="hero-visual">
-          <img src="../assets/brand/vela-helm-relationship-board-reference.png" alt="VELA 与 HELM 关系图">
-        </div>
+      </section>
+
+      <section class="section wide-visual">
+        <img src="../assets/overview/01-engineering-cybernetics-seven-layers.png" alt="VELA 工程控制论与七层结构">
+      </section>
+
+      <section class="section grid-3">
+        <article class="card"><h3>VELA 是什么</h3><p>给 Codex 研究项目使用的文件化工作流包：目录、规则、交接、证据、检查和运行日志。</p></article>
+        <article class="card"><h3>VELA 不是什么</h3><p>不是桌面 app、论文生成器、文献管理器、后台自动化服务，也不替代用户自己的工具和数据。</p></article>
+        <article class="card"><h3>底层逻辑</h3><p>工程控制论：目标、状态、反馈、验证和校正都必须体现在文件、检查结果和版本历史中。</p></article>
       </section>
 
       <section class="section">
         <div class="section-head">
-          <h2>项目结构</h2>
-          <p>先建立可读目录。私人项目数据不要放进公开仓库副本。</p>
+          <h2>七层结构</h2>
+          <p>VELA 把研究工作拆开，避免工具、证据、日志、检查和长期规则混成不可审查的黑箱。</p>
+        </div>
+        <table>
+          <tr><th>层级</th><th>作用</th></tr>
+          <tr><td>01 任务与边界</td><td>明确研究目标、可动范围、约束和验收标准。</td></tr>
+          <tr><td>02 工具与接口</td><td>接入 Git、Python、MCP、agentmemory、CodeGraph、Zotero、Obsidian 等用户自有工具。</td></tr>
+          <tr><td>03 上下文与证据</td><td>区分材料、证据、主张、方法和交付物。</td></tr>
+          <tr><td>04 研究阶段</td><td>组织研究设计、文献、阅读、写作、图表和复盘。</td></tr>
+          <tr><td>05 运行日志</td><td>记录操作、失败、检查和修复。</td></tr>
+          <tr><td>06 可靠性检查</td><td>运行 schema、validator、测试、隐私扫描和 handoff lint。</td></tr>
+          <tr><td>07 环境治理</td><td>决定哪些规则可以通过版本提交长期保留。</td></tr>
+        </table>
+      </section>
+
+      <section class="section wide-visual">
+        <img src="../assets/overview/02-vela-architecture.png" alt="VELA 整体架构">
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>安装</h2>
+          <p>VELA 通常形成两层：clone 下来的源包，以及安装到用户 <code>~/.vela</code> 和 <code>~/.codex</code> 的本机运行层。</p>
         </div>
         <div class="grid-3">
-          <article class="card"><h3>Materials</h3><p>收集到的来源、URL、文件、截图、数据集和笔记。</p></article>
-          <article class="card"><h3>Evidence</h3><p>带来源、访问时间、核验状态、权利或伦理说明的材料。</p></article>
-          <article class="card"><h3>Claims</h3><p>候选主张和已支持主张，必须保持证据链接。</p></article>
-          <article class="card"><h3>Methods</h3><p>假设、编码规则、分析计划和可复现说明。</p></article>
-          <article class="card"><h3>Deliverables</h3><p>报告、简报、表格、图和状态说明。</p></article>
-          <article class="card"><h3>Handoffs</h3><p>给 Codex 或合作者的有边界任务，包含约束和已知缺口。</p></article>
+          <article class="card"><h3>Windows</h3><pre>git clone https://github.com/Marcus-AI4SS/VELA.git vela
+cd vela
+.\install.ps1 -BootstrapTools
+.\vela.ps1 doctor</pre></article>
+          <article class="card"><h3>macOS</h3><pre>git clone https://github.com/Marcus-AI4SS/VELA.git vela
+cd vela
+sh ./install-macos.sh
+~/.vela/bin/vela doctor</pre></article>
+          <article class="card"><h3>Linux / shell</h3><pre>git clone https://github.com/Marcus-AI4SS/VELA.git vela
+cd vela
+sh ./install.sh --bootstrap-tools
+vela doctor</pre></article>
         </div>
       </section>
 
+      <section class="section wide-visual">
+        <img src="../assets/overview/04-vela-usage-roadmap.png" alt="VELA 使用路线图">
+      </section>
+
       <section class="section">
-        <div class="section-head">
-          <h2>Codex 交接</h2>
-          <p>交接范围要足够小，使复核成为可能。</p>
-        </div>
+        <div class="section-head"><h2>常用命令</h2></div>
+        <table>
+          <tr><th>目的</th><th>命令</th></tr>
+          <tr><td>查看环境状态</td><td><code>vela doctor</code></td></tr>
+          <tr><td>初始化项目</td><td><code>vela init &lt;project&gt;</code></td></tr>
+          <tr><td>创建 handoff</td><td><code>vela handoff new --template claim-check</code></td></tr>
+          <tr><td>检查 handoff</td><td><code>vela handoff lint handoffs/H001.yaml</code></td></tr>
+          <tr><td>渲染 Codex prompt</td><td><code>vela handoff render handoffs/H001.yaml --out handoffs/H001.prompt.md</code></td></tr>
+          <tr><td>验证项目</td><td><code>vela validate &lt;project&gt; --repair-context</code></td></tr>
+          <tr><td>隐私扫描</td><td><code>vela privacy scan &lt;project&gt;</code></td></tr>
+        </table>
+      </section>
+
+      <section class="section wide-visual">
+        <img src="../assets/overview/03-memory-evolution-governance.png" alt="VELA 记忆管理与自我演化治理">
+      </section>
+
+      <section class="section grid-2">
         <article class="card">
-          <pre><code>任务：
-相关文件：
-约束：
-预期输出：
-已知缺口：
-复核标准：</code></pre>
+          <h3>记忆边界</h3>
+          <ul class="guide-list">
+            <li>运行日志、handoff、证据台账和工具反馈进入候选线索。</li>
+            <li>agentmemory 可以召回偏好和历史经验。</li>
+            <li>记忆不能单独成为源规则。</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>演化边界</h3>
+          <ul class="guide-list">
+            <li>长期规则必须经过 schema、validator、测试、复核和提交。</li>
+            <li>VELA 不复制浏览器登录态、cookies、凭据、私有文献库或用户数据。</li>
+            <li>doctor 会区分已安装、缺失、可选和需要用户配置的工具。</li>
+          </ul>
         </article>
       </section>
 
-      <section class="section">
-        <div class="section-head">
-          <h2>VELA 与 HELM</h2>
-          <p>VELA 可以单独运行。HELM 后续可以作为 Hub for Evidence, Logs &amp; Monitoring 读取同一套项目状态。</p>
-        </div>
-        <div class="grid-2">
-          <article class="card"><h3>VELA</h3><p>Versioned Evidence Lifecycle Architecture。</p></article>
-          <article class="card"><h3>HELM</h3><p>Hub for Evidence, Logs &amp; Monitoring。</p></article>
-        </div>
-      </section>
-
-      <div class="footer-note">
-        Markdown 版本见 <a href="../manual.zh-CN.md">docs/manual.zh-CN.md</a>。
-      </div>
+      <footer>Markdown 版本见 <a href="../manual.zh-CN.md">docs/manual.zh-CN.md</a>。</footer>
     </main>
   </body>
 </html>

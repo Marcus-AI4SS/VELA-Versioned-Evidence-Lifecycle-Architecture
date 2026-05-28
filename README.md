@@ -6,18 +6,30 @@
   <p>
     <a href="./README.zh-CN.md">中文</a>
     · <a href="https://marcus-ai4ss.github.io/VELA/">Pages</a>
+    · <a href="./docs/manual.md">Manual</a>
     · <a href="./docs/getting-started.md">Getting started</a>
     · <a href="./docs/installation.md">Install</a>
-    · <a href="./docs/imports/vela-helm-interface.md">HELM interface</a>
     · <a href="./docs/faq.md">FAQ</a>
   </p>
 </div>
 
-VELA gives Codex a file-based research workflow: project folders, `AGENTS.md` rules, schema-checked handoffs, evidence ledgers, claim checks, validation reports, privacy scans, and a local context file that HELM can read.
+VELA gives Codex a file-based research workflow: project folders, `AGENTS.md` rules, schema-checked handoffs, evidence ledgers, claim checks, validation reports, privacy scans, and a machine-readable project context.
 
 Use it when you want Codex to work inside a clear project boundary instead of loose chat history. VELA is not a desktop app, paper generator, citation manager, or background automation service.
 
 The design borrows from engineering cybernetics: each research project has explicit objectives, observable state, feedback signals, validation gates, and bounded correction loops.
+
+Optional: VELA can interoperate with HELM through explicit local files, but VELA does not require HELM.
+
+## Visual Guide
+
+![VELA engineering cybernetics and seven-layer structure](./docs/assets/overview/01-engineering-cybernetics-seven-layers.png)
+
+![VELA source package, runtime, project, and tool architecture](./docs/assets/overview/02-vela-architecture.png)
+
+![VELA memory management and self-evolution governance](./docs/assets/overview/03-memory-evolution-governance.png)
+
+![VELA usage roadmap](./docs/assets/overview/04-vela-usage-roadmap.png)
 
 ## What You Get
 
@@ -28,8 +40,9 @@ The design borrows from engineering cybernetics: each research project has expli
 | Evidence workflow | Separate material intake, evidence promotion, claim linking, and deliverable review |
 | Governance model | Engineering-cybernetic loops for objectives, state, feedback, gates, and correction |
 | Validation | JSON Schema checks, handoff linting, project validation, privacy scans, and sharing-readiness checks |
+| Memory and evolution | Runtime logs, handoffs, evidence ledgers, and tool feedback become candidate improvements; durable rules require validation, tests, and versioned commits |
 | Optional runtime | Public research skills, route profiles, validators, and `envctl` helpers installed into the user's own Codex environment |
-| HELM link | `vela.project.context.v1` so HELM can read project status without controlling VELA |
+| Machine context | `.vela/context.json` exposes current project state for documented local readers |
 
 ## Quick Start
 
@@ -98,17 +111,6 @@ vela validate <project> --repair-context
 vela privacy scan <project>
 ```
 
-## VELA And HELM
-
-VELA and HELM are separate products with a shared interface.
-
-| Product | Role |
-| --- | --- |
-| VELA | Creates and validates the portable research workflow package |
-| HELM | Reads local project state and displays it as a desktop research board |
-
-VELA writes `.vela/context.json` using `vela.project.context.v1`. HELM can read that file and prepare `helm.codex.handoff.v1` notes for Codex. Neither product requires the other to run.
-
 ## Repository Layout
 
 | Path | Purpose |
@@ -126,7 +128,7 @@ VELA writes `.vela/context.json` using `vela.project.context.v1`. HELM can read 
 
 - [Getting started](./docs/getting-started.md)
 - [Installation](./docs/installation.md)
+- [Manual](./docs/manual.md)
 - [Workflow core](./docs/workflow-core.md)
 - [Evidence lifecycle](./docs/evidence-lifecycle.md)
 - [Handoff contract](./docs/handoff-contract.md)
-- [VELA and HELM interface](./docs/imports/vela-helm-interface.md)

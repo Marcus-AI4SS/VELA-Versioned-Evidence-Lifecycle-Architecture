@@ -42,4 +42,4 @@ A claim needs linked evidence and a support explanation. Unsupported claims can 
 
 
 
-Create a scoped handoff that states the task, relevant files, constraints, expected output, and known gaps. HELM can help assemble this view, but VELA can do it independently through documented project state.
+Create a scoped handoff that states the task, relevant files, constraints, expected output, and known gaps. Keep it narrow enough that a reviewer can tell whether Codex stayed inside scope.
