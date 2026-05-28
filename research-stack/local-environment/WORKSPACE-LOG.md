@@ -1,8 +1,8 @@
 ﻿# skills环境管理 Workspace Log
 
-- generated_at: 2026-05-28T12:36:31
+- generated_at: 2026-05-28T18:07:14
 - branch: `codex/cleanup-handoff`
-- HEAD: `ea06633`
+- HEAD: `b9a7617`
 - head_scope: pre-commit 时表示日志生成时的 base HEAD；manual / post-merge / post-checkout 时表示当前 HEAD
 - purpose: 本地私有 Codex 环境工作仓库。
 - trigger: `pre-commit`
@@ -49,6 +49,10 @@
 
 ## Independent Repo Commit History
 
+- 2026-05-28 $(b9a7617 2026-05-28 Clean old workspace paths and tool runtimes[0]) Clean old workspace paths and tool runtimes
+- 2026-05-28 $(ce74d74 2026-05-28 Move local environment source to C workspace[0]) Move local environment source to C workspace
+- 2026-05-28 $(a6e34ca 2026-05-28 Add project hygiene and subagent delegation rules[0]) Add project hygiene and subagent delegation rules
+- 2026-05-28 $(ce67496 2026-05-28 Make adoption readiness portable[0]) Make adoption readiness portable
 - 2026-05-28 $(ea06633 2026-05-28 Add external adoption readiness checks[0]) Add external adoption readiness checks
 - 2026-05-28 $(5995f3f 2026-05-28 Record VELA full environment sync handoff[0]) Record VELA full environment sync handoff
 - 2026-05-28 $(41481fa 2026-05-28 Update environment overview visuals and deck[0]) Update environment overview visuals and deck
@@ -137,4 +141,13 @@
 
 ## Current Working Tree Status
 
-- M  skills/scripts/envctl/external_adoption_readiness.py
+- M  README.md
+- A  handoffs/helm/2026-05-28-governance-audit-handoff.md
+- A  handoffs/vela/2026-05-28-governance-audit-handoff.md
+- M  skills/catalog/environment_layer_contract.json
+- M  skills/catalog/external_adoption_reviews.json
+- M  skills/catalog/local_memory_system.json
+- M  skills/catalog/scholar_browser_patterns.json
+- M  skills/profiles/startup-safe.toml
+- M  skills/scripts/cleanup-stale-codex-mcp-processes.ps1
+- M  skills/scripts/scan_research_stack.py

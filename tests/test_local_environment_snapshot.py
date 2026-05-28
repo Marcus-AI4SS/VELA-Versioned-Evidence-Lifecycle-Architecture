@@ -89,6 +89,8 @@ class LocalEnvironmentSnapshotTests(unittest.TestCase):
         settings = (SNAPSHOT / "skills" / "catalog" / "settings.toml").read_text(encoding="utf-8")
         self.assertIn("<LOCAL_ENV_ROOT>", settings)
         self.assertIn("<CODEX_HOME>", settings)
+        self.assertIn("<HELM_REPO_ROOT>", settings)
+        self.assertIn("<VELA_REPO_ROOT>", settings)
         self.assertIn("<OBSIDIAN_VAULT>", settings)
 
     def test_sanitized_snapshot_preserves_json_null_fields(self) -> None:

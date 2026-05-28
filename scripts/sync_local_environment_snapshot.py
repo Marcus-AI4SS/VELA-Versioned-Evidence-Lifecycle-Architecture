@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shutil
 import subprocess
 from datetime import datetime, timezone
@@ -10,7 +11,7 @@ from typing import Any
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_SOURCE = REPO_ROOT.parent / "skills-environment-local"
+DEFAULT_SOURCE = Path(os.environ.get("VELA_LOCAL_ENV_SOURCE", REPO_ROOT.parent / "skills-environment-local"))
 DESTINATION = REPO_ROOT / "research-stack" / "local-environment"
 DROP = object()
 
@@ -42,6 +43,10 @@ EXCLUDED_NAME_PARTS = {
 LEGACY_RUNTIME_DIR_NAME = "AI environment-" + "configuration"
 
 STATIC_PRIVATE_TEXT_REPLACEMENTS = {
+    "D:" + "\\AI environment-GITHUB\\git-folders\\skills-environment-local": "<LOCAL_ENV_ROOT>",
+    "D:" + "/AI environment-GITHUB/git-folders/skills-environment-local": "<LOCAL_ENV_ROOT>",
+    "D:" + "\\AI environment-GITHUB": "<AI_ENV_ROOT>",
+    "D:" + "/AI environment-GITHUB": "<AI_ENV_ROOT>",
     "<USER_DESKTOP>\\\\" + LEGACY_RUNTIME_DIR_NAME: "<LEGACY_RUNTIME_ROOT>",
     "<USER_DESKTOP>\\" + LEGACY_RUNTIME_DIR_NAME: "<LEGACY_RUNTIME_ROOT>",
     "<USER_DESKTOP>/" + LEGACY_RUNTIME_DIR_NAME: "<LEGACY_RUNTIME_ROOT>",
@@ -291,6 +296,11 @@ config_path = "<CODEX_HOME>/config.toml"
 skills_dir = "<CODEX_HOME>/skills"
 cloud_dir = "<LOCAL_ENV_ROOT>/skills/cloud"
 
+[repos]
+local_environment_root = "<LOCAL_ENV_ROOT>"
+helm_repo_root = "<HELM_REPO_ROOT>"
+vela_repo_root = "<VELA_REPO_ROOT>"
+
 [obsidian]
 vault_path = "<OBSIDIAN_VAULT>"
 vault_subdir = "Codex Research"
@@ -402,6 +412,22 @@ def patch_skill_workbench_policy(destination_root: Path) -> None:
         text = validator.read_text(encoding="utf-8")
         text = text.replace(
             """        if "skills-environment-local" not in source:
+            errors.append(f"skill-workbench-policy:source-of-truth-mismatch:{source}")
+        protected = str(boundary.get("protected_runtime_policy", ""))
+        if "scholar-nuwa" not in protected:
+            errors.append("skill-workbench-policy:protected-runtime-policy-missing-scholar-nuwa")
+""",
+            """        if source not in {"<LOCAL_ENV_ROOT>", "skills-environment-local"} and "skills-environment-local" not in source:
+            errors.append(f"skill-workbench-policy:source-of-truth-mismatch:{source}")
+        protected = str(boundary.get("protected_runtime_policy", ""))
+        if "protected_runtime_paths" not in protected:
+            errors.append("skill-workbench-policy:protected-runtime-policy-missing")
+""",
+        )
+        text = text.replace(
+            r"""        normalized_source = source.replace("\\", "/").rstrip("/")
+        normalized_repo = str(REPO_ROOT).replace("\\", "/").rstrip("/")
+        if normalized_source != normalized_repo and "skills-environment-local" not in source:
             errors.append(f"skill-workbench-policy:source-of-truth-mismatch:{source}")
         protected = str(boundary.get("protected_runtime_policy", ""))
         if "scholar-nuwa" not in protected:

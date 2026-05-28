@@ -12,10 +12,10 @@ if (-not $java) {
 $env:JAVA_HOME = Split-Path -Parent (Split-Path -Parent $java.FullName)
 $env:Path = (Join-Path $env:JAVA_HOME "bin") + ";" + $env:Path
 
-$cli = Join-Path $repoRoot ".venv\Scripts\opendataloader-pdf.exe"
-if (-not (Test-Path -LiteralPath $cli)) {
-    throw "opendataloader-pdf is not installed in the D-repo virtual environment. Run: $repoRoot\.venv\Scripts\python.exe -m pip install opendataloader-pdf==2.4.6"
+$python = Join-Path $repoRoot ".venv\Scripts\python.exe"
+if (-not (Test-Path -LiteralPath $python)) {
+    throw "Local virtual environment Python not found. Run: $repoRoot\python\runtime\python313\python.exe -m venv $repoRoot\.venv"
 }
 
-& $cli @args
+& $python -m opendataloader_pdf @args
 exit $LASTEXITCODE

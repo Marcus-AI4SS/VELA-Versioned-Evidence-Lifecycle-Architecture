@@ -42,6 +42,7 @@ TASK_TYPE_ENUM = {
     "writing_capture",
     "response_revision",
     "submission_packaging",
+    "presentation_design",
     "knowledge_sync",
     "cloud_routing",
     "skill_vetting",
@@ -52,10 +53,17 @@ TASK_TYPE_ENUM = {
 }
 
 PLUGIN_ID_OVERRIDES = {
+    "browser": "browser@openai-bundled",
     "documents": "documents@openai-primary-runtime",
+    "chrome": "chrome@openai-bundled",
     "presentations": "presentations@openai-primary-runtime",
     "research-autopilot": "research-autopilot@research-environment-local",
     "spreadsheets": "spreadsheets@openai-primary-runtime",
+}
+
+OFFICIAL_BUILTIN_PLUGIN_IDS = {
+    "browser@openai-bundled",
+    "chrome@openai-bundled",
 }
 
 
@@ -303,7 +311,7 @@ def main() -> None:
         PLUGIN_ID_OVERRIDES.get(name, f"{name}@openai-curated")
         for name in known_plugin_names
         if name not in {"obsidian-sidecar", "notion"}
-    }
+    } | OFFICIAL_BUILTIN_PLUGIN_IDS
 
     installed_skills = list_skills(args.skills_dir)
     installed_skill_set = set(installed_skills)

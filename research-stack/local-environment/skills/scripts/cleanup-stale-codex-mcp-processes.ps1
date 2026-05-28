@@ -15,6 +15,11 @@ $patterns = @(
     "@playwright\mcp",
     "@playwright/mcp",
     "chrome-devtools-mcp",
+    "@agentmemory\mcp",
+    "@agentmemory/mcp",
+    "agentmemory-mcp",
+    "codegraph.cmd",
+    "codegraph.js serve --mcp",
     "semantic-scholar-plugin.py",
     "cnki_mcp_server.py",
     "xiaohongshu"

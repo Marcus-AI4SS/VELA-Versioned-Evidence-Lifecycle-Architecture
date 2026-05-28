@@ -3,6 +3,12 @@ from __future__ import annotations
 import os
 import shutil
 from pathlib import Path
+from typing import Any
+
+try:
+    import tomllib
+except ModuleNotFoundError:  # pragma: no cover - Python < 3.11 fallback.
+    tomllib = None  # type: ignore[assignment]
 
 
 SCRIPT_ROOT = Path(__file__).resolve().parent
@@ -13,6 +19,7 @@ SCHEMAS_ROOT = SKILLS_ROOT / "schemas"
 PROFILES_ROOT = SKILLS_ROOT / "profiles"
 PLUGINS_ROOT = SKILLS_ROOT / "plugins"
 OUTPUTS_ROOT = SKILLS_ROOT / "outputs"
+SETTINGS_PATH = CATALOG_ROOT / "settings.toml"
 
 CODEX_HOME = Path(os.environ.get("CODEX_HOME", str(Path.home() / ".codex"))).expanduser().resolve()
 CONFIG_PATH = CODEX_HOME / "config.toml"
@@ -51,6 +58,66 @@ AGENT_BROWSER_CMD = resolve_executable(
     "agent-browser.cmd",
     "agent-browser",
     preferred_paths=[rf"{Path.home()}\AppData\Roaming\npm\agent-browser.cmd"],
+)
+
+
+def _load_settings() -> dict[str, Any]:
+    if tomllib is None or not SETTINGS_PATH.exists():
+        return {}
+    try:
+        return tomllib.loads(SETTINGS_PATH.read_text(encoding="utf-8"))
+    except (OSError, tomllib.TOMLDecodeError):
+        return {}
+
+
+def _configured_path(value: str) -> Path:
+    path = Path(os.path.expandvars(value)).expanduser()
+    if not path.is_absolute():
+        path = REPO_ROOT / path
+    return path.resolve()
+
+
+def resolve_external_repo_root(
+    *,
+    env_var: str,
+    settings_key: str,
+    sibling_name: str,
+    fallback_paths: list[str] | None = None,
+) -> Path:
+    """Resolve a peer repository without assuming it is always a sibling."""
+
+    env_value = os.environ.get(env_var)
+    if env_value:
+        return _configured_path(env_value)
+
+    repos = _load_settings().get("repos", {})
+    if isinstance(repos, dict):
+        settings_value = repos.get(settings_key)
+        if isinstance(settings_value, str) and settings_value.strip():
+            return _configured_path(settings_value)
+
+    sibling = (REPO_ROOT.parent / sibling_name).resolve()
+    if sibling.exists():
+        return sibling
+
+    for fallback in fallback_paths or []:
+        fallback_path = _configured_path(fallback)
+        if fallback_path.exists():
+            return fallback_path
+    return sibling
+
+
+VELA_REPO_ROOT = resolve_external_repo_root(
+    env_var="VELA_REPO_ROOT",
+    settings_key="vela_repo_root",
+    sibling_name="VELA-workflow",
+    fallback_paths=[r"<VELA_REPO_ROOT>"],
+)
+HELM_REPO_ROOT = resolve_external_repo_root(
+    env_var="HELM_REPO_ROOT",
+    settings_key="helm_repo_root",
+    sibling_name="HELM",
+    fallback_paths=[],
 )
 
 

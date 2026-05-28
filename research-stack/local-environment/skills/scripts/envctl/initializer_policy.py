@@ -8,14 +8,13 @@ from .schema_validation import collect_schema_errors, load_json
 from .validator_envelope import build_validator_result
 
 try:
-    from ..path_utils import CATALOG_ROOT, REPO_ROOT, SCHEMAS_ROOT
+    from ..path_utils import CATALOG_ROOT, REPO_ROOT, SCHEMAS_ROOT, VELA_REPO_ROOT
 except ImportError:  # pragma: no cover
-    from path_utils import CATALOG_ROOT, REPO_ROOT, SCHEMAS_ROOT
+    from path_utils import CATALOG_ROOT, REPO_ROOT, SCHEMAS_ROOT, VELA_REPO_ROOT
 
 
 LOCAL_INITIALIZER_PATH = CATALOG_ROOT / "project_initializer_manifest.json"
 LOCAL_INITIALIZER_SCHEMA_PATH = SCHEMAS_ROOT / "project_initializer_manifest.schema.json"
-VELA_REPO_ROOT = REPO_ROOT.parent / "VELA-workflow"
 VELA_INITIALIZER_PATH = VELA_REPO_ROOT / "package" / ".vela" / "initializer-manifest.json"
 VELA_INITIALIZER_SCHEMA_PATH = VELA_REPO_ROOT / "schemas" / "vela.project.initializer.v1.schema.json"
 

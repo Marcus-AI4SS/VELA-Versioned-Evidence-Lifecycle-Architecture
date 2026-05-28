@@ -1,35 +1,14 @@
 {
   "schema_version": "vela.local_environment_snapshot.v1",
-  "generated_at": "2026-05-28T07:24:08.730499+00:00",
+  "generated_at": "2026-05-28T10:14:47.397876+00:00",
   "source": {
     "repository": "skills-environment-local",
     "branch": "codex/cleanup-handoff",
-    "head": "ce67496",
+    "head": "c0f6a6a",
     "since": "2026-05-01",
-    "commit_count_since": 68,
-    "working_tree_dirty": true,
-    "working_tree_status": [
-      "M AGENTS.md",
-      " M skills/AGENTS.md",
-      " M skills/catalog/conflict_matrix.json",
-      " M skills/catalog/control_kernel.json",
-      " M skills/catalog/data_access_matrix.json",
-      " M skills/catalog/environment_layer_contract.json",
-      " M skills/catalog/project_scope_rules.json",
-      " M skills/catalog/research_pipeline_stages.json",
-      " M skills/catalog/research_team_playbooks.json",
-      " M skills/catalog/route_mcp_activation_policy.json",
-      " M skills/catalog/routing_table.json",
-      " M skills/catalog/skill_catalog.json",
-      " M skills/catalog/subagent_registry.json",
-      " M skills/plugins/research-autopilot/skills/research-autopilot/SKILL.md",
-      " M skills/plugins/research-autopilot/skills/research-team-orchestrator/SKILL.md",
-      " M skills/scripts/envctl/route_explain.py",
-      " M skills/scripts/sync_research_autopilot_skills.ps1",
-      " M skills/scripts/validate_research_stack.py",
-      " M skills/tests/test_envctl_contracts.py",
-      "?? skills/plugins/research-autopilot/skills/project-folder-hygiene/"
-    ]
+    "commit_count_since": 72,
+    "working_tree_dirty": false,
+    "working_tree_status": []
   },
   "policy": {
     "intent": "Publish a sanitized near 1:1 VELA distribution of the local research environment except explicitly excluded areas.",

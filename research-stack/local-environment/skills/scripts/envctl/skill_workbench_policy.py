@@ -6,11 +6,11 @@ from pathlib import Path
 from typing import Any
 
 try:
-    from ..path_utils import CATALOG_ROOT, SCHEMAS_ROOT, SKILLS_ROOT
+    from ..path_utils import CATALOG_ROOT, REPO_ROOT, SCHEMAS_ROOT, SKILLS_ROOT
     from .schema_validation import collect_schema_document_errors, collect_schema_errors, load_json
     from .validator_envelope import build_validator_result
 except ImportError:  # pragma: no cover
-    from path_utils import CATALOG_ROOT, SCHEMAS_ROOT, SKILLS_ROOT
+    from path_utils import CATALOG_ROOT, REPO_ROOT, SCHEMAS_ROOT, SKILLS_ROOT
     from envctl.schema_validation import collect_schema_document_errors, collect_schema_errors, load_json
     from envctl.validator_envelope import build_validator_result
 

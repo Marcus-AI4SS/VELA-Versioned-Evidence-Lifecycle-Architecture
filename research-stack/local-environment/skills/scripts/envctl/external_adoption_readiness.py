@@ -7,9 +7,9 @@ from typing import Any
 
 from .validator_envelope import build_validator_result
 try:
-    from ..path_utils import CATALOG_ROOT, CODEX_HOME, REPO_ROOT, VENV_PYTHON
+    from ..path_utils import CATALOG_ROOT, CODEX_HOME, REPO_ROOT, VELA_REPO_ROOT, VENV_PYTHON
 except ImportError:  # Portable VELA installs expose envctl as a top-level package.
-    from path_utils import CATALOG_ROOT, CODEX_HOME, REPO_ROOT, VENV_PYTHON
+    from path_utils import CATALOG_ROOT, CODEX_HOME, REPO_ROOT, VELA_REPO_ROOT, VENV_PYTHON
 
 
 REVIEWS_PATH = CATALOG_ROOT / "external_adoption_reviews.json"
@@ -176,12 +176,13 @@ def _probe_superpowers() -> dict[str, Any]:
 
 
 def _probe_vela() -> dict[str, Any]:
-    vela_root = REPO_ROOT.parent / "VELA-workflow"
+    vela_root = VELA_REPO_ROOT
     exists = vela_root.exists()
     manifest = vela_root / "research-stack" / "local-environment" / "manifest.json"
     return {
         "ok": exists and manifest.exists(),
         "kind": "cross_repo_contract_snapshot",
+        "repo_root": str(vela_root),
         "repo_exists": exists,
         "snapshot_manifest_exists": manifest.exists(),
     }

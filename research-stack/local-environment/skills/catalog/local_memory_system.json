@@ -460,7 +460,7 @@
       "<CODEX_HOME>/config.toml mcp_servers.agentmemory",
       "<CODEX_HOME>/hooks.json resolved agentmemory Codex hooks",
       "agentmemory viewer at http://localhost:3113",
-      "runtime data kept outside the D-repo source tree"
+      "runtime data kept outside the active local source tree"
     ],
     "allowed_actions": [
       "session and prompt observation capture",

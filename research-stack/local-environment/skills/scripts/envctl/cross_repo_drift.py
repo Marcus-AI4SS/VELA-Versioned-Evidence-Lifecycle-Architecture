@@ -8,21 +8,19 @@ from .schema_validation import load_json
 from .validator_envelope import build_validator_result
 
 try:
-    from ..path_utils import CONFIG_PATH, REPO_ROOT, SCHEMAS_ROOT
+    from ..path_utils import CONFIG_PATH, HELM_REPO_ROOT, REPO_ROOT, SCHEMAS_ROOT, VELA_REPO_ROOT
 except ImportError:  # pragma: no cover
-    from path_utils import CONFIG_PATH, REPO_ROOT, SCHEMAS_ROOT
+    from path_utils import CONFIG_PATH, HELM_REPO_ROOT, REPO_ROOT, SCHEMAS_ROOT, VELA_REPO_ROOT
 
 
-VELA_REPO_ROOT = REPO_ROOT.parent / "VELA-workflow"
-HELM_REPO_ROOT = REPO_ROOT.parent / "HELM"
 PUBLIC_SCHEMA_FILES = [
     "vela.codex.handoff.v1.schema.json",
     "vela.project.context.v1.schema.json",
     "helm.codex.handoff.v1.schema.json",
 ]
 OLD_ACTIVE_PATH_PATTERNS = [
-    re.compile(r"<LEGACY_RUNTIME_ROOT>\\git-folders", re.IGNORECASE),
-    re.compile(r"<LEGACY_RUNTIME_ROOT>/git-folders", re.IGNORECASE),
+    re.compile(r"<GIT_FOLDERS_ROOT>\\git-folders", re.IGNORECASE),
+    re.compile(r"<GIT_FOLDERS_ROOT>/git-folders", re.IGNORECASE),
     re.compile(r"public-release[\\/]codex-research-stack", re.IGNORECASE),
 ]
 OLD_VELA_EXPANSIONS = [

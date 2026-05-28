@@ -63,7 +63,7 @@
       ],
       "local_smoke_test": {
         "tested_at": "2026-05-26",
-        "environment": "D-repo local environment, Playwright MCP browser smoke only, no source-file writes, no full-text download, no Zotero write.",
+        "environment": "Active local environment repository, Playwright MCP browser smoke only, no source-file writes, no full-text download, no Zotero write.",
         "result": "pass",
         "passed_checks": [
           "CNKI basic search page loaded after visible security gate cleared in the session.",
@@ -289,7 +289,7 @@
       ],
       "local_smoke_test": {
         "tested_at": "2026-05-26",
-        "environment": "D-repo local environment, Playwright MCP browser smoke only, no source-file writes, no full-text download, no Zotero write.",
+        "environment": "Active local environment repository, Playwright MCP browser smoke only, no source-file writes, no full-text download, no Zotero write.",
         "result": "blocked",
         "passed_checks": [
           "Google Scholar page navigation reached a visible Scholar page.",

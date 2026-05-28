@@ -1435,7 +1435,7 @@
       "local_memory_system and memory_admission_policy decide durable promotion",
       "recalled context may trigger a clarification question but cannot silently change route",
       "no full transcript import, LLM compression, prompt injection, or source mutation by default",
-      "agentmemory data root must stay outside the D-repo source tree",
+      "agentmemory data root must stay outside the active local source tree",
       "codegraph index is ignored cache and cannot be used as rule authority"
     ]
   },

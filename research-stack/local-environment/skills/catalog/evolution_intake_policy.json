@@ -28,10 +28,16 @@
   ],
   "scan_roots": [
     {
-      "id": "active-git-folders",
+      "id": "active-environment-root",
       "path": "<GIT_FOLDERS_ROOT>",
       "enabled": true,
-      "purpose": "Active local Git workspaces and research projects."
+      "purpose": "Active local environment and HELM workspaces."
+    },
+    {
+      "id": "vela-workflow",
+      "path": "<VELA_REPO_ROOT>",
+      "enabled": true,
+      "purpose": "Active VELA workflow repository for local-to-release synchronization."
     },
     {
       "id": "desktop-projects",

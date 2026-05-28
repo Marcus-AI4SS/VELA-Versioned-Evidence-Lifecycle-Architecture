@@ -24,8 +24,11 @@ PLUGIN_CACHE_BUNDLE_ROOT = PLUGIN_CACHE_SKILLS_DIR.parent
 PLUGIN_BUNDLE_RUNTIME_DIRS = (".codex-plugin", "assets", "scripts")
 
 STALE_LOCAL_ROOT_PATTERNS = [
-    re.compile(r"<LEGACY_RUNTIME_ROOT>", re.IGNORECASE),
-    re.compile(r"<LEGACY_RUNTIME_ROOT>", re.IGNORECASE),
+    re.compile(r"<LOCAL_ENV_ROOT>", re.IGNORECASE),
+    re.compile(r"<LOCAL_ENV_ROOT>", re.IGNORECASE),
+    re.compile(r"<GIT_FOLDERS_ROOT>\\git-folders\\skills-environment-local", re.IGNORECASE),
+    re.compile(r"<GIT_FOLDERS_ROOT>/git-folders/skills-environment-local", re.IGNORECASE),
+    re.compile(r"public-release[\\/]codex-research-stack", re.IGNORECASE),
 ]
 
 TEXT_FILE_SUFFIXES = {

@@ -453,13 +453,13 @@
       "upstream": "opendataloader-project/opendataloader-pdf",
       "repo_url": "https://github.com/opendataloader-project/opendataloader-pdf",
       "decision": "adapt",
-      "current_status": "installed in the local D-repo virtual environment as an optional existing-PDF structure extraction backend; MCP and hybrid/OCR backends are not enabled by default",
+      "current_status": "installed in the active local repository virtual environment as an optional existing-PDF structure extraction backend; MCP and hybrid/OCR backends are not enabled by default",
       "accepted_patterns": [
         "Apache-2.0 Python wrapper around a bundled Java PDF CLI",
         "Markdown and JSON extraction from already obtained PDFs",
         "project-local output for structured reading and evidence triage",
         "portable Java runtime under the local ignored runtime directory",
-        "wrapper script that pins execution to the D-repo environment instead of the old C-repo environment"
+        "wrapper script that pins execution to the active local repository virtual environment"
       ],
       "rejected_patterns": [
         "treating the parser as a literature acquisition or download route",
@@ -551,7 +551,7 @@
       "upstream": "colbymchenry/codegraph",
       "repo_url": "https://github.com/colbymchenry/codegraph",
       "decision": "adapt",
-      "current_status": "installed globally on 2026-05-27 as @colbymchenry/codegraph@0.9.6; local D-repo indexed into ignored .codegraph cache and exposed as optional Codex MCP for code structure context",
+      "current_status": "installed globally on 2026-05-27 as @colbymchenry/codegraph@0.9.6; active local repository indexed into ignored .codegraph cache and exposed as optional Codex MCP for code structure context",
       "accepted_patterns": [
         "local-first code intelligence index",
         "MCP server for AI assistants",
