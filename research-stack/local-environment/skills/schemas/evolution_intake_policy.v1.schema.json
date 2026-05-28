@@ -1,0 +1,214 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://research-environment-local/schemas/evolution_intake_policy.v1.schema.json",
+  "title": "Evolution Intake Policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "generated_at",
+    "default_mode",
+    "default_lookback_days",
+    "report_output_dir",
+    "source_file_names",
+    "excluded_dir_names",
+    "scan_roots",
+    "risk_rules",
+    "source_write_policy"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schema_version": {
+      "const": "evolution_intake_policy.v1"
+    },
+    "generated_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "default_mode": {
+      "type": "string",
+      "enum": [
+        "proposal_only",
+        "controlled_auto_landing"
+      ]
+    },
+    "default_lookback_days": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 90
+    },
+    "report_output_dir": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_file_names": {
+      "$ref": "#/$defs/string_list"
+    },
+    "excluded_dir_names": {
+      "$ref": "#/$defs/string_list"
+    },
+    "scan_roots": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/scan_root"
+      }
+    },
+    "risk_rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/risk_rule"
+      }
+    },
+    "source_write_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "automation_default_writes_source_files",
+        "automation_backlog_append_allowed",
+        "automatic_landing_allowed",
+        "automatic_landing_risk_levels",
+        "automatic_source_write_scope",
+        "manual_append_backlog_allowed",
+        "direct_skill_mutation_allowed",
+        "required_gates_before_environment_change"
+      ],
+      "properties": {
+        "automation_default_writes_source_files": {
+          "type": "boolean"
+        },
+        "automation_backlog_append_allowed": {
+          "type": "boolean"
+        },
+        "automatic_landing_allowed": {
+          "type": "boolean"
+        },
+        "automatic_landing_risk_levels": {
+          "$ref": "#/$defs/risk_level_list"
+        },
+        "automatic_source_write_scope": {
+          "$ref": "#/$defs/string_list"
+        },
+        "manual_append_backlog_allowed": {
+          "type": "boolean"
+        },
+        "direct_skill_mutation_allowed": {
+          "type": "boolean"
+        },
+        "required_gates_before_environment_change": {
+          "$ref": "#/$defs/string_list"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "string_list": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "scan_root": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "path",
+        "enabled",
+        "purpose"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-]+$"
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "purpose": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "risk_level_list": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "low",
+          "medium",
+          "high"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "risk_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "risk_level",
+        "severity",
+        "recommended_action",
+        "proposed_target",
+        "keywords"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-]+$"
+        },
+        "risk_level": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "p0",
+            "p1",
+            "p2",
+            "p3"
+          ]
+        },
+        "recommended_action": {
+          "type": "string",
+          "minLength": 1
+        },
+        "proposed_target": {
+          "type": "string",
+          "enum": [
+            "control_kernel",
+            "skill",
+            "route",
+            "schema",
+            "validator",
+            "docs",
+            "automation",
+            "obsidian",
+            "discard"
+          ]
+        },
+        "keywords": {
+          "$ref": "#/$defs/string_list"
+        }
+      }
+    }
+  }
+}

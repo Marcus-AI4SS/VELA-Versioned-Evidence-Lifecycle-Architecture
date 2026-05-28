@@ -1,0 +1,224 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://research-environment-local/schemas/memory_candidate.v1.schema.json",
+  "title": "Memory Candidate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "observed_at",
+    "source_type",
+    "source_ref",
+    "source_hash",
+    "normalized_claim",
+    "memory_layer",
+    "privacy_scope",
+    "evidence_refs",
+    "occurrence_count",
+    "first_seen_at",
+    "last_seen_at",
+    "score_components",
+    "decay_class",
+    "conflict_refs",
+    "proposed_target",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "memory_candidate.v1"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+$"
+    },
+    "observed_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_type": {
+      "type": "string",
+      "enum": [
+        "user_correction",
+        "route_override",
+        "validator_failure",
+        "project_retrospective",
+        "tool_health",
+        "explicit_preference",
+        "daily_audit",
+        "weekly_review"
+      ]
+    },
+    "source_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{16,64}$"
+    },
+    "normalized_claim": {
+      "type": "string",
+      "minLength": 1
+    },
+    "memory_layer": {
+      "type": "string",
+      "enum": [
+        "ephemeral_session",
+        "project_memory",
+        "private_preference",
+        "procedural_memory",
+        "control_memory",
+        "discarded_noise"
+      ]
+    },
+    "privacy_scope": {
+      "type": "string",
+      "enum": [
+        "public_repo",
+        "project_private",
+        "local_private",
+        "session_only"
+      ]
+    },
+    "evidence_refs": {
+      "$ref": "#/$defs/string_list"
+    },
+    "occurrence_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "first_seen_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "last_seen_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "score_components": {
+      "$ref": "#/$defs/score_component_map"
+    },
+    "decay_class": {
+      "type": "string",
+      "enum": [
+        "fast",
+        "normal",
+        "slow",
+        "protected"
+      ]
+    },
+    "conflict_refs": {
+      "$ref": "#/$defs/string_list"
+    },
+    "proposed_target": {
+      "type": "string",
+      "enum": [
+        "control_kernel",
+        "skill",
+        "obsidian",
+        "codex_native",
+        "evolution_backlog",
+        "discard"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "candidate",
+        "needs_review",
+        "accepted",
+        "rejected",
+        "superseded",
+        "expired"
+      ]
+    },
+    "review_after": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "expires_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "user_confirmed": {
+      "type": "boolean"
+    }
+  },
+  "$defs": {
+    "string_list": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "score_component_map": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence",
+        "recurrence",
+        "actionability",
+        "stability",
+        "scope_fit",
+        "validator_support",
+        "privacy_risk",
+        "conflict_risk",
+        "staleness"
+      ],
+      "properties": {
+        "evidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "recurrence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "actionability": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "stability": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "scope_fit": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "validator_support": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "privacy_risk": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "conflict_risk": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "staleness": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    }
+  }
+}

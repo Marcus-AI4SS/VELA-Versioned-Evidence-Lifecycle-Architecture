@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://research-environment-local/schemas/subagent_registry.schema.json",
+  "title": "Subagent Registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "agents"
+  ],
+  "properties": {
+    "agents": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/agent"
+      }
+    }
+  },
+  "$defs": {
+    "string_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+$"
+    },
+    "string_list": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "non_empty_string_list": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "execution_mode": {
+      "type": "string",
+      "enum": [
+        "multi_perspective_reasoning",
+        "sequential_multi_agent_execution",
+        "parallel_multi_agent_execution"
+      ]
+    },
+    "isolation_method": {
+      "type": "string",
+      "enum": [
+        "shared_thread_context",
+        "project_file_context",
+        "isolated_subagent_context",
+        "isolated_worktree_context"
+      ]
+    },
+    "control_bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "control_objectives",
+        "controlled_variables",
+        "feedback_signals",
+        "stability_metrics",
+        "rollback_policy"
+      ],
+      "properties": {
+        "control_objectives": {
+          "$ref": "#/$defs/non_empty_string_list"
+        },
+        "controlled_variables": {
+          "$ref": "#/$defs/non_empty_string_list"
+        },
+        "feedback_signals": {
+          "$ref": "#/$defs/non_empty_string_list"
+        },
+        "stability_metrics": {
+          "$ref": "#/$defs/non_empty_string_list"
+        },
+        "rollback_policy": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "agent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "agent_id",
+        "display_name",
+        "preferred_model",
+        "role",
+        "isolation_method",
+        "parallel_safe",
+        "integration_review_required",
+        "capability_tags",
+        "allowed_skills_mcp",
+        "write_scope",
+        "max_execution_mode",
+        "required_review_for",
+        "control_bindings"
+      ],
+      "properties": {
+        "agent_id": {
+          "$ref": "#/$defs/string_id"
+        },
+        "display_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "preferred_model": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "manager",
+            "producer",
+            "reviewer"
+          ]
+        },
+        "isolation_method": {
+          "$ref": "#/$defs/isolation_method"
+        },
+        "parallel_safe": {
+          "type": "boolean"
+        },
+        "integration_review_required": {
+          "type": "boolean"
+        },
+        "capability_tags": {
+          "$ref": "#/$defs/non_empty_string_list"
+        },
+        "allowed_skills_mcp": {
+          "$ref": "#/$defs/non_empty_string_list"
+        },
+        "write_scope": {
+          "$ref": "#/$defs/non_empty_string_list"
+        },
+        "max_execution_mode": {
+          "$ref": "#/$defs/execution_mode"
+        },
+        "required_review_for": {
+          "$ref": "#/$defs/string_list"
+        },
+        "control_bindings": {
+          "$ref": "#/$defs/control_bindings"
+        }
+      }
+    }
+  }
+}

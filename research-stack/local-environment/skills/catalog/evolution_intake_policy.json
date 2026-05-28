@@ -1,0 +1,122 @@
+{
+  "$schema": "../schemas/evolution_intake_policy.v1.schema.json",
+  "schema_version": "evolution_intake_policy.v1",
+  "generated_at": "2026-05-27",
+  "default_mode": "controlled_auto_landing",
+  "default_lookback_days": 14,
+  "report_output_dir": "skills/outputs/reports/evolution-intake",
+  "source_file_names": [
+    "research_stack_change_proposal.md",
+    "project_closure_retrospective.md",
+    "PROJECT_CLOSED.md"
+  ],
+  "excluded_dir_names": [
+    ".git",
+    ".hg",
+    ".svn",
+    ".venv",
+    "__pycache__",
+    ".pytest_cache",
+    ".playwright-mcp",
+    "node_modules",
+    "dist",
+    "build",
+    "outputs",
+    "skills/outputs",
+    "python/runtime",
+    "python/downloads"
+  ],
+  "scan_roots": [
+    {
+      "id": "active-git-folders",
+      "path": "<GIT_FOLDERS_ROOT>",
+      "enabled": true,
+      "purpose": "Active local Git workspaces and research projects."
+    },
+    {
+      "id": "desktop-projects",
+      "path": "<USER_DESKTOP>",
+      "enabled": true,
+      "purpose": "Local desktop research projects that may not live under the Git folder root."
+    }
+  ],
+  "risk_rules": [
+    {
+      "id": "runtime-or-config-mutation",
+      "risk_level": "high",
+      "severity": "p1",
+      "recommended_action": "manual_review_required",
+      "proposed_target": "validator",
+      "keywords": [
+        ".codex",
+        "config.toml",
+        "mcp",
+        "token",
+        "credential",
+        "secret",
+        "delete",
+        "remove",
+        "权限",
+        "用户级配置",
+        "自动写入"
+      ]
+    },
+    {
+      "id": "contract-or-skill-change",
+      "risk_level": "medium",
+      "severity": "p2",
+      "recommended_action": "adaptation_proposal",
+      "proposed_target": "schema",
+      "keywords": [
+        "skill",
+        "schema",
+        "validator",
+        "catalog",
+        "route",
+        "playbook",
+        "AGENTS.md",
+        "envctl",
+        "质量门",
+        "项目规则",
+        "复盘"
+      ]
+    },
+    {
+      "id": "documentation-or-note",
+      "risk_level": "low",
+      "severity": "p3",
+      "recommended_action": "backlog_candidate",
+      "proposed_target": "docs",
+      "keywords": [
+        "README",
+        "文档",
+        "说明",
+        "Obsidian",
+        "note",
+        "report",
+        "日志"
+      ]
+    }
+  ],
+  "source_write_policy": {
+    "automation_default_writes_source_files": true,
+    "automation_backlog_append_allowed": true,
+    "automatic_landing_allowed": true,
+    "automatic_landing_risk_levels": [
+      "low"
+    ],
+    "automatic_source_write_scope": [
+      "skills/catalog/evolution_backlog.json",
+      "skills/outputs/reports/evolution-intake",
+      "skills/outputs/reports/automation-ledger"
+    ],
+    "manual_append_backlog_allowed": true,
+    "direct_skill_mutation_allowed": false,
+    "required_gates_before_environment_change": [
+      "python -m skills.scripts.envctl validate cybernetics",
+      "python -m skills.scripts.envctl validate memory",
+      "python -m skills.scripts.envctl validate stack",
+      "python .\\skills\\scripts\\validate_research_stack.py"
+    ]
+  }
+}

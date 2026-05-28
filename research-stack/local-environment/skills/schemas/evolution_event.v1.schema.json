@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://research-environment-local/schemas/evolution_event.v1.schema.json",
+  "title": "Adaptive Evolution Event Backlog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "generated_at",
+    "events"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schema_version": {
+      "const": "evolution_event.v1"
+    },
+    "generated_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/event"
+      }
+    }
+  },
+  "$defs": {
+    "string_list": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "observed_at",
+        "source",
+        "signal_type",
+        "severity",
+        "description",
+        "proposed_target",
+        "controller",
+        "required_gates",
+        "status",
+        "rollback"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-]+$"
+        },
+        "observed_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "signal_type": {
+          "type": "string",
+          "enum": [
+            "friction",
+            "route_error",
+            "validation_failure",
+            "repeated_manual_work",
+            "external_candidate",
+            "reading_insight",
+            "user_directive",
+            "daily_audit"
+          ]
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "p0",
+            "p1",
+            "p2",
+            "p3"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "proposed_target": {
+          "type": "string",
+          "enum": [
+            "control_kernel",
+            "skill",
+            "route",
+            "schema",
+            "validator",
+            "docs",
+            "automation",
+            "obsidian",
+            "discard"
+          ]
+        },
+        "controller": {
+          "type": "string",
+          "minLength": 1
+        },
+        "required_gates": {
+          "$ref": "#/$defs/string_list"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "observed",
+            "proposed",
+            "accepted",
+            "rejected",
+            "implemented",
+            "archived"
+          ]
+        },
+        "rollback": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

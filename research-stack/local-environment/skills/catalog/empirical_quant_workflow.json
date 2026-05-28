@@ -1,0 +1,1093 @@
+{
+  "$schema": "../schemas/empirical_quant_workflow.v1.schema.json",
+  "schema_version": "empirical_quant_workflow.v1",
+  "updated_at": "2026-05-27",
+  "policy": "Quantitative social-science work is controlled by research question, estimand, identification, diagnostics, robustness, transparent code, and bounded writing. External econometrics and de-AIGC skills provide patterns, but they do not replace the local route, citation, data, figure, writing, or reproducibility gates.",
+  "source_review_refs": [
+    {
+      "upstream": "brycewang-stanford/Awesome-Agent-Skills-for-Empirical-Research",
+      "repo_url": "https://github.com/brycewang-stanford/Awesome-Agent-Skills-for-Empirical-Research",
+      "commit": "e03ff8cf62f1ce8739c4181cead149da5dd84b11",
+      "adopted_as": [
+        "AER identification-first sequence before manuscript prose",
+        "modern causal design families and referee-facing diagnostics",
+        "full empirical analysis loop for Python, R, and Stata style projects",
+        "robustness, heterogeneity, mechanism, placebo, and sensitivity matrix",
+        "replication package and README-first discipline",
+        "academic de-AI writing audit as claim-preserving surface cleanup",
+        "AER skills decision tree for RCT, RDD, DID, IV, shift-share, SCM, mechanism, and replication design choice",
+        "Stata do-file ecosystem conventions including master runner, package installer, diagnostics, logs, and table/figure exports",
+        "academic humanization usage pattern: detect first, rewrite second, second-pass audit, no detector-bypass promise"
+      ],
+      "not_adopted": [
+        "bulk installing all external empirical or humanizer skills into runtime",
+        "using AER or economics top-5 standards as default for all social-science papers",
+        "using StatsPAI or any DSL as a black box without explicit audit artifacts",
+        "guaranteeing detector bypass or editing to hide unreviewed AI-generated scholarship",
+        "copying external templates as verified methods or references",
+        "treating a de-AIGC score or detector number as the formal quality target",
+        "using Stata package lists without project-specific design, data, and replication checks"
+      ]
+    }
+  ],
+  "adoption_options": [
+    {
+      "id": "option_a_direct_install_external_skills",
+      "label": "Directly install AER, StatsPAI, and humanizer skills",
+      "decision": "reject_as_default",
+      "description": "Direct installation would expose many overlapping writing and routing triggers, making Codex choose between duplicate humanization, writing, and quant skills.",
+      "strengths": [
+        "fast to expose upstream instructions",
+        "keeps upstream language close to source"
+      ],
+      "risks": [
+        "duplicates manuscript-writing-studio and writing-quality gates",
+        "imports economics top-5 conventions as too broad a default",
+        "can make detector-oriented language look like a separate objective"
+      ]
+    },
+    {
+      "id": "option_b_contract_first_empirical_quant_integration",
+      "label": "Adapt into local empirical quant contract",
+      "decision": "selected",
+      "description": "Encode useful upstream methods as a local schema, catalog, validator, quant skill, route rule, and quality gate while preserving research-autopilot as the only router.",
+      "strengths": [
+        "keeps identification, robustness, writing, figures, and replication under one local chain",
+        "makes causal method choice and diagnostics reviewable",
+        "lets English AER patterns remain optional instead of universal",
+        "prevents humanization from changing facts, claims, citations, or uncertainty"
+      ],
+      "risks": [
+        "requires validator upkeep when new methods are added",
+        "does not expose every external helper command immediately"
+      ]
+    },
+    {
+      "id": "option_c_optional_statspai_runtime",
+      "label": "Keep StatsPAI as optional future runtime",
+      "decision": "watch",
+      "description": "StatsPAI may be useful for fast exploratory causal workflows, but it needs separate local installation, API smoke tests, and result audit before becoming a default tool.",
+      "strengths": [
+        "could speed up exploratory model routing",
+        "self-describing function API may help agent use"
+      ],
+      "risks": [
+        "DSL output can hide modeling decisions",
+        "local projects still need transparent scripts for reviewers and collaborators",
+        "package version drift can change results"
+      ]
+    },
+    {
+      "id": "option_d_no_change",
+      "label": "Leave quant analysis as a short runtime skill",
+      "decision": "reject_as_default",
+      "description": "The existing short quant-analysis skill names minimum inputs but does not encode modern identification, diagnostics, robustness, or replication contracts.",
+      "strengths": [
+        "low maintenance",
+        "simple instructions"
+      ],
+      "risks": [
+        "causal claims remain under-specified",
+        "robustness and replication are easy to postpone",
+        "writing and figure outputs can drift away from the empirical design"
+      ]
+    }
+  ],
+  "selected_strategy": "option_b_contract_first_empirical_quant_integration",
+  "workflow_modes": [
+    {
+      "id": "empirical_question_intake",
+      "label": "量化研究问题和估计目标澄清",
+      "trigger_signals": [
+        "量化研究",
+        "实证分析",
+        "回归",
+        "因果识别",
+        "计量",
+        "empirical quant"
+      ],
+      "required_inputs": [
+        "research_question",
+        "unit_of_analysis",
+        "sample_definition",
+        "outcome_variable",
+        "main_explanatory_variable",
+        "estimand_or_descriptive_goal"
+      ],
+      "required_steps": [
+        "declare whether the task is descriptive, predictive, associational, or causal",
+        "state the estimand or the statistic before selecting a model",
+        "record sample, time window, unit, treatment, outcome, controls, and clustering level",
+        "ask for missing design information before causal wording"
+      ],
+      "outputs": [
+        "empirical question card",
+        "estimand and variable map",
+        "missing inputs or blocker list"
+      ]
+    },
+    {
+      "id": "identification_strategy_audit",
+      "label": "识别策略审计",
+      "trigger_signals": [
+        "DID",
+        "IV",
+        "RDD",
+        "PSM",
+        "SCM",
+        "DML",
+        "事件研究",
+        "工具变量",
+        "断点回归",
+        "识别策略",
+        "staggered DID",
+        "Sun-Abraham",
+        "Callaway SantAnna",
+        "Borusyak Jaravel Spiess",
+        "de Chaisemartin",
+        "weak IV",
+        "Anderson-Rubin",
+        "shift-share",
+        "Bartik",
+        "DDD",
+        "triple difference",
+        "synthetic DID",
+        "generalized synthetic control",
+        "field experiment",
+        "RCT",
+        "mediation",
+        "mechanism",
+        "dose response",
+        "continuous treatment",
+        "causal forest",
+        "CATE"
+      ],
+      "required_inputs": [
+        "estimand_or_target_parameter",
+        "candidate_design_family",
+        "assignment_or_treatment_process",
+        "identifying_assumptions",
+        "available_diagnostics"
+      ],
+      "required_steps": [
+        "select a design family from design_families",
+        "write the identifying assumption in one plain sentence",
+        "run the design family's required diagnostics before prose polishing",
+        "mark old defaults such as naive TWFE, first-stage F > 10, or high-order RDD polynomials as red flags",
+        "use the design decision tree before model selection: randomized assignment, threshold, timing shock, instrument, shift-share exposure, matched observables, synthetic control, or non-causal descriptive boundary",
+        "for staggered DID, reject naive TWFE as the only estimator and require modern cohort, imputation, or interaction-weighted checks",
+        "for weak IV risk, require weak-IV robust inference or downgrade the causal claim",
+        "for shift-share designs, declare whether identification comes from exogenous shares or exogenous shocks and audit Rotemberg weights or shock-level inference"
+      ],
+      "outputs": [
+        "identification audit",
+        "red-flag list",
+        "next robustness plan"
+      ]
+    },
+    {
+      "id": "full_empirical_pipeline",
+      "label": "完整实证分析链",
+      "trigger_signals": [
+        "从清洗到建模",
+        "一条龙实证",
+        "完整实证",
+        "full empirical analysis",
+        "analysis pipeline",
+        "Stata",
+        "do file",
+        "reghdfe",
+        "csdid",
+        "ivreg2",
+        "rdrobust",
+        "esttab",
+        "stata python replication"
+      ],
+      "required_inputs": [
+        "raw_or_clean_data_path",
+        "analysis_question",
+        "data_dictionary",
+        "code_language_preference",
+        "output_format"
+      ],
+      "required_steps": [
+        "clean data and record merge validation",
+        "construct variables and declare transformations",
+        "run descriptives and diagnostic checks",
+        "estimate the selected model family",
+        "run robustness, heterogeneity, mechanism, and sensitivity checks",
+        "produce figure, table, interpretation, and reproducibility artifacts",
+        "if Stata is used, create or inspect a master do-file pipeline with relative paths, package installation, logs, deterministic seeds, and table/figure output folders",
+        "store Stata outputs beside scripts and logs so the reviewer can trace every table or figure back to a command file"
+      ],
+      "outputs": [
+        "analysis log",
+        "tables and figures",
+        "interpretation note",
+        "reproducibility checklist"
+      ]
+    },
+    {
+      "id": "robustness_and_sensitivity",
+      "label": "稳健性和敏感性矩阵",
+      "trigger_signals": [
+        "稳健性",
+        "异质性",
+        "机制",
+        "安慰剂",
+        "敏感性",
+        "robustness",
+        "placebo"
+      ],
+      "required_inputs": [
+        "main_estimate",
+        "main_specification",
+        "threat_model",
+        "available_alternative_specs",
+        "reviewer_or_coauthor_concerns"
+      ],
+      "required_steps": [
+        "write the threat model before adding checks",
+        "rank robustness checks by the threats they answer",
+        "keep main-text robustness compact and move deep variants to appendix",
+        "separate failed robustness from optional polish"
+      ],
+      "outputs": [
+        "robustness matrix",
+        "appendix structure",
+        "failed or inconclusive checks"
+      ]
+    },
+    {
+      "id": "tables_figures_and_interpretation",
+      "label": "量化表图和结果解释",
+      "trigger_signals": [
+        "回归表",
+        "描述统计表",
+        "系数图",
+        "事件研究图",
+        "结果解释",
+        "publication tables"
+      ],
+      "required_inputs": [
+        "final_model_outputs",
+        "sample_and_cluster_notes",
+        "figure_or_table_claim",
+        "target_journal_or_report"
+      ],
+      "required_steps": [
+        "make one claim per table or figure",
+        "state estimator, sample, N, standard error or confidence interval structure",
+        "keep coefficient order, stars, notes, and precision consistent",
+        "route formal figures through scientific_figure_workflow and figure_table_consistency_checked"
+      ],
+      "outputs": [
+        "publication-ready table or figure plan",
+        "caption and note text",
+        "claim-evidence-boundary interpretation"
+      ]
+    },
+    {
+      "id": "replication_package_preflight",
+      "label": "复现包预审",
+      "trigger_signals": [
+        "复现包",
+        "可复现",
+        "代码和数据",
+        "openICPSR",
+        "AEA Data",
+        "replication package"
+      ],
+      "required_inputs": [
+        "code_root",
+        "data_root_or_access_statement",
+        "expected_outputs",
+        "runtime_environment",
+        "restricted_data_boundary"
+      ],
+      "required_steps": [
+        "write README before final packaging",
+        "list every dataset, script, output table, and output figure",
+        "record software versions and rerun order",
+        "separate restricted data instructions from public replication artifacts"
+      ],
+      "outputs": [
+        "replication README checklist",
+        "script-output map",
+        "restricted data statement"
+      ]
+    },
+    {
+      "id": "academic_humanization_surface_audit",
+      "label": "学术去模板化表层审计",
+      "trigger_signals": [
+        "降 AIGC",
+        "去 AI 味",
+        "不像 AI 写的",
+        "学术去 AI 味",
+        "humanizer",
+        "stop slop",
+        "avoid AI writing"
+      ],
+      "required_inputs": [
+        "current_text",
+        "target_language",
+        "discipline_target",
+        "claim_boundary",
+        "citation_and_data_lock"
+      ],
+      "required_steps": [
+        "diagnose empty rhetoric, mechanical transitions, inflated novelty, vague attribution, and rhythm uniformity",
+        "preserve claims, data, citations, variables, uncertainty, and limitations",
+        "apply Chinese, English, or bilingual academic surface rules according to target_language",
+        "run a second audit and report remaining surface risks without promising detector bypass",
+        "choose detect-only or rewrite mode before editing",
+        "for Chinese academic prose, use the five-step loop: locate, classify, rewrite, five-dimension self-check, second-pass review",
+        "for English academic prose, use severity tiers for vague attribution, inflated novelty, causal overclaiming, generic conclusions, formulaic transitions, and rhythm uniformity",
+        "treat detector scores as external signals only; the local acceptance target is evidence-faithful, authorial academic prose"
+      ],
+      "outputs": [
+        "surface issue log",
+        "claim-preserving revised text",
+        "second-pass audit",
+        "locked-items list",
+        "severity-coded surface issue ledger",
+        "change log",
+        "detector-boundary note"
+      ]
+    }
+  ],
+  "design_families": [
+    {
+      "id": "descriptive_or_correlational",
+      "label": "描述或相关研究",
+      "use_when": "The goal is to summarize distributions, associations, group differences, or predictive patterns without causal claims.",
+      "required_inputs": [
+        "unit_of_analysis",
+        "sample_definition",
+        "variables",
+        "weights_or_sampling_design",
+        "missingness_rule"
+      ],
+      "preferred_estimators": [
+        "descriptive statistics",
+        "group comparison",
+        "correlation",
+        "OLS or GLM as association model"
+      ],
+      "required_diagnostics": [
+        "missingness_outlier_balance",
+        "measurement_validity",
+        "model_assumption_check"
+      ],
+      "red_flags": [
+        "using causal verbs such as effect or impact without a design",
+        "turning statistical significance into substantive importance",
+        "omitting sample weights when the survey design requires them"
+      ]
+    },
+    {
+      "id": "panel_fixed_effects",
+      "label": "面板固定效应",
+      "use_when": "Repeated units over time allow within-unit comparison, but treatment timing or assignment is not enough for a stronger design by itself.",
+      "required_inputs": [
+        "panel_unit",
+        "time_variable",
+        "outcome",
+        "key_regressor",
+        "fixed_effects",
+        "cluster_level"
+      ],
+      "preferred_estimators": [
+        "two-way fixed effects for association or carefully bounded causal designs",
+        "high-dimensional fixed effects",
+        "first difference when justified by the data structure"
+      ],
+      "required_diagnostics": [
+        "data_cleaning_merge_integrity",
+        "model_assumption_check",
+        "inference_cluster_power"
+      ],
+      "red_flags": [
+        "unbalanced panel ignored without explanation",
+        "standard errors clustered at the wrong level",
+        "dynamic panel bias ignored when lagged dependent variables are used"
+      ]
+    },
+    {
+      "id": "difference_in_differences",
+      "label": "双重差分和事件研究",
+      "use_when": "Treatment status changes over time for treated and comparison units, and the central assumption is counterfactual trend comparability.",
+      "required_inputs": [
+        "treatment_group",
+        "comparison_group",
+        "treatment_timing",
+        "pre_periods",
+        "post_periods",
+        "parallel_trend_argument"
+      ],
+      "preferred_estimators": [
+        "canonical 2x2 DID for single treatment date",
+        "Callaway-Sant'Anna group-time ATT for staggered adoption",
+        "Sun-Abraham event study for staggered adoption",
+        "Borusyak-Jaravel-Spiess imputation when appropriate",
+        "HonestDID sensitivity when pre-trend concerns remain"
+      ],
+      "required_diagnostics": [
+        "causal_identification_red_flags",
+        "model_assumption_check",
+        "inference_cluster_power"
+      ],
+      "red_flags": [
+        "naive TWFE as the only estimator under staggered treatment",
+        "pre-trend test treated as proof rather than evidence",
+        "no event-time support or anticipation check"
+      ]
+    },
+    {
+      "id": "instrumental_variables",
+      "label": "工具变量",
+      "use_when": "A plausibly exogenous instrument shifts the endogenous regressor but should not affect the outcome except through that regressor.",
+      "required_inputs": [
+        "endogenous_variable",
+        "instrument",
+        "first_stage_story",
+        "exclusion_restriction",
+        "cluster_level"
+      ],
+      "preferred_estimators": [
+        "2SLS with transparent first stage",
+        "LIML or GMM when justified",
+        "Anderson-Rubin or weak-IV robust confidence sets when instruments are weak"
+      ],
+      "required_diagnostics": [
+        "causal_identification_red_flags",
+        "inference_cluster_power",
+        "model_assumption_check"
+      ],
+      "red_flags": [
+        "defending exclusion only by adding controls",
+        "first-stage F > 10 used as sufficient proof in clustered modern settings",
+        "reduced form omitted from the evidence chain"
+      ]
+    },
+    {
+      "id": "regression_discontinuity",
+      "label": "断点回归",
+      "use_when": "Treatment assignment changes sharply or fuzzily at a threshold in a running variable.",
+      "required_inputs": [
+        "running_variable",
+        "cutoff",
+        "treatment_rule",
+        "bandwidth_plan",
+        "manipulation_risk"
+      ],
+      "preferred_estimators": [
+        "local linear RD with MSE-optimal bandwidth",
+        "robust bias-corrected confidence intervals",
+        "donut RD when bunching near cutoff is plausible",
+        "fuzzy RD when treatment compliance is imperfect"
+      ],
+      "required_diagnostics": [
+        "causal_identification_red_flags",
+        "missingness_outlier_balance",
+        "inference_cluster_power"
+      ],
+      "red_flags": [
+        "high-order global polynomial",
+        "no density or manipulation test",
+        "no covariate continuity check",
+        "selective bandwidth reporting"
+      ]
+    },
+    {
+      "id": "matching_weighting_and_balance",
+      "label": "匹配、加权和协变量平衡",
+      "use_when": "The design relies on observed confounder adjustment through matching, propensity scores, inverse probability weighting, or entropy balancing.",
+      "required_inputs": [
+        "treatment",
+        "outcome",
+        "pre_treatment_covariates",
+        "overlap_definition",
+        "balance_threshold"
+      ],
+      "preferred_estimators": [
+        "propensity-score matching",
+        "inverse probability weighting",
+        "entropy balancing",
+        "doubly robust estimators when assumptions support them"
+      ],
+      "required_diagnostics": [
+        "missingness_outlier_balance",
+        "measurement_validity",
+        "causal_identification_red_flags"
+      ],
+      "red_flags": [
+        "post-treatment controls used in balance adjustment",
+        "no common support or overlap plot",
+        "causal language without unconfoundedness discussion"
+      ]
+    },
+    {
+      "id": "synthetic_control_and_sdid",
+      "label": "合成控制和合成双重差分",
+      "use_when": "A small number of treated aggregate units require a transparent comparison built from weighted controls.",
+      "required_inputs": [
+        "treated_unit",
+        "donor_pool",
+        "pre_treatment_predictors",
+        "intervention_time",
+        "outcome_series"
+      ],
+      "preferred_estimators": [
+        "classic synthetic control",
+        "synthetic difference-in-differences",
+        "generalized synthetic control when panel structure supports it"
+      ],
+      "required_diagnostics": [
+        "causal_identification_red_flags",
+        "model_assumption_check",
+        "inference_cluster_power"
+      ],
+      "red_flags": [
+        "poor pre-treatment fit hidden by visual scale",
+        "donor pool includes contaminated controls",
+        "no placebo or permutation inference"
+      ]
+    },
+    {
+      "id": "machine_learning_causal",
+      "label": "机器学习辅助因果估计",
+      "use_when": "The project uses DML, causal forests, meta-learners, or text-based causal features while still making a causal claim.",
+      "required_inputs": [
+        "target_estimand",
+        "treatment",
+        "outcome",
+        "covariates_or_text_features",
+        "sample_splitting_plan"
+      ],
+      "preferred_estimators": [
+        "double machine learning",
+        "causal forest",
+        "meta-learners",
+        "text causal models only with transparent feature construction"
+      ],
+      "required_diagnostics": [
+        "measurement_validity",
+        "causal_identification_red_flags",
+        "model_assumption_check"
+      ],
+      "red_flags": [
+        "benchmark performance substituted for identification",
+        "text features used without measurement validity review",
+        "black-box heterogeneity presented as mechanism"
+      ]
+    },
+    {
+      "id": "shift_share_bartik",
+      "label": "Shift-share 和 Bartik 设计",
+      "use_when": "Units have different baseline exposure shares and external shocks generate plausibly exogenous variation in treatment intensity.",
+      "required_inputs": [
+        "baseline_exposure_shares",
+        "external_shocks",
+        "share_time_reference",
+        "shock_source",
+        "outcome",
+        "cluster_or_shock_level"
+      ],
+      "preferred_estimators": [
+        "Bartik or shift-share IV with transparent share and shock construction",
+        "Rotemberg weight audit when identification relies on exposure shares",
+        "shock-level inference when identification relies on exogenous shocks",
+        "leave-one-out or industry-region exclusion checks when appropriate"
+      ],
+      "required_diagnostics": [
+        "causal_identification_red_flags",
+        "measurement_validity",
+        "inference_cluster_power",
+        "model_assumption_check"
+      ],
+      "red_flags": [
+        "current or post-treatment shares used as baseline exposure",
+        "top Rotemberg weights hidden or dominated by a few shocks",
+        "shock exogeneity asserted without source and timing evidence",
+        "ordinary unit-level standard errors used when shock-level inference is required"
+      ]
+    },
+    {
+      "id": "triple_difference",
+      "label": "三重差分 DDD",
+      "use_when": "A third comparison dimension can remove residual confounding that ordinary DID cannot credibly handle.",
+      "required_inputs": [
+        "treated_group",
+        "comparison_group",
+        "third_difference_dimension",
+        "treatment_timing",
+        "pre_periods",
+        "post_periods",
+        "parallel_trend_argument_by_dimension"
+      ],
+      "preferred_estimators": [
+        "DDD with transparent three-way interaction interpretation",
+        "event-study DDD when timing and support allow",
+        "modern staggered-DID extension when treatment adoption is staggered"
+      ],
+      "required_diagnostics": [
+        "causal_identification_red_flags",
+        "model_assumption_check",
+        "inference_cluster_power"
+      ],
+      "red_flags": [
+        "third difference dimension chosen after seeing results",
+        "baseline differences across the third dimension left unexplained",
+        "interaction coefficient interpreted without reconstructing the comparison cells",
+        "support missing for one of the treatment-time-dimension cells"
+      ]
+    },
+    {
+      "id": "rct_or_field_experiment",
+      "label": "随机实验和田野实验",
+      "use_when": "Treatment assignment is randomized, lottery-based, or experimentally manipulated with a pre-specified design.",
+      "required_inputs": [
+        "randomization_unit",
+        "treatment_arms",
+        "assignment_protocol",
+        "power_or_sample_plan",
+        "attrition_record",
+        "pre_analysis_plan_or_reason_missing"
+      ],
+      "preferred_estimators": [
+        "intention-to-treat estimate",
+        "treatment-on-the-treated with compliance design when justified",
+        "randomization inference",
+        "multiple-hypothesis adjusted families"
+      ],
+      "required_diagnostics": [
+        "missingness_outlier_balance",
+        "measurement_validity",
+        "inference_cluster_power",
+        "causal_identification_red_flags"
+      ],
+      "red_flags": [
+        "differential attrition ignored",
+        "unregistered outcome switching hidden",
+        "cluster randomization analyzed as individual randomization",
+        "multiple outcomes reported without adjustment or family definition"
+      ]
+    },
+    {
+      "id": "dose_response_or_continuous_treatment",
+      "label": "连续处理、剂量反应和强度效应",
+      "use_when": "The treatment varies by intensity, duration, dose, or exposure level rather than a simple treated/control indicator.",
+      "required_inputs": [
+        "continuous_treatment_measure",
+        "dose_timing",
+        "outcome",
+        "confounder_set",
+        "functional_form_plan",
+        "overlap_or_support_check"
+      ],
+      "preferred_estimators": [
+        "dose-response curve with transparent functional form",
+        "generalized propensity score or weighting when assumptions support it",
+        "spline or binning sensitivity",
+        "marginal effect plots with uncertainty intervals"
+      ],
+      "required_diagnostics": [
+        "measurement_validity",
+        "missingness_outlier_balance",
+        "model_assumption_check",
+        "causal_identification_red_flags"
+      ],
+      "red_flags": [
+        "linear dose effect assumed without support",
+        "extreme doses drive the conclusion",
+        "post-treatment variables used as dose controls",
+        "marginal effects plotted without uncertainty or support range"
+      ]
+    },
+    {
+      "id": "mechanism_mediation_and_distributional_effects",
+      "label": "机制、中介、分布效应和异质性",
+      "use_when": "The project needs to explain channels, subgroup variation, distributional change, CATE, or quantile effects after the main design is established.",
+      "required_inputs": [
+        "main_design_family",
+        "main_estimate",
+        "mechanism_or_mediator",
+        "subgroup_or_quantile_plan",
+        "pre_treatment_status_of_moderators",
+        "multiple_testing_plan"
+      ],
+      "preferred_estimators": [
+        "theory-predicted heterogeneity analysis",
+        "mechanism outcomes and alternative-channel tests",
+        "causal mediation only when sequential assumptions are defendable",
+        "quantile or distributional treatment effects",
+        "CATE or causal forest as exploratory heterogeneity with validation"
+      ],
+      "required_diagnostics": [
+        "causal_identification_red_flags",
+        "measurement_validity",
+        "inference_cluster_power",
+        "model_assumption_check"
+      ],
+      "red_flags": [
+        "post-treatment mediator treated as if randomly assigned",
+        "subgroups selected only because they are significant",
+        "heterogeneity presented as mechanism",
+        "black-box CATE described as theory without validation"
+      ]
+    }
+  ],
+  "diagnostics": [
+    {
+      "id": "data_cleaning_merge_integrity",
+      "label": "数据清洗与合并完整性",
+      "purpose": "Prevent silent sample changes, duplicate units, many-to-many merge errors, and unstable panel definitions.",
+      "checks": [
+        "row counts before and after each merge",
+        "unique key and duplicate checks",
+        "sample inclusion and exclusion log",
+        "panel balance and time coverage"
+      ],
+      "failure_action": "Stop modeling and produce a data-cleaning blocker report."
+    },
+    {
+      "id": "missingness_outlier_balance",
+      "label": "缺失、异常值和平衡",
+      "purpose": "Record missingness, outlier handling, transformations, and treatment-control balance before interpreting estimates.",
+      "checks": [
+        "missingness by variable and group",
+        "outlier rule and winsorization threshold",
+        "distribution plots or summary differences",
+        "standardized mean differences when treatment comparison is used"
+      ],
+      "failure_action": "Downgrade conclusions or rerun cleaning and balance checks before causal interpretation."
+    },
+    {
+      "id": "measurement_validity",
+      "label": "测量效度",
+      "purpose": "Confirm that variables, proxies, coding rules, and constructed indicators actually correspond to the theoretical concept.",
+      "checks": [
+        "variable definition and source",
+        "proxy limitation",
+        "coding or scale construction rule",
+        "concept-to-measurement mapping"
+      ],
+      "failure_action": "Mark the variable as provisional and avoid strong substantive interpretation."
+    },
+    {
+      "id": "model_assumption_check",
+      "label": "模型假设和设定诊断",
+      "purpose": "Check model assumptions that matter for the selected family rather than running generic tests mechanically.",
+      "checks": [
+        "heteroskedasticity or robust standard errors",
+        "serial correlation or clustering",
+        "multicollinearity when interpretation depends on coefficients",
+        "functional-form and influential-observation review"
+      ],
+      "failure_action": "Revise the model, change inference, or explicitly state the limitation."
+    },
+    {
+      "id": "causal_identification_red_flags",
+      "label": "因果识别红线",
+      "purpose": "Catch design-level weaknesses before writing causal claims or polishing the manuscript.",
+      "checks": [
+        "identifying assumption written plainly",
+        "assignment or treatment process documented",
+        "placebo, pre-trend, density, weak-IV, overlap, or donor-pool diagnostics as applicable",
+        "old default methods flagged when modern replacements are required"
+      ],
+      "failure_action": "Block causal wording and return to identification_strategy_audit."
+    },
+    {
+      "id": "inference_cluster_power",
+      "label": "推断、聚类和统计功效",
+      "purpose": "Ensure uncertainty statements match the design, clusters, sample size, and precision limits.",
+      "checks": [
+        "standard error or confidence interval type",
+        "cluster count and clustering level",
+        "small-sample or wild bootstrap need",
+        "precision and minimum detectable effect when relevant"
+      ],
+      "failure_action": "Report imprecision as a result boundary rather than a language problem."
+    }
+  ],
+  "robustness_ladder": [
+    {
+      "id": "specification_gradient",
+      "label": "规格梯度",
+      "purpose": "Show how estimates change as controls, fixed effects, samples, and inference choices are added.",
+      "required_for": [
+        "descriptive_or_correlational",
+        "panel_fixed_effects",
+        "difference_in_differences",
+        "instrumental_variables"
+      ],
+      "outputs": [
+        "M1-M6 model table or equivalent",
+        "short interpretation of estimate movement"
+      ]
+    },
+    {
+      "id": "alternative_estimators",
+      "label": "替代估计器",
+      "purpose": "Use methodologically appropriate alternatives when a design has known fragile defaults.",
+      "required_for": [
+        "difference_in_differences",
+        "instrumental_variables",
+        "regression_discontinuity",
+        "synthetic_control_and_sdid",
+        "machine_learning_causal",
+        "shift_share_bartik",
+        "triple_difference",
+        "dose_response_or_continuous_treatment"
+      ],
+      "outputs": [
+        "alternative estimator table",
+        "method choice note"
+      ]
+    },
+    {
+      "id": "placebo_negative_control",
+      "label": "安慰剂和负控",
+      "purpose": "Test whether the claimed design detects effects where it should not.",
+      "required_for": [
+        "difference_in_differences",
+        "regression_discontinuity",
+        "synthetic_control_and_sdid",
+        "matching_weighting_and_balance",
+        "shift_share_bartik",
+        "triple_difference",
+        "rct_or_field_experiment"
+      ],
+      "outputs": [
+        "placebo result",
+        "negative-control interpretation"
+      ]
+    },
+    {
+      "id": "heterogeneity_mechanism",
+      "label": "异质性和机制",
+      "purpose": "Separate subgroup variation, mechanism evidence, and exploratory patterns from the main causal claim.",
+      "required_for": [
+        "all_design_families"
+      ],
+      "outputs": [
+        "heterogeneity map",
+        "mechanism evidence boundary",
+        "multiple-testing or exploratory-status note",
+        "mechanism versus heterogeneity distinction"
+      ]
+    },
+    {
+      "id": "sensitivity_bounds",
+      "label": "敏感性边界",
+      "purpose": "Quantify how strong violations or hidden bias would need to be to overturn the main conclusion.",
+      "required_for": [
+        "difference_in_differences",
+        "instrumental_variables",
+        "matching_weighting_and_balance",
+        "machine_learning_causal",
+        "shift_share_bartik",
+        "triple_difference",
+        "mechanism_mediation_and_distributional_effects"
+      ],
+      "outputs": [
+        "sensitivity result",
+        "robust-or-fragile judgment"
+      ]
+    },
+    {
+      "id": "publication_ready_output",
+      "label": "发表级输出",
+      "purpose": "Make empirical results readable, auditable, and aligned with text, figures, tables, and replication materials.",
+      "required_for": [
+        "all_design_families"
+      ],
+      "outputs": [
+        "table and figure notes",
+        "claim-evidence-boundary paragraph",
+        "replication artifact map",
+        "Stata/Python/R script-output map when code generated results"
+      ]
+    }
+  ],
+  "output_contract": {
+    "quality_gate_report": "logs/quality-gates/empirical-quant-report.json",
+    "required_artifacts": [
+      "empirical question card",
+      "design family selection",
+      "identification or descriptive boundary note",
+      "diagnostics checklist",
+      "robustness matrix",
+      "figure/table output map",
+      "reproducibility checklist",
+      "tool ecosystem or code-language declaration"
+    ],
+    "optional_artifacts": [
+      "DAG or causal graph note",
+      "model comparison table",
+      "specification curve",
+      "replication README draft",
+      "AER or AEJ venue fit note",
+      "surface humanization audit",
+      "Stata do-file pipeline map",
+      "weak-IV inference note",
+      "Rotemberg or shock-level inference note",
+      "staggered DID estimator comparison",
+      "academic humanization second-pass audit"
+    ],
+    "accepted_statuses": [
+      "pass",
+      "revise",
+      "block"
+    ]
+  },
+  "safety_rules": [
+    {
+      "id": "no_causal_language_without_design",
+      "rule": "Do not write effect, impact, causes, or mechanism language unless the design family and identifying assumptions support it.",
+      "failure_action": "Downgrade to association language or return to identification_strategy_audit."
+    },
+    {
+      "id": "no_dsl_black_box_without_audit",
+      "rule": "StatsPAI or any one-shot DSL can be used only when the inputs, estimand, estimator, diagnostics, and output scripts are recorded in auditable artifacts.",
+      "failure_action": "Rerun through explicit Python, R, Stata, or documented pipeline code before formal delivery."
+    },
+    {
+      "id": "no_generated_results_without_data",
+      "rule": "Do not generate tables, figures, p-values, sample sizes, effect sizes, or robustness outcomes without real user-provided or verified data outputs.",
+      "failure_action": "Return a template or analysis plan and ask for data or model outputs."
+    },
+    {
+      "id": "no_ai_humanization_claim_or_evidence_change",
+      "rule": "Academic de-AI or humanization edits may only change wording, rhythm, and paragraph surface; facts, citations, variables, estimates, uncertainty, and limitations are locked.",
+      "failure_action": "Reject the edit or produce a flagged diff for user confirmation."
+    },
+    {
+      "id": "no_detector_evasion_guarantee",
+      "rule": "Do not promise to bypass Turnitin, CNKI AMLC, GPTZero, or any detector. The allowed objective is rigorous, authorial, non-template academic prose with traceable evidence.",
+      "failure_action": "Reframe the task as writing-quality and academic-integrity cleanup."
+    },
+    {
+      "id": "project_outputs_not_global_outputs",
+      "rule": "Empirical outputs, downloaded data, figures, and replication artifacts belong in the current project output tree, not in a shared global inbox, unless the task is an environment smoke test.",
+      "failure_action": "Ask for or infer the project root before writing artifacts."
+    },
+    {
+      "id": "no_detector_metric_as_goal",
+      "rule": "AIGC, detector, or similarity numbers are not the local objective. The accepted objective is evidence-faithful, authorial academic prose with locked facts, citations, variables, estimates, uncertainty, and limitations.",
+      "failure_action": "Reframe the request as academic writing-quality cleanup and report detector-related language as an external, non-guaranteed signal."
+    },
+    {
+      "id": "no_naive_twfe_as_staggered_default",
+      "rule": "When treatment timing is staggered, naive TWFE or a basic event-study regression cannot be the only DID evidence. Modern DID diagnostics or a justified non-causal downgrade are required.",
+      "failure_action": "Return to identification_strategy_audit and add cohort, imputation, interaction-weighted, Bacon, or HonestDID checks as appropriate."
+    },
+    {
+      "id": "no_stata_output_without_script_trace",
+      "rule": "Stata tables, figures, and estimates are not accepted as formal outputs unless the project records the do-file, command family, log, and output path that produced them.",
+      "failure_action": "Ask for the do-file or produce a Stata pipeline scaffold before accepting the output into the manuscript or replication package."
+    },
+    {
+      "id": "no_economics_standard_as_universal_default",
+      "rule": "AER, AEJ, applied-microeconometrics, and economics-specific standards are conditional enhancement rules. They must not override local Chinese social-science, humanities, qualitative, descriptive, or project-specific standards when the task does not require them.",
+      "failure_action": "Return to research-autopilot route selection and declare why the empirical-quant or economics-style standard is actually relevant before applying it."
+    },
+    {
+      "id": "no_stata_default_without_project_need",
+      "rule": "Stata support is enabled only when the project already uses Stata, collaborators or reviewers require Stata, a replication package needs .do files, or the user asks for Stata. Do not convert a Python, R, Excel, or supplied-output workflow to Stata by default.",
+      "failure_action": "Keep the existing project tool chain and record Stata as optional rather than mandatory."
+    }
+  ],
+  "tool_ecosystems": [
+    {
+      "id": "stata_aer_replication_pipeline",
+      "label": "Stata 计量与复现 do-file 生态",
+      "use_when": "Use only when the project already uses Stata, collaborators or reviewers require Stata, the replication package needs .do files, or the user asks for Stata-based applied microeconometrics output.",
+      "required_conventions": [
+        "master script run_all.do controls the whole run order",
+        "every do-file starts with version declaration, set more off, set varabbrev off, and deterministic seed when random steps exist",
+        "paths are relative to project root; no personal C: or D: hardcoded paths in shareable scripts",
+        "00_globals.do declares input, intermediate, table, figure, log, and temp folders",
+        "00_install_packages.do installs or checks user-written packages",
+        "logs are written for the full run and for major model stages",
+        "tables and figures are exported through traceable commands and mapped back to scripts"
+      ],
+      "core_packages_or_commands": [
+        "reghdfe",
+        "ftools",
+        "ivreg2",
+        "ranktest",
+        "weakivtest",
+        "ivreghdfe",
+        "csdid",
+        "drdid",
+        "did_imputation",
+        "did_multiplegt",
+        "did_multiplegt_dyn",
+        "eventstudyinteract",
+        "bacondecomp",
+        "honestdid",
+        "rdrobust",
+        "rddensity",
+        "synth",
+        "synth_runner",
+        "synth2",
+        "scul",
+        "psmatch2",
+        "teffects",
+        "ebalance",
+        "cem",
+        "ppmlhdfe",
+        "boottest",
+        "ritest",
+        "rwolf",
+        "wyoung",
+        "psacalc",
+        "xtserial",
+        "xttest3",
+        "xtcsd",
+        "esttab",
+        "estout",
+        "outreg2",
+        "asdoc",
+        "asdocx",
+        "coefplot",
+        "binscatter",
+        "heatplot"
+      ],
+      "pipeline_files": [
+        "run_all.do",
+        "00_globals.do",
+        "00_install_packages.do",
+        "01_clean.do",
+        "02_descriptives.do",
+        "03_main_models.do",
+        "03_main_did.do",
+        "04_robustness.do",
+        "05_heterogeneity_mechanism.do",
+        "06_tables.do",
+        "07_figures.do",
+        "README-replication.md"
+      ],
+      "outputs": [
+        "Stata run log",
+        "package install log",
+        "analysis table exports",
+        "figure exports",
+        "script-output map",
+        "replication README draft"
+      ],
+      "red_flags": [
+        "only pasted Stata output without the command that produced it",
+        "hardcoded local paths in shareable scripts",
+        "manual table edits not recorded in the script-output map",
+        "package list copied from a template without checking the actual design family",
+        "TWFE event-study output delivered without modern DID diagnostics when treatment is staggered",
+        "switching a working Python, R, Excel, or supplied-output workflow into Stata without project need"
+      ]
+    }
+  ]
+}

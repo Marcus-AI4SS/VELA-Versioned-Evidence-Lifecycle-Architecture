@@ -1,0 +1,428 @@
+{
+  "$schema": "../schemas/scholar_browser_patterns.v1.schema.json",
+  "schema_version": "scholar_browser_patterns.v1",
+  "generated_at": "2026-05-26",
+  "policy": {
+    "default_route": "reference-fulltext-acquisition",
+    "allowed_role": "Browser-visible academic search pages may be used as candidate sensors, full-text link sensors, citation-chain sensors, and metadata-export sensors under the unified full-text acquisition and evidence verification workflow.",
+    "forbidden_role": "They must not become an independent citation verifier, Zotero writer, paywall bypass, captcha bypass, cookie exporter, or high-frequency scraper.",
+    "must_stop_for": [
+      "captcha",
+      "login_required",
+      "sms_or_account_challenge",
+      "institutional_access_required",
+      "download_permission_missing",
+      "source_identity_mismatch"
+    ]
+  },
+  "systems": [
+    {
+      "system_id": "cnki",
+      "upstream": "cookjohn/cnki-skills",
+      "repo_url": "https://github.com/cookjohn/cnki-skills",
+      "decision": "adapt",
+      "absorbed_into": [
+        "skills/scripts/envctl/cnki_zotero.py",
+        "skills/catalog/cnki_zotero_workflow.json",
+        "skills/plugins/research-autopilot/skills/reference-fulltext-acquisition",
+        "skills/plugins/research-autopilot/skills/research-autopilot"
+      ],
+      "accepted_patterns": [
+        "single async DOM script per browser operation where feasible",
+        "direct navigation to detail pages instead of clicking result links that spawn extra tabs",
+        "old-style advanced search page for source category filters",
+        "author plus affiliation fields before author-institution downloads",
+        "visible Tencent captcha detection by #tcaptcha_transform_dy position",
+        "result-table checkbox value as export metadata id",
+        "batch export metadata from search results before Zotero planning",
+        "journal indexing lookup as a candidate quality signal"
+      ],
+      "rejected_patterns": [
+        "copying Claude slash-command skills into the local Codex runtime",
+        "direct Zotero write before local import plan review",
+        "saving browser cookies or login state",
+        "using CNKI export metadata as DOI verification",
+        "downloading before author-affiliation evidence is present",
+        "bypassing login, captcha, paywall, or institutional access restrictions"
+      ],
+      "entry_urls": [
+        "https://kns.cnki.net/kns8s/search",
+        "https://kns.cnki.net/kns/AdvSearch?classid=7NS01R8M",
+        "https://navi.cnki.net/knavi"
+      ],
+      "primary_keys": [
+        "input.cbItem value as cnki_export_id",
+        "detail_url from td.name a.fz14",
+        "dbcode/dbname/filename when a detail page exposes them",
+        "title plus source plus year for fallback matching"
+      ],
+      "captcha_detection": [
+        "#tcaptcha_transform_dy exists and getBoundingClientRect().top >= 0",
+        "page title or URL indicates security verification",
+        "visible text contains a slider verification instruction"
+      ],
+      "local_smoke_test": {
+        "tested_at": "2026-05-26",
+        "environment": "D-repo local environment, Playwright MCP browser smoke only, no source-file writes, no full-text download, no Zotero write.",
+        "result": "pass",
+        "passed_checks": [
+          "CNKI basic search page loaded after visible security gate cleared in the session.",
+          "Basic search selectors input.search-input and input.search-btn returned structured result rows.",
+          "Result extraction returned title, href, authors, journal, date, download count, and input.cbItem export ids.",
+          "Old-style advanced search URL exposed #txt_1_value1 and source-category checkboxes #SCI, #EI, #hx, #CSSCI, #CSCD, #gjAll.",
+          "CSSCI advanced search for 社会资本 returned result count and rows with no automated download."
+        ],
+        "blocked_checks": [
+          "Actual PDF or CAJ download was not run in this smoke because it would acquire copyrighted full text.",
+          "Zotero push scripts were not used; Zotero writes remain behind ingest-plan and explicit import."
+        ],
+        "not_tested_checks": [
+          "High-volume batch download throughput.",
+          "User-side slider completion followed by resume in the same run."
+        ]
+      },
+      "result_fields": [
+        {
+          "name": "title",
+          "selector": "td.name a.fz14",
+          "purpose": "candidate title and detail-page navigation",
+          "required": true
+        },
+        {
+          "name": "cnki_export_id",
+          "selector": ".result-table-list tbody input.cbItem",
+          "purpose": "batch metadata export from results page",
+          "required": false
+        },
+        {
+          "name": "authors",
+          "selector": "td.author a.KnowledgeNetLink",
+          "purpose": "candidate authors and author gate",
+          "required": true
+        },
+        {
+          "name": "source",
+          "selector": "td.source a",
+          "purpose": "journal or source matching",
+          "required": false
+        },
+        {
+          "name": "published_at",
+          "selector": "td.date",
+          "purpose": "year/date matching",
+          "required": false
+        },
+        {
+          "name": "citation_count",
+          "selector": "td.quote",
+          "purpose": "sort and screening signal, not formal quality proof",
+          "required": false
+        },
+        {
+          "name": "download_count",
+          "selector": "td.download",
+          "purpose": "screening signal only",
+          "required": false
+        },
+        {
+          "name": "detail_affiliations",
+          "selector": ".brief h3.author:nth-of-type(2) a",
+          "purpose": "author-affiliation evidence before restricted downloads",
+          "required": false
+        }
+      ],
+      "actions": [
+        {
+          "id": "basic_search",
+          "purpose": "Find CNKI candidates by subject, keyword, title, author, affiliation, fulltext, or DOI.",
+          "method": "direct_cdp",
+          "selectors_or_params": [
+            "korder=SU",
+            "korder=KY",
+            "korder=TI",
+            "korder=AU",
+            "korder=AF",
+            "korder=FT",
+            "korder=DOI"
+          ],
+          "notes": [
+            "Use envctl cnki-zotero find or fetch instead of standalone slash commands.",
+            "Downloaded files must go to the active project outputs/inbox/cnki-downloads when a project root exists."
+          ]
+        },
+        {
+          "id": "advanced_search_with_source_category",
+          "purpose": "Filter Chinese candidates by field, date, source category, author, journal, and author affiliation.",
+          "method": "navigate_plus_evaluate_script",
+          "selectors_or_params": [
+            "#txt_1_value1",
+            "#au_1_value1",
+            "#au_1_value2",
+            "#magazine_value1",
+            "#SCI",
+            "#EI",
+            "#hx",
+            "#CSSCI",
+            "#CSCD",
+            "#startYear",
+            "#endYear"
+          ],
+          "notes": [
+            "The old-style advanced search URL is required when source category checkboxes are needed.",
+            "For author plus institution requests, author-only search is not sufficient."
+          ]
+        },
+        {
+          "id": "detail_metadata",
+          "purpose": "Read full candidate metadata, abstract, keywords, fund, classification, DOI, and affiliation text.",
+          "method": "direct_cdp",
+          "selectors_or_params": [
+            ".brief h1",
+            ".brief h3.author",
+            ".abstract-text",
+            "p.keywords",
+            "p.funds",
+            ".clc-code",
+            "#pdfDown",
+            "#cajDown"
+          ],
+          "notes": [
+            "Detail-page evidence can satisfy the author-affiliation gate.",
+            "DOI found on the page must still be verified by the citation gate before formal writing."
+          ]
+        },
+        {
+          "id": "authorized_download",
+          "purpose": "Trigger PDF or CAJ downloads only in the user's already-authorized browser session.",
+          "method": "direct_cdp",
+          "selectors_or_params": [
+            "#pdfDown",
+            ".btn-dlpdf a",
+            "#cajDown",
+            ".btn-dlcaj a",
+            ".downloadlink.icon-notlogged"
+          ],
+          "notes": [
+            "Do not persist cookies.",
+            "Stop on visible captcha, login failure, or missing permission.",
+            "Use referrer-preserving browser navigation where direct URL navigation is required."
+          ]
+        },
+        {
+          "id": "batch_export_metadata",
+          "purpose": "Collect CNKI export metadata from the result page without visiting every detail page.",
+          "method": "metadata_export_only",
+          "selectors_or_params": [
+            "https://kns.cnki.net/dm8/API/GetExport",
+            "input.cbItem",
+            "displaymode=GBTREFER,elearning,EndNote",
+            "uniplatform=NZKPT"
+          ],
+          "notes": [
+            "Exported metadata is a Zotero planning input, not final citation verification.",
+            "Use local import plans before any Zotero write."
+          ]
+        },
+        {
+          "id": "journal_index_lookup",
+          "purpose": "Check journal inclusion labels and basic evaluation fields for Chinese venue screening.",
+          "method": "navigate_plus_evaluate_script",
+          "selectors_or_params": [
+            "h3.titbox",
+            "ISSN",
+            "CN",
+            "复合影响因子",
+            "综合影响因子",
+            "北大核心",
+            "CSSCI",
+            "CSCD",
+            "SCI",
+            "EI"
+          ],
+          "notes": [
+            "Journal inclusion is a screening signal and must not replace article-level verification."
+          ]
+        }
+      ]
+    },
+    {
+      "system_id": "google_scholar",
+      "upstream": "cookjohn/gs-skills",
+      "repo_url": "https://github.com/cookjohn/gs-skills",
+      "decision": "adapt",
+      "absorbed_into": [
+        "skills/plugins/research-autopilot/skills/reference-fulltext-acquisition",
+        "skills/plugins/research-autopilot/skills/evidence-based-literature-workflow",
+        "skills/plugins/research-autopilot/skills/research-autopilot",
+        "skills/catalog/route_mcp_activation_policy.json"
+      ],
+      "accepted_patterns": [
+        "Google Scholar data-cid as the browser-session primary key",
+        "advanced query parameters for author, publication, exact phrase, title-only, and year filters",
+        "right-side PDF/HTML link extraction as a full-text candidate sensor",
+        "cited-by navigation through the cites parameter for downstream literature discovery",
+        "BibTeX retrieval by navigation when CORS blocks direct fetch",
+        "captcha-aware stop-and-resume behavior",
+        "low-frequency visible-browser operation rather than high-frequency scraping"
+      ],
+      "rejected_patterns": [
+        "Sci-Hub or other bypass links",
+        "treating Google Scholar metadata as DOI or publication verification",
+        "batch PDF harvesting without OpenAlex/Crossref/Unpaywall/Semantic Scholar first",
+        "automatic CAPTCHA retry loops",
+        "direct Zotero writes before citation evidence and import planning"
+      ],
+      "entry_urls": [
+        "https://scholar.google.com/schhp?hl=zh-CN&as_sdt=0,5",
+        "https://scholar.google.com/scholar"
+      ],
+      "primary_keys": [
+        "data-cid attribute on .gs_r.gs_or.gs_scl",
+        "citedByUrl href containing cites=",
+        "versionsUrl href containing cluster=",
+        "exact verified title for per-paper fallback"
+      ],
+      "captcha_detection": [
+        "#gs_captcha_ccl exists",
+        "page text contains unusual traffic",
+        "visible Google verification page appears"
+      ],
+      "local_smoke_test": {
+        "tested_at": "2026-05-26",
+        "environment": "D-repo local environment, Playwright MCP browser smoke only, no source-file writes, no full-text download, no Zotero write.",
+        "result": "blocked",
+        "passed_checks": [
+          "Google Scholar page navigation reached a visible Scholar page.",
+          "The upstream captcha-detection script correctly returned a captcha stop instead of scraping or retrying.",
+          "Local policy rejection of Sci-Hub and bypass links was confirmed from upstream gs-fulltext review."
+        ],
+        "blocked_checks": [
+          "Live result extraction, data-cid follow-up, and right-side PDF extraction were blocked by the current Google Scholar verification page.",
+          "Chrome DevTools MCP list_pages timed out in this session, so upstream's exact chrome-devtools tool path was not considered locally reliable."
+        ],
+        "not_tested_checks": [
+          "Cited-by navigation with a live data-cid.",
+          "BibTeX export through scholar.googleusercontent.com.",
+          "Google Scholar right-side PDF click after a user-cleared verification state."
+        ]
+      },
+      "result_fields": [
+        {
+          "name": "title",
+          "selector": ".gs_rt a",
+          "purpose": "candidate title and publisher page",
+          "required": true
+        },
+        {
+          "name": "authors_source_year",
+          "selector": ".gs_a",
+          "purpose": "rough metadata for screening, not final citation verification",
+          "required": false
+        },
+        {
+          "name": "data_cid",
+          "selector": ".gs_r.gs_or.gs_scl[data-cid]",
+          "purpose": "primary key for citation tracking, versions, and export",
+          "required": true
+        },
+        {
+          "name": "cited_by",
+          "selector": ".gs_fl a[href*=\"cites\"]",
+          "purpose": "citation chasing and screening signal",
+          "required": false
+        },
+        {
+          "name": "right_fulltext",
+          "selector": ".gs_ggs a, .gs_or_ggsm a",
+          "purpose": "right-side PDF/HTML full-text candidate link",
+          "required": false
+        },
+        {
+          "name": "snippet",
+          "selector": ".gs_rs",
+          "purpose": "screening context only",
+          "required": false
+        }
+      ],
+      "actions": [
+        {
+          "id": "basic_or_advanced_search",
+          "purpose": "Find broad or filtered Google Scholar candidates after formal/open metadata routes are insufficient.",
+          "method": "navigate_plus_evaluate_script",
+          "selectors_or_params": [
+            "q",
+            "as_sauthors",
+            "as_publication",
+            "as_ylo",
+            "as_yhi",
+            "as_epq",
+            "as_oq",
+            "as_eq",
+            "as_occt=title",
+            "num=10"
+          ],
+          "notes": [
+            "Keep result pages small to reduce verification challenges.",
+            "Google Scholar records can support DOI-waiver evidence only after author, year, title, and source are checked."
+          ]
+        },
+        {
+          "id": "right_pdf_candidate",
+          "purpose": "Find and click right-side PDF/HTML links for unresolved English or international full texts.",
+          "method": "navigate_plus_evaluate_script",
+          "selectors_or_params": [
+            ".gs_ggs a",
+            ".gs_or_ggsm a",
+            "cluster=",
+            "title + DOI",
+            "title + first author",
+            "title + journal"
+          ],
+          "notes": [
+            "Use only after batch OpenAlex/Crossref/Unpaywall/Semantic Scholar attempts fail.",
+            "Every downloaded file still needs PDF identity validation before it is marked acquired."
+          ]
+        },
+        {
+          "id": "cited_by",
+          "purpose": "Follow downstream citations using the data-cid cites parameter.",
+          "method": "navigate_plus_evaluate_script",
+          "selectors_or_params": [
+            "scholar?cites={data_cid}",
+            "#gs_res_ccl .gs_r.gs_or.gs_scl"
+          ],
+          "notes": [
+            "Use for literature discovery and source expansion, not as a quality proof by itself."
+          ]
+        },
+        {
+          "id": "bibtex_metadata",
+          "purpose": "Retrieve BibTeX for candidate metadata review when no better export exists.",
+          "method": "metadata_export_only",
+          "selectors_or_params": [
+            "scholar?q=info:{data_cid}:scholar.google.com/&output=cite",
+            "#gs_citi a",
+            "scholar.googleusercontent.com"
+          ],
+          "notes": [
+            "Navigate to the BibTeX URL when browser CORS blocks direct fetch.",
+            "BibTeX from Google Scholar usually lacks DOI and abstract; it is not final metadata verification."
+          ]
+        },
+        {
+          "id": "captcha_stop_and_resume",
+          "purpose": "Stop automated Scholar activity when verification appears and resume only after user confirmation.",
+          "method": "manual_user_step",
+          "selectors_or_params": [
+            "#gs_captcha_ccl",
+            "unusual traffic"
+          ],
+          "notes": [
+            "Do not auto-retry loops.",
+            "Resume from the failed-item queue rather than restarting the whole batch."
+          ]
+        }
+      ]
+    }
+  ]
+}

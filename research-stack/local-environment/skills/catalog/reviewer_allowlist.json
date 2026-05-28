@@ -1,0 +1,16 @@
+{
+  "allowed_skills_mcp": [
+    "citation-verifier",
+    "academic-paper-review",
+    "openalex-mcp",
+    "semantic-scholar-mcp",
+    "agent-browser",
+    "chrome-devtools",
+    "playwright-mcp",
+    "figma-dev-mode-mcp"
+  ],
+  "disallowed_due_to_side_effects": [
+    "zotero-mcp",
+    "social-platform-mcp"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marcus-ai4ss.github.io/VELA/schemas/vela.codex.handoff.v1.schema.json",
+  "title": "VELA Codex handoff",
+  "type": "object",
+  "required": ["schema_version", "handoff_id", "created_at", "scope", "constraints", "expected_output", "review_standard", "completion"],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": { "const": "vela.codex.handoff.v1" },
+    "handoff_id": { "type": "string", "minLength": 1 },
+    "created_at": { "type": "string" },
+    "scope": {
+      "type": "object",
+      "required": ["task", "relevant_files"],
+      "additionalProperties": true
+    },
+    "constraints": { "type": "array" },
+    "expected_output": { "type": "object" },
+    "review_standard": { "type": "array" },
+    "completion": { "type": "object" }
+  }
+}

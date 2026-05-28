@@ -18,6 +18,12 @@ VELA = **Versioned Evidence Lifecycle Architecture**. It gives Codex a bounded, 
 
 VELA is not a desktop app, chat interface, paper generator, citation manager, hidden autonomous agent, or private memory store. VELA prepares bounded work for Codex; Codex performs the task; people review the result. [HELM](https://github.com/Marcus-AI4SS/HELM) is the optional Hub for Evidence, Logs & Monitoring that can read the same project state.
 
+## Local Research Environment Snapshot
+
+This repository now includes `research-stack/local-environment/`, a sanitized mirror of the local Codex research environment after the May 2026 governance updates. It carries the research routing contracts, engineering-cybernetics control kernel, seven-layer governance model, memory rules, workflow catalogs, MCP/profile templates, validators, tests, and toolchain inventory.
+
+The snapshot deliberately excludes desktop app development and distilled-scholar skill chains. It also redacts private absolute paths and never includes browser login state, cookies, secrets, caches, or generated outputs. VELA can use the snapshot to stay aligned with the local environment without turning the VELA project initializer into an uncontrolled copy of the private runtime.
+
 ## Start In Five Minutes
 
 ```powershell
@@ -123,6 +129,7 @@ See [VELA and HELM import interface](./docs/imports/vela-helm-interface.md).
 | `docs/` | Public documentation, GitHub Pages, and approved visual assets |
 | `docs/imports/` | VELA and HELM import contracts |
 | `docs/sync-log/` | Local cross-repository synchronization notes |
+| `research-stack/local-environment/` | Sanitized current snapshot of the local research environment, excluding desktop app and distilled-scholar chains |
 | `archive/legacy-research-stack/` | Historical private environment assets, kept out of VELA runtime |
 | `examples/` | Minimal project and quick demo for inspection |
 | `package/` | Starter package copied into a research project by `vela init` |

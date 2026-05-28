@@ -1,0 +1,132 @@
+{
+  "plugins": [
+    {
+      "name": "research-autopilot",
+      "status": "active-local-globalized",
+      "category": "主插件",
+      "role": "本地总控插件，承载主 skill、GUI、profile 管理和路由表。",
+      "default_policy": "默认启用并作为本地环境核心，同时写入用户级本地 marketplace。",
+      "notes": "这是当前研究型 Codex 的真正插件层核心。"
+    },
+    {
+      "name": "github",
+      "status": "enabled-official",
+      "category": "版本协作",
+      "role": "GitHub 仓库、issue、PR、CI、发布和代码协作入口。",
+      "default_policy": "默认启用，服务四仓分治、公开发行和私有仓同步，不承担研究内容判断。",
+      "notes": "官方原生插件；由 GitHub 工作流触发，不替代本地 Git 规则和仓库边界。"
+    },
+    {
+      "name": "superpowers",
+      "status": "enabled-official",
+      "category": "工程方法",
+      "role": "规划、调试、TDD、代码评审、分支收尾和技能编写方法论。",
+      "default_policy": "默认启用，作为工程治理增强层；研究任务仍先走 research-autopilot。",
+      "notes": "官方原生插件；可辅助开发和审查，但不接管研究路由。"
+    },
+    {
+      "name": "hugging-face",
+      "status": "enabled-official",
+      "category": "研究增强",
+      "role": "模型、数据集、推理/训练模板增强层，适合计算社科的文本、多模态和模型比较任务。",
+      "default_policy": "默认不抢主工作流，只在相关任务中建议接入。",
+      "notes": "已预装到配置层和本地缓存层；首次使用仍可能需要账号授权。"
+    },
+    {
+      "name": "scite",
+      "status": "enabled-official",
+      "category": "研究增强",
+      "role": "提供带引用语境和支持/争议关系的研究检索增强。",
+      "default_policy": "作为文献发现增强层，不替代正式引用核验。",
+      "notes": "已预装到配置层和本地缓存层；首次使用仍可能需要账号授权。 "
+    },
+    {
+      "name": "notion",
+      "status": "candidate-official-not-selected",
+      "category": "知识协作",
+      "role": "项目看板和 SaaS 知识库。",
+      "default_policy": "默认不装，因为当前知识沉淀方向已选 Obsidian。",
+      "notes": "官方插件清单中可用，但不进入默认主链。"
+    },
+    {
+      "name": "google-drive",
+      "status": "enabled-official-optional",
+      "category": "文件协作",
+      "role": "外部文件协作与资料访问。",
+      "default_policy": "作为可选协作层预装，不进入研究主链。",
+      "notes": "已预装到配置层和本地缓存层；首次使用仍可能需要账号授权。"
+    },
+    {
+      "name": "documents",
+      "status": "enabled-primary-runtime-optional",
+      "category": "文档导出",
+      "role": "本地 docx 创建、编辑、渲染和核验。",
+      "default_policy": "只作为写作与导出链的产物层使用，不替代 citation-verifier、writing-reference-capture 或 research-docx-export 的研究治理职责。",
+      "notes": "OpenAI primary runtime 插件；适合文档工件处理，不能绕过正式引文与写作质量 gate。"
+    },
+    {
+      "name": "presentations",
+      "status": "enabled-primary-runtime-optional",
+      "category": "演示导出",
+      "role": "本地 PowerPoint / PPTX 创建、编辑、渲染和导出。",
+      "default_policy": "只在汇报、答辩或项目状态展示需要幻灯片产物时调用，不进入研究主链。",
+      "notes": "OpenAI primary runtime 插件；属于交付格式层，不承担研究发现、方法判断或证据核验。"
+    },
+    {
+      "name": "spreadsheets",
+      "status": "enabled-primary-runtime-optional",
+      "category": "表格工件",
+      "role": "本地 xlsx / 表格文件创建、编辑、分析、可视化和导出。",
+      "default_policy": "作为表格工件处理层使用；研究数据分析仍先走 quant-analysis、figure-table-studio 或 reproducibility-package。",
+      "notes": "OpenAI primary runtime 插件；适合文件格式和展示层操作，不替代分析链与复现 gate。"
+    },
+    {
+      "name": "hyperframes",
+      "status": "enabled-official-optional",
+      "category": "视频与演示增强",
+      "role": "生成 HTML 视频构图、动画、字幕、旁白和网页转视频内容。",
+      "default_policy": "只在汇报视频、演示素材、研究传播或网页转视频任务中调用，不进入默认研究主链。",
+      "notes": "官方插件；属于交付展示层，不承担文献发现、证据核验、分析或项目治理职责。"
+    },
+    {
+      "name": "browser",
+      "status": "candidate-official-native-app-plugin-needs-ui-install",
+      "category": "浏览器交互",
+      "role": "Codex 原生浏览器交互层，用于需要页面可视状态和人工式网页操作的任务。",
+      "default_policy": "用户在 Codex App 中安装并启用 Browser plugin 且当前会话实际暴露 @Browser 时，作为本地预览和视觉 QA 增强层使用；默认不替代 chrome-devtools、playwright-mcp、social-platform-mcp 或 agent-browser。",
+      "notes": "Windows 可打开 in-app browser 预览无登录页面；Codex 代操作浏览器需要 Browser plugin。适合观察和交互，不等同于可复现的数据采集链；社媒证据仍需保留截图、快照和来源 ledger。"
+    },
+    {
+      "name": "computer-use",
+      "status": "candidate-official-native-macos-only-current-windows-not-available",
+      "category": "GUI 自动化",
+      "role": "Codex 原生 Computer Use 能力，用于跨应用 GUI 操作和视觉驱动交互。",
+      "default_policy": "仅在当前平台、地区和会话实际支持并暴露 @Computer Use / computer_use 时启用；不作为普通浏览器抓取默认入口。",
+      "notes": "官方文档当前写明 Computer Use 在 Codex App 中可用于 macOS；当前 Windows 会话未暴露 computer_use 工具命名空间，因此只能作为观察候选，不能写入默认执行链。"
+    },
+    {
+      "name": "figma",
+      "status": "enabled-official-optional",
+      "category": "设计协作",
+      "role": "设计到代码、界面实现、设计系统规则和 Figma 组件联动。",
+      "default_policy": "只在 app UI、公开发行页面、设计稿实现或设计系统任务中调用，不进入默认研究主链。",
+      "notes": "官方原生插件，具备读写能力；使用时应限定到目标 Figma 文件和当前 app / 发行项目。"
+    },
+    {
+      "name": "build-macos-apps",
+      "status": "enabled-official-optional",
+      "category": "应用开发",
+      "role": "macOS 原生 app 的构建、运行、测试、调试、签名、SwiftUI/AppKit 互操作和日志诊断。",
+      "default_policy": "只在 macOS app 开发、打包或朋友版 macOS 发行包任务中调用；Windows 本地研究环境不依赖它。",
+      "notes": "官方原生插件，适合作为 `skills-app-own` 和 `skills-app-github` 的 macOS 增强层，不替代本地环境主路由。"
+    },
+    {
+      "name": "obsidian-sidecar",
+      "status": "community-sidecar",
+      "category": "知识沉淀",
+      "role": "长期研究知识库侧车，不替代主路由。",
+      "default_policy": "通过 `obsidian-research-sync` 输出 Markdown 包或直接同步到 vault。",
+      "notes": "当前用 skill 层兼容 Obsidian，而不是依赖官方 Codex 插件。"
+    }
+  ]
+}

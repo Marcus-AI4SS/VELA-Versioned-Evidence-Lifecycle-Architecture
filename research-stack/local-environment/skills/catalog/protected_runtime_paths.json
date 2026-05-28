@@ -1,0 +1,7 @@
+{
+  "$schema": "../schemas/protected_runtime_paths.v1.schema.json",
+  "schema_version": "protected_runtime_paths.v1",
+  "generated_at": "2026-05-11",
+  "policy": "Local environment management may know these runtime paths exist and may route user requests to them, but automation must not write, sync, clean, rename, overwrite, install into, remove from, or include them in automatic skill evolution.",
+  "paths": []
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marcus-ai4ss.github.io/VELA/schemas/helm.codex.handoff.v1.schema.json",
+  "title": "HELM Codex handoff",
+  "type": "object",
+  "required": ["schema_version", "generated_at", "project", "recommended_action", "relevant_files", "constraints", "missing_inputs", "validation_context", "human_review_required", "text"],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": { "const": "helm.codex.handoff.v1" },
+    "generated_at": { "type": "string" },
+    "project": { "type": "object" },
+    "recommended_action": { "type": "string" },
+    "relevant_files": { "type": "array", "items": { "type": "string" } },
+    "constraints": { "type": "array", "items": { "type": "string" } },
+    "missing_inputs": { "type": "array", "items": { "type": "string" } },
+    "validation_context": { "type": "object" },
+    "human_review_required": { "type": "boolean" },
+    "text": { "type": "string" }
+  }
+}

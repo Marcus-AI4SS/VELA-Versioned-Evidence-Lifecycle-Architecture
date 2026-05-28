@@ -1,0 +1,212 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://research-environment-local/schemas/citation_verification_report.schema.json",
+  "title": "Citation Verification Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "checked_at",
+    "references",
+    "errors"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "citation_verification_report.v1"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "pass",
+        "revise",
+        "block",
+        "not_applicable"
+      ]
+    },
+    "checked_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/reference"
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "$defs": {
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "author",
+        "year",
+        "title",
+        "source",
+        "verified",
+        "verification_source",
+        "verification_basis"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "author": {
+          "type": "string",
+          "minLength": 1
+        },
+        "year": {
+          "type": [
+            "integer",
+            "string"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "doi": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^(10\\.[^\\s]+)?$"
+        },
+        "verified": {
+          "type": "boolean"
+        },
+        "verification_source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "verification_basis": {
+          "type": "string",
+          "enum": [
+            "doi_metadata",
+            "pdf_fulltext",
+            "doi_and_pdf_fulltext",
+            "source_metadata",
+            "user_provided_source",
+            "public_academic_index"
+          ]
+        },
+        "pdf_fulltext_evidence": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "required": [
+            "file_path",
+            "source_type",
+            "title_match",
+            "author_or_source_match",
+            "page_count",
+            "readable"
+          ],
+          "properties": {
+            "file_path": {
+              "type": "string",
+              "minLength": 1
+            },
+            "source_type": {
+              "type": "string",
+              "enum": [
+                "user_uploaded_pdf",
+                "user_local_pdf",
+                "authorized_downloaded_pdf",
+                "codex_downloaded_pdf"
+              ]
+            },
+            "title_match": {
+              "type": "boolean"
+            },
+            "author_or_source_match": {
+              "type": "boolean"
+            },
+            "page_count": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "readable": {
+              "type": "boolean"
+            },
+            "note": {
+              "type": "string"
+            }
+          }
+        },
+        "doi_waiver_evidence": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "required": [
+            "waiver_type",
+            "evidence_source",
+            "locator",
+            "title_match",
+            "author_or_source_match",
+            "year_or_source_match",
+            "checked_at"
+          ],
+          "properties": {
+            "waiver_type": {
+              "type": "string",
+              "enum": [
+                "user_provided_source",
+                "complete_pdf_fulltext",
+                "public_academic_index_record"
+              ]
+            },
+            "evidence_source": {
+              "type": "string",
+              "minLength": 1
+            },
+            "locator": {
+              "type": "string",
+              "minLength": 1
+            },
+            "title_match": {
+              "type": "boolean"
+            },
+            "author_or_source_match": {
+              "type": "boolean"
+            },
+            "year_or_source_match": {
+              "type": "boolean"
+            },
+            "checked_at": {
+              "type": "string",
+              "minLength": 1
+            },
+            "note": {
+              "type": "string"
+            }
+          }
+        },
+        "zotero_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "private_local_console": {
+    "platform": "windows",
+    "delivery_mode": "native_exe",
+    "workspace_mode": "integrated_environment_repo",
+    "environment_source": "current_repo",
+    "entry_app": "skills/manager/app.py",
+    "build_script": "skills/scripts/build-codex-manager-exe.ps1",
+    "dist_dir": "skills/outputs/manager-app/dist",
+    "binary_name": "CodexResearchConsole.exe",
+    "launch_entry": "Codex Research Console.lnk",
+    "privacy_mode": "private_local"
+  },
+  "friend_macos_console": {
+    "platform": "macos_apple_silicon",
+    "delivery_mode": "guided_install",
+    "workspace_mode": "bundled_environment_workspace",
+    "environment_source": "bundle_payload/skills",
+    "build_script": "skills/scripts/build-codex-manager-bundle.ps1",
+    "bundle_dir": "skills/outputs/manager-app/friend-macos/CodexResearchConsole-macOS",
+    "bundle_output": "skills/outputs/manager-app/friend-macos/CodexResearchConsole-macOS.tar.gz",
+    "install_entry": "Install Codex Research Console.command",
+    "setup_script": "skills/scripts/setup-codex-console-macos.sh",
+    "privacy_mode": "light_redaction"
+  }
+}

@@ -1,0 +1,353 @@
+{
+  "$schema": "../schemas/project_initializer_manifest.schema.json",
+  "schema_version": "project_initializer_manifest.v1",
+  "generated_at": "2026-05-05T00:00:00+08:00",
+  "directories": [
+    ".codex",
+    ".codex/agents",
+    ".codex/dispatch",
+    ".codex/context-packets",
+    "outputs/agent-runs",
+    "outputs/inbox/cnki-downloads",
+    "outputs/reports/cnki-zotero",
+    "logs/agent-handoffs",
+    "logs/quality-gates",
+    "logs/project-state"
+  ],
+  "files": [
+    {
+      "path": ".gitignore",
+      "kind": "text",
+      "content": ".venv/\n__pycache__/\n.ipynb_checkpoints/\noutputs/\n*.log\n*.tmp\n.env\n.env.*\n"
+    },
+    {
+      "path": "README.md",
+      "kind": "text",
+      "content": "# {project_name}\n\nThis project is initialized for Codex + Git + the V6.4 multi-agent research contract.\n\n## Default Python\n\nUse the shared research environment:\n\n`{shared_venv}`\n\n## Next steps\n\n1. Add your project files.\n2. Review root `AGENTS.md`, project `AGENTS.md`, `.codex/agents/`, `material-passport.yaml` and `logs/quality-gates/pipeline-status.json`.\n2.1 Check `logs/project-state/current.json` to see the current owner, stage, blockers and milestones.\n3. Open the folder in Codex.\n4. Commit changes with GitHub Desktop or git.\n"
+    },
+    {
+      "path": "AGENTS.md",
+      "kind": "text",
+      "content": "# AGENTS\n\n本项目继承当前研究环境 `skills/AGENTS.md` 的全局研究约束。\n本项目遵守研究型 Codex 多 agent contract。所有正式引用必须完成引用证据核验；证据材料里出现 DOI 时必须核验。无 DOI 条目可以用用户提供来源、完整论文 PDF 原文或公开学术检索记录作为 DOI 豁免证据；无 DOI 且无上述证据的文献不得作为正式引用；不得伪造 DOI。\n\n```yaml\nagent_constraints:\n  forbid_skills_mcp: []\n  forbid_write_roots: []\n  max_execution_mode: null\n  require_review_for:\n    - paper_draft\n    - revision_package\n    - submission_package\n    - figures_tables\n    - reproducibility_bundle\n    - literature_synthesis\n    - case_dataset\n    - project_map\n    - app_opportunity_brief\n    - user_needs_hierarchy\n    - target_specifications\n    - concept_selection_matrix\n    - concept_test_report\n    - prototype_test_plan\n    - development_economics_note\n    - app_prd\n    - visual_design_spec\n    - app_screen_mockups\n    - app_icon_assets\n    - app_architecture\n    - ui_implementation\n    - design_system_rules\n    - desktop_build\n    - release_package\n  project_truth_sources:\n    - research-map.md\n    - findings-memory.md\n    - material-passport.yaml\n    - evidence-ledger.yaml\n```\n"
+    },
+    {
+      "path": "research-map.md",
+      "kind": "text",
+      "content": "# Research Map\n\n- Research question:\n- Current stage:\n- Active route:\n- Expected deliverables:\n"
+    },
+    {
+      "path": "findings-memory.md",
+      "kind": "text",
+      "content": "# Findings Memory\n\n- Confirmed facts:\n- Rejected paths:\n- Pending verification:\n"
+    },
+    {
+      "path": "material-passport.yaml",
+      "kind": "text",
+      "content": "project_name: {project_name}\nroute_id: null\ncurrent_stage: research_design\ndata_access_level: public_open\nmaterials: []\nethics_notes: []\ntruth_sources:\n  - research-map.md\n  - findings-memory.md\n  - material-passport.yaml\n  - evidence-ledger.yaml\n"
+    },
+    {
+      "path": "evidence-ledger.yaml",
+      "kind": "text",
+      "content": "entries: []\n"
+    },
+    {
+      "path": "logs/quality-gates/pipeline-status.json",
+      "kind": "json",
+      "content": {
+        "current_stage": "research_design",
+        "completed_stages": [],
+        "gate_decisions": {},
+        "allowed_to_advance": false
+      }
+    },
+    {
+      "path": "logs/quality-gates/writing-quality-report.json",
+      "kind": "json",
+      "content": {
+        "status": "pending",
+        "target_paths": [],
+        "checks": {
+          "style_calibration": {
+            "decision": "pending",
+            "notes": []
+          },
+          "argument_chain_closure": {
+            "decision": "pending",
+            "notes": []
+          },
+          "citation_alignment": {
+            "decision": "pending",
+            "notes": []
+          },
+          "empty_phrase_scan": {
+            "decision": "pending",
+            "hits": [],
+            "notes": []
+          }
+        },
+        "banned_phrases": [
+          "总而言之",
+          "双刃剑",
+          "多维度视角"
+        ]
+      }
+    },
+    {
+      "path": "logs/project-state/current.json",
+      "kind": "json",
+      "content": {
+        "project_name": "{project_name}",
+        "dispatch_stage": "planning",
+        "pipeline_stage": "research_design",
+        "status": "initialized",
+        "current_owner_agent_id": "project-manager",
+        "current_owner_display_name": "项目经理智能体",
+        "blockers": [],
+        "next_quality_gates": [],
+        "selected_agents": [],
+        "selected_producers": [],
+        "selected_reviewers": [],
+        "review_agents": {},
+        "milestones": [
+          {
+            "id": "project_initialized",
+            "label": "项目已初始化",
+            "status": "complete"
+          }
+        ]
+      }
+    },
+    {
+      "path": "logs/project-state/history.md",
+      "kind": "text",
+      "content": "# Project State History\n\n- 项目初始化完成。\n"
+    }
+  ],
+  "project_agents": {
+    "project-manager.json": {
+      "agent_id": "project-manager",
+      "display_name": "项目经理智能体",
+      "role": "manager",
+      "enabled": true,
+      "allowed_skills_mcp_subset": [
+        "research-stack-manager",
+        "project-retrospective-evolver"
+      ],
+      "write_scope_subset": [
+        "outputs/agent-runs/<run_id>/<agent_id>/"
+      ],
+      "max_execution_mode": "sequential_multi_agent_execution",
+      "required_inputs": [
+        "route_id",
+        "clarification_card",
+        "dispatch_contract"
+      ],
+      "expected_outputs": [
+        "summary.md",
+        "result.json"
+      ]
+    },
+    "literature-producer.json": {
+      "agent_id": "literature-producer",
+      "display_name": "文献智能体",
+      "role": "producer",
+      "enabled": true,
+      "write_scope_subset": [
+        "outputs/agent-runs/<run_id>/<agent_id>/"
+      ],
+      "required_inputs": [
+        "clarification_card",
+        "project_truth_sources"
+      ],
+      "expected_outputs": [
+        "summary.md",
+        "result.json"
+      ],
+      "review_gate": "mandatory-review-when-required"
+    },
+    "social-platform-producer.json": {
+      "agent_id": "social-platform-producer",
+      "display_name": "平台证据智能体",
+      "role": "producer",
+      "enabled": true,
+      "write_scope_subset": [
+        "outputs/agent-runs/<run_id>/<agent_id>/"
+      ],
+      "required_inputs": [
+        "clarification_card",
+        "evidence_scope"
+      ],
+      "expected_outputs": [
+        "summary.md",
+        "result.json"
+      ],
+      "review_gate": "mandatory-review-when-required"
+    },
+    "analysis-producer.json": {
+      "agent_id": "analysis-producer",
+      "display_name": "分析智能体",
+      "role": "producer",
+      "enabled": true,
+      "write_scope_subset": [
+        "outputs/agent-runs/<run_id>/<agent_id>/"
+      ],
+      "required_inputs": [
+        "dataset_scope",
+        "analysis_plan"
+      ],
+      "expected_outputs": [
+        "summary.md",
+        "result.json"
+      ],
+      "review_gate": "mandatory-review-when-required"
+    },
+    "writing-producer.json": {
+      "agent_id": "writing-producer",
+      "display_name": "写作智能体",
+      "role": "producer",
+      "enabled": true,
+      "write_scope_subset": [
+        "outputs/agent-runs/<run_id>/<agent_id>/"
+      ],
+      "required_inputs": [
+        "writing_scope",
+        "verified_citations"
+      ],
+      "expected_outputs": [
+        "summary.md",
+        "result.json"
+      ],
+      "review_gate": "mandatory-review-when-required"
+    },
+    "app-product-producer.json": {
+      "agent_id": "app-product-producer",
+      "display_name": "App 产品蓝图智能体",
+      "role": "producer",
+      "enabled": true,
+      "write_scope_subset": [
+        "outputs/agent-runs/<run_id>/<agent_id>/"
+      ],
+      "required_inputs": [
+        "app_idea",
+        "target_users",
+        "raw_needs",
+        "competing_alternatives",
+        "visual_sources",
+        "release_lane"
+      ],
+      "expected_outputs": [
+        "summary.md",
+        "result.json"
+      ],
+      "review_gate": "mandatory-review-when-required"
+    },
+    "app-architect.json": {
+      "agent_id": "app-architect",
+      "display_name": "App 架构智能体",
+      "role": "producer",
+      "enabled": true,
+      "write_scope_subset": [
+        "outputs/agent-runs/<run_id>/<agent_id>/"
+      ],
+      "required_inputs": [
+        "app_scope",
+        "target_platforms",
+        "repo_boundary"
+      ],
+      "expected_outputs": [
+        "summary.md",
+        "result.json"
+      ],
+      "review_gate": "mandatory-review-when-required"
+    },
+    "app-ui-producer.json": {
+      "agent_id": "app-ui-producer",
+      "display_name": "App UI 智能体",
+      "role": "producer",
+      "enabled": true,
+      "write_scope_subset": [
+        "outputs/agent-runs/<run_id>/<agent_id>/"
+      ],
+      "required_inputs": [
+        "ui_scope",
+        "design_context",
+        "runtime_constraints"
+      ],
+      "expected_outputs": [
+        "summary.md",
+        "result.json"
+      ],
+      "review_gate": "mandatory-review-when-required"
+    },
+    "app-release-producer.json": {
+      "agent_id": "app-release-producer",
+      "display_name": "App 发行智能体",
+      "role": "producer",
+      "enabled": true,
+      "write_scope_subset": [
+        "outputs/agent-runs/<run_id>/<agent_id>/"
+      ],
+      "required_inputs": [
+        "release_lane",
+        "artifact_scope",
+        "privacy_boundary"
+      ],
+      "expected_outputs": [
+        "summary.md",
+        "result.json"
+      ],
+      "review_gate": "mandatory-review-when-required"
+    },
+    "app-qa-reviewer.json": {
+      "agent_id": "app-qa-reviewer",
+      "display_name": "App QA 审核智能体",
+      "role": "reviewer",
+      "enabled": true,
+      "allowed_skills_mcp_subset": [
+        "agent-browser",
+        "chrome-devtools",
+        "playwright-mcp",
+        "figma-dev-mode-mcp"
+      ],
+      "write_scope_subset": [
+        "outputs/agent-runs/<run_id>/<agent_id>/"
+      ],
+      "max_execution_mode": "sequential_multi_agent_execution",
+      "required_inputs": [
+        "target_agent_result",
+        "target_agent_summary",
+        "app_artifact"
+      ],
+      "expected_outputs": [
+        "review.<target_agent_id>.md",
+        "gate.<target_agent_id>.json"
+      ],
+      "review_gate": "target-specific"
+    },
+    "reviewer.json": {
+      "agent_id": "reviewer",
+      "display_name": "审稿智能体",
+      "role": "reviewer",
+      "enabled": true,
+      "allowed_skills_mcp_subset": [
+        "citation-verifier",
+        "academic-paper-review",
+        "openalex-mcp",
+        "semantic-scholar-mcp"
+      ],
+      "write_scope_subset": [
+        "outputs/agent-runs/<run_id>/<agent_id>/"
+      ],
+      "max_execution_mode": "sequential_multi_agent_execution",
+      "required_inputs": [
+        "target_agent_result",
+        "target_agent_summary"
+      ],
+      "expected_outputs": [
+        "review.<target_agent_id>.md",
+        "gate.<target_agent_id>.json"
+      ],
+      "review_gate": "target-specific"
+    }
+  }
+}

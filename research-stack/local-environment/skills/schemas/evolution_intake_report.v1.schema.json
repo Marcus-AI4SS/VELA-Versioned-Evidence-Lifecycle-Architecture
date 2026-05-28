@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://research-environment-local/schemas/evolution_intake_report.v1.schema.json",
+  "title": "Evolution Intake Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "generated_at",
+    "mode",
+    "source_files_written",
+    "lookback_days",
+    "scan_roots",
+    "candidate_count",
+    "recommendation_counts",
+    "items",
+    "duplicate_groups",
+    "next_actions"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "evolution_intake_report.v1"
+    },
+    "generated_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "proposal_only",
+        "backlog_append",
+        "controlled_auto_landing"
+      ]
+    },
+    "source_files_written": {
+      "type": "boolean"
+    },
+    "lookback_days": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "scan_roots": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "candidate_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "recommendation_counts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/item"
+      }
+    },
+    "duplicate_groups": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/duplicate_group"
+      }
+    },
+    "next_actions": {
+      "$ref": "#/$defs/string_list"
+    },
+    "report_written": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "json_report_written": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "backlog_append": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": true
+    }
+  },
+  "$defs": {
+    "string_list": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "project_root",
+        "source_file",
+        "source_file_name",
+        "modified_at",
+        "title",
+        "snippet",
+        "risk_level",
+        "severity",
+        "recommended_action",
+        "proposed_target",
+        "signals",
+        "fingerprint"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-]+$"
+        },
+        "project_root": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_file": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_file_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "modified_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "snippet": {
+          "type": "string",
+          "minLength": 1
+        },
+        "risk_level": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "p0",
+            "p1",
+            "p2",
+            "p3"
+          ]
+        },
+        "recommended_action": {
+          "type": "string",
+          "minLength": 1
+        },
+        "proposed_target": {
+          "type": "string",
+          "enum": [
+            "control_kernel",
+            "skill",
+            "route",
+            "schema",
+            "validator",
+            "docs",
+            "automation",
+            "obsidian",
+            "discard"
+          ]
+        },
+        "signals": {
+          "$ref": "#/$defs/string_list"
+        },
+        "fingerprint": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "duplicate_group": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fingerprint",
+        "count",
+        "source_files"
+      ],
+      "properties": {
+        "fingerprint": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "source_files": {
+          "$ref": "#/$defs/string_list"
+        }
+      }
+    }
+  }
+}

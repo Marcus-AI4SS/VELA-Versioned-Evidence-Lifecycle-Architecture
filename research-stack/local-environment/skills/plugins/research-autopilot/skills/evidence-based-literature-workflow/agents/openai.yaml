@@ -1,0 +1,4 @@
+interface:
+  display_name: "Evidence-Based Literature Workflow"
+  short_description: "候选文献筛选、结构性阅读、文献核验、引文证据标注和证据包交付的优先工作流。"
+  default_prompt: "启动 evidence-based-literature-workflow：请先按理论基础、研究现状、方法或主要变量建立候选文献表，默认只把有 SCI、SSCI 或 CSSCI 来源证据的文献纳入正式候选，再完成全文校验、结构性阅读、引文证据核验和证据包输出。"

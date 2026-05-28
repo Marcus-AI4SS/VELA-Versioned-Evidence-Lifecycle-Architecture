@@ -1,0 +1,169 @@
+{
+  "$schema": "../schemas/evolution_event.v1.schema.json",
+  "schema_version": "evolution_event.v1",
+  "generated_at": "2026-05-15",
+  "events": [
+    {
+      "id": "2026-05-09-control-kernel-bootstrap",
+      "observed_at": "2026-05-09",
+      "source": "user directive in local Codex environment governance thread",
+      "signal_type": "user_directive",
+      "severity": "p1",
+      "description": "Make Engineering Cybernetics the primary framework for the local research environment and convert prior self-evolution into a controlled adaptive loop.",
+      "proposed_target": "control_kernel",
+      "controller": "research-stack-manager",
+      "required_gates": [
+        "envctl validate cybernetics",
+        "validate_research_stack"
+      ],
+      "status": "implemented",
+      "rollback": "Revert the control kernel catalog, cybernetics schemas, and envctl cybernetics command set together."
+    },
+    {
+      "id": "2026-05-09-agent-contract-control-coupling",
+      "observed_at": "2026-05-09",
+      "source": "subagent integration review of control kernel and multi-agent contract",
+      "signal_type": "validation_failure",
+      "severity": "p0",
+      "description": "Subagent registry entries now carry control_bindings that bind each agent to control objectives, controlled variables, feedback signals, stability metrics, and rollback policy from the control kernel.",
+      "proposed_target": "validator",
+      "controller": "research-team-orchestrator",
+      "required_gates": [
+        "validate_agents_contract",
+        "envctl validate cybernetics",
+        "validate_subagent_registry"
+      ],
+      "status": "implemented",
+      "rollback": "Revert subagent control_bindings, subagent_registry.schema.json, context packet Control Bindings output, and validator coupling checks together."
+    },
+    {
+      "id": "2026-05-09-citation-verification-report-gate",
+      "observed_at": "2026-05-09",
+      "source": "subagent review of Zotero, Obsidian, and writing-reference-capture workflow",
+      "signal_type": "validation_failure",
+      "severity": "p1",
+      "description": "The DOI and metadata gate now requires a canonical citation verification report with per-reference author, year, title, source, DOI, verified status, and verification source before a pass decision is accepted.",
+      "proposed_target": "validator",
+      "controller": "writing-reference-capture",
+      "required_gates": [
+        "validate_research_pipeline",
+        "writing_quality_checked",
+        "citation-verifier"
+      ],
+      "status": "implemented",
+      "rollback": "Revert citation_verification_rules.json, citation_verification_report.schema.json, quality gate required_report wiring, and pipeline validator report checks together."
+    },
+    {
+      "id": "2026-05-09-profile-apply-envctl-boundary",
+      "observed_at": "2026-05-09",
+      "source": "subagent review of Plugin Skill MCP layering",
+      "signal_type": "friction",
+      "severity": "p1",
+      "description": "Profile application is now available through envctl apply-profile with dry-run, diff, backup, rollback, and restart-required reporting. HELM, plugin, and manager paths should call this boundary rather than writing Codex config directly.",
+      "proposed_target": "validator",
+      "controller": "research-stack-manager",
+      "required_gates": [
+        "validate_research_stack",
+        "envctl validate drift"
+      ],
+      "status": "implemented",
+      "rollback": "Revert envctl apply-profile, its CLI registration, tests, and stack validator probes together; restore previous direct profile entrypoints only as a temporary manual fallback."
+    },
+    {
+      "id": "2026-05-09-route-mcp-activation-contract",
+      "observed_at": "2026-05-09",
+      "source": "subagent review of route profile and MCP boundaries",
+      "signal_type": "friction",
+      "severity": "p2",
+      "description": "Route MCP policy now distinguishes required, optional, and activation-needed MCP entries and stack validation checks that the policy matches routing_table route MCP lists.",
+      "proposed_target": "schema",
+      "controller": "research-stack-manager",
+      "required_gates": [
+        "validate_research_stack",
+        "validate_vela_contracts"
+      ],
+      "status": "implemented",
+      "rollback": "Revert route_mcp_activation_policy.json, its schema, and validate_research_stack route MCP policy checks together."
+    },
+    {
+      "id": "2026-05-09-prompt-catalog-lite",
+      "observed_at": "2026-05-09",
+      "source": "subagent review of prompt engineering integration",
+      "signal_type": "repeated_manual_work",
+      "severity": "p2",
+      "description": "High-frequency prompts now have a lightweight prompt catalog with ids, versions, owners, scopes, purposes, failure modes, and evaluation notes without becoming a new runtime.",
+      "proposed_target": "schema",
+      "controller": "research-stack-manager",
+      "required_gates": [
+        "envctl validate cybernetics",
+        "validate_research_pipeline"
+      ],
+      "status": "implemented",
+      "rollback": "Revert prompt_catalog_lite.json and prompt_catalog_lite.schema.json if prompt metadata starts acting as a parallel router."
+    },
+    {
+      "id": "2026-05-09-harness-adapter-smoke-test",
+      "observed_at": "2026-05-09",
+      "source": "subagent review of harness engineering integration",
+      "signal_type": "validation_failure",
+      "severity": "p2",
+      "description": "The harness adapter reserved contract now uses schema validation and a unit smoke test to keep writes inside reserved harness paths while preserving active_runtime=false.",
+      "proposed_target": "validator",
+      "controller": "research-stack-manager",
+      "required_gates": [
+        "validate_harness_adapter_contract",
+        "validate_agents_contract"
+      ],
+      "status": "implemented",
+      "rollback": "Keep active_runtime false and revert harness adapter schema validation or smoke test if it requires a new runtime dependency."
+    },
+    {
+      "id": "2026-05-09-intake-9f2e39b96ce0",
+      "observed_at": "2026-05-09",
+      "source": "<USER_DESKTOP>/计算知识图谱/docs/research_stack_change_proposal.md",
+      "signal_type": "daily_audit",
+      "severity": "p1",
+      "description": "Research Stack Change Proposal :: # Research Stack Change Proposal 来源项目：结构空隙理论生成项目 状态：proposal only，不直接修改技能、插件或 MCP 配置。 日期：2026-05-10",
+      "proposed_target": "validator",
+      "controller": "project-retrospective-evolver",
+      "required_gates": [
+        "envctl validate cybernetics",
+        "validate_research_stack"
+      ],
+      "status": "observed",
+      "rollback": "Remove this observed intake event from evolution_backlog.json if manual review rejects it."
+    },
+    {
+      "id": "2026-05-09-intake-ba5ce34c3150",
+      "observed_at": "2026-05-09",
+      "source": "<USER_DESKTOP>/计算知识图谱/docs/project_closure_retrospective.md",
+      "signal_type": "daily_audit",
+      "severity": "p1",
+      "description": "Project Retrospective :: # Project Retrospective 项目状态：终止 终止日期：2026-05-10 项目目录：`C:\\Users\\17666\\Desktop\\计算知识图谱`",
+      "proposed_target": "validator",
+      "controller": "project-retrospective-evolver",
+      "required_gates": [
+        "envctl validate cybernetics",
+        "validate_research_stack"
+      ],
+      "status": "observed",
+      "rollback": "Remove this observed intake event from evolution_backlog.json if manual review rejects it."
+    },
+    {
+      "id": "2026-05-09-intake-5c1718e04bef",
+      "observed_at": "2026-05-09",
+      "source": "<USER_DESKTOP>/计算知识图谱/PROJECT_CLOSED.md",
+      "signal_type": "daily_audit",
+      "severity": "p2",
+      "description": "项目终止说明 :: # 项目终止说明 本项目已于 2026-05-10 终止为论文项目。 终止原因不是代码没有跑通，而是核心研究证据不足：1,000 篇关系社会学烟测中，结构空隙候选没有优于强语义基线，缺失直连和跨社区候选均未形成有效结果，关键人工质量门仍未完成。当前材料可以作为方法原型和负结果保留，但不宜继续扩展样本或写成投稿级论文。 主要复盘文件见 `docs/project_closure_retrospective.md`。研究栈改进建议见 `do",
+      "proposed_target": "schema",
+      "controller": "project-retrospective-evolver",
+      "required_gates": [
+        "envctl validate cybernetics",
+        "validate_research_stack"
+      ],
+      "status": "observed",
+      "rollback": "Remove this observed intake event from evolution_backlog.json if manual review rejects it."
+    }
+  ]
+}

@@ -1,0 +1,374 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://research-environment-local/schemas/manuscript_writing_workflow.v1.schema.json",
+  "title": "Manuscript Writing Workflow",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "updated_at",
+    "policy",
+    "source_review_refs",
+    "adoption_options",
+    "selected_strategy",
+    "language_targets",
+    "discipline_targets",
+    "workflow_modes",
+    "section_contracts",
+    "polishing_levels",
+    "output_contract",
+    "safety_rules"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schema_version": {
+      "const": "manuscript_writing_workflow.v1"
+    },
+    "updated_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "policy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_review_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/source_ref"
+      }
+    },
+    "adoption_options": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "$ref": "#/$defs/adoption_option"
+      }
+    },
+    "selected_strategy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "language_targets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/language_target"
+      }
+    },
+    "discipline_targets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/discipline_target"
+      }
+    },
+    "workflow_modes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/workflow_mode"
+      }
+    },
+    "section_contracts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/section_contract"
+      }
+    },
+    "polishing_levels": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/polishing_level"
+      }
+    },
+    "output_contract": {
+      "$ref": "#/$defs/output_contract"
+    },
+    "safety_rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/safety_rule"
+      }
+    }
+  },
+  "$defs": {
+    "non_empty_string": {
+      "type": "string",
+      "minLength": 1
+    },
+    "string_list": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/non_empty_string"
+      },
+      "uniqueItems": true
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_\\-]*$"
+    },
+    "source_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "upstream",
+        "repo_url",
+        "commit",
+        "adopted_as",
+        "not_adopted"
+      ],
+      "properties": {
+        "upstream": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "repo_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "commit": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "adopted_as": {
+          "$ref": "#/$defs/string_list"
+        },
+        "not_adopted": {
+          "$ref": "#/$defs/string_list"
+        }
+      }
+    },
+    "adoption_option": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "decision",
+        "description",
+        "strengths",
+        "risks"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "decision": {
+          "enum": [
+            "selected",
+            "adapt",
+            "watch",
+            "reject_as_default"
+          ]
+        },
+        "description": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "strengths": {
+          "$ref": "#/$defs/string_list"
+        },
+        "risks": {
+          "$ref": "#/$defs/string_list"
+        }
+      }
+    },
+    "language_target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "default_posture",
+        "style_rules",
+        "reject_when"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "default_posture": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "style_rules": {
+          "$ref": "#/$defs/string_list"
+        },
+        "reject_when": {
+          "$ref": "#/$defs/string_list"
+        }
+      }
+    },
+    "discipline_target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "primary_standard",
+        "adapted_from_nature",
+        "do_not_import"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "primary_standard": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "adapted_from_nature": {
+          "$ref": "#/$defs/string_list"
+        },
+        "do_not_import": {
+          "$ref": "#/$defs/string_list"
+        }
+      }
+    },
+    "workflow_mode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "trigger_signals",
+        "required_inputs",
+        "required_steps",
+        "outputs"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "trigger_signals": {
+          "$ref": "#/$defs/string_list"
+        },
+        "required_inputs": {
+          "$ref": "#/$defs/string_list"
+        },
+        "required_steps": {
+          "$ref": "#/$defs/string_list"
+        },
+        "outputs": {
+          "$ref": "#/$defs/string_list"
+        }
+      }
+    },
+    "section_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "section_job",
+        "move_order",
+        "social_science_adaptation",
+        "quality_checks"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "section_job": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "move_order": {
+          "$ref": "#/$defs/string_list"
+        },
+        "social_science_adaptation": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "quality_checks": {
+          "$ref": "#/$defs/string_list"
+        }
+      }
+    },
+    "polishing_level": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "purpose",
+        "actions",
+        "blockers"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "purpose": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "actions": {
+          "$ref": "#/$defs/string_list"
+        },
+        "blockers": {
+          "$ref": "#/$defs/string_list"
+        }
+      }
+    },
+    "output_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "quality_gate_report",
+        "default_outputs",
+        "optional_outputs"
+      ],
+      "properties": {
+        "quality_gate_report": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "default_outputs": {
+          "$ref": "#/$defs/string_list"
+        },
+        "optional_outputs": {
+          "$ref": "#/$defs/string_list"
+        }
+      }
+    },
+    "safety_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "rule",
+        "failure_action"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "rule": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "failure_action": {
+          "$ref": "#/$defs/non_empty_string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marcus-ai4ss.github.io/VELA/schemas/vela.project.context.v1.schema.json",
+  "title": "VELA project context",
+  "type": "object",
+  "required": ["schema_version", "generated_at", "project", "paths", "truth_files", "counts", "quality", "helm"],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": { "const": "vela.project.context.v1" },
+    "generated_at": { "type": "string" },
+    "project": {
+      "type": "object",
+      "required": ["id", "name", "root", "stage", "status"],
+      "additionalProperties": true,
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string" },
+        "root": { "type": "string" },
+        "stage": { "type": "string" },
+        "status": { "type": "string" }
+      }
+    },
+    "paths": {
+      "type": "object",
+      "required": ["materials", "evidence", "claims", "methods", "deliverables", "handoffs", "handoffs_helm", "logs"],
+      "additionalProperties": true,
+      "properties": {
+        "materials": { "type": "string" },
+        "evidence": { "type": "string" },
+        "claims": { "type": "string" },
+        "methods": { "type": "string" },
+        "deliverables": { "type": "string" },
+        "handoffs": { "type": "string" },
+        "handoffs_helm": { "type": "string" },
+        "logs": { "type": "string" }
+      }
+    },
+    "truth_files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "path", "exists"],
+        "additionalProperties": true,
+        "properties": {
+          "name": { "type": "string" },
+          "path": { "type": "string" },
+          "exists": { "type": "boolean" }
+        }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "required": ["materials", "evidence", "claims", "deliverables", "handoffs"],
+      "additionalProperties": true,
+      "properties": {
+        "materials": { "type": "integer", "minimum": 0 },
+        "evidence": { "type": "integer", "minimum": 0 },
+        "claims": { "type": "integer", "minimum": 0 },
+        "deliverables": { "type": "integer", "minimum": 0 },
+        "handoffs": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "quality": {
+      "type": "object",
+      "required": ["blockers", "warnings", "validators"],
+      "additionalProperties": true
+    },
+    "helm": {
+      "type": "object",
+      "required": ["import_ready", "handoff_dir"],
+      "additionalProperties": true,
+      "properties": {
+        "import_ready": { "type": "boolean" },
+        "handoff_dir": { "type": "string" },
+        "handoff_policy": { "enum": ["explicit_user_export_only", "copy_only_by_default"] }
+      }
+    }
+  }
+}

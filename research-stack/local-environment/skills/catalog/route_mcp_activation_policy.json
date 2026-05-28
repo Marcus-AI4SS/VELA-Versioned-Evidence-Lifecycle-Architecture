@@ -1,0 +1,235 @@
+{
+  "$schema": "../schemas/route_mcp_activation_policy.schema.json",
+  "schema_version": "route_mcp_activation_policy.v1",
+  "generated_at": "2026-05-09",
+  "routes": [
+    {
+      "route_id": "stack-governance",
+      "required_mcp": [],
+      "optional_mcp": [
+        "chrome-devtools",
+        "zotero-mcp",
+        "openalex-mcp",
+        "semantic-scholar-mcp",
+        "agentmemory",
+        "codegraph"
+      ],
+      "activation_needed_mcp": [],
+      "notes": "Governance work may inspect browser-visible plugin state, formal reference tooling, runtime memory, and code structure context, but shell and envctl remain the primary actuators."
+    },
+    {
+      "route_id": "single-paper-review",
+      "required_mcp": [
+        "zotero-mcp",
+        "openalex-mcp",
+        "semantic-scholar-mcp"
+      ],
+      "optional_mcp": [],
+      "activation_needed_mcp": [],
+      "notes": "Formal paper review requires citation evidence and metadata lookup plus Zotero synchronization before final references are accepted. DOI is verified when present; user-provided sources, complete PDFs, and public academic index records can waive the must-have-DOI requirement."
+    },
+    {
+      "route_id": "environment-ops",
+      "required_mcp": [],
+      "optional_mcp": [
+        "chrome-devtools",
+        "zotero-mcp",
+        "openalex-mcp",
+        "agentmemory",
+        "codegraph"
+      ],
+      "activation_needed_mcp": [],
+      "notes": "Environment operations can use MCP evidence, agentmemory health, and codegraph context when relevant, but config mutation must remain governed by envctl and validators."
+    },
+    {
+      "route_id": "project-retrospective",
+      "required_mcp": [],
+      "optional_mcp": [
+        "chrome-devtools",
+        "zotero-mcp",
+        "openalex-mcp",
+        "agentmemory"
+      ],
+      "activation_needed_mcp": [],
+      "notes": "Retrospective work may inspect evidence sources and runtime memory signals, but durable changes go through project-retrospective-evolver and research-stack-manager."
+    },
+    {
+      "route_id": "long-running-experiment-ops",
+      "required_mcp": [],
+      "optional_mcp": [
+        "chrome-devtools"
+      ],
+      "activation_needed_mcp": [],
+      "notes": "Browser tooling is optional for dashboards; process, logs, checkpoints, and shell probes remain primary."
+    },
+    {
+      "route_id": "evidence-based-literature-workflow",
+      "required_mcp": [
+        "zotero-mcp",
+        "openalex-mcp",
+        "semantic-scholar-mcp"
+      ],
+      "optional_mcp": [
+        "chrome-devtools",
+        "google-scholar-mcp",
+        "paper-search-mcp"
+      ],
+      "activation_needed_mcp": [],
+      "notes": "Structured reading and citation evidence auditing require the formal metadata/Zotero chain. Browser, Google Scholar, and paper-search remain discovery or PDF-evidence sensors, not substitutes for the citation gate."
+    },
+    {
+      "route_id": "literature-review",
+      "required_mcp": [
+        "zotero-mcp",
+        "openalex-mcp",
+        "semantic-scholar-mcp"
+      ],
+      "optional_mcp": [
+        "chrome-devtools",
+        "google-scholar-mcp",
+        "paper-search-mcp"
+      ],
+      "activation_needed_mcp": [],
+      "notes": "The citation evidence/Zotero/OpenAlex/Semantic Scholar chain is required for formal citation. DOI is checked when present; user-provided sources, complete PDFs, and public academic index records can waive the must-have-DOI requirement. Google Scholar and paper-search remain optional discovery sensors; CNKI discovery/download defaults to envctl cnki-zotero rather than direct cnki-mcp activation."
+    },
+    {
+      "route_id": "reference-fulltext-acquisition",
+      "required_mcp": [
+        "openalex-mcp",
+        "semantic-scholar-mcp"
+      ],
+      "optional_mcp": [
+        "chrome-devtools",
+        "zotero-mcp",
+        "google-scholar-mcp",
+        "paper-search-mcp"
+      ],
+      "activation_needed_mcp": [],
+      "notes": "Fulltext acquisition uses DOI/OA metadata first. For English or international papers, OpenAlex/Crossref/Unpaywall/Semantic Scholar are the batch OA attempt; if no verified PDF is acquired, Google Scholar exact-title lookup and right-side PDF links become the default per-paper fallback. Zotero is only for explicit attachment or import planning. CNKI discovery/download defaults to envctl cnki-zotero and authorized Chrome/CDP rather than direct cnki-mcp activation. Browser selectors, local smoke-test status, and captcha checkpoint rules are governed by scholar_browser_patterns.json."
+    },
+    {
+      "route_id": "research-figure-design",
+      "required_mcp": [],
+      "optional_mcp": [],
+      "activation_needed_mcp": [],
+      "notes": "Research figure work defaults to local source files, code, SVG/PPT/HTML, and image2 when appropriate. MCP tools are not required unless the figure task also enters citation, data, or platform evidence routes."
+    },
+    {
+      "route_id": "research-presentation",
+      "required_mcp": [],
+      "optional_mcp": [],
+      "activation_needed_mcp": [],
+      "notes": "Presentation work defaults to local files, the official Presentations plugin for PPTX, the installed original guizang-ppt-skill for HTML web decks, browser preview, and image2 when visuals are requested. MCP tools are not required unless the deck also enters citation, data, or platform evidence routes."
+    },
+    {
+      "route_id": "social-platform-case",
+      "required_mcp": [
+        "chrome-devtools"
+      ],
+      "optional_mcp": [
+        "social-platform-mcp",
+        "zotero-mcp",
+        "openalex-mcp"
+      ],
+      "activation_needed_mcp": [
+        "xiaohongshu-mcp"
+      ],
+      "notes": "Browser-visible evidence is required; generic social capture is optional; platform-specific MCP requires explicit activation."
+    },
+    {
+      "route_id": "computational-social-science",
+      "required_mcp": [],
+      "optional_mcp": [
+        "chrome-devtools",
+        "zotero-mcp",
+        "openalex-mcp",
+        "semantic-scholar-mcp",
+        "paper-search-mcp"
+      ],
+      "activation_needed_mcp": [],
+      "notes": "MCP tools are sensors for literature and data discovery; reproducible local artifacts remain the controlled outputs."
+    },
+    {
+      "route_id": "social-science-submission-package",
+      "required_mcp": [
+        "zotero-mcp",
+        "openalex-mcp",
+        "semantic-scholar-mcp"
+      ],
+      "optional_mcp": [],
+      "activation_needed_mcp": [],
+      "notes": "Submission packaging requires the formal citation evidence verification chain before final bibliography and response artifacts are accepted."
+    },
+    {
+      "route_id": "empirical-quant",
+      "required_mcp": [],
+      "optional_mcp": [
+        "zotero-mcp",
+        "openalex-mcp",
+        "semantic-scholar-mcp"
+      ],
+      "activation_needed_mcp": [],
+      "notes": "Citation MCP tools are optional unless the project enters formal writing or citation evidence verification. DOI is checked when present; user-provided sources, complete PDFs, and public academic index records can waive the must-have-DOI requirement."
+    },
+    {
+      "route_id": "text-corpus",
+      "required_mcp": [],
+      "optional_mcp": [
+        "zotero-mcp",
+        "openalex-mcp",
+        "semantic-scholar-mcp",
+        "paper-search-mcp"
+      ],
+      "activation_needed_mcp": [],
+      "notes": "Corpus projects may use literature and paper search MCPs as discovery sensors, not as uncontrolled data sources."
+    },
+    {
+      "route_id": "network-analysis",
+      "required_mcp": [],
+      "optional_mcp": [
+        "zotero-mcp",
+        "openalex-mcp",
+        "semantic-scholar-mcp"
+      ],
+      "activation_needed_mcp": [],
+      "notes": "Network analysis can use citation and literature MCPs for context, while node-edge definitions remain project artifacts."
+    },
+    {
+      "route_id": "writing-export",
+      "required_mcp": [
+        "zotero-mcp",
+        "openalex-mcp",
+        "semantic-scholar-mcp"
+      ],
+      "optional_mcp": [],
+      "activation_needed_mcp": [],
+      "notes": "Writing export requires reference capture and citation evidence verification before final output. DOI is checked when present; user-provided sources, complete PDFs, and public academic index records can waive the must-have-DOI requirement."
+    },
+    {
+      "route_id": "scholar-persona-distillation",
+      "required_mcp": [
+        "google-scholar-mcp"
+      ],
+      "optional_mcp": [
+        "openalex-mcp",
+        "paper-search-mcp",
+        "social-platform-mcp"
+      ],
+      "activation_needed_mcp": [],
+      "notes": "Scholar/persona distillation may use Google Scholar, paper-search, envctl cnki-zotero, and OpenAlex only as paper discovery sensors. Search candidates become distillation evidence only after explicit user confirmation or user-provided file/URL/export/source-json input. Public context collection is a separate portrait layer; social-platform-mcp is optional for browser-visible public articles and must not promote public-context candidates into paper evidence. DOI is not a hard gate for distillation. Formal paper writing still requires citation evidence verification; DOI must be verified when present, and user-provided sources, complete PDFs, or public academic index records can waive the must-have-DOI requirement."
+    },
+    {
+      "route_id": "general-research",
+      "required_mcp": [],
+      "optional_mcp": [
+        "chrome-devtools",
+        "zotero-mcp",
+        "openalex-mcp",
+        "semantic-scholar-mcp",
+        "agentmemory"
+      ],
+      "activation_needed_mcp": [],
+      "notes": "General research keeps MCPs as optional sensors until a more specific route selects stricter gates; runtime memory can help recall prior context but cannot silently switch route."
+    }
+  ]
+}

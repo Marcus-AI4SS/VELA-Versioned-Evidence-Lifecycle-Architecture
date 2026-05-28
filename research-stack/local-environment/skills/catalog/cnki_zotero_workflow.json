@@ -1,0 +1,242 @@
+{
+  "$schema": "../schemas/cnki_zotero_workflow.v1.schema.json",
+  "schema_version": "cnki_zotero_workflow.v1",
+  "workflow_id": "cnki-to-zotero-controlled-ingest",
+  "source_policy": {
+    "lawful_access_required": true,
+    "no_login_bypass": true,
+    "no_captcha_bypass": true,
+    "no_cookie_persistence": true,
+    "default_execution_mode": "report_only",
+    "copyrighted_files_storage": "CNKI PDFs, CAJ files, and downloaded full text stay under ignored output or user download folders. They are never committed to source control."
+  },
+  "inbox": {
+    "default_path": "skills/outputs/inbox/cnki-downloads",
+    "environment_fallback_path": "skills/outputs/inbox/cnki-downloads",
+    "project_default_relative_path": "outputs/inbox/cnki-downloads",
+    "project_inbox_required_when_project_root_known": true,
+    "allowed_environment_fallback_modes": [
+      "environment_smoke_test",
+      "manual_environment_maintenance"
+    ],
+    "allowed_extensions": [
+      ".pdf",
+      ".caj"
+    ],
+    "metadata_sidecar_extensions": [
+      ".json",
+      ".ris",
+      ".enw",
+      ".txt"
+    ],
+    "max_auto_import_mb": 80,
+    "git_policy": "Project downloads use <project>/outputs/inbox/cnki-downloads when a project root exists. The environment fallback inbox is only for smoke tests or manual environment maintenance. Reports may include filenames, size, hashes, and intended actions, but not file contents."
+  },
+  "candidate_selection": {
+    "author_affiliation_policy": {
+      "required_when_affiliation_requested": true,
+      "accepted_evidence_sources": [
+        "advanced_search_author_affiliation",
+        "detail_page_author_affiliation",
+        "metadata_sidecar_author_affiliation",
+        "user_verified_project_manifest"
+      ],
+      "forbidden_shortcuts": [
+        "author_only_search_as_affiliation_match",
+        "fulltext_query_as_affiliation_filter",
+        "citation_sort_without_affiliation_gate",
+        "download_before_affiliation_gate"
+      ],
+      "download_gate": "When the user asks for an author at a named institution, the download candidate must carry author-affiliation evidence from advanced CNKI search, detail-page affiliation text, metadata sidecar, or a user-verified project manifest before any batch download or Zotero import.",
+      "failure_action": "Stop before download, report the unverified candidates, and ask for a detail-page or advanced-search evidence pass."
+    }
+  },
+  "acquisition_channels": [
+    {
+      "id": "cnki-mcp-discovery",
+      "role": "Non-default CNKI candidate sensor. Use only when a live MCP smoke test passes; the default project path is envctl cnki-zotero backed by controlled Chrome/CDP. It does not download files or write Zotero.",
+      "allowed_outputs": [
+        "candidate metadata",
+        "detail page URL",
+        "DOI when present",
+        "download count as metadata only"
+      ],
+      "requires_user_session": false,
+      "writes_source_files": false
+    },
+    {
+      "id": "authorized-browser-download",
+      "role": "Use agent-browser or Chrome DevTools to attach to the user's already logged-in Chrome session, then discover candidates and trigger CNKI PDF/CAJ downloads for files the user is allowed to access.",
+      "allowed_outputs": [
+        "PDF in inbox",
+        "CAJ in inbox",
+        "agent-browser download report",
+        "browser-visible download status"
+      ],
+      "requires_user_session": true,
+      "writes_source_files": false
+    },
+    {
+      "id": "cnki-export-metadata",
+      "role": "Use CNKI export metadata, RIS, EndNote, or a user-provided sidecar file to enrich Zotero records.",
+      "allowed_outputs": [
+        "metadata sidecar",
+        "RIS review file",
+        "GB/T citation text for review"
+      ],
+      "requires_user_session": true,
+      "writes_source_files": false
+    },
+    {
+      "id": "zotero-mcp-write",
+      "role": "Write verified DOI records or local PDF files into Zotero after explicit import action.",
+      "allowed_outputs": [
+        "Zotero item",
+        "Zotero attachment",
+        "semantic search database update"
+      ],
+      "requires_user_session": false,
+      "writes_source_files": false
+    }
+  ],
+  "zotero_import": {
+    "primary_write_path": "zotero-mcp local connector first; use zotero_add_from_file for local PDFs and zotero_add_by_doi for verified DOI records.",
+    "supported_import_modes": [
+      "doi_metadata",
+      "local_pdf_add_from_file",
+      "cnki_export_metadata",
+      "manual_caj_attachment",
+      "ris_review"
+    ],
+    "default_tags": [
+      "source/cnki",
+      "source/browser-download",
+      "ingest/codex-reviewed"
+    ],
+    "collection_policy": "Prefer an existing project collection. If no collection exists, report the fallback target before writing.",
+    "post_import_checks": [
+      "search the newly added Zotero item by title or DOI",
+      "check child attachments for PDFs",
+      "run zotero_update_search_database after additions",
+      "keep CAJ files as manual-review attachments unless a trusted conversion path exists"
+    ]
+  },
+  "validation_gates": [
+    {
+      "id": "authorized-access-only",
+      "description": "The file must come from the user's legal CNKI access or an openly available source.",
+      "failure_action": "Do not download, import, or attach the file."
+    },
+    {
+      "id": "no-session-state-capture",
+      "description": "Do not persist browser cookies, credentials, tokens, or captcha artifacts into the repository.",
+      "failure_action": "Stop and ask the user to handle login in the browser."
+    },
+    {
+      "id": "captcha-checkpoint-before-resume",
+      "description": "When CNKI shows a slider or security verification page, stop automation, write captcha_checkpoint.resume_candidates, and resume only after the user handles verification in the visible logged-in browser.",
+      "failure_action": "Do not keep retrying the batch; preserve the interrupted queue and wait for manual confirmation."
+    },
+    {
+      "id": "inbox-is-ignored-output",
+      "description": "Downloaded full text must stay in ignored output or user download folders.",
+      "failure_action": "Move the file to an ignored inbox before scanning."
+    },
+    {
+      "id": "metadata-before-formal-citation",
+      "description": "Formal references still require citation evidence and metadata verification. DOI is verified when present in the evidence; CNKI records, complete PDFs, and user-provided metadata can serve as DOI-waiver evidence when DOI is absent.",
+      "failure_action": "Keep the record as a candidate or local attachment, not a formal reference."
+    },
+    {
+      "id": "explicit-write-before-zotero",
+      "description": "Zotero writes require an explicit import action or a generated import plan reviewed in the current thread.",
+      "failure_action": "Produce a report only."
+    }
+  ],
+  "external_references": [
+    {
+      "name": "cookjohn/cnki-skills",
+      "url": "https://github.com/cookjohn/cnki-skills",
+      "decision": "adapt",
+      "accepted_patterns": [
+        "browser-session based CNKI discovery and download after user login",
+        "field-flexible CNKI search with explicit sort order before batch download",
+        "detail-page referrer-preserving PDF/CAJ download through a controllable browser",
+        "captcha checkpoint and resume queue instead of repeated failed batch retries",
+        "CNKI export metadata before Zotero write",
+        "Zotero local connector as the first write path",
+        "batch export to reduce repeated page navigation"
+      ],
+      "rejected_patterns": [
+        "copying upstream scripts wholesale without local schema",
+        "persisting cookies in source files",
+        "bypassing CNKI login, captcha, or access restrictions",
+        "treating metadata export as DOI verification"
+      ]
+    },
+    {
+      "name": "cfh-7598/cnki-codex-skills",
+      "url": "https://github.com/cfh-7598/cnki-codex-skills",
+      "decision": "adapt",
+      "accepted_patterns": [
+        "thin Codex entry skill over shared Python browser automation",
+        "manual login and captcha handling through the user browser",
+        "Playwright/CDP connection to an existing Chrome session",
+        "focused subcommands for search, detail, download, and export"
+      ],
+      "rejected_patterns": [
+        "copying the package wholesale into the local source tree",
+        "using a global default download target for project tasks",
+        "writing cookies, browser state, or credentials into the repository"
+      ]
+    },
+    {
+      "name": "cookjohn/gs-skills",
+      "url": "https://github.com/cookjohn/gs-skills",
+      "decision": "adapt",
+      "accepted_patterns": [
+        "stable result identifiers for citation export and follow-up actions",
+        "DOM extraction wrapped behind small search and export skills",
+        "captcha-aware stop-and-resume behavior",
+        "batch citation export into Zotero after user-visible review"
+      ],
+      "rejected_patterns": [
+        "unauthorized full-text retrieval routes",
+        "treating Google Scholar metadata as formal DOI verification",
+        "rapid repeated page loads that increase captcha risk"
+      ]
+    },
+    {
+      "name": "cookjohn/wos-skills",
+      "url": "https://github.com/cookjohn/wos-skills",
+      "decision": "watch",
+      "accepted_patterns": [
+        "split search, detail, navigation, export, and download into small callable units",
+        "prefer structured site interfaces before brittle page scraping",
+        "use Zotero Connector writes only after metadata has been collected",
+        "route user-facing workflows through a thin researcher entrypoint"
+      ],
+      "rejected_patterns": [
+        "treating Web of Science as currently available in the local default workflow",
+        "anti-detection configuration as a default local policy",
+        "publisher PDF download without an explicit authorized browser session",
+        "copying external agent files without schema and validator coverage"
+      ]
+    },
+    {
+      "name": "paper-search and find-skills repositories",
+      "url": "https://github.com/futantan/agent-skills.md",
+      "decision": "watch",
+      "accepted_patterns": [
+        "skill discovery as an external input to skill-vetter",
+        "lightweight API search examples for open scholarly sources",
+        "separating skill descriptions from executable helper scripts"
+      ],
+      "rejected_patterns": [
+        "using third-party indexes as authoritative quality signals",
+        "adding a new primary runtime for routine literature search",
+        "installing generated skill packs without local tests"
+      ]
+    }
+  ]
+}

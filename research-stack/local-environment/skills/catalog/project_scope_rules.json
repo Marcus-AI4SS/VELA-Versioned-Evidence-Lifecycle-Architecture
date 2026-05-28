@@ -1,0 +1,308 @@
+{
+  "clarification_card_fields": [
+    "route_id",
+    "target_item_count",
+    "work_units",
+    "deliverable_types",
+    "sync_targets",
+    "explicit_project_mode",
+    "needs_clarification",
+    "route_confirmation_required",
+    "route_confirmation_question",
+    "user_confirmed_route"
+  ],
+  "enums": {
+    "work_units": [
+      "discovery",
+      "capture",
+      "cleaning",
+      "coding",
+      "analysis",
+      "writing",
+      "review",
+      "export",
+      "presentation",
+      "reproducibility",
+      "knowledge_sync",
+      "opportunity_planning",
+      "needs_discovery",
+      "product_spec",
+      "specification",
+      "concept_generation",
+      "concept_selection",
+      "concept_testing",
+      "visual_spec",
+      "asset_generation",
+      "prototyping",
+      "economics",
+      "preview_tuning",
+      "design",
+      "implementation",
+      "testing",
+      "packaging",
+      "release"
+    ],
+    "deliverable_types": [
+      "annotated_bibliography",
+      "literature_synthesis",
+      "case_dataset",
+      "comment_analysis_report",
+      "project_map",
+      "paper_draft",
+      "revision_package",
+      "submission_package",
+      "figures_tables",
+      "reproducibility_bundle",
+      "docx_export",
+      "latex_export",
+      "presentation_deck",
+      "web_deck",
+      "pptx_export",
+      "app_opportunity_brief",
+      "user_needs_hierarchy",
+      "target_specifications",
+      "concept_generation_log",
+      "concept_selection_matrix",
+      "concept_test_report",
+      "prototype_test_plan",
+      "development_economics_note",
+      "app_prd",
+      "visual_design_spec",
+      "app_screen_mockups",
+      "app_icon_assets",
+      "preview_tuning_report",
+      "app_architecture",
+      "ui_implementation",
+      "design_system_rules",
+      "test_report",
+      "desktop_build",
+      "release_package"
+    ],
+    "sync_targets": [
+      "zotero",
+      "obsidian"
+    ],
+    "explicit_project_mode": [
+      "auto",
+      "force_multi_agent",
+      "force_single_agent"
+    ],
+    "required_review_for": [
+      "paper_draft",
+      "revision_package",
+      "submission_package",
+      "figures_tables",
+      "presentation_deck",
+      "reproducibility_bundle",
+      "literature_synthesis",
+      "case_dataset",
+      "project_map",
+      "app_opportunity_brief",
+      "user_needs_hierarchy",
+      "target_specifications",
+      "concept_selection_matrix",
+      "concept_test_report",
+      "prototype_test_plan",
+      "development_economics_note",
+      "app_prd",
+      "visual_design_spec",
+      "app_screen_mockups",
+      "app_icon_assets",
+      "app_architecture",
+      "ui_implementation",
+      "design_system_rules",
+      "desktop_build",
+      "release_package"
+    ]
+  },
+  "route_scope": {
+    "always_multi_agent": [
+      "computational-social-science",
+      "social-science-submission-package",
+      "project-retrospective"
+    ],
+    "never_default_multi_agent": [
+      "stack-governance",
+      "environment-ops",
+      "single-paper-review",
+      "long-running-experiment-ops",
+      "scholar-persona-distillation",
+      "research-figure-design",
+      "research-presentation"
+    ],
+    "conditional_multi_agent": [
+      "literature-review",
+      "reference-fulltext-acquisition",
+      "social-platform-case",
+      "writing-export",
+      "empirical-quant",
+      "text-corpus",
+      "network-analysis",
+      "general-research",
+      "evidence-based-literature-workflow"
+    ]
+  },
+  "input_priority": [
+    "user_explicit_requirement",
+    "user_confirmed_route",
+    "clarification_card",
+    "confirmed_thread_facts",
+    "needs_clarification"
+  ],
+  "route_confirmation_policy": {
+    "default_for_new_chain": "ask_before_entering_route",
+    "same_chain_continue": "no_extra_confirmation_when_user_says_continue_or_the_route_is_already_confirmed_in_thread",
+    "ambiguous_semantics": "ask_guided_questions_before_selecting_route",
+    "question_limit": 3,
+    "block_when_required_but_unconfirmed": true,
+    "minimum_confirmation_card_fields": [
+      "candidate_route",
+      "why_this_route",
+      "main_tools_or_skills",
+      "excluded_routes",
+      "confirmation_question"
+    ]
+  },
+  "override_rules": {
+    "force_single_agent": "single-producer-only-but-mandatory-review-still-applies",
+    "force_multi_agent": "upgrade-to-sequential-multi-agent-execution",
+    "auto": "route-defaults-and-conditional-rules"
+  },
+  "conditional_rules": {
+    "literature-review": {
+      "any": [
+        {
+          "field": "target_item_count",
+          "operator": ">=",
+          "value": 15
+        },
+        {
+          "field": "deliverable_types",
+          "operator": "contains",
+          "value": "literature_synthesis"
+        },
+        {
+          "field": "sync_targets",
+          "operator": "contains_all",
+          "value": [
+            "zotero",
+            "obsidian"
+          ]
+        }
+      ]
+    },
+    "reference-fulltext-acquisition": {
+      "copy_of": "literature-review"
+    },
+    "social-platform-case": {
+      "any": [
+        {
+          "field": "target_item_count",
+          "operator": ">",
+          "value": 3
+        },
+        {
+          "field": "deliverable_types",
+          "operator": "contains_any",
+          "value": [
+            "case_dataset",
+            "comment_analysis_report"
+          ]
+        },
+        {
+          "field": "work_units",
+          "operator": "contains_all",
+          "value": [
+            "capture",
+            "analysis"
+          ]
+        }
+      ]
+    },
+    "writing-export": {
+      "any": [
+        {
+          "field": "deliverable_types",
+          "operator": "contains_any",
+          "value": [
+            "paper_draft",
+            "revision_package",
+            "submission_package"
+          ]
+        },
+        {
+          "field": "work_units",
+          "operator": "contains_all",
+          "value": [
+            "writing",
+            "review"
+          ]
+        }
+      ],
+      "single_agent_only_deliverables": [
+        "docx_export",
+        "latex_export"
+      ]
+    },
+    "empirical-quant": {
+      "any": [
+        {
+          "field": "work_units",
+          "operator": "min_count",
+          "value": 2,
+          "pool": [
+            "capture",
+            "cleaning",
+            "coding",
+            "analysis",
+            "writing",
+            "reproducibility",
+            "knowledge_sync"
+          ]
+        },
+        {
+          "field": "deliverable_types",
+          "operator": "contains",
+          "value": "figures_tables"
+        },
+        {
+          "field": "deliverable_types",
+          "operator": "contains_any",
+          "value": [
+            "reproducibility_bundle",
+            "paper_draft",
+            "literature_synthesis"
+          ]
+        }
+      ],
+      "all": [
+        {
+          "field": "deliverable_types",
+          "operator": "contains",
+          "value": "figures_tables"
+        },
+        {
+          "field": "deliverable_types",
+          "operator": "contains_any",
+          "value": [
+            "reproducibility_bundle",
+            "paper_draft",
+            "literature_synthesis"
+          ]
+        }
+      ]
+    },
+    "text-corpus": {
+      "copy_of": "empirical-quant"
+    },
+    "network-analysis": {
+      "copy_of": "empirical-quant"
+    },
+    "general-research": {
+      "requires_clarification_card": true
+    },
+    "evidence-based-literature-workflow": {
+      "copy_of": "literature-review"
+    }
+  }
+}

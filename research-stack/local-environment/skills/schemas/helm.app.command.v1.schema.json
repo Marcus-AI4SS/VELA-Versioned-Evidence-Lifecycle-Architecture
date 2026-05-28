@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://research-environment-local/schemas/helm.app.command.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "command",
+    "payload"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "helm.app.command.v1"
+    },
+    "command": {
+      "type": "string",
+      "enum": [
+        "validate",
+        "plan-team",
+        "init-project",
+        "scan-stack"
+      ]
+    },
+    "dry_run": {
+      "type": "boolean",
+      "default": false
+    },
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "payload": {
+      "type": "object"
+    }
+  }
+}

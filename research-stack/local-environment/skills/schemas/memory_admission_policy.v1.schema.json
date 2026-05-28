@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://research-environment-local/schemas/memory_admission_policy.v1.schema.json",
+  "title": "Memory Admission Policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "generated_at",
+    "default_decision_order",
+    "placements"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schema_version": {
+      "const": "memory_admission_policy.v1"
+    },
+    "generated_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "default_decision_order": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": [
+          "control_kernel",
+          "skill",
+          "obsidian",
+          "codex_native",
+          "discard"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "placements": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "$ref": "#/$defs/placement"
+      }
+    }
+  },
+  "$defs": {
+    "string_list": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "placement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision_label",
+        "purpose",
+        "allowed_items",
+        "forbidden_items",
+        "owner",
+        "validation_gate"
+      ],
+      "properties": {
+        "decision_label": {
+          "type": "string",
+          "enum": [
+            "control_kernel",
+            "skill",
+            "obsidian",
+            "codex_native",
+            "discard"
+          ]
+        },
+        "purpose": {
+          "type": "string",
+          "minLength": 1
+        },
+        "allowed_items": {
+          "$ref": "#/$defs/string_list"
+        },
+        "forbidden_items": {
+          "$ref": "#/$defs/string_list"
+        },
+        "owner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "validation_gate": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}
