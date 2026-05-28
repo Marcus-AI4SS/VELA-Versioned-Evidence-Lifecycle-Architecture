@@ -22,14 +22,18 @@ On macOS or Linux:
 ```bash
 git clone https://github.com/Marcus-AI4SS/VELA.git vela
 cd vela
-sh ./install.sh
+sh ./install-macos.sh
 ~/.vela/bin/vela local-env doctor
 ~/.vela/bin/vela local-env doctor-runtime --include core,automation,toolchain
 ```
 
 The install script configures the VELA CLI and installs the research environment into your Codex home. Restart Codex after installation so the new skills are discovered.
 
-`-BootstrapTools` checks and, on Windows, attempts public installs for Git, Python 3.13+, PowerShell 7, ripgrep, Node.js, GitHub CLI, and agentmemory. CodeGraph, MCP server vendor setup, Codex plugins, browser/CNKI sessions, Zotero, Obsidian, and private memory databases remain explicit user-runtime setup; VELA only reports their status and gives the next action.
+Use `sh ./install.sh --bootstrap-tools` instead on Linux or when you want the generic shell installer.
+
+`-BootstrapTools` checks and, on Windows, attempts public installs through `winget` for Git, Python 3.13+, PowerShell 7, ripgrep, Node.js, GitHub CLI, and agentmemory. `install-macos.sh` uses Homebrew for the same public toolchain where available. CodeGraph, MCP server vendor setup, Codex plugins, browser/CNKI sessions, Zotero, Obsidian, and private memory databases remain explicit user-runtime setup; VELA only reports their status and gives the next action.
+
+VELA always keeps two layers: the cloned `vela/` folder is the source package, while the installed runtime lives in `~/.codex` and `~/.vela` unless you override `CODEX_HOME` or `VELA_HOME`.
 
 ## 2. Initialize A Project
 

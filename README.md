@@ -26,25 +26,35 @@ The distribution deliberately excludes desktop app development and distilled-sch
 
 ## Environment Requirements
 
-VELA is closest to a one-command setup when the public toolchain is already present. For a fresh Windows machine, run `.\install.ps1 -BootstrapTools` first; it checks the toolchain and attempts safe public installs where VELA knows a stable installer.
+VELA is closest to a one-command setup when the public toolchain is already present. For a fresh Windows machine, run `.\install.ps1 -BootstrapTools` first; it checks the toolchain and attempts safe public installs through `winget` where VELA knows a stable package. On macOS, run `sh ./install-macos.sh`; it uses Homebrew when `brew` is available and otherwise reports manual setup steps.
 
 | Component | Required For | VELA Setup Behavior |
 | --- | --- | --- |
-| Git | clone, repo audit, release workflow | `-BootstrapTools` attempts `winget` install |
-| Python 3.13+ | VELA CLI, validators, envctl, schema checks | required before the Python installer can run; `-BootstrapTools` attempts `winget` install when possible |
-| PowerShell 7 (`pwsh`) | cross-platform runtime scripts | `-BootstrapTools` attempts `winget` install |
-| ripgrep (`rg`) | fast repository and privacy scans | `-BootstrapTools` attempts `winget` install |
-| Node.js LTS / npm | optional JavaScript-based tools and agentmemory install path | `-BootstrapTools` attempts `winget` install |
-| GitHub CLI (`gh`) | optional GitHub release and repo checks | `-BootstrapTools` attempts `winget` install |
+| Git | clone, repo audit, release workflow | Windows: `winget`; macOS: Homebrew |
+| Python 3.13+ | VELA CLI, validators, envctl, schema checks | required before the Python installer can run; Windows: `winget`; macOS: Homebrew |
+| PowerShell 7 (`pwsh`) | cross-platform runtime scripts | Windows: `winget`; macOS: Homebrew |
+| ripgrep (`rg`) | fast repository and privacy scans | Windows: `winget`; macOS: Homebrew |
+| Node.js LTS / npm | optional JavaScript-based tools and agentmemory install path | Windows: `winget`; macOS: Homebrew |
+| GitHub CLI (`gh`) | optional GitHub release and repo checks | Windows: `winget`; macOS: Homebrew |
 | agentmemory | optional local memory-management runtime | checked and optionally installed with npm; VELA never exports memory data |
 | CodeGraph | optional project-local code index | checked/guided only; initialize each target project explicitly |
 | MCP servers | optional Codex tool profiles | profile and doctor checks only; server credentials remain user-local |
 | Codex plugins | optional plugin capabilities such as Browser, GitHub, Superpowers, Research Autopilot | install in the user's Codex runtime; VELA never redistributes plugin cache |
 | Zotero / Obsidian / browser logins / CNKI sessions | optional external research workflows | never copied; VELA only documents and checks the boundary |
 
-`.\install.ps1` without `-BootstrapTools` installs only the VELA-owned workflow/runtime layer: public research skills, contracts, schemas, catalogs, profiles, validators, tests, envctl modules, toolchain manifests, and shims.
+`.\install.ps1` or `sh ./install.sh` without bootstrap installs only the VELA-owned workflow/runtime layer: public research skills, contracts, schemas, catalogs, profiles, validators, tests, envctl modules, toolchain manifests, and shims.
+
+VELA intentionally creates a two-layer setup for every user. The cloned VELA repository is the source package and can be updated with Git. The user's runtime layer lives under `CODEX_HOME` and `VELA_HOME`, defaulting to `~/.codex` and `~/.vela` on Windows, macOS, and Linux. Runtime receipts, installed public skills, envctl shims, MCP profile checks, and optional tool probes live there; private account state and caches stay user-local.
 
 ## Start In Five Minutes
+
+Choose the installer for your machine:
+
+| Platform | Use This | What It Does |
+| --- | --- | --- |
+| Windows | `install.ps1 -BootstrapTools` | Uses `winget` where possible, then installs the VELA runtime into your own `CODEX_HOME` and `VELA_HOME`. |
+| macOS | `sh ./install-macos.sh` | Uses Homebrew where possible, then installs the VELA runtime into your own `~/.codex` and `~/.vela`. |
+| Linux / advanced shell use | `sh ./install.sh --bootstrap-tools` | Checks public tools, installs the VELA runtime, and leaves system package installation to the user. |
 
 ```powershell
 git clone https://github.com/Marcus-AI4SS/VELA.git vela
@@ -60,6 +70,15 @@ cd ..\my-research-project
 ..\vela\vela.ps1 handoff render handoffs\H001.yaml --out handoffs\H001.prompt.md
 ..\vela\vela.ps1 validate . --repair-context
 ..\vela\vela.ps1 privacy scan .
+```
+
+On macOS:
+
+```bash
+git clone https://github.com/Marcus-AI4SS/VELA.git vela
+cd vela
+sh ./install-macos.sh
+~/.vela/bin/vela local-env doctor-runtime --include core,automation,toolchain
 ```
 
 The generated project contains `materials/`, `evidence/`, `claims/`, `methods/`, `deliverables/`, `handoffs/`, `logs/`, `.codex/`, and `.vela/context.json`.

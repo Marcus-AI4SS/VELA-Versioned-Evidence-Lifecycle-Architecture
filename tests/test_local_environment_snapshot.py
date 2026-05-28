@@ -42,6 +42,7 @@ class LocalEnvironmentSnapshotTests(unittest.TestCase):
         self.assertIn("bootstrap.public-tools", components)
         bootstrap = components["bootstrap.public-tools"]
         self.assertIn("Git", bootstrap["auto_installable_windows"])
+        self.assertIn("Git via Homebrew", bootstrap["auto_installable_macos"])
         self.assertIn("CodeGraph", bootstrap["doctor_only"])
 
     def test_excluded_app_agents_are_not_in_project_initializer_manifest(self) -> None:

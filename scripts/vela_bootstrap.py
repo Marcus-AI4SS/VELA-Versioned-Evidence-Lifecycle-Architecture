@@ -108,7 +108,17 @@ def _npm_available() -> bool:
     return bool(_probe_command("npm", ["--version"]).get("ok"))
 
 
+def _system_install_strategy() -> str:
+    system = platform.system().lower()
+    if system == "windows":
+        return "winget"
+    if system == "darwin":
+        return "homebrew"
+    return "manual"
+
+
 def _tool_specs() -> list[dict[str, Any]]:
+    system_strategy = _system_install_strategy()
     return [
         {
             "id": "git",
@@ -116,8 +126,9 @@ def _tool_specs() -> list[dict[str, Any]]:
             "required": True,
             "command": "git",
             "args": ["--version"],
-            "install_strategy": "winget",
+            "install_strategy": system_strategy,
             "winget_id": "Git.Git",
+            "brew_formula": "git",
             "remediation": "Install Git, then reopen the terminal so PATH is refreshed.",
         },
         {
@@ -127,9 +138,10 @@ def _tool_specs() -> list[dict[str, Any]]:
             "command": "python",
             "args": ["--version"],
             "custom_probe": "python",
-            "install_strategy": "winget",
+            "install_strategy": system_strategy,
             "winget_id": "Python.Python.3.13",
-            "remediation": "Install Python 3.13+, then run install.ps1 again with the selected interpreter.",
+            "brew_formula": "python@3.13",
+            "remediation": "Install Python 3.13+, then run the installer again with the selected interpreter.",
         },
         {
             "id": "powershell",
@@ -137,8 +149,9 @@ def _tool_specs() -> list[dict[str, Any]]:
             "required": True,
             "command": "pwsh",
             "args": ["-NoProfile", "-Command", "$PSVersionTable.PSVersion.ToString()"],
-            "install_strategy": "winget",
+            "install_strategy": system_strategy,
             "winget_id": "Microsoft.PowerShell",
+            "brew_formula": "powershell",
             "remediation": "Install PowerShell 7 (`pwsh`) for the cross-platform runtime scripts.",
         },
         {
@@ -147,8 +160,9 @@ def _tool_specs() -> list[dict[str, Any]]:
             "required": True,
             "command": "rg",
             "args": ["--version"],
-            "install_strategy": "winget",
+            "install_strategy": system_strategy,
             "winget_id": "BurntSushi.ripgrep.MSVC",
+            "brew_formula": "ripgrep",
             "remediation": "Install ripgrep so validators and repository audits can run quickly.",
         },
         {
@@ -157,8 +171,9 @@ def _tool_specs() -> list[dict[str, Any]]:
             "required": True,
             "command": "node",
             "args": ["--version"],
-            "install_strategy": "winget",
+            "install_strategy": system_strategy,
             "winget_id": "OpenJS.NodeJS.LTS",
+            "brew_formula": "node",
             "remediation": "Install Node.js LTS. npm is used for optional JavaScript-based runtime tools.",
         },
         {
@@ -167,8 +182,9 @@ def _tool_specs() -> list[dict[str, Any]]:
             "required": False,
             "command": "gh",
             "args": ["--version"],
-            "install_strategy": "winget",
+            "install_strategy": system_strategy,
             "winget_id": "GitHub.cli",
+            "brew_formula": "gh",
             "remediation": "Install GitHub CLI if you want VELA to run repository and release checks.",
         },
         {
@@ -294,12 +310,26 @@ def _install_with_npm(spec: dict[str, Any]) -> dict[str, Any]:
     return _run(run_args, timeout=900)
 
 
+def _install_with_homebrew(spec: dict[str, Any]) -> dict[str, Any]:
+    brew = shutil.which("brew")
+    if not brew:
+        return {"ok": False, "status": "installer-missing", "stderr": "homebrew-not-found"}
+    formula = str(spec.get("brew_formula", ""))
+    if not formula:
+        return {"ok": False, "status": "formula-missing", "stderr": "brew-formula-missing"}
+    return _run([brew, "install", formula], timeout=900)
+
+
 def _install_tool(spec: dict[str, Any]) -> dict[str, Any]:
     strategy = str(spec.get("install_strategy", "manual"))
     if strategy == "winget":
         if platform.system().lower() != "windows":
             return {"ok": False, "status": "manual-guidance", "stderr": "winget-bootstrap-is-windows-only"}
         return _install_with_winget(spec)
+    if strategy == "homebrew":
+        if platform.system().lower() != "darwin":
+            return {"ok": False, "status": "manual-guidance", "stderr": "homebrew-bootstrap-is-macos-only"}
+        return _install_with_homebrew(spec)
     if strategy == "npm-global":
         return _install_with_npm(spec)
     return {"ok": False, "status": "manual-guidance", "stderr": "manual-install-required"}
@@ -311,14 +341,14 @@ def _tool_payload(spec: dict[str, Any], *, install: bool, yes: bool) -> tuple[di
     warnings: list[str] = []
     mutated = False
     install_result: dict[str, Any] | None = None
-    install_policy = "explicit-bootstrap" if spec.get("install_strategy") in {"winget", "npm-global"} else "manual"
+    install_policy = "explicit-bootstrap" if spec.get("install_strategy") in {"winget", "homebrew", "npm-global"} else "manual"
     if spec.get("doctor_only"):
         install_policy = "doctor-only"
 
     if install and not ok and not spec.get("doctor_only"):
-        if yes and spec.get("install_strategy") in {"winget", "npm-global"}:
+        if yes and spec.get("install_strategy") in {"winget", "homebrew", "npm-global"}:
             install_result = _install_tool(spec)
-            mutated = spec.get("install_strategy") in {"winget", "npm-global"}
+            mutated = spec.get("install_strategy") in {"winget", "homebrew", "npm-global"}
             probe = _probe_tool(spec)
             ok = bool(probe.get("ok"))
         else:
@@ -347,6 +377,8 @@ def _tool_payload(spec: dict[str, Any], *, install: bool, yes: bool) -> tuple[di
     }
     if spec.get("winget_id"):
         payload["winget_id"] = spec["winget_id"]
+    if spec.get("brew_formula"):
+        payload["brew_formula"] = spec["brew_formula"]
     if spec.get("npm_package"):
         payload["npm_package"] = spec["npm_package"]
     if install_result is not None:

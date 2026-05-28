@@ -18,7 +18,13 @@ VELA = **Versioned Evidence Lifecycle Architecture**. It is a portable project l
 
 ## Local Research Environment
 
-Run `install.ps1` or `install.sh` from the repository root to install the VELA CLI and the sanitized local research environment. On a fresh Windows machine, start with `.\install.ps1 -BootstrapTools` so VELA can check and attempt safe public installs for Git, Python 3.13+, PowerShell 7, ripgrep, Node.js, GitHub CLI, and agentmemory. CodeGraph, MCP server vendors, Codex plugins, browser/CNKI sessions, Zotero, Obsidian, and private memory stores are doctor/manual setup only.
+Run the installer for your platform from the repository root:
+
+- Windows: `.\install.ps1 -BootstrapTools`
+- macOS: `sh ./install-macos.sh`
+- Linux or generic shell: `sh ./install.sh --bootstrap-tools`
+
+Windows bootstrap uses `winget` where possible. macOS bootstrap uses Homebrew where possible. Both install the public VELA runtime into the user's own `CODEX_HOME` and `VELA_HOME`, normally `~/.codex` and `~/.vela`. CodeGraph, MCP server vendors, Codex plugins, browser/CNKI sessions, Zotero, Obsidian, and private memory stores are doctor/manual setup only.
 
 The distribution excludes desktop app development, distilled-scholar material, browser state, cookies, secrets, caches, generated outputs, and private absolute paths.
 

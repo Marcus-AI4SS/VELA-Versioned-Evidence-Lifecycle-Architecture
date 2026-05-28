@@ -7,6 +7,8 @@ This update adds an explicit public tool bootstrap layer to VELA. The goal is to
 ## Added
 
 - `install.ps1 -BootstrapTools` checks and attempts safe Windows public installs for Git, Python 3.13+, PowerShell 7, ripgrep, Node.js LTS, GitHub CLI, and `agentmemory` when npm is available.
+- `install-macos.sh` provides the corresponding macOS entrypoint and uses Homebrew for public tool bootstrap when `brew` is available.
+- `install.sh --bootstrap-tools` remains the generic shell entrypoint for Linux and advanced users.
 - `vela local-env bootstrap-tools --include all` reports bootstrap readiness through `vela.local_runtime.bootstrap_tools.v1`.
 - `schemas/vela.local_runtime.bootstrap_tools.v1.schema.json` defines the machine-readable bootstrap report.
 - README, Pages, and runtime manifest now state the required environment configuration explicitly.

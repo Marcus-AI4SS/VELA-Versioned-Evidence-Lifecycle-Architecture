@@ -767,6 +767,15 @@ def write_runtime_manifest(destination_root: Path) -> None:
                     "GitHub CLI",
                     "agentmemory when npm is available",
                 ],
+                "auto_installable_macos": [
+                    "Git via Homebrew",
+                    "Python 3.13+ via Homebrew",
+                    "PowerShell 7 via Homebrew",
+                    "ripgrep via Homebrew",
+                    "Node.js LTS via Homebrew",
+                    "GitHub CLI via Homebrew",
+                    "agentmemory when npm is available",
+                ],
                 "doctor_only": [
                     "CodeGraph",
                     "MCP server vendor environment",
@@ -774,7 +783,7 @@ def write_runtime_manifest(destination_root: Path) -> None:
                     "browser and CNKI login state",
                     "Zotero and Obsidian private libraries",
                 ],
-                "description": "Explicit bootstrap layer for public system tools. Private runtime state is never copied into VELA.",
+                "description": "Explicit bootstrap layer for public system tools. Windows uses winget where available; macOS uses Homebrew where available. Private runtime state is never copied into VELA.",
             },
         ],
     }

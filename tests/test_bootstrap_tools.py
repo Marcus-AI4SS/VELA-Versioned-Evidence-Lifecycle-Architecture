@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import unittest
+from unittest.mock import patch
 
 from scripts import vela_bootstrap
 from scripts import vela
@@ -37,6 +38,26 @@ class BootstrapToolsTests(unittest.TestCase):
         self.assertIn(optional["agentmemory"]["install_strategy"], {"npm-global", "manual"})
         self.assertIn("codegraph", optional)
         self.assertEqual(optional["codegraph"]["install_strategy"], "manual")
+
+    def test_bootstrap_plan_uses_homebrew_strategy_on_macos(self) -> None:
+        with patch("scripts.vela_bootstrap.platform.system", return_value="Darwin"):
+            plan = vela_bootstrap.plan_bootstrap_tools(include="system")
+
+        tools = {tool["id"]: tool for tool in plan["tools"]}
+        self.assertEqual(tools["git"]["install_strategy"], "homebrew")
+        self.assertEqual(tools["git"]["install_policy"], "explicit-bootstrap")
+        self.assertEqual(tools["git"]["brew_formula"], "git")
+        self.assertEqual(tools["python"]["brew_formula"], "python@3.13")
+        self.assertEqual(tools["powershell"]["brew_formula"], "powershell")
+
+    def test_bootstrap_commit_attempts_homebrew_on_macos(self) -> None:
+        with patch("scripts.vela_bootstrap.platform.system", return_value="Darwin"):
+            with patch("scripts.vela_bootstrap._probe_tool", return_value={"ok": False, "path": None}):
+                with patch("scripts.vela_bootstrap._install_tool", return_value={"ok": False, "status": "installer-missing"}) as install_tool:
+                    plan = vela_bootstrap.bootstrap_tools(include="system", install=True, yes=True)
+
+        self.assertTrue(install_tool.called)
+        self.assertIn("bootstrap-install-failed:git", plan["errors"])
 
     def test_cli_exposes_bootstrap_tools_command(self) -> None:
         parser = vela.build_parser()

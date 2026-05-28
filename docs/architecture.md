@@ -19,6 +19,20 @@ my-research-project/
 
 `vela init` materializes this shape from `package/.vela/initializer-manifest.json`, then writes `.vela/context.json` through the VELA context contract. The initializer is schema-driven so new project files and directories can be reviewed without hunting through Python code.
 
+## Installed Environment Shape
+
+Every VELA user gets a source package plus a local runtime:
+
+```text
+vela/                         # cloned or downloaded source package
+~/.codex/skills/              # public VELA research skills installed for Codex
+~/.vela/research-stack/       # contracts, schemas, profiles, validators, envctl modules
+~/.vela/bin/                  # vela/envctl shims
+~/.vela/state/                # install receipts and doctor state
+```
+
+`CODEX_HOME` and `VELA_HOME` can override the runtime targets. This is the same source/runtime split used by the original local environment, but without copying private machine state.
+
 ## Repository Shape
 
 | Path | Role |

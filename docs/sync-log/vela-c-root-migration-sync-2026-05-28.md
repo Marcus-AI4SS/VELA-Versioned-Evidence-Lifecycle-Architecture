@@ -47,3 +47,4 @@ VELA checks passed:
 - Private path scan across `research-stack`, `scripts`, `tests`, and `docs`
 - `git diff --check`
 - Sandbox runtime install and strict doctor using temporary `CODEX_HOME` / `VELA_HOME`; 17 public skills installed and no missing core/runtime shim entries remained.
+- Platform installer split documented and implemented: Windows uses `install.ps1`, macOS uses `install-macos.sh`, and generic shell/Linux uses `install.sh`.
