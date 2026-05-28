@@ -54,6 +54,7 @@
       "path": "logs/quality-gates/pipeline-status.json",
       "kind": "json",
       "content": {
+        "route_id": null,
         "current_stage": "research_design",
         "completed_stages": [],
         "gate_decisions": {},
@@ -65,6 +66,7 @@
       "kind": "json",
       "content": {
         "status": "pending",
+        "checked_deliverable": null,
         "target_paths": [],
         "checks": {
           "style_calibration": {
@@ -89,7 +91,9 @@
           "总而言之",
           "双刃剑",
           "多维度视角"
-        ]
+        ],
+        "generated_by": null,
+        "updated_at": null
       }
     },
     {
@@ -97,6 +101,9 @@
       "kind": "json",
       "content": {
         "project_name": "{project_name}",
+        "route_id": null,
+        "project_type": null,
+        "dispatch_run_id": null,
         "dispatch_stage": "planning",
         "pipeline_stage": "research_design",
         "status": "initialized",
@@ -127,8 +134,13 @@
     "project-manager.json": {
       "agent_id": "project-manager",
       "display_name": "项目经理智能体",
+      "preferred_model": null,
       "role": "manager",
       "enabled": true,
+      "isolation_method": null,
+      "parallel_safe": null,
+      "integration_review_required": null,
+      "capability_tags_subset": null,
       "allowed_skills_mcp_subset": [
         "research-stack-manager",
         "project-retrospective-evolver"
@@ -145,16 +157,24 @@
       "expected_outputs": [
         "summary.md",
         "result.json"
-      ]
+      ],
+      "review_gate": null
     },
     "literature-producer.json": {
       "agent_id": "literature-producer",
       "display_name": "文献智能体",
+      "preferred_model": null,
       "role": "producer",
       "enabled": true,
+      "isolation_method": null,
+      "parallel_safe": null,
+      "integration_review_required": null,
+      "capability_tags_subset": null,
+      "allowed_skills_mcp_subset": null,
       "write_scope_subset": [
         "outputs/agent-runs/<run_id>/<agent_id>/"
       ],
+      "max_execution_mode": null,
       "required_inputs": [
         "clarification_card",
         "project_truth_sources"
@@ -168,11 +188,18 @@
     "social-platform-producer.json": {
       "agent_id": "social-platform-producer",
       "display_name": "平台证据智能体",
+      "preferred_model": null,
       "role": "producer",
       "enabled": true,
+      "isolation_method": null,
+      "parallel_safe": null,
+      "integration_review_required": null,
+      "capability_tags_subset": null,
+      "allowed_skills_mcp_subset": null,
       "write_scope_subset": [
         "outputs/agent-runs/<run_id>/<agent_id>/"
       ],
+      "max_execution_mode": null,
       "required_inputs": [
         "clarification_card",
         "evidence_scope"
@@ -186,11 +213,18 @@
     "analysis-producer.json": {
       "agent_id": "analysis-producer",
       "display_name": "分析智能体",
+      "preferred_model": null,
       "role": "producer",
       "enabled": true,
+      "isolation_method": null,
+      "parallel_safe": null,
+      "integration_review_required": null,
+      "capability_tags_subset": null,
+      "allowed_skills_mcp_subset": null,
       "write_scope_subset": [
         "outputs/agent-runs/<run_id>/<agent_id>/"
       ],
+      "max_execution_mode": null,
       "required_inputs": [
         "dataset_scope",
         "analysis_plan"
@@ -204,11 +238,18 @@
     "writing-producer.json": {
       "agent_id": "writing-producer",
       "display_name": "写作智能体",
+      "preferred_model": null,
       "role": "producer",
       "enabled": true,
+      "isolation_method": null,
+      "parallel_safe": null,
+      "integration_review_required": null,
+      "capability_tags_subset": null,
+      "allowed_skills_mcp_subset": null,
       "write_scope_subset": [
         "outputs/agent-runs/<run_id>/<agent_id>/"
       ],
+      "max_execution_mode": null,
       "required_inputs": [
         "writing_scope",
         "verified_citations"
@@ -219,116 +260,16 @@
       ],
       "review_gate": "mandatory-review-when-required"
     },
-    "app-product-producer.json": {
-      "agent_id": "app-product-producer",
-      "display_name": "App 产品蓝图智能体",
-      "role": "producer",
-      "enabled": true,
-      "write_scope_subset": [
-        "outputs/agent-runs/<run_id>/<agent_id>/"
-      ],
-      "required_inputs": [
-        "app_idea",
-        "target_users",
-        "raw_needs",
-        "competing_alternatives",
-        "visual_sources",
-        "release_lane"
-      ],
-      "expected_outputs": [
-        "summary.md",
-        "result.json"
-      ],
-      "review_gate": "mandatory-review-when-required"
-    },
-    "app-architect.json": {
-      "agent_id": "app-architect",
-      "display_name": "App 架构智能体",
-      "role": "producer",
-      "enabled": true,
-      "write_scope_subset": [
-        "outputs/agent-runs/<run_id>/<agent_id>/"
-      ],
-      "required_inputs": [
-        "app_scope",
-        "target_platforms",
-        "repo_boundary"
-      ],
-      "expected_outputs": [
-        "summary.md",
-        "result.json"
-      ],
-      "review_gate": "mandatory-review-when-required"
-    },
-    "app-ui-producer.json": {
-      "agent_id": "app-ui-producer",
-      "display_name": "App UI 智能体",
-      "role": "producer",
-      "enabled": true,
-      "write_scope_subset": [
-        "outputs/agent-runs/<run_id>/<agent_id>/"
-      ],
-      "required_inputs": [
-        "ui_scope",
-        "design_context",
-        "runtime_constraints"
-      ],
-      "expected_outputs": [
-        "summary.md",
-        "result.json"
-      ],
-      "review_gate": "mandatory-review-when-required"
-    },
-    "app-release-producer.json": {
-      "agent_id": "app-release-producer",
-      "display_name": "App 发行智能体",
-      "role": "producer",
-      "enabled": true,
-      "write_scope_subset": [
-        "outputs/agent-runs/<run_id>/<agent_id>/"
-      ],
-      "required_inputs": [
-        "release_lane",
-        "artifact_scope",
-        "privacy_boundary"
-      ],
-      "expected_outputs": [
-        "summary.md",
-        "result.json"
-      ],
-      "review_gate": "mandatory-review-when-required"
-    },
-    "app-qa-reviewer.json": {
-      "agent_id": "app-qa-reviewer",
-      "display_name": "App QA 审核智能体",
-      "role": "reviewer",
-      "enabled": true,
-      "allowed_skills_mcp_subset": [
-        "agent-browser",
-        "chrome-devtools",
-        "playwright-mcp",
-        "figma-dev-mode-mcp"
-      ],
-      "write_scope_subset": [
-        "outputs/agent-runs/<run_id>/<agent_id>/"
-      ],
-      "max_execution_mode": "sequential_multi_agent_execution",
-      "required_inputs": [
-        "target_agent_result",
-        "target_agent_summary",
-        "app_artifact"
-      ],
-      "expected_outputs": [
-        "review.<target_agent_id>.md",
-        "gate.<target_agent_id>.json"
-      ],
-      "review_gate": "target-specific"
-    },
     "reviewer.json": {
       "agent_id": "reviewer",
       "display_name": "审稿智能体",
+      "preferred_model": null,
       "role": "reviewer",
       "enabled": true,
+      "isolation_method": null,
+      "parallel_safe": null,
+      "integration_review_required": null,
+      "capability_tags_subset": null,
       "allowed_skills_mcp_subset": [
         "citation-verifier",
         "academic-paper-review",

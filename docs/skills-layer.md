@@ -1,8 +1,13 @@
 # Skills Layer
 
-VELA skills are small Codex workflow entrypoints. They support the file contracts but do not replace the CLI validators.
+VELA has two skill layers:
 
-Public skills:
+- public VELA wrapper skills in `skills/`;
+- the near 1:1 local research environment distribution installed from `research-stack/local-environment/`.
+
+Both support file contracts and bounded Codex work. CLI validators remain the final check.
+
+Core VELA wrapper skills:
 
 - `vela-material-intake`
 - `vela-evidence-promote`
@@ -12,4 +17,6 @@ Public skills:
 
 These skills do not require HELM, private MCP routing, Zotero, Obsidian, or a desktop app.
 
-Use skills to help Codex follow the VELA workflow. Use CLI validation to decide whether a project state or handoff is acceptable.
+The local research environment distribution additionally installs research-autopilot, literature, citation, writing, figure, presentation, quantitative, review, reference-acquisition, social-platform, and submission skills. It deliberately excludes desktop app development and distilled-scholar chains, and it ships only sanitized contracts, profiles, validators, and toolchain metadata.
+
+Use skills to help Codex follow the VELA workflow. Use `vela validate`, `vela privacy scan`, and `envctl validate ...` to decide whether a project state or environment state is acceptable.

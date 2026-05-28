@@ -113,7 +113,8 @@
       "<CODEX_HOME>/skills",
       "<CODEX_HOME>/plugins/cache/research-environment-local/research-autopilot/0.1.0/skills"
     ],
-    "external_repo_policy": "External repositories may be cloned under skills/outputs for review, but no external source directory is installed or treated as canonical until skill-vetter, catalog/schema updates, tests, and runtime sync pass."
+    "external_repo_policy": "External repositories may be cloned under skills/outputs for review, but no external source directory is installed or treated as canonical until skill-vetter, catalog/schema updates, tests, and runtime sync pass.",
+    "protected_runtime_policy": "skills/catalog/protected_runtime_paths.json"
   },
   "package_contracts": [
     {
@@ -296,6 +297,11 @@
       "id": "validate_before_runtime_sync",
       "rule": "Do not sync research-autopilot skill changes into runtime mirrors unless the relevant source files are tracked and local tests or validators cover the changed contract.",
       "failure_action": "Leave runtime untouched and return a source validation blocker."
+    },
+    {
+      "id": "no_protected_skill_mutation",
+      "rule": "Do not write, sync, overwrite, clean, or mutate protected runtime skill paths from the public VELA distribution.",
+      "failure_action": "Stop and report the protected runtime boundary."
     }
   ]
 }

@@ -1,15 +1,15 @@
 {
   "schema_version": "vela.local_environment_snapshot.v1",
-  "generated_at": "2026-05-28T02:29:55.032066+00:00",
+  "generated_at": "2026-05-28T03:26:19.811578+00:00",
   "source": {
     "repository": "skills-environment-local",
     "branch": "codex/cleanup-handoff",
-    "head": "41481fa",
+    "head": "5995f3f",
     "since": "2026-05-01",
-    "commit_count_since": 65
+    "commit_count_since": 66
   },
   "policy": {
-    "intent": "Mirror the local research environment into VELA except explicitly excluded areas.",
+    "intent": "Publish a sanitized near 1:1 VELA distribution of the local research environment except explicitly excluded areas.",
     "include": [
       "research routing and workflow contracts",
       "engineering-cybernetics control kernel",
@@ -30,9 +30,10 @@
   },
   "layout": {
     "root": "research-stack/local-environment",
-    "runtime_mode": "snapshot; not automatically executed by VELA init",
+    "runtime_mode": "installable through `vela local-env install`; not automatically copied by `vela init`",
     "settings_policy": "settings.toml is scrubbed to portable placeholders"
   },
-  "copied_file_count": 260,
-  "total_file_count": 261
+  "raw_copied_file_count": 255,
+  "copied_file_count": 249,
+  "total_file_count": 249
 }

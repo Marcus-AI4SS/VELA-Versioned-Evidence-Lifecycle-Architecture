@@ -25,7 +25,7 @@ ROOT = SKILLS_ROOT
 CATALOG = CATALOG_ROOT
 BOOTSTRAP_SCRIPT = SCRIPT_ROOT / "bootstrap_agent_dispatch.py"
 
-REVIEWER_AGENT_IDS = {"reviewer", "app-qa-reviewer"}
+REVIEWER_AGENT_IDS = {"reviewer"}
 WRITING_DELIVERABLES = {"paper_draft", "revision_package", "submission_package", "docx_export", "latex_export"}
 WRITING_UNITS = {"writing", "review", "export"}
 ANALYSIS_UNITS = {"cleaning", "coding", "analysis", "reproducibility"}
@@ -170,7 +170,7 @@ def build_review_pairs(route_id: str, producers: list[str], available_agents: di
     reviewers: list[str] = []
     review_pairs: dict[str, str] = {}
     excluded: list[str] = []
-    reviewer_id = "app-qa-reviewer" if route_id == "desktop-app-development" else "reviewer"
+    reviewer_id = "reviewer"
     if reviewer_id not in available_agents:
         excluded.append(reviewer_id)
         return reviewers, review_pairs, excluded
@@ -254,11 +254,6 @@ def exclusion_reasons(route_id: str, selected_agents: list[str], available_agent
         "social-platform-producer": "本轮 route 不以平台证据抓取为主，或 capture 单元未达到独立 producer 阈值。",
         "analysis-producer": "本轮 route 不以分析执行、图表或复现为主。",
         "writing-producer": "本轮 route 不以主稿、返修包或导出写作为主。",
-        "app-product-producer": "本轮 route 不涉及桌面端 app 的机会规划、用户需求、目标规格、概念选择、PRD、页面地图、视觉规范、生图输入、图标资产或预览微调。",
-        "app-architect": "本轮 route 不涉及桌面端 app 架构、运行模型或仓库边界。",
-        "app-ui-producer": "本轮 route 不涉及桌面端 UI 实现、交互验证或 Figma 到代码转换。",
-        "app-release-producer": "本轮 route 不涉及桌面端打包、发行物或隐私清理。",
-        "app-qa-reviewer": "本轮 route 不涉及桌面端 app QA gate。",
         "project-manager": "本轮只有单一 producer，不需要额外 manager 做阶段编排。",
         "reviewer": "当前项目 agent 定义里没有 reviewer，或本轮被显式否决。",
     }

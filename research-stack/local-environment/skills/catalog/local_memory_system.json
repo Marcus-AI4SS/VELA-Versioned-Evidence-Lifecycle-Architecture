@@ -92,6 +92,7 @@
       "id": "project_memory",
       "purpose": "项目事实、阶段、材料边界和项目内证据链。",
       "default_target": "obsidian",
+      "ttl_days": null,
       "auto_promotion_allowed": false
     },
     {
@@ -105,12 +106,14 @@
       "id": "procedural_memory",
       "purpose": "可复用流程、路由修正规则、工具调用顺序和质量清单。",
       "default_target": "skill",
+      "ttl_days": null,
       "auto_promotion_allowed": false
     },
     {
       "id": "control_memory",
       "purpose": "会改变总路由、权限、验证逻辑或稳定性指标的底层规则。",
       "default_target": "control_kernel",
+      "ttl_days": null,
       "auto_promotion_allowed": false
     },
     {

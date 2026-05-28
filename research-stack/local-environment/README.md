@@ -1,8 +1,10 @@
-# Local Research Environment Snapshot
+# Local Research Environment Distribution
 
-This directory mirrors the current local Codex research environment for VELA.
+This directory is the sanitized near 1:1 VELA distribution of the current local Codex research environment.
 
-It is a source snapshot, not an automatic runtime installer. VELA can read it to adopt local rules, workflows, validators, memory governance, tool profiles, and documentation. The existing VELA initializer remains stable unless a future change explicitly promotes part of this snapshot into the default package.
+It is installable through `vela local-env install`. The installer copies the public research skills into `CODEX_HOME/skills`, places contracts, schemas, profiles, validators, scripts, and toolchain metadata under `VELA_HOME/research-stack/local-environment`, and creates an `envctl` shim under `VELA_HOME/bin`.
+
+The project initializer remains separate: `vela init` creates a VELA research project, while `vela local-env install` installs the broader Codex research environment.
 
 ## Included
 
@@ -25,8 +27,9 @@ It is a source snapshot, not an automatic runtime installer. VELA can read it to
 ## How VELA Should Use It
 
 1. Read `manifest.json` first.
-2. Treat `skills/catalog` and `skills/schemas` as the contract layer.
-3. Treat `skills/plugins/research-autopilot/skills` as the skill source layer.
-4. Treat `skills/profiles` as MCP/profile intent, not as user config to write blindly.
-5. Promote changes into VELA only through explicit schema, tests, and privacy review.
+2. Use `vela local-env install` for user installation.
+3. Treat `skills/catalog` and `skills/schemas` as the contract layer.
+4. Treat `skills/plugins/research-autopilot/skills` as the public skill source layer.
+5. Treat `skills/profiles` as MCP/profile intent; apply profiles only through explicit `envctl apply-profile --commit`.
+6. Promote future local changes into VELA only through schema, tests, and privacy review.
 

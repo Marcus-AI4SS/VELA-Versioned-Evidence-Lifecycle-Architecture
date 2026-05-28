@@ -12,6 +12,7 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SOURCE = REPO_ROOT.parent / "skills-environment-local"
 DESTINATION = REPO_ROOT / "research-stack" / "local-environment"
+DROP = object()
 
 EXCLUDED_PATH_PARTS = {
     ".git",
@@ -22,6 +23,11 @@ EXCLUDED_PATH_PARTS = {
 }
 
 EXCLUDED_NAME_PARTS = {
+    "app-product-producer",
+    "app-architect",
+    "app-ui-producer",
+    "app-release-producer",
+    "app-qa-reviewer",
     "desktop-app",
     "desktop_app",
     "desktop-ui",
@@ -93,9 +99,6 @@ SKILLS_SUBTREES = [
 ]
 
 ASSET_SUBTREES = [
-    "assets/local-environment-map.png",
-    "assets/local-environment-map.svg",
-    "assets/environment-overview-image2",
 ]
 
 
@@ -163,7 +166,7 @@ def prune_json_value(value: Any, *, root: bool = False) -> Any:
             if contains_excluded_token(item):
                 continue
             pruned = prune_json_value(item)
-            if pruned is not None:
+            if pruned is not DROP:
                 result.append(pruned)
         return result
     if isinstance(value, dict):
@@ -172,11 +175,11 @@ def prune_json_value(value: Any, *, root: bool = False) -> Any:
             if any(token in key.lower() for token in EXCLUDED_NAME_PARTS):
                 continue
             pruned = prune_json_value(child)
-            if pruned is not None:
+            if pruned is not DROP:
                 result[key] = pruned
         return result
     if isinstance(value, str) and contains_excluded_token(value) and not root:
-        return None
+        return DROP
     return value
 
 
@@ -187,6 +190,40 @@ def prune_snapshot_jsons(destination_root: Path) -> None:
             json.dumps(prune_json_value(payload, root=True), ensure_ascii=False, indent=2) + "\n",
             encoding="utf-8",
         )
+    normalize_protected_runtime_paths(destination_root)
+
+
+def normalize_protected_runtime_paths(destination_root: Path) -> None:
+    protected_path = destination_root / "skills" / "catalog" / "protected_runtime_paths.json"
+    if not protected_path.exists():
+        return
+    payload = json.loads(protected_path.read_text(encoding="utf-8"))
+    if payload.get("paths"):
+        return
+    payload["paths"] = [
+        {
+            "id": "excluded-protected-runtime-boundary",
+            "path": "<PROTECTED_RUNTIME_PATH>",
+            "owner": "user",
+            "purpose": "Placeholder for local protected runtime paths intentionally excluded from the VELA snapshot.",
+            "protection_level": "no_touch",
+            "allowed_operations": ["record_boundary_only"],
+            "forbidden_operations": [
+                "write",
+                "sync",
+                "clean",
+                "delete",
+                "rename",
+                "overwrite",
+                "install_dependency",
+                "auto_evolve",
+                "bulk_content_scan",
+                "environment_automation_mutation",
+            ],
+            "reason": "VELA keeps the boundary contract without exporting private path names or excluded skill content.",
+        }
+    ]
+    protected_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def scrub_text_files(destination_root: Path) -> None:
@@ -244,6 +281,220 @@ data_paragraph_framework = "PEEL"
     )
 
 
+def patch_snapshot_runtime_boundaries(destination_root: Path) -> None:
+    remove_distribution_only_exclusions(destination_root)
+    patch_envctl_entrypoint(destination_root)
+    patch_cybernetics_contract_list(destination_root)
+    patch_helm_snapshot_contract(destination_root)
+    patch_skill_workbench_policy(destination_root)
+    patch_team_planning_modules(destination_root)
+    write_distribution_stack_validator(destination_root)
+
+
+def remove_distribution_only_exclusions(destination_root: Path) -> None:
+    for relative in [
+        "skills/scripts/generate_environment_overview.py",
+        "skills/scripts/generate_environment_overview_visuals.ps1",
+        "skills/scripts/sync_research_autopilot_skills.ps1",
+    ]:
+        path = destination_root / relative
+        if path.exists():
+            path.unlink()
+    tests_root = destination_root / "skills" / "tests"
+    if tests_root.exists():
+        for path in tests_root.glob("*.py"):
+            text = path.read_text(encoding="utf-8", errors="replace").lower()
+            if any(token in text for token in EXCLUDED_NAME_PARTS):
+                path.unlink()
+
+
+def patch_envctl_entrypoint(destination_root: Path) -> None:
+    envctl_main = destination_root / "skills" / "scripts" / "envctl" / "__main__.py"
+    if not envctl_main.exists():
+        return
+    text = envctl_main.read_text(encoding="utf-8")
+    text = text.replace(", scholar_panel, validate", ", validate")
+    text = text.replace("    scholar_panel.add_parser(subparsers)\n", "")
+    envctl_main.write_text(text, encoding="utf-8")
+
+
+def patch_cybernetics_contract_list(destination_root: Path) -> None:
+    cybernetics = destination_root / "skills" / "scripts" / "envctl" / "cybernetics.py"
+    if not cybernetics.exists():
+        return
+    text = cybernetics.read_text(encoding="utf-8")
+    text = text.replace(
+        """    "scholar_advisory_panel_policy": (
+        CATALOG_ROOT / "scholar_advisory_panel_policy.json",
+        SCHEMAS_ROOT / "scholar_advisory_panel_policy.v1.schema.json",
+    ),
+""",
+        "",
+    )
+    cybernetics.write_text(text, encoding="utf-8")
+
+
+def patch_helm_snapshot_contract(destination_root: Path) -> None:
+    helm_snapshot = destination_root / "skills" / "scripts" / "envctl" / "helm_snapshot.py"
+    if not helm_snapshot.exists():
+        return
+    text = helm_snapshot.read_text(encoding="utf-8")
+    text = text.replace('    "scholar_advisory_panel_policy.json",\n', "")
+    helm_snapshot.write_text(text, encoding="utf-8")
+
+
+def patch_skill_workbench_policy(destination_root: Path) -> None:
+    policy_path = destination_root / "skills" / "catalog" / "skill_workbench_policy.json"
+    if policy_path.exists():
+        payload = json.loads(policy_path.read_text(encoding="utf-8"))
+        boundary = payload.setdefault("local_boundaries", {})
+        if isinstance(boundary, dict):
+            boundary["source_of_truth"] = "<LOCAL_ENV_ROOT>"
+            boundary["protected_runtime_policy"] = "skills/catalog/protected_runtime_paths.json"
+        safety_rules = payload.setdefault("safety_rules", [])
+        if isinstance(safety_rules, list) and not any(
+            isinstance(item, dict) and item.get("id") == "no_protected_skill_mutation"
+            for item in safety_rules
+        ):
+            safety_rules.append(
+                {
+                    "id": "no_protected_skill_mutation",
+                    "rule": "Do not write, sync, overwrite, clean, or mutate protected runtime skill paths from the public VELA distribution.",
+                    "failure_action": "Stop and report the protected runtime boundary.",
+                }
+            )
+        policy_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    validator = destination_root / "skills" / "scripts" / "envctl" / "skill_workbench_policy.py"
+    if validator.exists():
+        text = validator.read_text(encoding="utf-8")
+        text = text.replace(
+            """        if "skills-environment-local" not in source:
+            errors.append(f"skill-workbench-policy:source-of-truth-mismatch:{source}")
+        protected = str(boundary.get("protected_runtime_policy", ""))
+        if "scholar-nuwa" not in protected:
+            errors.append("skill-workbench-policy:protected-runtime-policy-missing-scholar-nuwa")
+""",
+            """        if source not in {"<LOCAL_ENV_ROOT>", "skills-environment-local"} and "skills-environment-local" not in source:
+            errors.append(f"skill-workbench-policy:source-of-truth-mismatch:{source}")
+        protected = str(boundary.get("protected_runtime_policy", ""))
+        if "protected_runtime_paths" not in protected:
+            errors.append("skill-workbench-policy:protected-runtime-policy-missing")
+""",
+        )
+        validator.write_text(text, encoding="utf-8")
+
+
+def patch_team_planning_modules(destination_root: Path) -> None:
+    replacements = {
+        'REVIEWER_AGENT_IDS = {"reviewer", "app-qa-reviewer"}': 'REVIEWER_AGENT_IDS = {"reviewer"}',
+        'reviewer_id = "app-qa-reviewer" if route_id == "desktop-app-development" else "reviewer"': 'reviewer_id = "reviewer"',
+        'default_reviewer = "app-qa-reviewer" if route_id == "desktop-app-development" else "reviewer"': 'default_reviewer = "reviewer"',
+    }
+    for relative in [
+        "skills/scripts/envctl/team_plan.py",
+        "skills/scripts/envctl/team_planner.py",
+    ]:
+        path = destination_root / relative
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8")
+        for source, target in replacements.items():
+            text = text.replace(source, target)
+        lines = [
+            line for line in text.splitlines()
+            if not any(token in line.lower() for token in EXCLUDED_NAME_PARTS)
+        ]
+        path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def write_distribution_stack_validator(destination_root: Path) -> None:
+    validator = destination_root / "skills" / "scripts" / "validate_research_stack.py"
+    validator.write_text(
+        '''from __future__ import annotations
+
+import json
+import sys
+from pathlib import Path
+
+
+SKILLS_ROOT = Path(__file__).resolve().parents[1]
+EXCLUDED_TOKENS = [
+    "app-" + "product-producer",
+    "app-" + "architect",
+    "app-" + "ui-producer",
+    "app-" + "release-producer",
+    "app-" + "qa-reviewer",
+    "desktop-" + "app-development",
+    "scholar-" + "nuwa",
+    "scholar-" + "panel",
+    "scholar" + "_panel",
+    "scholar" + "_advisory_panel",
+]
+REQUIRED_PATHS = [
+    "AGENTS.md",
+    "catalog/routing_table.json",
+    "catalog/skill_catalog.json",
+    "catalog/local_memory_system.json",
+    "catalog/protected_runtime_paths.json",
+    "schemas/validator_result.schema.json",
+    "schemas/local_memory_system.v1.schema.json",
+    "profiles/baseline.toml",
+    "scripts/envctl/__main__.py",
+    "plugins/research-autopilot/skills/research-autopilot/SKILL.md",
+]
+
+
+def main() -> int:
+    errors: list[str] = []
+    commands: dict[str, dict[str, object]] = {}
+    for relative in REQUIRED_PATHS:
+        exists = (SKILLS_ROOT / relative).exists()
+        commands[f"path:{relative}"] = {"ok": exists}
+        if not exists:
+            errors.append(f"path-missing:{relative}")
+
+    text_suffixes = {".json", ".md", ".ps1", ".py", ".toml", ".txt", ".yaml", ".yml"}
+    findings: list[str] = []
+    for path in SKILLS_ROOT.rglob("*"):
+        if not path.is_file() or path.suffix.lower() not in text_suffixes:
+            continue
+        if "__pycache__" in path.parts:
+            continue
+        text = path.read_text(encoding="utf-8", errors="replace").lower()
+        for token in EXCLUDED_TOKENS:
+            if token in text:
+                findings.append(str(path.relative_to(SKILLS_ROOT)).replace("\\\\", "/") + ":" + token)
+                break
+    commands["excluded-token-scan"] = {"ok": not findings, "findings": findings}
+    errors.extend(f"excluded-token:{item}" for item in findings)
+
+    payload = {
+        "schema_version": "validator_result.v1",
+        "validator": "validate_research_stack",
+        "scope": "vela_local_environment_distribution",
+        "ok": not errors,
+        "decision": "pass" if not errors else "fail",
+        "errors": errors,
+        "warnings": [],
+        "details": {
+            "skills_root": str(SKILLS_ROOT),
+            "commands": commands,
+            "distribution_policy": "near-1:1 local research environment minus desktop app, distillation, private paths, browser state, cookies, secrets, caches, and generated outputs",
+        },
+        "commands": commands,
+    }
+    print(json.dumps(payload, ensure_ascii=False, indent=2))
+    return 0 if not errors else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+''',
+        encoding="utf-8",
+    )
+
+
 def command_version(command: str, args: list[str]) -> dict[str, Any]:
     location = run_text(["where.exe", command], REPO_ROOT)
     version = run_text([command, *args], REPO_ROOT)
@@ -295,6 +546,7 @@ def write_manifest(source: Path, copied: list[str]) -> None:
         ],
         source,
     )
+    final_file_count = count_files(DESTINATION)
     manifest = {
         "schema_version": "vela.local_environment_snapshot.v1",
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -306,7 +558,7 @@ def write_manifest(source: Path, copied: list[str]) -> None:
             "commit_count_since": len(since_count.splitlines()) if since_count else 0,
         },
         "policy": {
-            "intent": "Mirror the local research environment into VELA except explicitly excluded areas.",
+            "intent": "Publish a sanitized near 1:1 VELA distribution of the local research environment except explicitly excluded areas.",
             "include": [
                 "research routing and workflow contracts",
                 "engineering-cybernetics control kernel",
@@ -327,22 +579,25 @@ def write_manifest(source: Path, copied: list[str]) -> None:
         },
         "layout": {
             "root": "research-stack/local-environment",
-            "runtime_mode": "snapshot; not automatically executed by VELA init",
+            "runtime_mode": "installable through `vela local-env install`; not automatically copied by `vela init`",
             "settings_policy": "settings.toml is scrubbed to portable placeholders",
         },
-        "copied_file_count": len(copied),
-        "total_file_count": count_files(DESTINATION),
+        "raw_copied_file_count": len(copied),
+        "copied_file_count": final_file_count,
+        "total_file_count": final_file_count,
     }
     (DESTINATION / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def write_readme() -> None:
     (DESTINATION / "README.md").write_text(
-        """# Local Research Environment Snapshot
+        """# Local Research Environment Distribution
 
-This directory mirrors the current local Codex research environment for VELA.
+This directory is the sanitized near 1:1 VELA distribution of the current local Codex research environment.
 
-It is a source snapshot, not an automatic runtime installer. VELA can read it to adopt local rules, workflows, validators, memory governance, tool profiles, and documentation. The existing VELA initializer remains stable unless a future change explicitly promotes part of this snapshot into the default package.
+It is installable through `vela local-env install`. The installer copies the public research skills into `CODEX_HOME/skills`, places contracts, schemas, profiles, validators, scripts, and toolchain metadata under `VELA_HOME/research-stack/local-environment`, and creates an `envctl` shim under `VELA_HOME/bin`.
+
+The project initializer remains separate: `vela init` creates a VELA research project, while `vela local-env install` installs the broader Codex research environment.
 
 ## Included
 
@@ -365,10 +620,11 @@ It is a source snapshot, not an automatic runtime installer. VELA can read it to
 ## How VELA Should Use It
 
 1. Read `manifest.json` first.
-2. Treat `skills/catalog` and `skills/schemas` as the contract layer.
-3. Treat `skills/plugins/research-autopilot/skills` as the skill source layer.
-4. Treat `skills/profiles` as MCP/profile intent, not as user config to write blindly.
-5. Promote changes into VELA only through explicit schema, tests, and privacy review.
+2. Use `vela local-env install` for user installation.
+3. Treat `skills/catalog` and `skills/schemas` as the contract layer.
+4. Treat `skills/plugins/research-autopilot/skills` as the public skill source layer.
+5. Treat `skills/profiles` as MCP/profile intent; apply profiles only through explicit `envctl apply-profile --commit`.
+6. Promote future local changes into VELA only through schema, tests, and privacy review.
 
 """,
         encoding="utf-8",
@@ -393,6 +649,7 @@ def sync(source: Path) -> None:
     scrub_local_settings(DESTINATION)
     prune_snapshot_jsons(DESTINATION)
     scrub_text_files(DESTINATION)
+    patch_snapshot_runtime_boundaries(DESTINATION)
     toolchain_dir = DESTINATION / "toolchain"
     toolchain_dir.mkdir(parents=True, exist_ok=True)
     (toolchain_dir / "toolchain_inventory.json").write_text(

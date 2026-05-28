@@ -2,6 +2,8 @@
 
 Use VELA when you want Codex to work from a bounded project state rather than loose conversation history. VELA is the Versioned Evidence Lifecycle Architecture around Codex, not a desktop app or a hidden agent loop.
 
+VELA also ships a sanitized near 1:1 distribution of the local Codex research environment. It includes the public research skills, routing contracts, memory governance, MCP/profile templates, envctl validators, and workflow catalogs, while excluding desktop app development, distilled-scholar material, and private runtime data.
+
 ## 1. Download VELA
 
 Clone or download the repository you are viewing:
@@ -10,6 +12,7 @@ Clone or download the repository you are viewing:
 git clone https://github.com/Marcus-AI4SS/VELA.git vela
 cd vela
 .\install.ps1
+.\vela.ps1 local-env doctor
 ```
 
 On macOS or Linux:
@@ -18,7 +21,10 @@ On macOS or Linux:
 git clone https://github.com/Marcus-AI4SS/VELA.git vela
 cd vela
 sh ./install.sh
+~/.vela/bin/vela local-env doctor
 ```
+
+The install script configures the VELA CLI and installs the research environment into your Codex home. Restart Codex after installation so the new skills are discovered.
 
 ## 2. Initialize A Project
 

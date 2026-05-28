@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import subprocess
+import sys
 import unittest
 from pathlib import Path
 
@@ -30,6 +32,19 @@ class LocalEnvironmentSnapshotTests(unittest.TestCase):
         self.assertNotIn("scholar-panel", names)
         self.assertIn("research-autopilot", names)
         self.assertIn("reference-fulltext-acquisition", names)
+
+    def test_excluded_app_agents_are_not_in_project_initializer_manifest(self) -> None:
+        manifest = json.loads((SNAPSHOT / "skills" / "catalog" / "project_initializer_manifest.json").read_text(encoding="utf-8"))
+        text = json.dumps(manifest, ensure_ascii=False)
+        for token in (
+            "app-product-producer",
+            "app-architect",
+            "app-ui-producer",
+            "app-release-producer",
+            "app-qa-reviewer",
+            "desktop-app-development",
+        ):
+            self.assertNotIn(token, text)
 
     def test_private_paths_are_redacted_from_snapshot_text(self) -> None:
         forbidden = [
@@ -62,6 +77,72 @@ class LocalEnvironmentSnapshotTests(unittest.TestCase):
         self.assertIn("<LOCAL_ENV_ROOT>", settings)
         self.assertIn("<CODEX_HOME>", settings)
         self.assertIn("<OBSIDIAN_VAULT>", settings)
+
+    def test_sanitized_snapshot_preserves_json_null_fields(self) -> None:
+        memory = json.loads((SNAPSHOT / "skills" / "catalog" / "local_memory_system.json").read_text(encoding="utf-8"))
+        layers = {item["id"]: item for item in memory["memory_layers"]}
+        for layer_id in ("project_memory", "procedural_memory", "control_memory"):
+            self.assertIn("ttl_days", layers[layer_id])
+            self.assertIsNone(layers[layer_id]["ttl_days"])
+
+    def test_protected_runtime_paths_keep_public_boundary_placeholder(self) -> None:
+        protected = json.loads((SNAPSHOT / "skills" / "catalog" / "protected_runtime_paths.json").read_text(encoding="utf-8"))
+        self.assertEqual(len(protected["paths"]), 1)
+        placeholder = protected["paths"][0]
+        self.assertEqual(placeholder["path"], "<PROTECTED_RUNTIME_PATH>")
+        joined = json.dumps(placeholder, ensure_ascii=False).lower()
+        self.assertNotIn("scholar", joined)
+        self.assertNotIn("desktop", joined)
+
+    def test_envctl_entrypoint_matches_sanitized_snapshot(self) -> None:
+        envctl_main = (SNAPSHOT / "skills" / "scripts" / "envctl" / "__main__.py").read_text(encoding="utf-8")
+        self.assertNotIn("scholar_panel", envctl_main)
+        previous = sys.dont_write_bytecode
+        sys.dont_write_bytecode = True
+        sys.path.insert(0, str(SNAPSHOT / "skills" / "scripts"))
+        try:
+            import envctl.__main__ as envctl_main_module
+
+            parser = envctl_main_module.build_parser()
+            command_names = set(parser._subparsers._actions[1].choices)
+            self.assertIn("validate", command_names)
+            self.assertNotIn("scholar-panel", command_names)
+        finally:
+            sys.path.pop(0)
+            sys.dont_write_bytecode = previous
+
+    def test_core_snapshot_validators_survive_sanitization(self) -> None:
+        previous = sys.dont_write_bytecode
+        sys.dont_write_bytecode = True
+        sys.path.insert(0, str(SNAPSHOT / "skills" / "scripts"))
+        try:
+            from envctl.cybernetics import validate_cybernetics_contracts
+            from envctl.memory_system import validate_local_memory_system
+            from envctl.skill_workbench_policy import validate_skill_workbench_policy
+
+            memory_report = validate_local_memory_system()
+            cybernetics_report = validate_cybernetics_contracts()
+            skill_workbench_report = validate_skill_workbench_policy()
+        finally:
+            sys.path.pop(0)
+            sys.dont_write_bytecode = previous
+        self.assertEqual(memory_report.get("errors"), [])
+        self.assertEqual(cybernetics_report.get("errors"), [])
+        self.assertEqual(skill_workbench_report.get("errors"), [])
+
+    def test_distribution_stack_validator_passes_after_exclusions(self) -> None:
+        script = SNAPSHOT / "skills" / "scripts" / "validate_research_stack.py"
+        result = subprocess.run(
+            [sys.executable, str(script)],
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            check=False,
+        )
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        payload = json.loads(result.stdout)
+        self.assertTrue(payload["ok"])
 
 
 if __name__ == "__main__":

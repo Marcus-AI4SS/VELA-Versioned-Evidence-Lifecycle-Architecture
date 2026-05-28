@@ -33,7 +33,6 @@ PUBLIC_CATALOG_FILES = [
     "research_team_playbooks.json",
     "reviewer_allowlist.json",
     "route_mcp_activation_policy.json",
-    "scholar_advisory_panel_policy.json",
     "routing_table.json",
     "skill_catalog.json",
     "subagent_registry.json",

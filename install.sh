@@ -33,5 +33,15 @@ cat > "$STATE_DIR/install.json" <<EOF
 EOF
 
 "$PYTHON_BIN" "$SCRIPT" doctor
+if [ "${VELA_SKIP_LOCAL_ENV:-0}" != "1" ]; then
+  if [ "${VELA_FORCE_LOCAL_ENV:-0}" = "1" ]; then
+    "$PYTHON_BIN" "$SCRIPT" local-env install --python "$PYTHON_BIN" --force
+  else
+    "$PYTHON_BIN" "$SCRIPT" local-env install --python "$PYTHON_BIN"
+  fi
+fi
 printf '\nVELA shim created: %s\n' "$SHIM"
 printf 'Add this directory to PATH if you want to run vela directly: %s\n' "$BIN_DIR"
+if [ "${VELA_SKIP_LOCAL_ENV:-0}" != "1" ]; then
+  printf 'VELA local research environment installed. Restart Codex so new skills are discovered.\n'
+fi

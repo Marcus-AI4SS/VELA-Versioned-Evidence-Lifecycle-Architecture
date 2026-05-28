@@ -14,7 +14,7 @@ except ImportError:  # pragma: no cover
     from path_utils import CATALOG_ROOT
 
 
-REVIEWER_AGENT_IDS = {"reviewer", "app-qa-reviewer"}
+REVIEWER_AGENT_IDS = {"reviewer"}
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -113,7 +113,7 @@ def build_review_pairs(
         for item in team_playbook.get("review_chain", []):
             add_pair(item["producer"], item["reviewer"])
 
-    default_reviewer = "app-qa-reviewer" if route_id == "desktop-app-development" else "reviewer"
+    default_reviewer = "reviewer"
     for producer in producers:
         if producer not in review_pairs:
             add_pair(producer, default_reviewer)

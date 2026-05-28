@@ -23,7 +23,7 @@ The user also requested that environment configuration be included, including me
 
 ## Implementation
 
-Added `research-stack/local-environment/` as a sanitized current snapshot. It contains:
+Added `research-stack/local-environment/` as a sanitized near 1:1 distribution of the current local research environment. It contains:
 
 - root local environment docs and rules
 - `skills/catalog`
@@ -38,7 +38,14 @@ Added `research-stack/local-environment/` as a sanitized current snapshot. It co
 - `toolchain/toolchain_inventory.json`
 - `manifest.json`
 
-The snapshot is not automatically run by `vela init`. VELA can inspect and selectively promote pieces from it through schema, test, and privacy review.
+The distribution is installed through `vela local-env install`. It is not automatically copied by `vela init`; project initialization and environment installation stay separate.
+
+The installer:
+
+- installs public research skills into `CODEX_HOME/skills`
+- copies contracts, schemas, profiles, validators, envctl modules, and toolchain metadata into `VELA_HOME/research-stack/local-environment`
+- creates an `envctl` shim under `VELA_HOME/bin`
+- refuses unmanaged skill conflicts unless `--force` is provided, and backs up conflicts before replacement
 
 ## Redaction And Exclusion
 
@@ -70,3 +77,4 @@ Added `tests/test_local_environment_snapshot.py` to verify:
 - toolchain inventory includes required commands without executable paths
 - `settings.toml` uses portable placeholders
 
+Added `tests/test_local_environment_install.py` to verify clean installs, conflict refusal, forced conflict backup, and `vela local-env doctor`.

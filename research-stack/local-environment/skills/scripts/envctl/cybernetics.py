@@ -77,10 +77,6 @@ CONTRACTS = {
         CATALOG_ROOT / "scholar_browser_patterns.json",
         SCHEMAS_ROOT / "scholar_browser_patterns.v1.schema.json",
     ),
-    "scholar_advisory_panel_policy": (
-        CATALOG_ROOT / "scholar_advisory_panel_policy.json",
-        SCHEMAS_ROOT / "scholar_advisory_panel_policy.v1.schema.json",
-    ),
     "peer_review_workflow": (
         CATALOG_ROOT / "peer_review_workflow.json",
         SCHEMAS_ROOT / "peer_review_workflow.v1.schema.json",

@@ -1,6 +1,6 @@
 {
   "schema_version": "vela.local_toolchain_inventory.v1",
-  "generated_at": "2026-05-28T02:29:53.836096+00:00",
+  "generated_at": "2026-05-28T03:26:18.565676+00:00",
   "tools": [
     {
       "command": "git",

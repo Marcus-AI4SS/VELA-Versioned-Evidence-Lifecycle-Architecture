@@ -137,10 +137,10 @@ def _collect_policy_errors(policy: dict[str, Any]) -> list[str]:
     boundary = policy.get("local_boundaries", {})
     if isinstance(boundary, dict):
         source = str(boundary.get("source_of_truth", ""))
-        if "skills-environment-local" not in source:
+        if source not in {"<LOCAL_ENV_ROOT>", "skills-environment-local"} and "skills-environment-local" not in source:
             errors.append(f"skill-workbench-policy:source-of-truth-mismatch:{source}")
         protected = str(boundary.get("protected_runtime_policy", ""))
-        if "scholar-nuwa" not in protected:
-            errors.append("skill-workbench-policy:protected-runtime-policy-missing-scholar-nuwa")
+        if "protected_runtime_paths" not in protected:
+            errors.append("skill-workbench-policy:protected-runtime-policy-missing")
 
     return errors

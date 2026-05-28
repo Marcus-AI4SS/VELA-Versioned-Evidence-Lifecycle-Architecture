@@ -10,6 +10,7 @@ if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
     from scripts import init_research_project
     from scripts import vela_handoff
+    from scripts import vela_local_environment
     from scripts import vela_privacy
     from scripts import vela_public_export
     from scripts import public_release_env as pre
@@ -18,6 +19,7 @@ if __package__ in {None, ""}:
 else:
     from scripts import init_research_project
     from scripts import vela_handoff
+    from scripts import vela_local_environment
     from scripts import vela_privacy
     from scripts import vela_public_export
     from scripts import public_release_env as pre
@@ -115,6 +117,27 @@ def cmd_export_public(args: argparse.Namespace) -> int:
     return 0 if result["ok"] else 1
 
 
+def cmd_local_env_install(args: argparse.Namespace) -> int:
+    result = vela_local_environment.install_local_environment(
+        codex_home=Path(args.codex_home) if args.codex_home else None,
+        vela_home=Path(args.vela_home) if args.vela_home else None,
+        python_executable=args.python or sys.executable,
+        force=args.force,
+        dry_run=args.dry_run,
+    )
+    _print_json(result)
+    return 0 if result.get("ok") else 1
+
+
+def cmd_local_env_doctor(args: argparse.Namespace) -> int:
+    result = vela_local_environment.doctor_local_environment(
+        codex_home=Path(args.codex_home) if args.codex_home else None,
+        vela_home=Path(args.vela_home) if args.vela_home else None,
+    )
+    _print_json(result)
+    return 0 if result.get("ok") else 1
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="VELA workflow wrapper CLI.")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -151,6 +174,23 @@ def build_parser() -> argparse.ArgumentParser:
     export_public.add_argument("--out", required=True, help="Export output directory.")
     export_public.add_argument("--force", action="store_true", help="Write export even when privacy scan has errors.")
     export_public.set_defaults(func=cmd_export_public)
+
+    local_env = sub.add_parser("local-env", help="Install or inspect the local research environment distribution.")
+    local_env_sub = local_env.add_subparsers(dest="local_env_command", required=True)
+    local_env_install = local_env_sub.add_parser(
+        "install",
+        help="Install the near 1:1 VELA local research environment into CODEX_HOME, excluding app and distillation chains.",
+    )
+    local_env_install.add_argument("--codex-home", default=None, help="Override CODEX_HOME for installation.")
+    local_env_install.add_argument("--vela-home", default=None, help="Override VELA_HOME for managed state.")
+    local_env_install.add_argument("--python", default=None, help="Python executable used by the envctl shim.")
+    local_env_install.add_argument("--force", action="store_true", help="Back up and replace conflicting skill folders.")
+    local_env_install.add_argument("--dry-run", action="store_true", help="Preview installation without writing files.")
+    local_env_install.set_defaults(func=cmd_local_env_install)
+    local_env_doctor = local_env_sub.add_parser("doctor", help="Check the installed VELA local research environment.")
+    local_env_doctor.add_argument("--codex-home", default=None, help="Override CODEX_HOME for inspection.")
+    local_env_doctor.add_argument("--vela-home", default=None, help="Override VELA_HOME for inspection.")
+    local_env_doctor.set_defaults(func=cmd_local_env_doctor)
 
     handoff = sub.add_parser("handoff", help="Create, lint, or render Codex handoffs.")
     handoff_sub = handoff.add_subparsers(dest="handoff_command", required=True)

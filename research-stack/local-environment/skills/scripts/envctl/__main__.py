@@ -8,7 +8,7 @@ if hasattr(sys.stdout, "reconfigure"):
 if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
-from .commands import apply_profile, cnki_zotero, cybernetics, evolution, init_project, memory, plan_team, route, scholar_panel, validate
+from .commands import apply_profile, cnki_zotero, cybernetics, evolution, init_project, memory, plan_team, route, validate
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -22,7 +22,6 @@ def build_parser() -> argparse.ArgumentParser:
     apply_profile.add_parser(subparsers)
     plan_team.add_parser(subparsers)
     route.add_parser(subparsers)
-    scholar_panel.add_parser(subparsers)
     init_project.add_parser(subparsers)
     return parser
 

@@ -1,8 +1,8 @@
 ﻿# skills环境管理 Workspace Log
 
-- generated_at: 2026-05-28T02:20:26
+- generated_at: 2026-05-28T10:40:56
 - branch: `codex/cleanup-handoff`
-- HEAD: `e14a51c`
+- HEAD: `41481fa`
 - head_scope: pre-commit 时表示日志生成时的 base HEAD；manual / post-merge / post-checkout 时表示当前 HEAD
 - purpose: 本地私有 Codex 环境工作仓库。
 - trigger: `pre-commit`
@@ -49,6 +49,7 @@
 
 ## Independent Repo Commit History
 
+- 2026-05-28 $(41481fa 2026-05-28 Update environment overview visuals and deck[0]) Update environment overview visuals and deck
 - 2026-05-28 $(e14a51c 2026-05-28 Complete environment governance enhancements[0]) Complete environment governance enhancements
 - 2026-05-28 $(7fbdeb2 2026-05-28 Clarify ambiguous package route scopes[0]) Clarify ambiguous package route scopes
 - 2026-05-27 $(6e288cc 2026-05-27 Add seven layer memory runtime governance[0]) Add seven layer memory runtime governance
@@ -134,11 +135,5 @@
 
 ## Current Working Tree Status
 
-- M  README.md
-- A  assets/environment-overview-image2/00-local-environment-main-map.png
-- A  assets/environment-overview-image2/01-research-stage-roadmap.png
-- A  assets/environment-overview-image2/02-memory-automation-governance.png
-- M  assets/local-environment-map.png
-- M  assets/local-environment-map.svg
-- A  skills/scripts/generate_environment_overview.py
-- A  skills/scripts/generate_environment_overview_visuals.ps1
+- A  handoffs/vela/2026-05-28-local-environment-full-sync-handoff.json
+- A  handoffs/vela/2026-05-28-vela-full-sync-prompt.txt

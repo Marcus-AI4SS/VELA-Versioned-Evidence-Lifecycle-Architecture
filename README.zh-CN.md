@@ -18,12 +18,19 @@ VELA = **Versioned Evidence Lifecycle Architecture**。它给 Codex 一个有边
 
 它不是桌面 app，不是聊天界面，不是论文生成器，也不是隐藏自动执行的 agent。VELA 准备有边界的任务，Codex 执行，用户复核；[HELM](https://github.com/Marcus-AI4SS/HELM) 是可选的 Hub for Evidence, Logs & Monitoring，可以读取同一套项目状态。
 
+## 本地科研环境发行版
+
+`research-stack/local-environment/` 是对当前本地 Codex 科研环境的近 1:1 脱敏复刻发行版，包含研究路由、工程控制论控制核、七层环境治理、记忆规则、工作流目录、MCP/profile 模板、validators、tests、envctl 模块、公开科研 skills 和工具链清单。
+
+它明确排除桌面 app 开发链和蒸馏/学者面板链，也不包含浏览器登录态、cookies、密钥、缓存、生成物或个人绝对路径。`vela local-env install` 会把公开科研 skills 安装到 `CODEX_HOME/skills`，把 contracts、schemas、profiles 和 envctl runtime 放到 `VELA_HOME/research-stack/local-environment`，并创建 `envctl` 入口。`vela init` 仍只负责初始化单个研究项目。
+
 ## 五分钟开始
 
 ```powershell
 git clone https://github.com/Marcus-AI4SS/VELA.git vela
 cd vela
 .\install.ps1
+.\vela.ps1 local-env doctor
 .\vela.ps1 init ..\my-research-project --skip-codex-trust
 cd ..\my-research-project
 ..\vela\vela.ps1 handoff new --template claim-check
@@ -122,6 +129,7 @@ completion:
 | `docs/` | 公开文档、GitHub Pages 和确认后的视觉资产 |
 | `docs/imports/` | VELA 与 HELM 的导入契约 |
 | `docs/sync-log/` | 本地跨仓同步记录 |
+| `research-stack/local-environment/` | 近 1:1 的本地科研环境脱敏发行版，排除桌面 app 和蒸馏链 |
 | `archive/legacy-research-stack/` | 历史私有环境资产，不再属于 VELA runtime |
 | `examples/` | 可检查的最小项目和快速演示 |
 | `package/` | `vela init` 复制到研究项目里的 starter package |
