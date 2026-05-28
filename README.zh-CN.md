@@ -24,13 +24,34 @@ VELA = **Versioned Evidence Lifecycle Architecture**。它给 Codex 一个有边
 
 它明确排除桌面 app 开发链和蒸馏/学者面板链，也不包含浏览器登录态、cookies、密钥、缓存、生成物或个人绝对路径。`vela local-env install` 会把公开科研 skills 安装到 `CODEX_HOME/skills`，把 contracts、schemas、profiles 和 envctl runtime 放到 `VELA_HOME/research-stack/local-environment`，并创建 `envctl` 入口。`vela init` 仍只负责初始化单个研究项目。
 
+## 环境配置要求
+
+VELA 的目标是让别人 clone 仓库后尽量接近“一键配置”，但它只能自动安装公开、可再分发、可由用户本机确认的工具。全新 Windows 机器建议先运行 `.\install.ps1 -BootstrapTools`；已有工具链的机器可以直接运行 `.\install.ps1`。
+
+| 组件 | 用途 | VELA 当前行为 |
+| --- | --- | --- |
+| Git | clone、仓库审计、发布工作流 | `-BootstrapTools` 尝试通过 `winget` 安装 |
+| Python 3.13+ | VELA CLI、validators、envctl、schema 检查 | 安装脚本运行前必须可用；`-BootstrapTools` 会尽量通过 `winget` 补齐 |
+| PowerShell 7 (`pwsh`) | 跨平台 runtime 脚本 | `-BootstrapTools` 尝试通过 `winget` 安装 |
+| ripgrep (`rg`) | 快速搜索、隐私扫描、仓库检查 | `-BootstrapTools` 尝试通过 `winget` 安装 |
+| Node.js LTS / npm | 可选 JS 工具、agentmemory 安装路径 | `-BootstrapTools` 尝试通过 `winget` 安装 |
+| GitHub CLI (`gh`) | 可选 GitHub 仓库和发布检查 | `-BootstrapTools` 尝试通过 `winget` 安装 |
+| agentmemory | 可选本地记忆管理 runtime | 检查并可用 npm 安装工具本体；绝不导出记忆数据 |
+| CodeGraph | 可选项目级代码索引 | 只检查/引导；每个项目需要单独初始化索引 |
+| MCP servers | Codex 可选工具 profile | 只提供 profile、doctor 和配置检查；凭据留在用户本机 |
+| Codex 插件 | Browser、GitHub、Superpowers、Research Autopilot 等能力 | 由用户在 Codex runtime 中安装；VELA 不分发插件缓存 |
+| Zotero / Obsidian / 浏览器登录 / CNKI 会话 | 可选外部研究工作流 | 绝不复制，只说明边界并做 doctor 检查 |
+
+`.\install.ps1` 默认只安装 VELA 自己能公开发行的部分：公开 research skills、contracts、schemas、catalog、profiles、validators、tests、envctl 模块、工具链清单和 shim。它不会把你的插件缓存、登录态、私有记忆库、Zotero 数据库或 Obsidian vault 复制给别人。
+
 ## 五分钟开始
 
 ```powershell
 git clone https://github.com/Marcus-AI4SS/VELA.git vela
 cd vela
-.\install.ps1
+.\install.ps1 -BootstrapTools
 .\vela.ps1 local-env doctor
+.\vela.ps1 local-env bootstrap-tools --include all
 .\vela.ps1 init ..\my-research-project --skip-codex-trust
 cd ..\my-research-project
 ..\vela\vela.ps1 handoff new --template claim-check

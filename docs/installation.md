@@ -7,8 +7,9 @@ VELA is a repository-based Codex research environment distribution and project w
 ```powershell
 git clone https://github.com/Marcus-AI4SS/VELA.git vela
 cd vela
-.\install.ps1
+.\install.ps1 -BootstrapTools
 .\vela.ps1 local-env doctor
+.\vela.ps1 local-env bootstrap-tools --include all
 .\vela.ps1 local-env doctor-runtime --include core,automation,toolchain
 ```
 
@@ -23,6 +24,17 @@ The installer uses `requirements.txt` to install `jsonschema` and `PyYAML` for l
 - excludes desktop app development, distilled-scholar material, browser state, cookies, secrets, caches, generated outputs, and private absolute paths.
 
 Use `.\install.ps1 -SkipLocalEnvironment` when you only want the VELA CLI and project wrapper. Use `.\install.ps1 -ForceLocalEnvironment` only after reviewing conflicts; existing non-VELA skill folders are backed up before replacement.
+
+## Tool Bootstrap
+
+`.\install.ps1 -BootstrapTools` is the explicit bootstrap layer for public machine tools. It checks and attempts safe Windows `winget` installs for Git, Python 3.13+, PowerShell 7, ripgrep, Node.js LTS, and GitHub CLI. If npm is available, it can also install the optional `agentmemory` command. The same state can be inspected without mutation:
+
+```powershell
+.\vela.ps1 local-env bootstrap-tools --include all
+.\vela.ps1 local-env bootstrap-tools --include system --install
+```
+
+Without `--yes`, `--install` is a preview. With `--yes`, VELA may run public installer commands. CodeGraph, MCP server vendor environments, Codex plugin installation, browser login state, CNKI sessions, Zotero databases, Obsidian vaults, and private memory stores are not copied or silently installed. VELA only reports whether they are present and what the user must configure locally.
 
 ## Use With Codex
 

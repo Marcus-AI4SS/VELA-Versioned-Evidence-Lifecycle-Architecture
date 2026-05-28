@@ -80,9 +80,20 @@
           <h2>从这里开始</h2>
         </div>
         <div class="grid-3">
-          <article class="card"><h3>1. 安装</h3><p>在克隆的仓库里运行 <code>install.ps1</code> 或 <code>install.sh</code>。</p></article>
+          <article class="card"><h3>1. 安装</h3><p>全新 Windows 机器先运行 <code>install.ps1 -BootstrapTools</code>；已有工具链时可直接运行 <code>install.ps1</code>。</p></article>
           <article class="card"><h3>2. 初始化</h3><p>运行 <code>vela init my-project</code>，生成可读取的本地项目上下文。</p></article>
           <article class="card"><h3>3. 交给 Codex</h3><p>创建有边界任务，检查格式，渲染提示，然后回到 Codex 执行。</p></article>
+        </div>
+      </section>
+      <section class="section">
+        <div class="section-head">
+          <h2>环境配置边界</h2>
+          <p>VELA 安装公开工作流层，并检查用户运行态；不会复制私人机器状态。</p>
+        </div>
+        <div class="grid-3">
+          <article class="card"><h3>可安装或提示</h3><p>Git、Python 3.13+、PowerShell 7、ripgrep、Node.js、GitHub CLI、agentmemory。</p></article>
+          <article class="card"><h3>只检查</h3><p>CodeGraph、MCP vendor、Codex 插件、Zotero、Obsidian、浏览器/CNKI 会话、私有记忆库。</p></article>
+          <article class="card"><h3>VELA 自有</h3><p>公开 skills、contracts、schemas、catalog、profiles、validators、tests、envctl 和 runtime receipt。</p></article>
         </div>
       </section>
       <footer>VELA = Versioned Evidence Lifecycle Architecture。HELM = Hub for Evidence, Logs &amp; Monitoring。</footer>

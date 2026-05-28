@@ -24,13 +24,34 @@ This repository now includes `research-stack/local-environment/`, a sanitized ne
 
 The distribution deliberately excludes desktop app development and distilled-scholar skill chains. It also redacts private absolute paths and never includes browser login state, cookies, secrets, caches, or generated outputs. `install.ps1` and `install.sh` run `vela local-env install-runtime --include core,automation,toolchain --commit`: this installs the public research skills into `CODEX_HOME/skills`, copies the contracts and envctl runtime into `VELA_HOME/research-stack/local-environment`, creates an `envctl` shim, and records a runtime receipt. Optional MCP servers, Codex plugins, browser login state, Zotero, Obsidian, agentmemory, and CodeGraph are checked or guided through doctor commands, not copied from another user's machine. `vela init` remains the project initializer and does not copy the broader environment into each project.
 
+## Environment Requirements
+
+VELA is closest to a one-command setup when the public toolchain is already present. For a fresh Windows machine, run `.\install.ps1 -BootstrapTools` first; it checks the toolchain and attempts safe public installs where VELA knows a stable installer.
+
+| Component | Required For | VELA Setup Behavior |
+| --- | --- | --- |
+| Git | clone, repo audit, release workflow | `-BootstrapTools` attempts `winget` install |
+| Python 3.13+ | VELA CLI, validators, envctl, schema checks | required before the Python installer can run; `-BootstrapTools` attempts `winget` install when possible |
+| PowerShell 7 (`pwsh`) | cross-platform runtime scripts | `-BootstrapTools` attempts `winget` install |
+| ripgrep (`rg`) | fast repository and privacy scans | `-BootstrapTools` attempts `winget` install |
+| Node.js LTS / npm | optional JavaScript-based tools and agentmemory install path | `-BootstrapTools` attempts `winget` install |
+| GitHub CLI (`gh`) | optional GitHub release and repo checks | `-BootstrapTools` attempts `winget` install |
+| agentmemory | optional local memory-management runtime | checked and optionally installed with npm; VELA never exports memory data |
+| CodeGraph | optional project-local code index | checked/guided only; initialize each target project explicitly |
+| MCP servers | optional Codex tool profiles | profile and doctor checks only; server credentials remain user-local |
+| Codex plugins | optional plugin capabilities such as Browser, GitHub, Superpowers, Research Autopilot | install in the user's Codex runtime; VELA never redistributes plugin cache |
+| Zotero / Obsidian / browser logins / CNKI sessions | optional external research workflows | never copied; VELA only documents and checks the boundary |
+
+`.\install.ps1` without `-BootstrapTools` installs only the VELA-owned workflow/runtime layer: public research skills, contracts, schemas, catalogs, profiles, validators, tests, envctl modules, toolchain manifests, and shims.
+
 ## Start In Five Minutes
 
 ```powershell
 git clone https://github.com/Marcus-AI4SS/VELA.git vela
 cd vela
-.\install.ps1
+.\install.ps1 -BootstrapTools
 .\vela.ps1 local-env doctor
+.\vela.ps1 local-env bootstrap-tools --include all
 .\vela.ps1 local-env doctor-runtime --include core,automation,toolchain
 .\vela.ps1 init ..\my-research-project --skip-codex-trust
 cd ..\my-research-project

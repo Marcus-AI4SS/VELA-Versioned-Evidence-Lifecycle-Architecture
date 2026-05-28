@@ -81,10 +81,21 @@
           <h2>Start Here</h2>
         </div>
         <div class="grid-3">
-          <article class="card"><h3>1. Install</h3><p>Run <code>install.ps1</code> or <code>install.sh</code> in the repository you cloned.</p></article>
+          <article class="card"><h3>1. Install</h3><p>On a fresh Windows machine, run <code>install.ps1 -BootstrapTools</code>. Existing toolchains can run <code>install.ps1</code> directly.</p></article>
           <article class="card"><h3>2. Initialize</h3><p>Run <code>vela init my-project</code> to create a project with a readable local context file.</p></article>
           <article class="card"><h3>3. Hand Off</h3><p>Create a bounded task, lint it, render a prompt, and take that task back to Codex.</p></article>
           <article class="card"><h3>4. Validate</h3><p>Run project validation, privacy scan, and public export checks before sharing work.</p></article>
+        </div>
+      </section>
+      <section class="section">
+        <div class="section-head">
+          <h2>Environment Requirements</h2>
+          <p>VELA installs the public workflow layer and checks the user runtime boundary. It does not copy private machine state.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card"><h3>Public tools</h3><p><code>-BootstrapTools</code> checks Git, Python 3.13+, PowerShell 7, ripgrep, Node.js, GitHub CLI, and agentmemory.</p></article>
+          <article class="card"><h3>Doctor only</h3><p>CodeGraph, MCP vendors, Codex plugins, Zotero, Obsidian, browser/CNKI sessions, and private memory stores stay local.</p></article>
+          <article class="card"><h3>VELA owned</h3><p>VELA installs public skills, contracts, schemas, catalogs, profiles, validators, tests, envctl modules, and runtime receipts.</p></article>
         </div>
       </section>
       <footer>VELA = Versioned Evidence Lifecycle Architecture. HELM = Hub for Evidence, Logs &amp; Monitoring.</footer>

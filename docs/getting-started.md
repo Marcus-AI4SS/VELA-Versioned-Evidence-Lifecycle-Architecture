@@ -11,8 +11,9 @@ Clone or download the repository you are viewing:
 ```powershell
 git clone https://github.com/Marcus-AI4SS/VELA.git vela
 cd vela
-.\install.ps1
+.\install.ps1 -BootstrapTools
 .\vela.ps1 local-env doctor
+.\vela.ps1 local-env bootstrap-tools --include all
 .\vela.ps1 local-env doctor-runtime --include core,automation,toolchain
 ```
 
@@ -27,6 +28,8 @@ sh ./install.sh
 ```
 
 The install script configures the VELA CLI and installs the research environment into your Codex home. Restart Codex after installation so the new skills are discovered.
+
+`-BootstrapTools` checks and, on Windows, attempts public installs for Git, Python 3.13+, PowerShell 7, ripgrep, Node.js, GitHub CLI, and agentmemory. CodeGraph, MCP server vendor setup, Codex plugins, browser/CNKI sessions, Zotero, Obsidian, and private memory databases remain explicit user-runtime setup; VELA only reports their status and gives the next action.
 
 ## 2. Initialize A Project
 

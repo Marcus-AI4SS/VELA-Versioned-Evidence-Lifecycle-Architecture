@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vela.local/schemas/vela.local_runtime.bootstrap_tools.v1.schema.json",
+  "title": "VELA local runtime bootstrap tools",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "generated_at",
+    "ok",
+    "ready",
+    "mode",
+    "include",
+    "mutated",
+    "tools",
+    "protected_runtime_boundaries",
+    "errors",
+    "warnings",
+    "next_action"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "vela.local_runtime.bootstrap_tools.v1"
+    },
+    "generated_at": {"type": "string"},
+    "ok": {"type": "boolean"},
+    "ready": {"type": "boolean"},
+    "mode": {"type": "string"},
+    "include": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "mutated": {"type": "boolean"},
+    "tools": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "category",
+          "required",
+          "ok",
+          "status",
+          "command",
+          "install_policy",
+          "install_strategy",
+          "remediation"
+        ],
+        "properties": {
+          "id": {"type": "string"},
+          "category": {"type": "string"},
+          "required": {"type": "boolean"},
+          "ok": {"type": "boolean"},
+          "status": {"type": "string"},
+          "command": {"type": "string"},
+          "path": {"type": ["string", "null"]},
+          "install_policy": {"type": "string"},
+          "install_strategy": {"type": "string"},
+          "remediation": {"type": "string"}
+        },
+        "additionalProperties": true
+      }
+    },
+    "protected_runtime_boundaries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "status", "install_policy", "reason"],
+        "properties": {
+          "id": {"type": "string"},
+          "status": {"type": "string"},
+          "install_policy": {"type": "string"},
+          "reason": {"type": "string"}
+        },
+        "additionalProperties": true
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "warnings": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "next_action": {"type": "string"}
+  },
+  "additionalProperties": true
+}

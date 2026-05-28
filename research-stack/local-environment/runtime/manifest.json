@@ -1,6 +1,6 @@
 {
   "schema_version": "vela.local_runtime.manifest.v1",
-  "generated_at": "2026-05-28T05:08:51.602855+00:00",
+  "generated_at": "2026-05-28T05:28:00+00:00",
   "boundary": {
     "source_authority": {
       "role": "D-drive source repository",
@@ -114,6 +114,31 @@
       ],
       "install_policy": "requirements_only_no_vendored_runtime",
       "description": "VELA publishes requirements and manifests, not local Python/JDK runtime binaries."
+    },
+    {
+      "id": "bootstrap.public-tools",
+      "category": "toolchain",
+      "kind": "explicit_public_tool_bootstrap",
+      "default_action": "install_or_prompt",
+      "installer": "install.ps1 -BootstrapTools",
+      "doctor": "vela local-env bootstrap-tools --include all",
+      "auto_installable_windows": [
+        "Git",
+        "Python 3.13+",
+        "PowerShell 7",
+        "ripgrep",
+        "Node.js LTS",
+        "GitHub CLI",
+        "agentmemory when npm is available"
+      ],
+      "doctor_only": [
+        "CodeGraph",
+        "MCP server vendor environment",
+        "Codex plugin install status",
+        "browser and CNKI login state",
+        "Zotero and Obsidian private libraries"
+      ],
+      "description": "Explicit bootstrap layer for public system tools. Private runtime state is never copied into VELA."
     }
   ]
 }

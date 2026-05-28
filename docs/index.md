@@ -18,7 +18,9 @@ VELA = **Versioned Evidence Lifecycle Architecture**. It is a portable project l
 
 ## Local Research Environment
 
-Run `install.ps1` or `install.sh` from the repository root to install the VELA CLI and the sanitized local research environment. The distribution excludes desktop app development, distilled-scholar material, browser state, cookies, secrets, caches, generated outputs, and private absolute paths.
+Run `install.ps1` or `install.sh` from the repository root to install the VELA CLI and the sanitized local research environment. On a fresh Windows machine, start with `.\install.ps1 -BootstrapTools` so VELA can check and attempt safe public installs for Git, Python 3.13+, PowerShell 7, ripgrep, Node.js, GitHub CLI, and agentmemory. CodeGraph, MCP server vendors, Codex plugins, browser/CNKI sessions, Zotero, Obsidian, and private memory stores are doctor/manual setup only.
+
+The distribution excludes desktop app development, distilled-scholar material, browser state, cookies, secrets, caches, generated outputs, and private absolute paths.
 
 ## Relationship To HELM
 

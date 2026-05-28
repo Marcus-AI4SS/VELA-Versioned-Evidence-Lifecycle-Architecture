@@ -6,14 +6,28 @@ PYTHON_BIN=${PYTHON:-python3}
 VELA_HOME=${VELA_HOME:-"$HOME/.vela"}
 STATE_DIR="$VELA_HOME/state"
 BIN_DIR="$VELA_HOME/bin"
+SCRIPT="$REPO_ROOT/scripts/vela.py"
 mkdir -p "$STATE_DIR" "$BIN_DIR"
+
+if [ "${VELA_BOOTSTRAP_TOOLS:-0}" = "1" ]; then
+  printf 'VELA bootstrap: checking public system tools. Private runtime state will not be copied.\n'
+  if ! command -v git >/dev/null 2>&1; then printf 'Install Git before using repository workflows.\n'; fi
+  if ! command -v "$PYTHON_BIN" >/dev/null 2>&1; then printf 'Install Python 3.13+ or set PYTHON=/path/to/python.\n'; fi
+  if ! command -v pwsh >/dev/null 2>&1; then printf 'Install PowerShell 7 (pwsh) if you need cross-platform runtime scripts.\n'; fi
+  if ! command -v rg >/dev/null 2>&1; then printf 'Install ripgrep for validators and repository audits.\n'; fi
+  if ! command -v node >/dev/null 2>&1; then printf 'Install Node.js LTS for optional JavaScript runtime tools.\n'; fi
+  if ! command -v gh >/dev/null 2>&1; then printf 'Install GitHub CLI if you need repository and release checks.\n'; fi
+  if ! command -v agentmemory >/dev/null 2>&1 && command -v npm >/dev/null 2>&1; then
+    npm install -g agentmemory || printf 'agentmemory npm install failed; continue with manual optional setup.\n'
+  fi
+  printf 'CodeGraph, MCP vendors, Codex plugins, browser/CNKI sessions, Zotero, and Obsidian are doctor/manual setup only.\n'
+fi
 
 if [ "${VELA_SKIP_DEP_INSTALL:-0}" != "1" ] && [ -f "$REPO_ROOT/requirements.txt" ]; then
   "$PYTHON_BIN" -m pip install -r "$REPO_ROOT/requirements.txt"
 fi
 
 SHIM="$BIN_DIR/vela"
-SCRIPT="$REPO_ROOT/scripts/vela.py"
 cat > "$SHIM" <<EOF
 #!/usr/bin/env sh
 exec "$PYTHON_BIN" "$SCRIPT" "\$@"
@@ -33,6 +47,9 @@ cat > "$STATE_DIR/install.json" <<EOF
 EOF
 
 "$PYTHON_BIN" "$SCRIPT" doctor
+if [ "${VELA_BOOTSTRAP_TOOLS:-0}" = "1" ]; then
+  "$PYTHON_BIN" "$SCRIPT" local-env bootstrap-tools --include all --install --yes
+fi
 if [ "${VELA_SKIP_LOCAL_ENV:-0}" != "1" ]; then
   if [ "${VELA_FORCE_LOCAL_ENV:-0}" = "1" ]; then
     "$PYTHON_BIN" "$SCRIPT" local-env install-runtime --include core,automation,toolchain --python "$PYTHON_BIN" --commit --force-core

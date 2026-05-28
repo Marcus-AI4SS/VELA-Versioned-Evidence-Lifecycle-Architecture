@@ -19,12 +19,26 @@
           <h1><span class="sans">Portable by default.</span></h1>
           <p>VELA is a repository-based workflow environment. Clone or download it, then open the VELA folder and your research project folder in the Codex environment you already use.</p>
           <pre>git clone REPOSITORY_URL vela
-cd vela</pre>
+cd vela
+.\install.ps1 -BootstrapTools</pre>
         </div>
       </section>
       <section class="section grid-2">
         <article class="card"><h3>Base requirement</h3><p>Keep project files portable and keep private material in your own project storage.</p></article>
         <article class="card"><h3>Optional companion</h3><p>HELM can read VELA project state, but the workflow environment must remain usable without HELM.</p></article>
+      </section>
+      <section class="section">
+        <div class="section-head">
+          <h2>Bootstrap Layer</h2>
+          <p>Use the explicit bootstrap flag when the machine does not already have the public research toolchain.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card"><h3>Can install or prompt</h3><p>Git, Python 3.13+, PowerShell 7, ripgrep, Node.js LTS, GitHub CLI, and agentmemory.</p></article>
+          <article class="card"><h3>Checks only</h3><p>CodeGraph, MCP server vendor setup, Codex plugin status, Zotero, Obsidian, browser sessions, and CNKI permissions.</p></article>
+          <article class="card"><h3>Never copied</h3><p>Plugin caches, cookies, login state, secrets, private memory stores, Zotero databases, Obsidian vaults, and generated outputs.</p></article>
+        </div>
+        <pre>.\vela.ps1 local-env bootstrap-tools --include all
+.\vela.ps1 local-env bootstrap-tools --include system --install</pre>
       </section>
     </main>
   </body>

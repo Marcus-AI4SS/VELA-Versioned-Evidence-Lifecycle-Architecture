@@ -10,6 +10,7 @@ if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
     from scripts import init_research_project
     from scripts import vela_handoff
+    from scripts import vela_bootstrap
     from scripts import vela_local_environment
     from scripts import vela_privacy
     from scripts import vela_public_export
@@ -20,6 +21,7 @@ if __package__ in {None, ""}:
 else:
     from scripts import init_research_project
     from scripts import vela_handoff
+    from scripts import vela_bootstrap
     from scripts import vela_local_environment
     from scripts import vela_privacy
     from scripts import vela_public_export
@@ -179,6 +181,12 @@ def cmd_local_env_install_runtime(args: argparse.Namespace) -> int:
     return 0 if result.get("ok") else 1
 
 
+def cmd_local_env_bootstrap_tools(args: argparse.Namespace) -> int:
+    result = vela_bootstrap.bootstrap_tools(include=args.include, install=args.install, yes=args.yes)
+    _print_json(result)
+    return 0 if result.get("ok") else 1
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="VELA workflow wrapper CLI.")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -262,6 +270,14 @@ def build_parser() -> argparse.ArgumentParser:
     local_env_install_runtime.add_argument("--force-core", action="store_true", help="Back up and replace conflicting skill folders during core install.")
     local_env_install_runtime.add_argument("--apply-profile", action="store_true", help="With --commit and --include mcp, mutate CODEX_HOME/config.toml through envctl apply-profile.")
     local_env_install_runtime.set_defaults(func=cmd_local_env_install_runtime)
+    local_env_bootstrap_tools = local_env_sub.add_parser(
+        "bootstrap-tools",
+        help="Check and optionally install public system tools needed by the VELA runtime.",
+    )
+    local_env_bootstrap_tools.add_argument("--include", default="all", help="Comma list: system,optional,runtime or all.")
+    local_env_bootstrap_tools.add_argument("--install", action="store_true", help="Attempt explicit public tool installation where VELA knows a safe installer.")
+    local_env_bootstrap_tools.add_argument("--yes", action="store_true", help="Allow installation commands to run. Without this, --install only previews remediation.")
+    local_env_bootstrap_tools.set_defaults(func=cmd_local_env_bootstrap_tools)
 
     handoff = sub.add_parser("handoff", help="Create, lint, or render Codex handoffs.")
     handoff_sub = handoff.add_subparsers(dest="handoff_command", required=True)
