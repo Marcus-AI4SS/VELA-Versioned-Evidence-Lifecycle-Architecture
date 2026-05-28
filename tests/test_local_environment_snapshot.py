@@ -52,6 +52,8 @@ class LocalEnvironmentSnapshotTests(unittest.TestCase):
             "C:/Users/" + "17666",
             "D:" + "\\AI environment",
             "D:/AI " + "environment",
+            "<USER_DESKTOP>" + "\\AI environment-" + "configuration",
+            "<USER_DESKTOP>/AI environment-" + "configuration",
             "Obsidian Vault",
         ]
         text_suffixes = {".css", ".html", ".js", ".json", ".md", ".ps1", ".py", ".svg", ".toml", ".txt", ".yaml", ".yml"}

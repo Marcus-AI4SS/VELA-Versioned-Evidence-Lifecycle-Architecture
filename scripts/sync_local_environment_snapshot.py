@@ -39,7 +39,12 @@ EXCLUDED_NAME_PARTS = {
     "scholar_advisory_panel",
 }
 
+LEGACY_RUNTIME_DIR_NAME = "AI environment-" + "configuration"
+
 STATIC_PRIVATE_TEXT_REPLACEMENTS = {
+    "<USER_DESKTOP>\\\\" + LEGACY_RUNTIME_DIR_NAME: "<LEGACY_RUNTIME_ROOT>",
+    "<USER_DESKTOP>\\" + LEGACY_RUNTIME_DIR_NAME: "<LEGACY_RUNTIME_ROOT>",
+    "<USER_DESKTOP>/" + LEGACY_RUNTIME_DIR_NAME: "<LEGACY_RUNTIME_ROOT>",
     "Obsidian Vault": "<OBSIDIAN_VAULT>",
 }
 
@@ -258,6 +263,9 @@ def scrub_text_files(destination_root: Path, replacements: dict[str, str]) -> No
         except UnicodeDecodeError:
             continue
         for source, replacement in sorted(replacements.items(), key=lambda item: len(item[0]), reverse=True):
+            text = text.replace(source, replacement)
+            text = text.replace(source.replace("\\", "\\\\"), replacement)
+        for source, replacement in STATIC_PRIVATE_TEXT_REPLACEMENTS.items():
             text = text.replace(source, replacement)
             text = text.replace(source.replace("\\", "\\\\"), replacement)
         if path.suffix.lower() in LINE_STRIP_SUFFIXES:

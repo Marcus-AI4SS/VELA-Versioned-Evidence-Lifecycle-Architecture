@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -69,6 +70,22 @@ class LocalRuntimeBootstrapTests(unittest.TestCase):
             receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
             self.assertEqual(receipt["schema_version"], "vela.local_runtime.install.receipt.v1")
             self.assertTrue(any(action["id"] == "core.local-environment" for action in receipt["actions"]))
+
+    @unittest.skipUnless(os.name == "nt", "Windows .cmd shim probing is platform-specific")
+    def test_runtime_probe_handles_windows_cmd_shims(self) -> None:
+        with tempfile.TemporaryDirectory() as root:
+            base = Path(root)
+            shim = base / "fake-runtime-tool.cmd"
+            shim.write_text("@echo off\necho Connected -- v0.0.0\nexit /b 0\n", encoding="ascii")
+            previous_path = os.environ.get("PATH", "")
+            os.environ["PATH"] = str(base) + os.pathsep + previous_path
+            try:
+                result = vela_runtime._probe_command("fake-runtime-tool", ["status"])
+            finally:
+                os.environ["PATH"] = previous_path
+
+            self.assertTrue(result["ok"], result)
+            self.assertIn("Connected", result["stdout_head"])
 
 
 if __name__ == "__main__":

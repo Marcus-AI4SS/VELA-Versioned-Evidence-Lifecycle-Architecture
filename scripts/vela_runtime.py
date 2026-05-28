@@ -143,7 +143,13 @@ def _probe_command(command: str, args: list[str] | None = None, *, timeout: int 
     found = shutil.which(command)
     if not found:
         return {"ok": False, "command": command, "path": None, "stdout_head": "", "stderr": "command-not-found"}
-    result = _run([command, *(args or ["--version"])], timeout=timeout)
+    command_args = args or ["--version"]
+    executable = Path(found)
+    if os.name == "nt" and executable.suffix.lower() in {".cmd", ".bat"}:
+        run_args = ["cmd", "/c", str(executable), *command_args]
+    else:
+        run_args = [str(executable), *command_args]
+    result = _run(run_args, timeout=timeout)
     stdout_head = "\n".join(result.get("stdout", "").splitlines()[:6])
     return {
         "ok": bool(result.get("ok")),
@@ -187,13 +193,22 @@ def _public_skill_status(codex_home: Path) -> dict[str, Any]:
 def _toolchain_status() -> dict[str, Any]:
     requirements = vela_local_environment.SNAPSHOT_ROOT / "python" / "requirements" / "research-core.txt"
     ai_requirements = vela_local_environment.SNAPSHOT_ROOT / "python" / "requirements" / "research-ai-extra.txt"
+    current_python = _run([sys.executable, "--version"], timeout=10)
     return {
         "ok": requirements.exists(),
         "requirements": str(requirements),
         "requirements_exists": requirements.exists(),
         "ai_extra_requirements": str(ai_requirements),
         "ai_extra_requirements_exists": ai_requirements.exists(),
-        "python": _probe_command("python", ["--version"]),
+        "python": {
+            "ok": bool(current_python.get("ok")),
+            "command": "current-python",
+            "path": sys.executable,
+            "returncode": current_python.get("returncode"),
+            "stdout_head": "\n".join(str(current_python.get("stdout", "")).splitlines()[:6]),
+            "stderr": current_python.get("stderr", ""),
+        },
+        "path_python": _probe_command("python", ["--version"]),
         "git": _probe_command("git", ["--version"]),
         "node": _probe_command("node", ["--version"]),
     }
@@ -222,7 +237,7 @@ def _mcp_status(codex_home: Path, vela_home: Path, profile: str) -> dict[str, An
 def _memory_status() -> dict[str, Any]:
     probe = _probe_command("agentmemory", ["status"], timeout=15)
     stdout = str(probe.get("stdout_head", "")).lower()
-    healthy = bool(probe.get("ok")) and ("healthy" in stdout or stdout == "")
+    healthy = bool(probe.get("ok")) and ("healthy" in stdout or "connected" in stdout or stdout == "")
     probe["healthy"] = healthy
     probe["ok"] = healthy
     probe["policy"] = "agentmemory runtime data is probed but never exported into VELA."

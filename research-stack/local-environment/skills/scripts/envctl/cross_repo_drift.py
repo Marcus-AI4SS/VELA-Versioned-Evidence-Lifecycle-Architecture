@@ -21,8 +21,8 @@ PUBLIC_SCHEMA_FILES = [
     "helm.codex.handoff.v1.schema.json",
 ]
 OLD_ACTIVE_PATH_PATTERNS = [
-    re.compile(r"<USER_DESKTOP>\\AI environment-configuration\\git-folders", re.IGNORECASE),
-    re.compile(r"<USER_DESKTOP>/AI environment-configuration/git-folders", re.IGNORECASE),
+    re.compile(r"<LEGACY_RUNTIME_ROOT>\\git-folders", re.IGNORECASE),
+    re.compile(r"<LEGACY_RUNTIME_ROOT>/git-folders", re.IGNORECASE),
     re.compile(r"public-release[\\/]codex-research-stack", re.IGNORECASE),
 ]
 OLD_VELA_EXPANSIONS = [
