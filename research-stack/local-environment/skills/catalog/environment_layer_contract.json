@@ -1265,14 +1265,6 @@
       "write_boundary": "No source writes unless the active route, user confirmation, and validator gates permit it."
     },
     {
-      "id": "xiaohongshu-mcp",
-      "kind": "mcp",
-      "layer": "tool",
-      "source": "<CODEX_HOME>/config.toml and route_mcp_activation_policy.json",
-      "use_boundary": "Browser-visible evidence or UI automation sensor; does not bypass login, captcha, copyright, or user confirmation.",
-      "write_boundary": "No source writes unless the active route, user confirmation, and validator gates permit it."
-    },
-    {
       "id": "zotero-mcp",
       "kind": "mcp",
       "layer": "tool",

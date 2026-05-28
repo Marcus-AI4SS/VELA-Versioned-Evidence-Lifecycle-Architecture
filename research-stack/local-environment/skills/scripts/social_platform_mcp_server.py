@@ -20,11 +20,6 @@ CLEANUP_SCRIPT = SCRIPT_ROOT / "cleanup-stale-agent-browser-sessions.ps1"
 OUTPUT_ROOT = OUTPUTS_ROOT / "social-platform-reader" / "agent-browser"
 
 SUPPORTED_PLATFORMS: dict[str, dict[str, str]] = {
-    "xiaohongshu": {
-        "label": "小红书",
-        "default_artifact_type": "board",
-        "mode": "browser-visible",
-    },
     "douyin": {
         "label": "抖音",
         "default_artifact_type": "video",
@@ -46,7 +41,7 @@ SUPPORTED_PLATFORMS: dict[str, dict[str, str]] = {
 mcp = FastMCP(
     "social-platform-mcp",
     instructions=(
-        "Generic social-platform capture facade for Xiaohongshu, Douyin, Bilibili, and WeChat public articles. "
+        "Generic social-platform capture facade for Douyin, Bilibili, and WeChat public articles. "
         "This server only returns browser-visible evidence artifacts and does not invent hidden content."
     ),
 )

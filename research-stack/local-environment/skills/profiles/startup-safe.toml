@@ -6,7 +6,6 @@ managed_mcp = [
   "playwright-mcp",
   "figma-dev-mode-mcp",
   "social-platform-mcp",
-  "xiaohongshu-mcp",
   "zotero-mcp",
   "openalex-mcp",
   "semantic-scholar-mcp",

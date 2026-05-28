@@ -22,12 +22,6 @@ Workspace wrapper:
 
 ## Common Invocations
 
-### Xiaohongshu board or collection
-
-```powershell
-pwsh -ExecutionPolicy Bypass -File "<LOCAL_ENV_ROOT>\skills\scripts\run-social-platform-agent-browser-template.ps1" -Platform xiaohongshu -ArtifactType board -Url "https://www.xiaohongshu.com/board/..."
-```
-
 ### Douyin video
 
 ```powershell

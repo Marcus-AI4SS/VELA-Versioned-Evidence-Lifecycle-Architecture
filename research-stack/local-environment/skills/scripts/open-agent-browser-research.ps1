@@ -1,7 +1,7 @@
 param(
     [Parameter(Mandatory = $true)]
     [string]$Url,
-    [ValidateSet("generic", "xiaohongshu", "douyin", "bilibili", "wechat")]
+    [ValidateSet("generic", "douyin", "bilibili", "wechat")]
     [string]$Platform = "generic",
     [string]$SessionName = "research-social",
     [string]$ProfileName,
@@ -16,7 +16,6 @@ $ErrorActionPreference = "Stop"
 
 $platformDomains = @{
     generic = $null
-    xiaohongshu = "xiaohongshu.com,*.xiaohongshu.com,*.xhscdn.com"
     douyin = "douyin.com,*.douyin.com,*.amemv.com,*.douyinvod.com,*.byteimg.com,*.bytedance.com"
     bilibili = "bilibili.com,*.bilibili.com,*.hdslb.com"
     wechat = "mp.weixin.qq.com,weixin.qq.com,*.qq.com"
@@ -24,7 +23,6 @@ $platformDomains = @{
 
 $platformWaitMs = @{
     generic = "1200"
-    xiaohongshu = "2200"
     douyin = "2200"
     bilibili = "1800"
     wechat = "1500"

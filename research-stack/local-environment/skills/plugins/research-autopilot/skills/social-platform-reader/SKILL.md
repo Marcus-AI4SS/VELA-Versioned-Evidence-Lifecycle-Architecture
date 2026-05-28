@@ -1,6 +1,6 @@
 ---
 name: social-platform-reader
-description: Use when Codex needs to inspect Xiaohongshu, Douyin, Bilibili, WeChat public-article pages, boards, favorites, collections, notes, posts, videos, or similar platform artifacts, and must extract only directly visible evidence from a logged-in browser or a stronger installed backend.
+description: Use when Codex needs to inspect Douyin, Bilibili, WeChat public-article pages, boards, favorites, collections, posts, videos, or similar platform artifacts, and must extract only directly visible evidence from a logged-in browser or a stronger installed backend.
 ---
 
 # Social Platform Reader
@@ -16,46 +16,13 @@ Choose the backend in this order:
 1. Use native Codex computer-use/browser capability only when it is actually exposed in the current session. As of the current Windows setup, no native `computer_use` tool is available, so do not assume it exists.
 2. Use `chrome-devtools` for login-gated or browser-exact tasks when the MCP connection is healthy, especially boards, favorites, collections, user-visible tabs, lazy-loaded pages, WeChat article pages behind verification, or any case where the user asks to read what is currently visible in Chrome.
 3. Add `social-platform-mcp` when the task should be turned into a standardized cross-platform capture flow with saved artifacts, repeatable execution, or a reusable evidence bundle. On Windows this is currently the most stable browser-evidence backend in this stack.
-4. Use `xiaohongshu-mcp` only for Xiaohongshu tasks that match its structured platform-specific capabilities, such as search, feed detail, profile, or other public content endpoints that the server already exposes.
-5. Add direct `agent-browser` only when the task is template development, capture debugging, nonstandard interaction, or another case that should bypass the generic facade on purpose.
-6. Fall back to browser reading for Douyin, Bilibili, and WeChat article pages by default. Do not invent a dedicated backend unless one is already installed and clearly stronger than browser extraction for the exact task.
+4. Add direct `agent-browser` only when the task is template development, capture debugging, nonstandard interaction, or another case that should bypass the generic facade on purpose.
+5. Fall back to browser reading for Douyin, Bilibili, WeChat article pages, and similar platform tasks by default. Do not invent or require a dedicated platform backend in VELA.
 
 Read [references/upstream-backends.md](references/upstream-backends.md) when the task requires backend-selection rationale or platform extension.
 Read [references/agent-browser-templates.md](references/agent-browser-templates.md) when the task should switch from one-off reading to reusable browser automation.
 
 ## Platform Routing
-
-### Xiaohongshu
-
-Prefer `xiaohongshu-mcp` when the task is:
-
-- search and note discovery
-- reading a note detail page that is already public and structured
-- reading a profile or basic feed metadata
-
-Prefer `chrome-devtools` when the task is:
-
-- board, collection, or favorites pages
-- login-gated state
-- exact visible page extraction
-- pages that require scrolling or clicking to reveal note cards
-- cases where the user asks for evidence tied to what is open in their current browser
-
-Add `social-platform-mcp` when the task is:
-
-- board or collection traversal across multiple visible cards
-- repeatable multi-step capture that should land in a standard output directory
-- reusable evidence packaging across Xiaohongshu, Douyin, Bilibili, and WeChat article pages
-
-Add direct `agent-browser` when the task is:
-
-- template debugging or backend debugging
-- repeated open -> wait -> snapshot -> screenshot loops
-- saving a reusable session state for future capture runs
-- producing nonstandard capture artifacts under the local research environment that the generic facade does not already cover
-
-For Xiaohongshu boards and collections, prefer the board-scoped card URL when opening a note detail page from the browser session.
-The useful pattern is `/board/<board_id>/<note_id>?xsec_token=...`, not the hidden `/explore/<note_id>` link that may appear in the DOM and can fail outside the current board context.
 
 ### Douyin
 
@@ -85,7 +52,7 @@ If the page shows an environment exception, verification prompt, or anti-bot int
 
 Classify the user target before extraction:
 
-- platform: Xiaohongshu / Douyin / Bilibili / WeChat article / other
+- platform: Douyin / Bilibili / WeChat article / other
 - artifact type: board, collection, favorites, profile, search result, note, post, video, public article
 - access mode: public URL, logged-in browser page, or already-open tab
 
@@ -94,7 +61,7 @@ If the target is ambiguous, resolve the page first and only then extract.
 ### 2. Choose the Backend
 
 Use the routing rules above.
-If `xiaohongshu-mcp` is unavailable or unhealthy, fall back to `chrome-devtools` when the browser can still expose the page directly.
+If a platform-specific backend is unavailable or excluded from the public VELA package, fall back to `chrome-devtools` when the browser can still expose the page directly.
 If the task requires repeatable browser automation, prefer `social-platform-mcp` first, and switch to direct `agent-browser` only when the generic facade is insufficient.
 If all applicable backends are unavailable, stop and report the missing prerequisite instead of improvising.
 
@@ -164,18 +131,6 @@ When the page is lazy-loaded or client-rendered:
 
 If the same interaction must be repeated across many visible items, promote the task to `social-platform-mcp` first, and only drop to direct `agent-browser` when the generic facade no longer covers the interaction cleanly.
 
-### Xiaohongshu Board Detail Rule
-
-When extracting note details from a Xiaohongshu board or collection:
-
-1. collect the visible board card URL from the card footer or cover link
-2. use that board-scoped URL to open the note detail page in the browser context
-3. scroll the note detail page until the comment section is rendered
-4. extract only currently visible top-level comments unless the user explicitly asks for deeper expansion
-
-Do not treat a hidden `/explore/` anchor inside the card DOM as the preferred detail URL when the board-scoped URL is available.
-Do not claim that missing cards or posts exist unless a direct page artifact exposes them.
-
 ## Report Handoff
 
 If the user wants a deliverable file rather than only a chat summary:
@@ -216,7 +171,7 @@ When comments are requested, also report whether the result covers:
 
 Use these scripts instead of rewriting setup steps by hand:
 
-- [scripts/run-social-platform-agent-browser-template.ps1](scripts/run-social-platform-agent-browser-template.ps1): reusable `agent-browser` capture template for Xiaohongshu, Douyin, Bilibili, and WeChat article pages
+- [scripts/run-social-platform-agent-browser-template.ps1](scripts/run-social-platform-agent-browser-template.ps1): reusable `agent-browser` capture template for Douyin, Bilibili, and WeChat article pages
 
 ## References
 

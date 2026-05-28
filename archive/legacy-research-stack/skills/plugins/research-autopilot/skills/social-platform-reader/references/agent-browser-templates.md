@@ -21,12 +21,6 @@ Optional local wrapper name:
 
 ## Common Invocations
 
-### Xiaohongshu board or collection
-
-```powershell
-agent-browser open "https://www.xiaohongshu.com/board/..."
-```
-
 ### Douyin video
 
 ```powershell

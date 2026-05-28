@@ -51,14 +51,14 @@
     {
       "rule": "social-reading",
       "winner": "social-platform-reader + chrome-devtools (+ social-platform-mcp when standardized capture is needed)",
-      "losers": ["xiaohongshu-mcp direct-first", "agent-browser direct-first"],
+      "losers": ["platform-specific MCP direct-first", "agent-browser direct-first"],
       "reason": "社媒研究默认浏览器优先，只读真实可见内容。"
     },
     {
       "rule": "social-facade-vs-platform-backend",
       "winner": "social-platform-mcp as generic capture facade",
-      "losers": ["xiaohongshu-mcp as generic solution"],
-      "reason": "小红书 MCP 只能作为平台专用后端，不能冒充跨平台总抓取接口；跨平台统一入口应由 social-platform-mcp 承担。"
+      "losers": ["platform-specific MCP as generic solution"],
+      "reason": "平台专用后端不能冒充跨平台总抓取接口；跨平台统一入口应由 social-platform-mcp 承担。"
     },
     {
       "rule": "social-facade-vs-direct-agent-browser",

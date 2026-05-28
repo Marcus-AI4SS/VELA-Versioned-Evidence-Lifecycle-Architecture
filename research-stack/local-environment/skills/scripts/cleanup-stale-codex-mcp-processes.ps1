@@ -21,8 +21,7 @@ $patterns = @(
     "codegraph.cmd",
     "codegraph.js serve --mcp",
     "semantic-scholar-plugin.py",
-    "cnki_mcp_server.py",
-    "xiaohongshu"
+    "cnki_mcp_server.py"
 )
 
 $processes = Get-CimInstance Win32_Process

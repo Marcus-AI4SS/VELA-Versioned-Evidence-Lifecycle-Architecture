@@ -1,6 +1,6 @@
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet("xiaohongshu", "douyin", "bilibili", "wechat")]
+    [ValidateSet("douyin", "bilibili", "wechat")]
     [string]$Platform,
 
     [Parameter(Mandatory = $true)]
@@ -54,10 +54,6 @@ function Resolve-AgentBrowserExe {
 $agentBrowserExe = Resolve-AgentBrowserExe
 
 $platformConfig = @{
-    xiaohongshu = @{
-        allowed_domains = "xiaohongshu.com,*.xiaohongshu.com,*.xhscdn.com"
-        wait_ms = "2200"
-    }
     douyin = @{
         allowed_domains = "douyin.com,*.douyin.com,*.amemv.com,*.douyinvod.com,*.byteimg.com,*.bytedance.com"
         wait_ms = "2200"

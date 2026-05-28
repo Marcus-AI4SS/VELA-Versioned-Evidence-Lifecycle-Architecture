@@ -70,6 +70,10 @@ TEXT_SUFFIXES = {
 
 LINE_STRIP_SUFFIXES = {".md", ".toml", ".txt"}
 
+PUBLIC_EXCLUDED_MCP_TOKENS = {
+    "".join(["xiao", "hong", "shu", "-mcp"]),
+}
+
 ROOT_FILES = [
     "AGENTS.md",
     "README.md",
@@ -273,6 +277,12 @@ def scrub_text_files(destination_root: Path, replacements: dict[str, str]) -> No
         for source, replacement in STATIC_PRIVATE_TEXT_REPLACEMENTS.items():
             text = text.replace(source, replacement)
             text = text.replace(source.replace("\\", "\\\\"), replacement)
+        for token in PUBLIC_EXCLUDED_MCP_TOKENS:
+            text = text.replace(f', "{token}"', "")
+            text = text.replace(f'"{token}", ', "")
+            text = text.replace(f'"{token}"', "")
+            text = text.replace(f"`{token}`", "the excluded platform-specific MCP")
+            text = text.replace(token, "excluded-platform-mcp")
         if path.suffix.lower() in LINE_STRIP_SUFFIXES:
             lines = []
             for line in text.splitlines():

@@ -125,7 +125,7 @@ description: Use when the user is doing research, literature review, computation
 - `社媒后端决策`
 - `为什么本次是否选用 social-platform-mcp`
 - `为什么本次是否直接选用 agent-browser`
-- `为什么没有把 xiaohongshu-mcp 当作跨平台总入口`
+- `为什么没有把平台专用 MCP 当作跨平台总入口`
 
 如果当前 MCP 状态与目标 profile 不一致，要明确说明：
 - 哪些 MCP 需要变更
@@ -142,7 +142,7 @@ description: Use when the user is doing research, literature review, computation
 - 筛选参考文献、候选文献表、结构性阅读、结构化读文献、文献核验、证据核验、引文核验、引用核验、证据句、支撑判断或证据包 -> 优先选择 `evidence-based-literature-workflow` route。它是证据链总控，具体动作仍调用 `citation-verifier`、`reference-fulltext-acquisition`、`systematic-literature-review`、`writing-reference-capture`、`pdf` 和 Zotero。
 - Python / Git / PowerShell / Codex config / MCP profile 维护 -> `environment-ops` 路线，仍由 `research-stack-manager` 执行，不直接散落成临时 shell 修补
 - 文献发现不等于正式引用 -> `citation-verifier` 必须先于 `zotero-sync`；DOI 有则核验。用户提供来源、完整 PDF 原文或公开学术检索记录可以作为 DOI 豁免证据，并按项目规则记录。
-- 社媒读取默认浏览器优先 -> `xiaohongshu-mcp` 不是默认第一入口
+- 社媒读取默认浏览器优先 -> 平台专用 MCP 不是默认第一入口
 - 社媒统一抓取入口 -> `social-platform-mcp` 只作为通用 capture facade，不取代 `social-platform-reader` 这个用户侧编排 skill
 - 社媒读取遇到复杂交互、会话持久化、批量化或网络跟踪 -> 保留 `chrome-devtools` 为主链，同时可加用 `agent-browser` 作为浏览器自动化增强层
 - 长时计算实验监控、断点续跑、worker 调整和 dashboard 修复 -> `long-running-experiment-ops`，不得由 `abm-simulation-lab` 或 `reproducibility-package` 直接替代

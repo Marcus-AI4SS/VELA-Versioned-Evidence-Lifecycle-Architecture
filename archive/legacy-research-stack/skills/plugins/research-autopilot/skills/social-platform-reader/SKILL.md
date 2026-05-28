@@ -1,6 +1,6 @@
 ---
 name: social-platform-reader
-description: Use when the task needs browser-visible evidence from Xiaohongshu, Douyin, Bilibili, WeChat public articles, or similar social-platform artifacts.
+description: Use when the task needs browser-visible evidence from Douyin, Bilibili, WeChat public articles, or similar social-platform artifacts.
 ---
 
 # Social Platform Reader
@@ -11,8 +11,7 @@ Use this skill when research work depends on visible social-platform evidence.
 
 1. `chrome-devtools` for exact browser-visible reading
 2. `social-platform-mcp` for repeatable cross-platform capture
-3. `xiaohongshu-mcp` only for Xiaohongshu-specific structured public capabilities
-4. direct `agent-browser` only for debugging or custom automation
+3. direct `agent-browser` only for debugging or custom automation
 
 ## Evidence Rule
 

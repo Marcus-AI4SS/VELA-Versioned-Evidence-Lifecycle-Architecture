@@ -708,7 +708,6 @@
       "project_scope_class": "conditional_multi_agent",
       "clarification_rule": "project_scope_rules.social-platform-case",
       "keywords": [
-        "小红书",
         "抖音",
         "B站",
         "b站",
@@ -724,7 +723,6 @@
       "aliases": [
         "social media",
         "douyin",
-        "xiaohongshu",
         "wechat article",
         "bilibili"
       ],
@@ -742,12 +740,11 @@
       "mcp": [
         "chrome-devtools",
         "social-platform-mcp",
-        "xiaohongshu-mcp",
         "zotero-mcp",
         "openalex-mcp"
       ],
       "rationale": "任务信号直接指向平台内容读取，必须先走浏览器可见证据链；若需要可复用、可留证、跨平台一致的抓取接口，则优先加用 social-platform-mcp，而不是把平台专用 MCP 当成总入口。",
-      "next_step": "先判断当前任务是一次性浏览器可见读取，还是需要标准化社媒抓取接口；然后输出社媒后端决策卡，明确说明为什么选 chrome-devtools / social-platform-mcp / xiaohongshu-mcp，以及为什么是否直接启用 agent-browser。",
+      "next_step": "先判断当前任务是一次性浏览器可见读取，还是需要标准化社媒抓取接口；然后输出社媒后端决策卡，明确说明为什么选 chrome-devtools / social-platform-mcp，以及为什么是否直接启用 agent-browser。",
       "not_selected_reason": "当前任务核心不是正式文献发现。",
       "task_type": "social_evidence",
       "data_access_level": "authenticated_visible",

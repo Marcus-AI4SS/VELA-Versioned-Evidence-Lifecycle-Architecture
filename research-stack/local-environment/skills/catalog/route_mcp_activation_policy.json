@@ -138,10 +138,8 @@
         "zotero-mcp",
         "openalex-mcp"
       ],
-      "activation_needed_mcp": [
-        "xiaohongshu-mcp"
-      ],
-      "notes": "Browser-visible evidence is required; generic social capture is optional; platform-specific MCP requires explicit activation."
+      "activation_needed_mcp": [],
+      "notes": "Browser-visible evidence is required; generic social capture is optional; VELA does not ship platform-specific social MCP backends."
     },
     {
       "route_id": "computational-social-science",

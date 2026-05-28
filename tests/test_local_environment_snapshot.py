@@ -110,6 +110,18 @@ class LocalEnvironmentSnapshotTests(unittest.TestCase):
         self.assertNotIn("scholar", joined)
         self.assertNotIn("desktop", joined)
 
+    def test_platform_specific_mcp_backend_is_not_published(self) -> None:
+        token = "".join(["xiao", "hong", "shu", "-mcp"])
+        offenders: list[str] = []
+        text_suffixes = {".json", ".md", ".ps1", ".py", ".toml", ".txt", ".yaml", ".yml"}
+        for path in SNAPSHOT.rglob("*"):
+            if not path.is_file() or path.suffix.lower() not in text_suffixes:
+                continue
+            text = path.read_text(encoding="utf-8", errors="ignore")
+            if token in text:
+                offenders.append(str(path.relative_to(ROOT)))
+        self.assertEqual(offenders, [])
+
     def test_envctl_entrypoint_matches_sanitized_snapshot(self) -> None:
         envctl_main = (SNAPSHOT / "skills" / "scripts" / "envctl" / "__main__.py").read_text(encoding="utf-8")
         self.assertNotIn("scholar_panel", envctl_main)

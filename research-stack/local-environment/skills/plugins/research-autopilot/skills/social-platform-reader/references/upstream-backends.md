@@ -26,34 +26,17 @@ Do not remove `social-platform-mcp`, `chrome-devtools`, or `agent-browser` just 
 Use when:
 
 - the task should be expressed as a generic cross-platform capture interface
-- the same evidence workflow should work across Xiaohongshu, Douyin, Bilibili, and WeChat article pages
+- the same evidence workflow should work across Douyin, Bilibili, and WeChat article pages
 - the capture should leave a standard artifact bundle on disk
 - repeatable execution matters more than one-off manual inspection
 
 Do not force it onto:
 
 - one-off visible reading that `chrome-devtools` can already handle cleanly
-- platform-specific public metadata queries that `xiaohongshu-mcp` already exposes better
+- one-off visible reading that should stay in `chrome-devtools`
 - debugging tasks where direct `agent-browser` access is more transparent
 
 This is the generic capture facade. It wraps the local browser-evidence workflow rather than replacing it with hidden scraping.
-
-### `xiaohongshu-mcp`
-
-Use when:
-
-- Xiaohongshu search
-- public note discovery
-- public profile or feed metadata
-- structured public note reads that the server already exposes cleanly
-
-Do not force it onto:
-
-- cross-platform generic capture
-- browser-exact favorites pages
-- board pages
-- lazy-loaded collection pages
-- login-gated visible-state tasks
 
 ### `chrome-devtools`
 
@@ -86,5 +69,4 @@ In routine use it should usually sit behind `social-platform-mcp`, not become th
 - Windows current setup -> keep `social-platform-mcp` as the stable repeatable capture layer
 - one-off visible reading -> `chrome-devtools` when healthy
 - repeatable cross-platform capture -> `social-platform-mcp`
-- public structured Xiaohongshu metadata -> `xiaohongshu-mcp`
 - debug or custom browser automation -> `agent-browser`
