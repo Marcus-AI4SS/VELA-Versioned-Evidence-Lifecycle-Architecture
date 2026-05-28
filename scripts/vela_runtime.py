@@ -245,9 +245,15 @@ def _memory_status() -> dict[str, Any]:
 
 
 def _codegraph_status(project_root: Path) -> dict[str, Any]:
-    if not shutil.which("codegraph"):
+    found = shutil.which("codegraph")
+    if not found:
         return {"ok": False, "command": "codegraph", "stderr": "command-not-found"}
-    status = _run(["codegraph", "status", "--json", str(project_root)], timeout=15)
+    executable = Path(found)
+    if os.name == "nt" and executable.suffix.lower() in {".cmd", ".bat"}:
+        args = ["cmd", "/c", str(executable), "status", "--json", str(project_root)]
+    else:
+        args = [str(executable), "status", "--json", str(project_root)]
+    status = _run(args, timeout=15)
     parsed: dict[str, Any] = {}
     if status.get("ok"):
         try:
@@ -422,6 +428,12 @@ def plan_runtime(
 
     required_ready = all(item["ok"] for item in components if item.get("required"))
     ready = required_ready and (all(item["ok"] for item in components) if strict else True)
+    if not required_ready:
+        next_action = "Run `vela local-env install-runtime --commit --include core` first, then enable optional runtime categories explicitly."
+    elif strict and any(not item["ok"] for item in components):
+        next_action = "Core VELA runtime is ready. Enable or document optional runtime categories before requiring --strict all."
+    else:
+        next_action = "Core VELA runtime is ready. Use `vela local-env doctor-runtime --include all` to inspect optional runtime categories."
     return {
         "schema_version": RUNTIME_SCHEMA_VERSION,
         "generated_at": _utc_now(),
@@ -443,7 +455,7 @@ def plan_runtime(
         "components": components,
         "errors": errors,
         "warnings": warnings,
-        "next_action": "Run `vela local-env install-runtime --commit --include core` first, then enable optional runtime categories explicitly.",
+        "next_action": next_action,
     }
 
 

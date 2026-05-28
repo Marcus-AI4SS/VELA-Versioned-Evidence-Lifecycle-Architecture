@@ -70,6 +70,9 @@ class LocalRuntimeBootstrapTests(unittest.TestCase):
             receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
             self.assertEqual(receipt["schema_version"], "vela.local_runtime.install.receipt.v1")
             self.assertTrue(any(action["id"] == "core.local-environment" for action in receipt["actions"]))
+            doctor = vela_runtime.doctor_runtime(codex_home=base / "codex", vela_home=base / "vela", include="core,automation,toolchain", strict=True)
+            self.assertTrue(doctor["ready"])
+            self.assertIn("ready", doctor["next_action"].lower())
 
     @unittest.skipUnless(os.name == "nt", "Windows .cmd shim probing is platform-specific")
     def test_runtime_probe_handles_windows_cmd_shims(self) -> None:
@@ -86,6 +89,29 @@ class LocalRuntimeBootstrapTests(unittest.TestCase):
 
             self.assertTrue(result["ok"], result)
             self.assertIn("Connected", result["stdout_head"])
+
+    @unittest.skipUnless(os.name == "nt", "Windows .cmd shim probing is platform-specific")
+    def test_codegraph_status_handles_windows_cmd_shims(self) -> None:
+        with tempfile.TemporaryDirectory() as root:
+            base = Path(root)
+            shim = base / "codegraph.cmd"
+            shim.write_text(
+                '@echo off\n'
+                'echo {"initialized":true,"nodeCount":12,"edgeCount":34}\n'
+                'exit /b 0\n',
+                encoding="ascii",
+            )
+            previous_path = os.environ.get("PATH", "")
+            os.environ["PATH"] = str(base) + os.pathsep + previous_path
+            try:
+                result = vela_runtime._codegraph_status(base / "project")
+            finally:
+                os.environ["PATH"] = previous_path
+
+            self.assertTrue(result["ok"], result)
+            self.assertTrue(result["initialized"])
+            self.assertEqual(result["node_count"], 12)
+            self.assertEqual(result["edge_count"], 34)
 
 
 if __name__ == "__main__":
