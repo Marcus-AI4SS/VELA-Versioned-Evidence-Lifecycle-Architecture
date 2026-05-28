@@ -258,5 +258,5 @@ def doctor_local_environment(*, codex_home: Path | None = None, vela_home: Path 
         "install_receipt": str(receipt_path),
         "errors": errors,
         "warnings": [],
-        "next_action": "Run `vela local-env install` from the VELA repository." if errors else "Restart Codex if these skills were installed during the current session.",
+        "next_action": "Run `vela local-env install-runtime --include core,automation,toolchain --commit` from the VELA repository." if errors else "Restart Codex if these skills were installed during the current session.",
     }

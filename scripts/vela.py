@@ -13,6 +13,7 @@ if __package__ in {None, ""}:
     from scripts import vela_local_environment
     from scripts import vela_privacy
     from scripts import vela_public_export
+    from scripts import vela_runtime
     from scripts import public_release_env as pre
     from scripts import vela_contract as contract
     from scripts import vela_initializer as initializer
@@ -22,6 +23,7 @@ else:
     from scripts import vela_local_environment
     from scripts import vela_privacy
     from scripts import vela_public_export
+    from scripts import vela_runtime
     from scripts import public_release_env as pre
     from scripts import vela_contract as contract
     from scripts import vela_initializer as initializer
@@ -138,6 +140,45 @@ def cmd_local_env_doctor(args: argparse.Namespace) -> int:
     return 0 if result.get("ok") else 1
 
 
+def cmd_local_env_plan_runtime(args: argparse.Namespace) -> int:
+    result = vela_runtime.plan_runtime(
+        codex_home=Path(args.codex_home) if args.codex_home else None,
+        vela_home=Path(args.vela_home) if args.vela_home else None,
+        include=args.include,
+        profile=args.profile,
+        strict=args.strict,
+    )
+    _print_json(result)
+    return 0 if result.get("ok") else 1
+
+
+def cmd_local_env_doctor_runtime(args: argparse.Namespace) -> int:
+    result = vela_runtime.doctor_runtime(
+        codex_home=Path(args.codex_home) if args.codex_home else None,
+        vela_home=Path(args.vela_home) if args.vela_home else None,
+        include=args.include,
+        profile=args.profile,
+        strict=args.strict,
+    )
+    _print_json(result)
+    return 0 if result.get("ok") else 1
+
+
+def cmd_local_env_install_runtime(args: argparse.Namespace) -> int:
+    result = vela_runtime.install_runtime(
+        codex_home=Path(args.codex_home) if args.codex_home else None,
+        vela_home=Path(args.vela_home) if args.vela_home else None,
+        include=args.include,
+        profile=args.profile,
+        python_executable=args.python or sys.executable,
+        commit=args.commit,
+        force_core=args.force_core,
+        apply_profile=args.apply_profile,
+    )
+    _print_json(result)
+    return 0 if result.get("ok") else 1
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="VELA workflow wrapper CLI.")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -191,6 +232,36 @@ def build_parser() -> argparse.ArgumentParser:
     local_env_doctor.add_argument("--codex-home", default=None, help="Override CODEX_HOME for inspection.")
     local_env_doctor.add_argument("--vela-home", default=None, help="Override VELA_HOME for inspection.")
     local_env_doctor.set_defaults(func=cmd_local_env_doctor)
+    local_env_plan_runtime = local_env_sub.add_parser(
+        "plan-runtime",
+        help="Plan the optional C-drive/user runtime bootstrap without mutating plugin caches, memory data, or MCP config.",
+    )
+    local_env_plan_runtime.add_argument("--codex-home", default=None, help="Override CODEX_HOME for inspection.")
+    local_env_plan_runtime.add_argument("--vela-home", default=None, help="Override VELA_HOME for inspection.")
+    local_env_plan_runtime.add_argument("--include", default="all", help="Comma list: core,mcp,plugins,memory,automation,external-repos,toolchain or all.")
+    local_env_plan_runtime.add_argument("--profile", default="startup-safe", help="MCP profile to evaluate.")
+    local_env_plan_runtime.add_argument("--strict", action="store_true", help="Treat optional runtime gaps as errors.")
+    local_env_plan_runtime.set_defaults(func=cmd_local_env_plan_runtime)
+    local_env_doctor_runtime = local_env_sub.add_parser("doctor-runtime", help="Check the optional runtime bootstrap status.")
+    local_env_doctor_runtime.add_argument("--codex-home", default=None, help="Override CODEX_HOME for inspection.")
+    local_env_doctor_runtime.add_argument("--vela-home", default=None, help="Override VELA_HOME for inspection.")
+    local_env_doctor_runtime.add_argument("--include", default="all", help="Comma list: core,mcp,plugins,memory,automation,external-repos,toolchain or all.")
+    local_env_doctor_runtime.add_argument("--profile", default="startup-safe", help="MCP profile to evaluate.")
+    local_env_doctor_runtime.add_argument("--strict", action="store_true", help="Treat optional runtime gaps as errors.")
+    local_env_doctor_runtime.set_defaults(func=cmd_local_env_doctor_runtime)
+    local_env_install_runtime = local_env_sub.add_parser(
+        "install-runtime",
+        help="Install VELA-owned runtime pieces and write a runtime receipt. External plugins, MCP servers, and memory stores remain explicit/user-runtime only.",
+    )
+    local_env_install_runtime.add_argument("--codex-home", default=None, help="Override CODEX_HOME for installation.")
+    local_env_install_runtime.add_argument("--vela-home", default=None, help="Override VELA_HOME for managed state.")
+    local_env_install_runtime.add_argument("--include", default="core,automation,toolchain", help="Comma list: core,mcp,plugins,memory,automation,external-repos,toolchain or all.")
+    local_env_install_runtime.add_argument("--profile", default="startup-safe", help="MCP profile to apply when --apply-profile is set.")
+    local_env_install_runtime.add_argument("--python", default=None, help="Python executable used for runtime shims.")
+    local_env_install_runtime.add_argument("--commit", action="store_true", help="Write receipts and install VELA-owned core runtime pieces.")
+    local_env_install_runtime.add_argument("--force-core", action="store_true", help="Back up and replace conflicting skill folders during core install.")
+    local_env_install_runtime.add_argument("--apply-profile", action="store_true", help="With --commit and --include mcp, mutate CODEX_HOME/config.toml through envctl apply-profile.")
+    local_env_install_runtime.set_defaults(func=cmd_local_env_install_runtime)
 
     handoff = sub.add_parser("handoff", help="Create, lint, or render Codex handoffs.")
     handoff_sub = handoff.add_subparsers(dest="handoff_command", required=True)

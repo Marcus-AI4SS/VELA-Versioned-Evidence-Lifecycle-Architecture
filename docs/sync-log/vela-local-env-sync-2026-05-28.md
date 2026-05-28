@@ -38,7 +38,7 @@ Added `research-stack/local-environment/` as a sanitized near 1:1 distribution o
 - `toolchain/toolchain_inventory.json`
 - `manifest.json`
 
-The distribution is installed through `vela local-env install`. It is not automatically copied by `vela init`; project initialization and environment installation stay separate.
+The distribution is installed through `vela local-env install-runtime --include core,automation,toolchain --commit`. It is not automatically copied by `vela init`; project initialization and environment installation stay separate.
 
 The installer:
 

@@ -39,26 +39,8 @@ EXCLUDED_NAME_PARTS = {
     "scholar_advisory_panel",
 }
 
-PRIVATE_PATH_REPLACEMENTS = {
-    "D:\\AI environment-GITHUB": "<AI_ENV_ROOT>",
-    "D:/AI environment-GITHUB": "<AI_ENV_ROOT>",
-    "D:\\AI environment-GITHUB\\git-folders": "<GIT_FOLDERS_ROOT>",
-    "D:/AI environment-GITHUB/git-folders": "<GIT_FOLDERS_ROOT>",
-    "D:\\AI environment-GITHUB\\git-folders\\skills-environment-local": "<LOCAL_ENV_ROOT>",
-    "D:/AI environment-GITHUB/git-folders/skills-environment-local": "<LOCAL_ENV_ROOT>",
-    "C:\\Users\\17666\\.codex": "<CODEX_HOME>",
-    "C:/Users/17666/.codex": "<CODEX_HOME>",
-    "C:\\Users\\17666\\Documents\\Obsidian Vault": "<OBSIDIAN_VAULT>",
-    "C:/Users/17666/Documents/Obsidian Vault": "<OBSIDIAN_VAULT>",
+STATIC_PRIVATE_TEXT_REPLACEMENTS = {
     "Obsidian Vault": "<OBSIDIAN_VAULT>",
-    "C:\\Users\\17666\\Desktop": "<USER_DESKTOP>",
-    "C:/Users/17666/Desktop": "<USER_DESKTOP>",
-    "C:\\Users\\17666\\Downloads": "<USER_DOWNLOADS>",
-    "C:/Users/17666/Downloads": "<USER_DOWNLOADS>",
-    "C:\\Users\\17666\\Zotero": "<ZOTERO_HOME>",
-    "C:/Users/17666/Zotero": "<ZOTERO_HOME>",
-    "C:\\Users\\17666": "<USER_HOME>",
-    "C:/Users/17666": "<USER_HOME>",
 }
 
 TEXT_SUFFIXES = {
@@ -99,6 +81,11 @@ SKILLS_SUBTREES = [
 ]
 
 ASSET_SUBTREES = [
+]
+
+PYTHON_SUBTREES = [
+    "requirements",
+    "manifests",
 ]
 
 
@@ -226,7 +213,43 @@ def normalize_protected_runtime_paths(destination_root: Path) -> None:
     protected_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
-def scrub_text_files(destination_root: Path) -> None:
+def _path_variants(path: Path) -> set[str]:
+    values = {str(path), path.as_posix()}
+    try:
+        resolved = path.resolve()
+    except OSError:
+        resolved = path
+    values.update({str(resolved), resolved.as_posix()})
+    return {value for value in values if value}
+
+
+def build_private_path_replacements(source: Path) -> dict[str, str]:
+    replacements = dict(STATIC_PRIVATE_TEXT_REPLACEMENTS)
+    source = source.expanduser()
+    dynamic_paths = [
+        (source, "<LOCAL_ENV_ROOT>"),
+        (source.parent, "<GIT_FOLDERS_ROOT>"),
+        (source.parent.parent, "<AI_ENV_ROOT>"),
+        (REPO_ROOT, "<VELA_REPO_ROOT>"),
+    ]
+    home = Path.home()
+    dynamic_paths.extend(
+        [
+            (home / ".codex", "<CODEX_HOME>"),
+            (home / "Documents" / "Obsidian Vault", "<OBSIDIAN_VAULT>"),
+            (home / "Desktop", "<USER_DESKTOP>"),
+            (home / "Downloads", "<USER_DOWNLOADS>"),
+            (home / "Zotero", "<ZOTERO_HOME>"),
+            (home, "<USER_HOME>"),
+        ]
+    )
+    for path, placeholder in dynamic_paths:
+        for value in _path_variants(path):
+            replacements[value] = placeholder
+    return replacements
+
+
+def scrub_text_files(destination_root: Path, replacements: dict[str, str]) -> None:
     for path in destination_root.rglob("*"):
         if not path.is_file() or path.suffix.lower() not in TEXT_SUFFIXES:
             continue
@@ -234,8 +257,9 @@ def scrub_text_files(destination_root: Path) -> None:
             text = path.read_text(encoding="utf-8")
         except UnicodeDecodeError:
             continue
-        for source, replacement in sorted(PRIVATE_PATH_REPLACEMENTS.items(), key=lambda item: len(item[0]), reverse=True):
+        for source, replacement in sorted(replacements.items(), key=lambda item: len(item[0]), reverse=True):
             text = text.replace(source, replacement)
+            text = text.replace(source.replace("\\", "\\\\"), replacement)
         if path.suffix.lower() in LINE_STRIP_SUFFIXES:
             lines = []
             for line in text.splitlines():
@@ -567,11 +591,13 @@ def write_manifest(source: Path, copied: list[str]) -> None:
                 "literature acquisition and citation evidence workflows",
                 "writing, review, figure, presentation, submission, and quantitative workflows",
                 "MCP/profile/toolchain configuration templates",
+                "Python requirements and toolchain manifests without vendored runtime binaries",
                 "validators, envctl modules, scripts, schemas, and tests",
             ],
             "exclude": [
                 "desktop app development chain",
                 "distilled scholar generation and scholar advisory panel chain",
+                "vendored Python/JDK/runtime binaries",
                 "runtime caches and generated outputs",
                 "browser login state, cookies, credentials, and personal secrets",
                 "private absolute paths; exported settings use placeholders",
@@ -579,7 +605,7 @@ def write_manifest(source: Path, copied: list[str]) -> None:
         },
         "layout": {
             "root": "research-stack/local-environment",
-            "runtime_mode": "installable through `vela local-env install`; not automatically copied by `vela init`",
+            "runtime_mode": "installable through `vela local-env install-runtime --include core,automation,toolchain --commit`; not automatically copied by `vela init`",
             "settings_policy": "settings.toml is scrubbed to portable placeholders",
         },
         "raw_copied_file_count": len(copied),
@@ -589,15 +615,118 @@ def write_manifest(source: Path, copied: list[str]) -> None:
     (DESTINATION / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def write_runtime_manifest(destination_root: Path) -> None:
+    runtime_dir = destination_root / "runtime"
+    runtime_dir.mkdir(parents=True, exist_ok=True)
+    profiles = sorted(path.stem for path in (destination_root / "skills" / "profiles").glob("*.toml"))
+    manifest = {
+        "schema_version": "vela.local_runtime.manifest.v1",
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "boundary": {
+            "source_authority": {
+                "role": "D-drive source repository",
+                "description": "The publishable source-of-truth snapshot comes from the local environment source repository. It contains contracts, schemas, scripts, profiles, tests, and public skills.",
+                "public_placeholder": "<LOCAL_ENV_ROOT>",
+            },
+            "runtime_authority": {
+                "role": "C-drive user runtime",
+                "description": "The user's Codex, plugin cache, MCP config, browser state, memory service data, and application data live in the runtime layer and are install targets or health probes, not publishable source payload.",
+                "public_placeholders": ["<CODEX_HOME>", "<AGENTS_HOME>", "<VELA_HOME>", "<USER_HOME>"],
+            },
+            "never_export": [
+                "browser login state",
+                "cookies",
+                "tokens and secrets",
+                "agentmemory data stores",
+                "plugin cache payloads",
+                "Zotero databases",
+                "Obsidian private vault content",
+                "generated outputs and runtime caches",
+            ],
+        },
+        "components": [
+            {
+                "id": "core.local-environment",
+                "category": "core",
+                "kind": "vela_managed_payload",
+                "default_action": "install",
+                "installer": "vela local-env install-runtime --include core,automation,toolchain --commit",
+                "description": "Public research skills, contracts, schemas, profiles, envctl modules, validators, tests, and toolchain manifests.",
+            },
+            {
+                "id": "mcp.profile-templates",
+                "category": "mcp",
+                "kind": "config_template",
+                "default_action": "plan",
+                "profiles": profiles,
+                "installer": "envctl apply-profile <profile> --dry-run|--commit",
+                "description": "Profiles describe which existing MCP server config sections should be enabled for each research route.",
+            },
+            {
+                "id": "mcp.servers",
+                "category": "mcp",
+                "kind": "external_runtime",
+                "default_action": "doctor",
+                "install_policy": "not_vendored",
+                "description": "MCP server binaries and connector registrations are user runtime dependencies. VELA checks config readiness but does not copy private or cached server payloads.",
+            },
+            {
+                "id": "plugins.codex",
+                "category": "plugins",
+                "kind": "external_runtime",
+                "default_action": "doctor",
+                "tracked_plugins": ["superpowers", "github", "browser", "research-environment-local"],
+                "install_policy": "not_vendored",
+                "description": "Codex plugin/cache bundles are detected in CODEX_HOME but are not redistributed by VELA.",
+            },
+            {
+                "id": "memory.agentmemory",
+                "category": "memory",
+                "kind": "optional_service",
+                "default_action": "doctor",
+                "probe": "agentmemory status",
+                "install_policy": "explicit_optional_runtime",
+                "description": "agentmemory may provide runtime recall and audit. Source rules remain in Git-controlled contracts and validators.",
+            },
+            {
+                "id": "automation.envctl",
+                "category": "automation",
+                "kind": "local_cli",
+                "default_action": "install",
+                "installer": "vela local-env install-runtime --include core,automation,toolchain --commit",
+                "description": "envctl shims expose validators, profile application, route explanation, memory governance, and research workflow checks. No background service is auto-started.",
+            },
+            {
+                "id": "external-repos.adoption-readiness",
+                "category": "external-repos",
+                "kind": "classified_external_input",
+                "default_action": "doctor",
+                "validator": "envctl validate adoption-readiness --summary",
+                "description": "External repositories are classified as installed runtime, optional backend, active plugin, cross-repo contract snapshot, or pattern-only before VELA claims them as usable.",
+            },
+            {
+                "id": "toolchain.python",
+                "category": "toolchain",
+                "kind": "requirements_manifest",
+                "default_action": "plan",
+                "artifacts": ["python/requirements/research-core.txt", "python/requirements/research-ai-extra.txt", "python/manifests/system-python-summary.json"],
+                "install_policy": "requirements_only_no_vendored_runtime",
+                "description": "VELA publishes requirements and manifests, not local Python/JDK runtime binaries.",
+            },
+        ],
+    }
+    (runtime_dir / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
 def write_readme() -> None:
     (DESTINATION / "README.md").write_text(
         """# Local Research Environment Distribution
 
 This directory is the sanitized near 1:1 VELA distribution of the current local Codex research environment.
 
-It is installable through `vela local-env install`. The installer copies the public research skills into `CODEX_HOME/skills`, places contracts, schemas, profiles, validators, scripts, and toolchain metadata under `VELA_HOME/research-stack/local-environment`, and creates an `envctl` shim under `VELA_HOME/bin`.
+It is installable through `vela local-env install-runtime --include core,automation,toolchain --commit`. The installer copies the public research skills into `CODEX_HOME/skills`, places contracts, schemas, profiles, validators, scripts, and toolchain metadata under `VELA_HOME/research-stack/local-environment`, creates an `envctl` shim under `VELA_HOME/bin`, and writes receipts for `doctor-runtime`.
 
-The project initializer remains separate: `vela init` creates a VELA research project, while `vela local-env install` installs the broader Codex research environment.
+The project initializer remains separate: `vela init` creates a VELA research project, while `vela local-env install-runtime` installs the broader Codex research environment and runtime shims.
 
 ## Included
 
@@ -608,23 +737,26 @@ The project initializer remains separate: `vela init` creates a VELA research pr
 - literature acquisition, CNKI/Google Scholar/Zotero evidence paths, citation evidence rules
 - structured reading, manuscript writing, peer review, revision, figure, presentation, submission, and empirical quantitative workflows
 - MCP/profile configuration templates and toolchain inventory
+- Python requirements and environment manifests without Python/JDK runtime binaries
 - envctl modules, validators, scripts, schemas, tests, and product overview assets
 
 ## Excluded
 
 - desktop app development skills and profiles
 - distilled scholar generation, scholar panel, and personal scholar-role material
+- vendored Python/JDK runtime binaries
 - runtime caches, generated outputs, browser state, cookies, credentials, and personal secrets
 - machine-specific absolute paths; `skills/catalog/settings.toml` is converted to placeholders
 
 ## How VELA Should Use It
 
 1. Read `manifest.json` first.
-2. Use `vela local-env install` for user installation.
+2. Use `vela local-env install-runtime --include core,automation,toolchain --commit` for user installation.
 3. Treat `skills/catalog` and `skills/schemas` as the contract layer.
 4. Treat `skills/plugins/research-autopilot/skills` as the public skill source layer.
 5. Treat `skills/profiles` as MCP/profile intent; apply profiles only through explicit `envctl apply-profile --commit`.
-6. Promote future local changes into VELA only through schema, tests, and privacy review.
+6. Treat `runtime/manifest.json` as the C-drive runtime bootstrap contract: C-drive runtime data is probed or installed into, never exported.
+7. Promote future local changes into VELA only through schema, tests, and privacy review.
 
 """,
         encoding="utf-8",
@@ -645,10 +777,12 @@ def sync(source: Path) -> None:
         copied.extend(copy_filtered(source / "skills" / subtree, DESTINATION / "skills" / subtree))
     for subtree in ASSET_SUBTREES:
         copied.extend(copy_filtered(source / subtree, DESTINATION / subtree))
+    for subtree in PYTHON_SUBTREES:
+        copied.extend(copy_filtered(source / "python" / subtree, DESTINATION / "python" / subtree))
 
     scrub_local_settings(DESTINATION)
     prune_snapshot_jsons(DESTINATION)
-    scrub_text_files(DESTINATION)
+    scrub_text_files(DESTINATION, build_private_path_replacements(source))
     patch_snapshot_runtime_boundaries(DESTINATION)
     toolchain_dir = DESTINATION / "toolchain"
     toolchain_dir.mkdir(parents=True, exist_ok=True)
@@ -656,6 +790,7 @@ def sync(source: Path) -> None:
         json.dumps(build_toolchain_inventory(), ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
+    write_runtime_manifest(DESTINATION)
     write_readme()
     write_manifest(source, copied)
 

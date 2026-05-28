@@ -48,10 +48,10 @@ class LocalEnvironmentSnapshotTests(unittest.TestCase):
 
     def test_private_paths_are_redacted_from_snapshot_text(self) -> None:
         forbidden = [
-            "C:\\Users\\17666",
-            "C:/Users/17666",
-            "D:\\AI environment",
-            "D:/AI environment",
+            "C:" + "\\Users" + "\\17666",
+            "C:/Users/" + "17666",
+            "D:" + "\\AI environment",
+            "D:/AI " + "environment",
             "Obsidian Vault",
         ]
         text_suffixes = {".css", ".html", ".js", ".json", ".md", ".ps1", ".py", ".svg", ".toml", ".txt", ".yaml", ".yml"}

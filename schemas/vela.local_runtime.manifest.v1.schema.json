@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vela.local/schemas/vela.local_runtime.manifest.v1.schema.json",
+  "title": "VELA local runtime manifest",
+  "type": "object",
+  "required": ["schema_version", "generated_at", "boundary", "components"],
+  "properties": {
+    "schema_version": {
+      "const": "vela.local_runtime.manifest.v1"
+    },
+    "generated_at": {
+      "type": "string"
+    },
+    "boundary": {
+      "type": "object",
+      "required": ["source_authority", "runtime_authority", "never_export"],
+      "properties": {
+        "source_authority": {
+          "type": "object",
+          "required": ["role", "description", "public_placeholder"],
+          "properties": {
+            "role": {"type": "string"},
+            "description": {"type": "string"},
+            "public_placeholder": {"type": "string"}
+          },
+          "additionalProperties": true
+        },
+        "runtime_authority": {
+          "type": "object",
+          "required": ["role", "description", "public_placeholders"],
+          "properties": {
+            "role": {"type": "string"},
+            "description": {"type": "string"},
+            "public_placeholders": {
+              "type": "array",
+              "items": {"type": "string"}
+            }
+          },
+          "additionalProperties": true
+        },
+        "never_export": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      },
+      "additionalProperties": true
+    },
+    "components": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "category", "kind", "default_action", "description"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "category": {"type": "string", "minLength": 1},
+          "kind": {"type": "string", "minLength": 1},
+          "default_action": {"type": "string", "minLength": 1},
+          "description": {"type": "string", "minLength": 1}
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": false
+}

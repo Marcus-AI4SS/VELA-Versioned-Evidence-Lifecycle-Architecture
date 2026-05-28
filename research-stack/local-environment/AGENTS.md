@@ -42,6 +42,13 @@ This repository is the private `skills环境管理` workspace.
 - If a project is missing them, use `python -m skills.scripts.envctl ensure-project-contract --path "<project_root>"` or the equivalent `plan-team` auto-initialization before dispatch.
 - The local environment's `skills/AGENTS.md` and initializer catalog are templates and validators; they do not replace project-local contracts at runtime.
 
+## External Adoption Readiness Rule
+
+- When an external repository is described as installed, enabled, indexed, or delegated to, verify it with `python -m skills.scripts.envctl validate adoption-readiness --summary` before relying on it.
+- When an external repository is described as pattern-only or not installed, do not claim its runtime is available. Use only the local schema, catalog, skill, or validator that absorbed the pattern.
+- CodeGraph is project-local. If a target project reports `Not initialized`, run `skills/scripts/ensure-codegraph-index.ps1 -ProjectRoot "<project_root>"` or `codegraph init -i "<project_root>"` before using CodeGraph context. Do not treat another project's missing `.codegraph` cache as evidence that the local environment is broken.
+- CodeGraph, agentmemory, and other runtime adapters provide context evidence only; they never replace `rg`, source files, validators, tests, and Git history.
+
 ## Protected Runtime Skill Rule
 
 - Local environment management and automations must not write, sync, clean, rename, overwrite, delete, install dependencies into, or auto-evolve that folder.

@@ -4,9 +4,9 @@
   "generated_at": "2026-05-09",
   "system_boundary": {
     "system_name": "local-research-codex-environment",
-    "source_of_truth_repo": "D:\\AI environment-GITHUB\\git-folders\\skills-environment-local",
+    "source_of_truth_repo": "<LOCAL_ENV_ROOT>",
     "managed_repositories": [
-      "D:\\AI environment-GITHUB\\git-folders\\skills-environment-local"
+      "<LOCAL_ENV_ROOT>"
     ],
     "out_of_scope": [
       "Direct mutation of VELA or HELM without an explicit promotion task",
@@ -19,7 +19,7 @@
       "id": "engineering-cybernetics-en",
       "title": "Engineering Cybernetics",
       "language": "en",
-      "local_path": "C:\\Users\\17666\\Downloads\\Engineering cybernetics (Hsue Shen Tsien) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "local_path": "<USER_DOWNLOADS>\\Engineering cybernetics (Hsue Shen Tsien) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
       "status": "verified",
       "formal_citation_status": "local_source_only"
     },
@@ -27,7 +27,7 @@
       "id": "engineering-cybernetics-zh-vol1",
       "title": "工程控制论 上册 第三版",
       "language": "zh",
-      "local_path": "C:\\Users\\17666\\Downloads\\工程控制论 (上册) (第三版) (钱学森, 宋健) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "local_path": "<USER_DOWNLOADS>\\工程控制论 (上册) (第三版) (钱学森, 宋健) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
       "status": "verified",
       "formal_citation_status": "local_source_only"
     },
@@ -35,7 +35,7 @@
       "id": "engineering-cybernetics-zh-vol2",
       "title": "工程控制论 下册 第三版",
       "language": "zh",
-      "local_path": "C:\\Users\\17666\\Downloads\\工程控制论 (下册) (第三版) (钱学森, 宋健) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "local_path": "<USER_DOWNLOADS>\\工程控制论 (下册) (第三版) (钱学森, 宋健) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
       "status": "verified",
       "formal_citation_status": "local_source_only"
     }

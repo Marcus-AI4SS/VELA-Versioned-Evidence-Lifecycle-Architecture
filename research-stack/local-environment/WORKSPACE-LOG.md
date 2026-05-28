@@ -1,8 +1,8 @@
 ﻿# skills环境管理 Workspace Log
 
-- generated_at: 2026-05-28T10:40:56
+- generated_at: 2026-05-28T12:36:31
 - branch: `codex/cleanup-handoff`
-- HEAD: `41481fa`
+- HEAD: `ea06633`
 - head_scope: pre-commit 时表示日志生成时的 base HEAD；manual / post-merge / post-checkout 时表示当前 HEAD
 - purpose: 本地私有 Codex 环境工作仓库。
 - trigger: `pre-commit`
@@ -49,6 +49,8 @@
 
 ## Independent Repo Commit History
 
+- 2026-05-28 $(ea06633 2026-05-28 Add external adoption readiness checks[0]) Add external adoption readiness checks
+- 2026-05-28 $(5995f3f 2026-05-28 Record VELA full environment sync handoff[0]) Record VELA full environment sync handoff
 - 2026-05-28 $(41481fa 2026-05-28 Update environment overview visuals and deck[0]) Update environment overview visuals and deck
 - 2026-05-28 $(e14a51c 2026-05-28 Complete environment governance enhancements[0]) Complete environment governance enhancements
 - 2026-05-28 $(7fbdeb2 2026-05-28 Clarify ambiguous package route scopes[0]) Clarify ambiguous package route scopes
@@ -135,5 +137,4 @@
 
 ## Current Working Tree Status
 
-- A  handoffs/vela/2026-05-28-local-environment-full-sync-handoff.json
-- A  handoffs/vela/2026-05-28-vela-full-sync-prompt.txt
+- M  skills/scripts/envctl/external_adoption_readiness.py

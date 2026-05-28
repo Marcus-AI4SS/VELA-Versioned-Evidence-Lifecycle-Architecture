@@ -13,9 +13,9 @@ Cleanup completed in the surrounding local workspace:
 
 Current source-of-truth mapping:
 
-- VELA workflow package: `D:\AI environment-GITHUB\git-folders\VELA-workflow`
-- HELM public dashboard: `D:\AI environment-GITHUB\git-folders\HELM`
-- Local research environment: `D:\AI environment-GITHUB\git-folders\skills-environment-local`
-- Private local app: `D:\AI environment-GITHUB\git-folders\skills-app-own`
+- VELA workflow package: `<GIT_FOLDERS_ROOT>\VELA-workflow`
+- HELM public dashboard: `<GIT_FOLDERS_ROOT>\HELM`
+- Local research environment: `<LOCAL_ENV_ROOT>`
+- Private local app: `<GIT_FOLDERS_ROOT>\skills-app-own`
 
 Do not restore `codex-research-stack`, `skills-environment-release`, or `skills-app-github` as active workspaces unless a later migration explicitly reopens them.

@@ -14,8 +14,8 @@
 
 This plan must stay consistent with:
 
-- HELM plan: `D:\AI environment-GITHUB\git-folders\HELM\docs\desktop-contract-refactor-plan.md`
-- Local environment plan: `D:\AI environment-GITHUB\git-folders\skills-environment-local\skills\docs\20-architecture\local-environment-contract-refactor-plan.md`
+- HELM plan: `<GIT_FOLDERS_ROOT>\HELM\docs\desktop-contract-refactor-plan.md`
+- Local environment plan: `<LOCAL_ENV_ROOT>\skills\docs\20-architecture\local-environment-contract-refactor-plan.md`
 
 Shared product boundary:
 
@@ -335,7 +335,7 @@ Required public wording:
 
 ## Acceptance Tests
 
-Run from `D:\AI environment-GITHUB\git-folders\VELA-workflow`.
+Run from the VELA repository root.
 
 ```powershell
 python -m py_compile `

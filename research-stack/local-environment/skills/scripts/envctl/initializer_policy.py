@@ -22,9 +22,9 @@ VELA_INITIALIZER_SCHEMA_PATH = VELA_REPO_ROOT / "schemas" / "vela.project.initia
 PRIVATE_STRING_PATTERNS = [
     re.compile(r"\b[A-Za-z]:\\"),
     re.compile(r"<USER_HOME>", re.IGNORECASE),
-    re.compile(r"C:\\Users\\17666", re.IGNORECASE),
+    re.compile(r"<USER_HOME>", re.IGNORECASE),
     re.compile(r"<AI_ENV_ROOT>", re.IGNORECASE),
-    re.compile(r"D:\\AI environment-GITHUB", re.IGNORECASE),
+    re.compile(r"<AI_ENV_ROOT>", re.IGNORECASE),
     re.compile(r"skills-app-own", re.IGNORECASE),
     re.compile(r"manager-app", re.IGNORECASE),
     re.compile(r"<OBSIDIAN_VAULT>", re.IGNORECASE),

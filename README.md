@@ -22,7 +22,7 @@ VELA is not a desktop app, chat interface, paper generator, citation manager, hi
 
 This repository now includes `research-stack/local-environment/`, a sanitized near 1:1 distribution of the local Codex research environment after the May 2026 governance updates. It carries the research routing contracts, engineering-cybernetics control kernel, seven-layer governance model, memory rules, workflow catalogs, MCP/profile templates, validators, tests, envctl modules, public research skills, and toolchain inventory.
 
-The distribution deliberately excludes desktop app development and distilled-scholar skill chains. It also redacts private absolute paths and never includes browser login state, cookies, secrets, caches, or generated outputs. `vela local-env install` installs the public research skills into `CODEX_HOME/skills`, copies the contracts and envctl runtime into `VELA_HOME/research-stack/local-environment`, and creates an `envctl` shim. `vela init` remains the project initializer and does not copy the broader environment into each project.
+The distribution deliberately excludes desktop app development and distilled-scholar skill chains. It also redacts private absolute paths and never includes browser login state, cookies, secrets, caches, or generated outputs. `install.ps1` and `install.sh` run `vela local-env install-runtime --include core,automation,toolchain --commit`: this installs the public research skills into `CODEX_HOME/skills`, copies the contracts and envctl runtime into `VELA_HOME/research-stack/local-environment`, creates an `envctl` shim, and records a runtime receipt. Optional MCP servers, Codex plugins, browser login state, Zotero, Obsidian, agentmemory, and CodeGraph are checked or guided through doctor commands, not copied from another user's machine. `vela init` remains the project initializer and does not copy the broader environment into each project.
 
 ## Start In Five Minutes
 
@@ -31,6 +31,7 @@ git clone https://github.com/Marcus-AI4SS/VELA.git vela
 cd vela
 .\install.ps1
 .\vela.ps1 local-env doctor
+.\vela.ps1 local-env doctor-runtime --include core,automation,toolchain
 .\vela.ps1 init ..\my-research-project --skip-codex-trust
 cd ..\my-research-project
 ..\vela\vela.ps1 handoff new --template claim-check

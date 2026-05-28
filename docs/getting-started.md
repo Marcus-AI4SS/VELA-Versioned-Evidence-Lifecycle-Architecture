@@ -13,6 +13,7 @@ git clone https://github.com/Marcus-AI4SS/VELA.git vela
 cd vela
 .\install.ps1
 .\vela.ps1 local-env doctor
+.\vela.ps1 local-env doctor-runtime --include core,automation,toolchain
 ```
 
 On macOS or Linux:
@@ -22,6 +23,7 @@ git clone https://github.com/Marcus-AI4SS/VELA.git vela
 cd vela
 sh ./install.sh
 ~/.vela/bin/vela local-env doctor
+~/.vela/bin/vela local-env doctor-runtime --include core,automation,toolchain
 ```
 
 The install script configures the VELA CLI and installs the research environment into your Codex home. Restart Codex after installation so the new skills are discovered.

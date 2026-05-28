@@ -139,7 +139,7 @@
       "source": "<USER_DESKTOP>/计算知识图谱/docs/project_closure_retrospective.md",
       "signal_type": "daily_audit",
       "severity": "p1",
-      "description": "Project Retrospective :: # Project Retrospective 项目状态：终止 终止日期：2026-05-10 项目目录：`C:\\Users\\17666\\Desktop\\计算知识图谱`",
+      "description": "Project Retrospective :: # Project Retrospective 项目状态：终止 终止日期：2026-05-10 项目目录：`<USER_DESKTOP>\\计算知识图谱`",
       "proposed_target": "validator",
       "controller": "project-retrospective-evolver",
       "required_gates": [

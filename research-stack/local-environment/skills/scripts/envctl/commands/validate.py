@@ -13,6 +13,7 @@ try:
     from ..cybernetics import validate_cybernetics_contracts
     from ..empirical_quant_workflow import validate_empirical_quant_workflow
     from ..environment_layers import validate_environment_layer_contract
+    from ..external_adoption_readiness import validate_external_adoption_readiness
     from ..helm_snapshot import validate_helm_snapshot_contract
     from ..initializer_policy import validate_initializer_policy
     from ..manuscript_writing_workflow import validate_manuscript_writing_workflow
@@ -31,6 +32,7 @@ except ImportError:  # pragma: no cover
     from envctl.cybernetics import validate_cybernetics_contracts
     from envctl.empirical_quant_workflow import validate_empirical_quant_workflow
     from envctl.environment_layers import validate_environment_layer_contract
+    from envctl.external_adoption_readiness import validate_external_adoption_readiness
     from envctl.helm_snapshot import validate_helm_snapshot_contract
     from envctl.initializer_policy import validate_initializer_policy
     from envctl.manuscript_writing_workflow import validate_manuscript_writing_workflow
@@ -67,6 +69,8 @@ def run(args: argparse.Namespace) -> int:
         report = validate_local_memory_system()
     elif args.target == "environment-layers":
         report = validate_environment_layer_contract()
+    elif args.target == "adoption-readiness":
+        report = validate_external_adoption_readiness()
     elif args.target == "conflicts":
         report = validate_conflict_matrix()
     elif args.target == "cnki-zotero":
@@ -179,6 +183,7 @@ def add_parser(subparsers: argparse._SubParsersAction) -> None:
             "cybernetics",
             "memory",
             "environment-layers",
+            "adoption-readiness",
             "conflicts",
             "cnki-zotero",
             "scholar-browser-patterns",

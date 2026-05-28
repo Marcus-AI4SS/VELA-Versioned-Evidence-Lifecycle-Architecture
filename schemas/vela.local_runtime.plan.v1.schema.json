@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vela.local/schemas/vela.local_runtime.plan.v1.schema.json",
+  "title": "VELA local runtime plan",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "generated_at",
+    "ok",
+    "ready",
+    "mode",
+    "profile",
+    "include",
+    "paths",
+    "components",
+    "errors",
+    "warnings"
+  ],
+  "properties": {
+    "schema_version": {
+      "enum": [
+        "vela.local_runtime.plan.v1",
+        "vela.local_runtime.doctor.v1",
+        "vela.local_runtime.install.receipt.v1"
+      ]
+    },
+    "generated_at": {"type": "string"},
+    "ok": {"type": "boolean"},
+    "ready": {"type": "boolean"},
+    "mode": {"type": "string"},
+    "profile": {"type": "string"},
+    "include": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "paths": {
+      "type": "object",
+      "required": ["source_snapshot", "codex_home", "vela_home"],
+      "properties": {
+        "source_snapshot": {"type": "string"},
+        "codex_home": {"type": "string"},
+        "vela_home": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "category", "ok", "status"],
+        "properties": {
+          "id": {"type": "string"},
+          "category": {"type": "string"},
+          "ok": {"type": "boolean"},
+          "status": {"type": "string"}
+        },
+        "additionalProperties": true
+      }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "status"],
+        "properties": {
+          "id": {"type": "string"},
+          "status": {"type": "string"}
+        },
+        "additionalProperties": true
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "warnings": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "next_action": {"type": "string"}
+  },
+  "additionalProperties": true
+}

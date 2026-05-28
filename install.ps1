@@ -39,9 +39,9 @@ $Receipt | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $StateD
 & $Python $Script doctor
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 if (-not $SkipLocalEnvironment) {
-  $LocalEnvArgs = @($Script, "local-env", "install", "--python", $Python)
+  $LocalEnvArgs = @($Script, "local-env", "install-runtime", "--include", "core,automation,toolchain", "--python", $Python, "--commit")
   if ($ForceLocalEnvironment) {
-    $LocalEnvArgs += "--force"
+    $LocalEnvArgs += "--force-core"
   }
   & $Python @LocalEnvArgs
   if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
@@ -50,5 +50,5 @@ Write-Host ""
 Write-Host "VELA shim created: $Shim"
 Write-Host "Add this directory to PATH if you want to run 'vela' directly: $BinDir"
 if (-not $SkipLocalEnvironment) {
-  Write-Host "VELA local research environment installed. Restart Codex so new skills are discovered."
+  Write-Host "VELA local research environment and runtime shims installed. Restart Codex so new skills are discovered."
 }

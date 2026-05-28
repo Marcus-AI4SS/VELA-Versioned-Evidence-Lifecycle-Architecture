@@ -23,7 +23,7 @@ function parseArgs(argv) {
 
 function readBrowserWsUrl() {
   const devtoolsPortFile = path.join(
-    process.env.LOCALAPPDATA || "C:\\Users\\17666\\AppData\\Local",
+    process.env.LOCALAPPDATA || "<USER_HOME>\\AppData\\Local",
     "Google",
     "Chrome",
     "User Data",

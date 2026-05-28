@@ -24,7 +24,7 @@ PLUGIN_CACHE_BUNDLE_ROOT = PLUGIN_CACHE_SKILLS_DIR.parent
 PLUGIN_BUNDLE_RUNTIME_DIRS = (".codex-plugin", "assets", "scripts")
 
 STALE_LOCAL_ROOT_PATTERNS = [
-    re.compile(r"C:\\Users\\17666\\Desktop\\AI environment-configuration", re.IGNORECASE),
+    re.compile(r"<USER_DESKTOP>\\AI environment-configuration", re.IGNORECASE),
     re.compile(r"<USER_DESKTOP>/AI environment-configuration", re.IGNORECASE),
 ]
 
