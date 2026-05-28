@@ -42,6 +42,13 @@
       "notes": "Environment operations can use MCP evidence, agentmemory health, and codegraph context when relevant, but config mutation must remain governed by envctl and validators."
     },
     {
+      "route_id": "project-folder-hygiene",
+      "required_mcp": [],
+      "optional_mcp": [],
+      "activation_needed_mcp": [],
+      "notes": "Project folder hygiene is filesystem and Git-state work. It should inventory and classify local project files without requiring MCP activation; browser, memory, and code-structure tools are only separate helper evidence if another confirmed route needs them."
+    },
+    {
       "route_id": "project-retrospective",
       "required_mcp": [],
       "optional_mcp": [

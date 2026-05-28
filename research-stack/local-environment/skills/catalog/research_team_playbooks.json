@@ -265,6 +265,53 @@
       ]
     },
     {
+      "route_id": "project-folder-hygiene",
+      "squad_name": "Project Folder Hygiene Squad",
+      "mission": "Inventory a project folder, classify clutter and protected materials, and return a safe cleanup plan before any destructive action.",
+      "default_agents": [
+        "project-manager",
+        "reviewer"
+      ],
+      "optional_agents": [
+        {
+          "agent_id": "analysis-producer",
+          "include_when": {
+            "any_of": [
+              {
+                "target_item_count_gte": 100
+              },
+              {
+                "work_units_contains_any": [
+                  "analysis",
+                  "reproducibility",
+                  "testing"
+                ]
+              },
+              {
+                "deliverable_types_contains_any": [
+                  "reproducibility_bundle"
+                ]
+              }
+            ]
+          },
+          "reason": "Add analysis only when the cleanup involves large analytical outputs, reproducibility artifacts, or test/build residue that needs technical classification."
+        }
+      ],
+      "primary_outputs": [
+        "project_map"
+      ],
+      "review_chain": [
+        {
+          "producer": "project-manager",
+          "reviewer": "reviewer"
+        },
+        {
+          "producer": "analysis-producer",
+          "reviewer": "reviewer"
+        }
+      ]
+    },
+    {
       "route_id": "social-platform-case",
       "squad_name": "Platform Evidence Squad",
       "mission": "Capture browser-visible platform evidence, structure it, and block unverifiable claims.",

@@ -80,6 +80,8 @@ def _triggered_conflict_rules(query: str, conflicts: dict[str, Any]) -> list[dic
         "revision-package-scope-disambiguation": ["revision package", "修改稿", "rebuttal", "response letter"],
         "replication-package-scope-disambiguation": ["复现包", "replication package", "reproducibility package"],
         "route-confirmation-before-new-chain": ["开始", "进入", "切换", "新链条", "下载", "批量", "配置"],
+        "project-folder-hygiene-vs-environment-ops": ["清理项目", "整理项目", "项目文件夹", "临时文件", "死文件", "归档项目"],
+        "subagent-first-for-divisible-work": ["subagent", "子智能体", "并行 agent", "并行智能体", "多智能体"],
     }
     for item in conflicts.get("rules", []):
         rule_id = str(item.get("rule", ""))

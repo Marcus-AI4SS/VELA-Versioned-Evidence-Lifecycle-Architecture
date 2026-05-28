@@ -286,6 +286,25 @@
       "verification_gates": []
     },
     {
+      "route_id": "project-folder-hygiene",
+      "main_layer": "lifecycle",
+      "required_layers": [
+        "execution",
+        "tool",
+        "context",
+        "lifecycle",
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "lifecycle_stages": [
+        "environment_maintenance",
+        "package_freeze",
+        "project_retrospective"
+      ],
+      "verification_gates": []
+    },
+    {
       "route_id": "project-retrospective",
       "main_layer": "lifecycle",
       "required_layers": [
@@ -951,6 +970,17 @@
       ],
       "role": "controller",
       "task_type": "project_retrospective"
+    },
+    {
+      "skill_id": "project-folder-hygiene",
+      "primary_layer": "lifecycle",
+      "secondary_layers": [
+        "observability",
+        "verification",
+        "governance"
+      ],
+      "role": "helper",
+      "task_type": "environment_ops"
     },
     {
       "skill_id": "quant-analysis",

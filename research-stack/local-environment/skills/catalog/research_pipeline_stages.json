@@ -414,6 +414,11 @@
     "environment-ops": [
       "environment_maintenance"
     ],
+    "project-folder-hygiene": [
+      "environment_maintenance",
+      "package_freeze",
+      "project_retrospective"
+    ],
     "project-retrospective": [
       "project_retrospective"
     ],

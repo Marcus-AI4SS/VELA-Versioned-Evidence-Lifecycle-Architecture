@@ -56,6 +56,21 @@
       ],
       "subagent_allowed": false
     },
+    "project-folder-hygiene": {
+      "category": "内部 helper",
+      "role": "helper",
+      "status": "active",
+      "entry": false,
+      "task_type": "environment_ops",
+      "data_access_level": "restricted_sensitive",
+      "quality_gate_required": [],
+      "stage_scope": [
+        "environment_maintenance",
+        "project_retrospective",
+        "package_freeze"
+      ],
+      "subagent_allowed": true
+    },
     "research-team-orchestrator": {
       "category": "总控",
       "role": "controller",

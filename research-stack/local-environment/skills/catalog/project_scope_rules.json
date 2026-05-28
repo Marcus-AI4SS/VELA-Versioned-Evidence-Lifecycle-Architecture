@@ -133,6 +133,7 @@
     "conditional_multi_agent": [
       "literature-review",
       "reference-fulltext-acquisition",
+      "project-folder-hygiene",
       "social-platform-case",
       "writing-export",
       "empirical-quant",
@@ -193,6 +194,29 @@
     },
     "reference-fulltext-acquisition": {
       "copy_of": "literature-review"
+    },
+    "project-folder-hygiene": {
+      "any": [
+        {
+          "field": "work_units",
+          "operator": "contains",
+          "value": "cleaning"
+        },
+        {
+          "field": "target_item_count",
+          "operator": ">=",
+          "value": 30
+        },
+        {
+          "field": "deliverable_types",
+          "operator": "contains_any",
+          "value": [
+            "project_map",
+            "reproducibility_bundle",
+            "submission_package"
+          ]
+        }
+      ]
     },
     "social-platform-case": {
       "any": [

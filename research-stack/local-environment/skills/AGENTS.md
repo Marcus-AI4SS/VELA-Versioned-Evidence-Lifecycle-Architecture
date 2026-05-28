@@ -16,6 +16,8 @@
 - 项目型多 agent 编排必须在项目目录里使用真实落盘的 `AGENTS.md` 和 `.codex/agents/*.json`。缺失时先用 `envctl ensure-project-contract` 或 `plan-team` 的自动初始化补齐；不得用对话上下文、临时 JSON 或 `audit/` 目录伪造项目 contract。
 - 经验沉淀必须遵守 `skills/catalog/memory_admission_policy.json`：底层逻辑进 control kernel，可复用流程进 skill，长解释和复盘进 Obsidian，临时噪声丢弃。
 - 外部 GitHub、plugin、MCP 或 skill 候选不得整包接管本地环境，必须先经过 `skill-vetter`、`external_systems_research.json` 和 `external_adoption_reviews.json`。
+- 每个线程必须维护自己的目标项目文件夹整洁：不留下不必要的临时文件、死代码、死文件、重复草稿、空壳目录或失效中间产物。用户要求清理、整理、交接、归档、收尾或大量生成文件后，优先调用 `project-folder-hygiene`；删除前必须分类，危险或模糊项先询问，所有清理必须限制在确认后的项目根目录内。
+- 对可拆分的研究、写作、审稿、文献、代码、环境审计和多文件执行任务，默认偏向使用 subagent 式分工。主 agent 负责路线、边界、整合、复核和最终交付；子 agent 负责上下文重、可并行、可验证的脏活。每个子 agent 必须有明确任务、输入、禁区、产物、迭代要求和回报格式。
 
 ## 继承规则
 

@@ -19,6 +19,8 @@ description: Use when the user is doing research, literature review, computation
 7. 涉及数据分析的文字输出，必须遵守 `Point -> Evidence -> Explanation -> Link`。
 8. 每次准备开启新的工作链条、切换 route、启用新的高成本工具链或进入多 agent 项目编排前，必须先输出路线确认卡并询问用户是否确认进入该链条。用户明确说“继续当前链条”“按上一步继续”或已经在本线程确认过同一路线时，可以继续；否则不得把候选 route 当成已确认事实。
 9. 当用户指令语义模糊、可能命中多个 route、可能导致不同工具/MCP/skill 组合，或会改变写入范围、下载范围、引用核验强度、项目状态、运行态配置时，必须优先提出 1-3 个引导式问题。问题应帮助用户在候选 route、目标产物、材料范围、工具链和风险边界之间做选择；不要为了推进速度静默猜测。
+10. 每个线程都要保持自己的目标项目文件夹干净、可交接、可继续。大量生成文件、项目收尾、交接、归档或用户要求整理时，调用 `project-folder-hygiene`，先分类后清理，不静默删除 tracked 文件、用户材料、证据、PDF、数据、日志或项目合同。
+11. 对可拆分、上下文重、需要比较或需要多轮审阅的任务，默认偏向 subagent 式分工。主 agent 保持路线、边界、整合、复核和最终交付；子 agent 承担阅读、检索、盘点、测试、审查、方案比较等脏活，并带回证据化报告。
 
 ## Required References
 
@@ -144,6 +146,7 @@ description: Use when the user is doing research, literature review, computation
 - 社媒统一抓取入口 -> `social-platform-mcp` 只作为通用 capture facade，不取代 `social-platform-reader` 这个用户侧编排 skill
 - 社媒读取遇到复杂交互、会话持久化、批量化或网络跟踪 -> 保留 `chrome-devtools` 为主链，同时可加用 `agent-browser` 作为浏览器自动化增强层
 - 长时计算实验监控、断点续跑、worker 调整和 dashboard 修复 -> `long-running-experiment-ops`，不得由 `abm-simulation-lab` 或 `reproducibility-package` 直接替代
+- 项目文件夹清理、整理、归档、交接、收尾前目录收束、死文件检查、临时文件清理或大量生成产物后的组织化 -> `project-folder-hygiene`。先确认项目根目录和写权限，再分类为保留、可删、需确认、需归档；不得把项目清理混同于本地环境治理，也不得静默删除 tracked 文件、用户材料、证据、PDF、数据、notebook、Zotero/Obsidian 内容、日志或项目合同。
 - 社会科学论文送审包、A/B 稿融合、公开/内部材料同步和复现交付冻结 -> `social-science-submission-packager`，再调用图表、复现、审稿和导出子技能
 - 论文图片、科研图、机制图、概念图、流程图、研究设计图、结果图、多面板图或顶刊风格图 -> `research-figure-design` route 和 `research-figure-studio`。不得因为目标是科研图而拒绝 image2；但调用 image2 前必须锁定图型、面板、文字、箭头、配色和禁止编造项。精确数据图先用代码或可编辑工具控制数据，并按 `scientific_figure_workflow.json` 执行数据体检、过程数据留痕、字体字号、统计标注、图注和导出规范。
 - PPT、PPTX、幻灯片、答辩、开题、中期、路演、汇报、分享、网页 PPT、论文转 PPT、Swiss Style 或杂志风 PPT -> `research-presentation` route 和 `research-presentation-studio`。网页高质量视觉直接委托原版安装的 `guizang-ppt-skill`；需要 `.pptx` 时使用官方 `Presentations` 插件。演示文稿不得替代正式论文图表、引用核验或数据核验。
@@ -206,6 +209,16 @@ description: Use when the user is doing research, literature review, computation
 3. 比较 `profiles/*.toml`、`config.toml`、`.codex/skills`、插件源目录和 catalog。
 4. 说明配置漂移，再执行最小必要变更。
 5. 修改运行态 `.codex` 后，如果需要重启 Codex，必须明确说明。
+
+## Subagent Delegation
+
+当任务可以拆分时，优先把上下文重的工作交给子 agent 或并行 agent：
+
+1. 给每个 agent 写清楚任务、范围、项目根目录、可读材料、禁止写入范围、可用 skill/MCP/plugin、必须迭代到什么程度、验收方式和回报格式。
+2. 子 agent 的输出必须是可整合报告：发现、证据、操作记录、失败点、风险、建议下一步；不要只给一句结论。
+3. 主 agent 不把所有原始检索、长文阅读、文件盘点和重复测试塞进主上下文；主上下文只保留路线、关键证据、决策和下一步。
+4. 主 agent 必须审查子 agent 报告之间的冲突，必要时继续分派二轮任务。
+5. 涉及删除、覆盖、运行态配置、凭据、隐私材料和正式引用的关键动作，必须由主 agent 复核并按全局约束执行。
 
 ## Writing Tasks
 

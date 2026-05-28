@@ -113,6 +113,18 @@
       "owner": "research-autopilot"
     },
     {
+      "id": "project-folder-hygiene",
+      "name": "Project folder hygiene",
+      "description": "The organization state of each thread's target project folder, including temporary artifacts, dead files, stale outputs, duplicate drafts, evidence preservation, and handoff readability.",
+      "owner": "project-folder-hygiene"
+    },
+    {
+      "id": "subagent-context-load",
+      "name": "Subagent context load",
+      "description": "The share of context-heavy reading, searching, inventory, testing, and review work delegated to isolated subagent contexts while the main context keeps only routing, decisions, and integration state.",
+      "owner": "research-team-orchestrator"
+    },
+    {
       "id": "external-adoption-pressure",
       "name": "External adoption pressure",
       "description": "The inflow of GitHub patterns, plugins, MCP servers, skills, and harness ideas.",
@@ -143,6 +155,12 @@
       "name": "Daily audit feedback",
       "description": "Proposal-only reports from the cybernetics daily skill audit automation.",
       "owner": "research-stack-manager"
+    },
+    {
+      "id": "folder-hygiene-feedback",
+      "name": "Folder hygiene feedback",
+      "description": "Git status, file inventory, removed or retained artifact lists, and needs-user-decision cleanup reports from project-folder-hygiene.",
+      "owner": "project-folder-hygiene"
     }
   ],
   "controllers": [
@@ -221,6 +239,12 @@
       "name": "Context loss",
       "description": "Thread compaction, missing handoff, project memory drift, or repeated reconstruction of the same workflow.",
       "owner": "project-retrospective-evolver"
+    },
+    {
+      "id": "workspace-clutter",
+      "name": "Workspace clutter",
+      "description": "Temporary files, stale intermediate outputs, duplicate drafts, dead code, dead folders, and unclassified artifacts that make a project harder to continue or review.",
+      "owner": "project-folder-hygiene"
     }
   ],
   "stability_metrics": [
@@ -249,6 +273,18 @@
       "name": "External adoption discipline",
       "description": "Every upstream component has keep, adapt, watch, or reject status before any implementation.",
       "owner": "skill-vetter"
+    },
+    {
+      "id": "project-folder-cleanliness",
+      "name": "Project folder cleanliness",
+      "description": "Project folders end substantial work with classified files, no avoidable scratch artifacts, no accidental deletion of evidence, and a readable handoff state.",
+      "owner": "project-folder-hygiene"
+    },
+    {
+      "id": "subagent-delegation-discipline",
+      "name": "Subagent delegation discipline",
+      "description": "Substantial divisible tasks use explicit agent task cards and return evidence-based reports before main-agent integration.",
+      "owner": "research-team-orchestrator"
     }
   ],
   "adaptation_rules": [
@@ -301,6 +337,40 @@
         "all validators pass"
       ],
       "rollback": "Revert the dedicated branch before promotion; never mutate runtime config silently."
+    },
+    {
+      "id": "hygiene-before-handoff",
+      "trigger": "A thread finishes substantial file-generating work, starts project handoff, archives a project, or detects stale temporary artifacts.",
+      "controller": "project-folder-hygiene",
+      "allowed_targets": [
+        "reports",
+        "temporary_files",
+        "archive",
+        "outputs"
+      ],
+      "required_gates": [
+        "confirmed project root",
+        "file classification before deletion",
+        "post-cleanup git status"
+      ],
+      "rollback": "Do not delete ambiguous or tracked files; move only with user confirmation or restore from Git/history if a safe cleanup candidate was misclassified."
+    },
+    {
+      "id": "delegate-context-heavy-work",
+      "trigger": "A task has separable reading, search, file inventory, testing, review, comparison, or implementation units that would overload the main context.",
+      "controller": "research-team-orchestrator",
+      "allowed_targets": [
+        "subagent task cards",
+        "context packets",
+        "agent reports",
+        "review gates"
+      ],
+      "required_gates": [
+        "explicit task card per agent",
+        "bounded write scope",
+        "main-agent integration review"
+      ],
+      "rollback": "Collapse back to single-agent execution when the task is tiny, unsafe to delegate, or the available subagent channel cannot enforce the needed scope."
     }
   ],
   "memory_policy_ref": "skills/catalog/memory_admission_policy.json",

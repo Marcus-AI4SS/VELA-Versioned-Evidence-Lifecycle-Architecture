@@ -76,7 +76,9 @@ description: Use when a research task has entered project-type multi-agent plann
 3. reviewer 不能碰任何有持久副作用的能力。
 4. dispatch 只能收缩权限，不能扩权。
 5. 所有路径必须落在 canonical 目录中。
-6. 不得绕过这些硬链路：
+6. 每个 producer / reviewer 都必须拿到详细任务卡：任务目标、输入材料、禁止范围、允许工具、输出文件、迭代要求、验证方式、回报格式和失败上报规则。
+7. 主 agent 只保留干净的项目主线和协调状态；大体量阅读、检索、盘点、对比、测试和初审应尽量交给独立子 agent 上下文。
+8. 不得绕过这些硬链路：
    - `citation-verifier -> zotero-sync`
    - `writing-reference-capture`
    - `social-platform-reader / social-platform-mcp`
@@ -182,6 +184,8 @@ description: Use when a research task has entered project-type multi-agent plann
 - `每个 selected agent 的 control_bindings`
 - `dispatch artifact 会写到哪里`
 - `project state board 会写到哪里`
+- `每个 agent 的详细任务卡`
+- `每个 agent 必须带回的报告字段`
 
 然后输出结构化结果：
 

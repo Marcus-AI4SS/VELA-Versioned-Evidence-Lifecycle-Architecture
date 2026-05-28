@@ -52,6 +52,15 @@
       ],
       "required_gates": []
     },
+    "project-folder-hygiene": {
+      "default_level": "restricted_sensitive",
+      "allowed_levels": [
+        "public_open",
+        "licensed_library",
+        "restricted_sensitive"
+      ],
+      "required_gates": []
+    },
     "project-retrospective": {
       "default_level": "public_open",
       "allowed_levels": [

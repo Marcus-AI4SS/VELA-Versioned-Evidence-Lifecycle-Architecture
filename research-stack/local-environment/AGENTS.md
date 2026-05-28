@@ -42,6 +42,21 @@ This repository is the private `skills环境管理` workspace.
 - If a project is missing them, use `python -m skills.scripts.envctl ensure-project-contract --path "<project_root>"` or the equivalent `plan-team` auto-initialization before dispatch.
 - The local environment's `skills/AGENTS.md` and initializer catalog are templates and validators; they do not replace project-local contracts at runtime.
 
+## Project Folder Hygiene Rule
+
+- Every thread must keep its own target project folder organized and free of avoidable temporary files, dead files, dead code, duplicate scratch exports, empty throwaway folders, and stale intermediate artifacts.
+- Use `project-folder-hygiene` when the user asks to clean, organize, hand off, archive, close, or audit a project folder, and before ending substantial file-generating work when the target folder may have accumulated scratch artifacts.
+- Classify before deleting: keep source, evidence, data, schemas, scripts, tests, configs, final deliverables, logs, and user-provided materials; remove only clearly safe temporary/cache artifacts; ask before deleting tracked files, ambiguous data, PDFs, notebooks, evidence ledgers, Zotero/Obsidian files, or user-authored material.
+- Destructive cleanup must stay inside the confirmed project root. Verify resolved paths before recursive removal, and report removed, moved, retained, and needs-user-decision items.
+
+## Subagent Delegation Rule
+
+- For substantial research, coding, review, environment audit, literature, figure, writing, or multi-file execution tasks with separable work units, prefer subagent-style decomposition and parallel agents when available.
+- Each delegated agent must receive a concrete mission, project root, permitted files/sources, forbidden writes, required tools/skills, iteration expectation, validation method, and expected report format.
+- Subagents should do context-heavy discovery, comparison, testing, reading, and draft review in their own context windows, then return concise but deep reports with evidence, decisions, failures, risks, and recommended next actions.
+- The main agent remains accountable for route choice, integration, critique, follow-up assignment, final edits, validation, and user-facing summary. Do not delegate unsafe writes, secret handling, or irreversible operations without explicit guardrails.
+- Tiny one-step tasks may stay single-agent; otherwise the default bias is to offload context-heavy work and keep the main context focused on the clean project line.
+
 ## External Adoption Readiness Rule
 
 - When an external repository is described as installed, enabled, indexed, or delegated to, verify it with `python -m skills.scripts.envctl validate adoption-readiness --summary` before relying on it.

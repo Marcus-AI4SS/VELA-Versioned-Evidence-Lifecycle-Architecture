@@ -569,6 +569,8 @@ def count_files(root: Path) -> int:
 def write_manifest(source: Path, copied: list[str]) -> None:
     source_head = run_text(["git", "rev-parse", "--short", "HEAD"], source)
     source_branch = run_text(["git", "branch", "--show-current"], source)
+    source_status = run_text(["git", "status", "--short"], source) or ""
+    source_status_lines = [line for line in source_status.splitlines() if line.strip()]
     since_count = run_text(
         [
             "git",
@@ -588,6 +590,8 @@ def write_manifest(source: Path, copied: list[str]) -> None:
             "head": source_head,
             "since": "2026-05-01",
             "commit_count_since": len(since_count.splitlines()) if since_count else 0,
+            "working_tree_dirty": bool(source_status_lines),
+            "working_tree_status": source_status_lines,
         },
         "policy": {
             "intent": "Publish a sanitized near 1:1 VELA distribution of the local research environment except explicitly excluded areas.",
@@ -720,6 +724,31 @@ def write_runtime_manifest(destination_root: Path) -> None:
                 "artifacts": ["python/requirements/research-core.txt", "python/requirements/research-ai-extra.txt", "python/manifests/system-python-summary.json"],
                 "install_policy": "requirements_only_no_vendored_runtime",
                 "description": "VELA publishes requirements and manifests, not local Python/JDK runtime binaries.",
+            },
+            {
+                "id": "bootstrap.public-tools",
+                "category": "toolchain",
+                "kind": "explicit_public_tool_bootstrap",
+                "default_action": "install_or_prompt",
+                "installer": "install.ps1 -BootstrapTools",
+                "doctor": "vela local-env bootstrap-tools --include all",
+                "auto_installable_windows": [
+                    "Git",
+                    "Python 3.13+",
+                    "PowerShell 7",
+                    "ripgrep",
+                    "Node.js LTS",
+                    "GitHub CLI",
+                    "agentmemory when npm is available",
+                ],
+                "doctor_only": [
+                    "CodeGraph",
+                    "MCP server vendor environment",
+                    "Codex plugin install status",
+                    "browser and CNKI login state",
+                    "Zotero and Obsidian private libraries",
+                ],
+                "description": "Explicit bootstrap layer for public system tools. Private runtime state is never copied into VELA.",
             },
         ],
     }

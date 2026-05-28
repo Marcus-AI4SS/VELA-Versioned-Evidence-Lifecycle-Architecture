@@ -18,6 +18,8 @@ class LocalEnvironmentSnapshotTests(unittest.TestCase):
         self.assertEqual(manifest["source"]["repository"], "skills-environment-local")
         self.assertEqual(manifest["source"]["since"], "2026-05-01")
         self.assertGreaterEqual(manifest["source"]["commit_count_since"], 1)
+        self.assertIn("working_tree_dirty", manifest["source"])
+        self.assertIn("working_tree_status", manifest["source"])
         self.assertIn("memory governance", manifest["policy"]["include"])
         self.assertIn("desktop app development chain", manifest["policy"]["exclude"])
 
@@ -31,7 +33,16 @@ class LocalEnvironmentSnapshotTests(unittest.TestCase):
         self.assertNotIn("desktop-app-release-packager", names)
         self.assertNotIn("scholar-panel", names)
         self.assertIn("research-autopilot", names)
+        self.assertIn("project-folder-hygiene", names)
         self.assertIn("reference-fulltext-acquisition", names)
+
+    def test_runtime_manifest_keeps_public_bootstrap_contract(self) -> None:
+        manifest = json.loads((SNAPSHOT / "runtime" / "manifest.json").read_text(encoding="utf-8"))
+        components = {item["id"]: item for item in manifest["components"]}
+        self.assertIn("bootstrap.public-tools", components)
+        bootstrap = components["bootstrap.public-tools"]
+        self.assertIn("Git", bootstrap["auto_installable_windows"])
+        self.assertIn("CodeGraph", bootstrap["doctor_only"])
 
     def test_excluded_app_agents_are_not_in_project_initializer_manifest(self) -> None:
         manifest = json.loads((SNAPSHOT / "skills" / "catalog" / "project_initializer_manifest.json").read_text(encoding="utf-8"))

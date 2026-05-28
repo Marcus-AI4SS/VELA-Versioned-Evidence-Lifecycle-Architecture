@@ -16,7 +16,8 @@
       ],
       "allowed_skills_mcp": [
         "research-stack-manager",
-        "project-retrospective-evolver"
+        "project-retrospective-evolver",
+        "project-folder-hygiene"
       ],
       "write_scope": [
         "outputs/agent-runs/<run_id>/<agent_id>/"

@@ -167,6 +167,57 @@
       "subagent_allowed": false
     },
     {
+      "id": "project-folder-hygiene",
+      "profile": "baseline",
+      "project_scope_class": "conditional_multi_agent",
+      "keywords": [
+        "清理项目",
+        "整理项目",
+        "项目文件夹",
+        "文件夹干净",
+        "临时文件",
+        "死文件",
+        "死代码",
+        "无用文件",
+        "空目录",
+        "归档项目",
+        "交接项目",
+        "项目收尾",
+        "folder hygiene",
+        "cleanup project",
+        "organize project"
+      ],
+      "aliases": [
+        "project folder hygiene",
+        "project cleanup",
+        "folder cleanup",
+        "archive project",
+        "handoff cleanup"
+      ],
+      "skills": [
+        "project-folder-hygiene"
+      ],
+      "helper_skills": [
+        "research-stack-manager"
+      ],
+      "plugins": [
+        "Superpowers"
+      ],
+      "mcp": [],
+      "rationale": "任务核心是把目标项目文件夹整理成可交接、可继续、无明显临时垃圾和死文件的状态；它处理项目内文件组织，不等同于本地环境治理。",
+      "next_step": "先确认项目根目录、整理目的和写权限；再盘点 Git 状态和文件清单，把文件分为保留、可安全删除、需用户确认、需移动归档；执行前只处理明确安全项，完成后复查 Git 状态并输出整理报告。",
+      "not_selected_reason": "当前任务不是项目文件夹清理、整理、交接或收尾。",
+      "task_type": "environment_ops",
+      "data_access_level": "restricted_sensitive",
+      "quality_gate_required": [],
+      "stage_scope": [
+        "environment_maintenance",
+        "project_retrospective",
+        "package_freeze"
+      ],
+      "subagent_allowed": true
+    },
+    {
       "id": "project-retrospective",
       "profile": "baseline",
       "project_scope_class": "always_multi_agent",

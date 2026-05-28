@@ -58,6 +58,16 @@
       "reason": "Python、Git、PowerShell、Codex config、agent-browser 和 MCP profile 维护属于环境运维子路线；它仍由 research-stack-manager 治理，但必须先检查漂移和运行态，再做最小修复。"
     },
     {
+      "rule": "project-folder-hygiene-vs-environment-ops",
+      "winner": "project-folder-hygiene",
+      "losers": [
+        "environment-ops for ordinary project clutter",
+        "stack-governance for per-project temporary files",
+        "ad hoc deletion without classification"
+      ],
+      "reason": "当目标是整理某个项目文件夹、清理临时文件、死文件、重复草稿、空目录或交接前收束时，必须先走 project-folder-hygiene 分类和报告；只有修 Codex/Python/Git/MCP 本身才进入 environment-ops。"
+    },
+    {
       "rule": "configuration-drift",
       "winner": "profile/catalog/config drift check before mutation",
       "losers": [
@@ -279,6 +289,16 @@
         "direct dispatch bootstrap without route selection"
       ],
       "reason": "research-team-orchestrator 只负责项目型多 agent 编排与 dispatch 落盘，不能跳过总路由、clarification card 和 profile 选择。"
+    },
+    {
+      "rule": "subagent-first-for-divisible-work",
+      "winner": "explicit subagent task cards with main-agent integration",
+      "losers": [
+        "main context doing all large discovery work",
+        "parallel agents without scoped tasks",
+        "subagent reports without evidence or next actions"
+      ],
+      "reason": "可拆分且上下文重的研究、执行、审稿、环境审计、文件盘点和测试任务，应优先用子 agent 分担；每个 agent 必须有任务卡、边界、迭代要求和证据化报告，主 agent 负责整合和复核。"
     },
     {
       "rule": "pipeline-gates-before-stage-advance",
