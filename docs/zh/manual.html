@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>VELA 介绍资料与使用说明书</title>
-    <meta name="description" content="VELA 公开版介绍资料与使用说明书。">
+    <title>VELA 公开版说明书</title>
+    <meta name="description" content="VELA 公开版研究工作流环境说明书。">
     <link rel="stylesheet" href="../assets/site.css">
   </head>
   <body>
@@ -19,9 +19,10 @@
 
       <section class="hero compact">
         <div>
-          <div class="eyebrow">介绍资料与使用说明书 · 更新于 2026-05-28</div>
-          <h1><span class="sans">VELA</span> 说明书</h1>
-          <p>VELA 是面向 Codex 研究项目的便携式工作流包。它把目标、状态、反馈、验证、校正、记忆和演化沉淀为可审查的项目文件。</p>
+          <div class="eyebrow">公开版说明书 · 更新于 2026-05-29</div>
+          <h1><span class="sans">VELA</span> 研究工作流环境</h1>
+          <p>VELA 是面向 Codex 的便携式研究工作流环境。它把研究项目拆成清楚的目录、规则、证据、交接、检查、日志和可演化经验，让 Codex 在可审查的边界内协作。</p>
+          <p>它不是桌面 app、论文生成器、文献管理器或后台自动化平台。它的核心价值是把研究从临时聊天推进，变成文件里可追溯、可验证、可回滚、可交接的工作流。</p>
           <div class="hero-actions">
             <a class="button button-primary" href="../installation.html">安装</a>
             <a class="button" href="../getting-started.html">快速开始</a>
@@ -32,29 +33,48 @@
 
       <section class="section wide-visual">
         <img src="../assets/overview/01-engineering-cybernetics-seven-layers.png" alt="VELA 工程控制论与七层结构">
-      </section>
-
-      <section class="section grid-3">
-        <article class="card"><h3>VELA 是什么</h3><p>给 Codex 研究项目使用的文件化工作流包：目录、规则、交接、证据、检查和运行日志。</p></article>
-        <article class="card"><h3>VELA 不是什么</h3><p>不是桌面 app、论文生成器、文献管理器、后台自动化服务，也不替代用户自己的工具和数据。</p></article>
-        <article class="card"><h3>底层逻辑</h3><p>工程控制论：目标、状态、反馈、验证和校正都必须体现在文件、检查结果和版本历史中。</p></article>
+        <p class="caption">VELA 用工程控制论组织研究：目标、状态、反馈、验证、校正都必须落到文件、检查和版本历史里。</p>
       </section>
 
       <section class="section">
         <div class="section-head">
-          <h2>七层结构</h2>
-          <p>VELA 把研究工作拆开，避免工具、证据、日志、检查和长期规则混成不可审查的黑箱。</p>
+          <h2>VELA 解决什么问题</h2>
+          <p>VELA 不是替用户做研究，而是给研究过程建立可检查的操作层。</p>
         </div>
         <table>
-          <tr><th>层级</th><th>作用</th></tr>
-          <tr><td>01 任务与边界</td><td>明确研究目标、可动范围、约束和验收标准。</td></tr>
-          <tr><td>02 工具与接口</td><td>接入 Git、Python、MCP、agentmemory、CodeGraph、Zotero、Obsidian 等用户自有工具。</td></tr>
-          <tr><td>03 上下文与证据</td><td>区分材料、证据、主张、方法和交付物。</td></tr>
-          <tr><td>04 研究阶段</td><td>组织研究设计、文献、阅读、写作、图表和复盘。</td></tr>
-          <tr><td>05 运行日志</td><td>记录操作、失败、检查和修复。</td></tr>
-          <tr><td>06 可靠性检查</td><td>运行 schema、validator、测试、隐私扫描和 handoff lint。</td></tr>
-          <tr><td>07 环境治理</td><td>决定哪些规则可以通过版本提交长期保留。</td></tr>
+          <tr><th>常见问题</th><th>VELA 怎么处理</th></tr>
+          <tr><td>材料散在聊天、PDF、网页、笔记、代码和草稿里</td><td>建立固定项目结构，把材料、证据、主张、方法、交付物分开。</td></tr>
+          <tr><td>Codex 每次都要重新解释上下文</td><td>用 <code>AGENTS.md</code>、handoff 和 <code>.vela/context.json</code> 保存可读上下文。</td></tr>
+          <tr><td>AI 总结被误当成证据</td><td>只有完成来源、访问时间、核验状态和支持关系的材料才能进入 <code>evidence/</code>。</td></tr>
+          <tr><td>工具越接越多，边界不清</td><td>用 route/profile 决定什么时候使用哪些 skill、插件和 MCP。</td></tr>
+          <tr><td>经验沉淀靠记忆，容易越界</td><td>记忆只作为候选线索；长期规则必须经过检查、测试和版本提交。</td></tr>
         </table>
+        <table>
+          <tr><th>VELA 做的事</th><th>具体含义</th><th>用户得到什么</th></tr>
+          <tr><td>建项目秩序</td><td>生成固定目录、Codex 指令、交接模板和机器可读状态。</td><td>换对话、换协作者，也能看懂项目做到哪一步。</td></tr>
+          <tr><td>管工具边界</td><td>把 skill、插件、MCP、本地命令放进路线表和质量门。</td><td>工具按任务开启，不因为“能调用”就随意调用。</td></tr>
+          <tr><td>沉淀经验</td><td>日志、失败原因、修复动作进入候选改进。</td><td>环境可以演化，但长期规则必须经过验证和提交。</td></tr>
+        </table>
+        <p>VELA 公开版包含研究路线、公开 skills、MCP/profile 模板、插件协作方式、schemas、validators、tests、envctl、记忆治理和项目文件夹规则。它不包含用户私有数据库、账号状态、浏览器登录态、cookies、密钥、缓存或与公开研究工作流无关的个人定制模块。</p>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>工程控制论骨架</h2>
+          <p>VELA 把每个研究项目看成一个需要持续校正的系统：先定目标，再观察状态，收集反馈，通过验证门，最后小步校正。</p>
+        </div>
+        <table>
+          <tr><th>控制论概念</th><th>在 VELA 里是什么意思</th><th>你会看到什么</th></tr>
+          <tr><td>目标</td><td>研究任务到底要完成什么</td><td>research question、阶段目标、交付物说明、handoff task</td></tr>
+          <tr><td>边界</td><td>哪些目录、材料、工具可以动，哪些不能动</td><td><code>AGENTS.md</code>、handoff constraints、privacy boundaries</td></tr>
+          <tr><td>状态</td><td>项目当前处于什么阶段，有哪些材料、证据、阻塞和交付物</td><td><code>.vela/context.json</code>、logs、counts、validator report</td></tr>
+          <tr><td>反馈</td><td>执行后产生的可检查信号</td><td>doctor 结果、schema error、lint error、测试结果、引用核验结果</td></tr>
+          <tr><td>控制器</td><td>决定走哪条路线、用哪些工具、何时停下检查</td><td>routing table、profiles、quality gates、envctl validators</td></tr>
+          <tr><td>执行器</td><td>真正做事的技能、脚本、插件、MCP 和本地工具</td><td>skills、MCP servers、Codex plugins、Python/Git/rg</td></tr>
+          <tr><td>扰动</td><td>可能让项目跑偏的因素</td><td>登录态、网络、权限、路径变动、工具缺失、未经核验的资料</td></tr>
+          <tr><td>稳定性</td><td>项目能否越做越清楚、越做越可交接</td><td>Git 提交、测试通过、日志完整、证据链可复核</td></tr>
+        </table>
+        <p>落到实际操作上，就是先写清任务，再选择路线，再打开必要工具，执行后留下状态，然后用 schema、引用、证据、路径、权限和隐私扫描检查，最后只把通过检查的经验沉淀为长期规则。</p>
       </section>
 
       <section class="section wide-visual">
@@ -63,8 +83,55 @@
 
       <section class="section">
         <div class="section-head">
-          <h2>安装</h2>
-          <p>VELA 通常形成两层：clone 下来的源包，以及安装到用户 <code>~/.vela</code> 和 <code>~/.codex</code> 的本机运行层。</p>
+          <h2>总体结构</h2>
+          <p>VELA 可以只用最小项目结构，也可以安装完整运行层。</p>
+        </div>
+        <table>
+          <tr><th>模块</th><th>通俗解释</th><th>主要内容</th></tr>
+          <tr><td>VELA 源包</td><td>从 GitHub 下载或 clone 的 VELA 仓库</td><td><code>package/</code>、<code>runtime/</code>、<code>schemas/</code>、<code>scripts/</code>、<code>docs/</code>、<code>tests/</code></td></tr>
+          <tr><td>本机运行层</td><td>安装到用户自己 Codex 环境里的运行入口</td><td><code>~/.vela</code>、<code>~/.codex/skills</code>、CLI、profiles、commands、安装回执</td></tr>
+          <tr><td>项目工作层</td><td>每个研究项目自己的文件结构</td><td><code>materials/</code>、<code>evidence/</code>、<code>claims/</code>、<code>methods/</code>、<code>deliverables/</code>、<code>handoffs/</code>、<code>logs/</code></td></tr>
+          <tr><td>工具接口层</td><td>按任务需要连接外部工具</td><td>Git、Python、ripgrep、MCP servers、Codex plugins、Zotero、Obsidian</td></tr>
+          <tr><td>记忆与演化层</td><td>保存经验，但必须经过治理</td><td>logs、agentmemory 候选召回、CodeGraph 索引、evolution backlog、validators</td></tr>
+        </table>
+        <table>
+          <tr><th>层</th><th>Windows 常见位置</th><th>macOS / Linux 常见位置</th><th>说明</th></tr>
+          <tr><td>源包</td><td>用户 clone 的 <code>vela/</code> 目录</td><td>用户 clone 的 <code>vela/</code> 目录</td><td>用 Git 更新，查看源码和文档。</td></tr>
+          <tr><td>运行层</td><td><code>%USERPROFILE%\.vela</code>、<code>%USERPROFILE%\.codex</code></td><td><code>~/.vela</code>、<code>~/.codex</code></td><td>安装 CLI、skills、profiles、commands 和 doctor 结果。</td></tr>
+          <tr><td>项目层</td><td>任意研究项目目录</td><td>任意研究项目目录</td><td><code>vela init</code> 生成项目结构和 <code>.vela/context.json</code>。</td></tr>
+        </table>
+        <p>其他用户安装后也会形成“源包 + 本机运行层 + 自己的研究项目层”。源包负责更新，运行层负责让 Codex 能调用，项目层保存用户自己的材料和交付物。</p>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>七层结构</h2>
+          <p>七层结构把“我要做什么、用什么工具、依据什么材料、处于哪个阶段、留下什么记录、怎么检查、哪些规则能长期保留”拆开。</p>
+        </div>
+        <table>
+          <tr><th>层级</th><th>一句话解释</th><th>典型内容</th><th>主要检查</th></tr>
+          <tr><td>01 任务与边界</td><td>先确定任务目标和可动范围</td><td><code>AGENTS.md</code>、handoff、constraints、expected output</td><td>任务是否过宽，是否缺少验收标准</td></tr>
+          <tr><td>02 工具与接口</td><td>决定是否需要外部工具</td><td>Git、Python、rg、MCP、插件、Zotero、Obsidian</td><td>工具是否可用，是否需要登录或权限</td></tr>
+          <tr><td>03 上下文与证据</td><td>明确当前判断依据</td><td>materials、evidence、claims、methods、source notes</td><td>材料是否完成核验，证据是否能支撑主张</td></tr>
+          <tr><td>04 研究阶段</td><td>判断项目处于哪一步</td><td>研究设计、文献、全文、分析、写作、图表、投稿、复盘</td><td>是否跳过了必要阶段</td></tr>
+          <tr><td>05 运行日志</td><td>留下执行痕迹</td><td>logs、handoff render、doctor report、validation report</td><td>是否能复盘失败原因</td></tr>
+          <tr><td>06 可靠性检查</td><td>用规则检查项目是否可信</td><td>schema、validator、privacy scan、tests、quality gates</td><td>是否有结构、隐私、引用或证据风险</td></tr>
+          <tr><td>07 环境治理</td><td>决定哪些经验能长期留下</td><td>routing table、profiles、memory policy、evolution backlog、Git commit</td><td>是否通过检查、测试和人工确认</td></tr>
+        </table>
+        <table>
+          <tr><th>上一层问的问题</th><th>下一层负责回答</th></tr>
+          <tr><td>任务到底是什么？</td><td>任务与边界层写清目标、范围和验收标准。</td></tr>
+          <tr><td>需要哪些工具？</td><td>工具与接口层决定是否打开插件、MCP 或本地命令。</td></tr>
+          <tr><td>凭什么判断？</td><td>上下文与证据层区分材料、证据、主张和方法。</td></tr>
+          <tr><td>做到哪一步？</td><td>研究阶段层记录当前在设计、检索、分析、写作、投稿还是复盘。</td></tr>
+          <tr><td>结果可靠吗？</td><td>可靠性检查层运行 schema、测试、隐私扫描、引用核验和质量门。</td></tr>
+          <tr><td>经验能不能留下？</td><td>环境治理层决定是否进入长期规则、profile、skill 或文档。</td></tr>
+        </table>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>安装与环境要求</h2>
         </div>
         <div class="grid-3">
           <article class="card"><h3>Windows</h3><pre>git clone https://github.com/Marcus-AI4SS/VELA.git vela
@@ -80,6 +147,28 @@ cd vela
 sh ./install.sh --bootstrap-tools
 vela doctor</pre></article>
         </div>
+        <table>
+          <tr><th>项目</th><th>Windows</th><th>macOS / Linux</th></tr>
+          <tr><td>安装入口</td><td><code>install.ps1</code>、<code>vela.ps1</code></td><td><code>install-macos.sh</code> / <code>install.sh</code>、<code>~/.vela/bin/vela</code></td></tr>
+          <tr><td>Shell</td><td>PowerShell 7 优先</td><td>zsh/bash</td></tr>
+          <tr><td>工具安装</td><td>可提示 winget 或手动安装</td><td>可提示 Homebrew 或手动安装</td></tr>
+          <tr><td>权限注意</td><td>PowerShell 执行策略、路径空格、Windows Defender</td><td>Gatekeeper、可执行权限、Homebrew 路径</td></tr>
+        </table>
+        <table>
+          <tr><th>组件</th><th>作用</th><th>状态说明</th></tr>
+          <tr><td>Git</td><td>clone、更新、回滚、提交、发布</td><td>推荐安装</td></tr>
+          <tr><td>Python 3.13+</td><td>运行 CLI、schema checks、validators</td><td>核心依赖</td></tr>
+          <tr><td>PowerShell 7 / POSIX shell</td><td>运行跨平台安装脚本</td><td>Windows/macOS/Linux 分开处理</td></tr>
+          <tr><td>ripgrep</td><td>快速搜索、路径审计、隐私扫描</td><td>推荐安装</td></tr>
+          <tr><td>MCP servers</td><td>浏览器、文献、记忆、代码索引等接口</td><td>按任务启用</td></tr>
+          <tr><td>Codex plugins</td><td>GitHub、Superpowers、文档、表格、演示等增强层</td><td>按任务启用</td></tr>
+        </table>
+        <table>
+          <tr><th>依赖类型</th><th>代表项</th><th>VELA 怎么处理</th></tr>
+          <tr><td>核心依赖</td><td>Git、Python、shell、VELA CLI、schemas、validators</td><td>安装脚本和 <code>vela doctor</code> 会重点检查。</td></tr>
+          <tr><td>推荐依赖</td><td>ripgrep、GitHub CLI、Node.js、PowerShell 7、Homebrew/winget</td><td>缺失时提示，不伪装成已安装。</td></tr>
+          <tr><td>可选集成</td><td>Zotero、Obsidian、MCP servers、Codex plugins、agentmemory、CodeGraph</td><td>只提供 profile、doctor 检查和使用说明，用户授权后才启用。</td></tr>
+        </table>
       </section>
 
       <section class="section wide-visual">
@@ -87,16 +176,83 @@ vela doctor</pre></article>
       </section>
 
       <section class="section">
-        <div class="section-head"><h2>常用命令</h2></div>
+        <div class="section-head">
+          <h2>项目结构</h2>
+        </div>
+        <pre>my-research-project/
+  AGENTS.md
+  materials/
+  evidence/
+  claims/
+  methods/
+  deliverables/
+  handoffs/
+  logs/
+  .codex/
+  .vela/context.json</pre>
         <table>
-          <tr><th>目的</th><th>命令</th></tr>
-          <tr><td>查看环境状态</td><td><code>vela doctor</code></td></tr>
-          <tr><td>初始化项目</td><td><code>vela init &lt;project&gt;</code></td></tr>
-          <tr><td>创建 handoff</td><td><code>vela handoff new --template claim-check</code></td></tr>
-          <tr><td>检查 handoff</td><td><code>vela handoff lint handoffs/H001.yaml</code></td></tr>
-          <tr><td>渲染 Codex prompt</td><td><code>vela handoff render handoffs/H001.yaml --out handoffs/H001.prompt.md</code></td></tr>
-          <tr><td>验证项目</td><td><code>vela validate &lt;project&gt; --repair-context</code></td></tr>
-          <tr><td>隐私扫描</td><td><code>vela privacy scan &lt;project&gt;</code></td></tr>
+          <tr><th>目录</th><th>用途</th></tr>
+          <tr><td><code>materials/</code></td><td>原始材料：PDF、网页、截图、数据、访谈、链接、笔记。</td></tr>
+          <tr><td><code>evidence/</code></td><td>已核验材料：有来源、访问时间、状态、权利或伦理说明。</td></tr>
+          <tr><td><code>claims/</code></td><td>候选主张、已支持主张、证据支持关系。</td></tr>
+          <tr><td><code>methods/</code></td><td>方法假设、编码规则、分析计划、复现说明。</td></tr>
+          <tr><td><code>deliverables/</code></td><td>报告、论文、图表、PPT、提交包、复盘。</td></tr>
+          <tr><td><code>handoffs/</code></td><td>给 Codex 或协作者的有边界任务说明。</td></tr>
+          <tr><td><code>logs/</code></td><td>运行记录、质量门、doctor、validation、修复记录。</td></tr>
+        </table>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>工作流入口</h2>
+          <p>先看任务路线，再看 skill 名称。一条路线可以组合多个 skill、插件和 MCP。</p>
+        </div>
+        <pre>用户任务 -> route 判断 -> skill 组合 -> 插件/MCP 按需开启 -> schema/validator 检查 -> logs/handoff/context 更新</pre>
+        <table>
+          <tr><th>任务</th><th>路线</th><th>主要能力</th><th>边界</th></tr>
+          <tr><td>不确定该走哪条研究路线</td><td><code>general-research</code></td><td>研究设计、引用核验、基础导出</td><td>用于初始分流，不替代具体路线</td></tr>
+          <tr><td>检查 VELA、skills、profiles、MCP、插件和配置</td><td><code>stack-governance</code></td><td>运行层治理、外部能力审查</td><td>管环境，不管具体研究结论</td></tr>
+          <tr><td>安装、修复、更新运行层</td><td><code>environment-ops</code></td><td>runtime 检查、profile 应用、配置漂移检查</td><td>不静默改用户级配置</td></tr>
+          <tr><td>项目文件夹混乱</td><td><code>project-folder-hygiene</code></td><td>文件盘点、临时文件分类、交接前整理</td><td>不静默删除原始材料、数据、PDF、证据</td></tr>
+          <tr><td>文献证据总控</td><td><code>evidence-based-literature-workflow</code></td><td>结构性阅读、证据核验、引用支撑</td><td>发现文献不等于正式引用</td></tr>
+          <tr><td>文献综述和研究版图</td><td><code>literature-review</code></td><td>主题检索、引用扩展、综述表</td><td>综述写作前仍需引用核验</td></tr>
+          <tr><td>全文获取</td><td><code>reference-fulltext-acquisition</code></td><td>DOI/OA 查询、PDF 获取、缺失清单</td><td>只处理合法可访问全文</td></tr>
+          <tr><td>单篇论文评审</td><td><code>single-paper-review</code></td><td>贡献、方法、证据、写作问题评估</td><td>不能用未核验文献做正式引用</td></tr>
+          <tr><td>量化实证、文本、网络、计算社科</td><td><code>empirical-quant</code> / <code>text-corpus</code> / <code>network-analysis</code> / <code>computational-social-science</code></td><td>研究设计、数据发现、模型、语料、网络、复现</td><td>工具只是执行器，证据和复现包才是交付依据</td></tr>
+          <tr><td>科研图、结果表和汇报</td><td><code>research-figure-design</code> / <code>research-presentation</code></td><td>机制图、概念图、数据图、PPT、网页演示</td><td>不能编造数据或统计标注</td></tr>
+          <tr><td>正文写作、审稿回复、投稿包</td><td><code>writing-export</code> / <code>social-science-submission-package</code></td><td>写作、引用捕获、审稿回复、DOCX/LaTeX、版本冻结</td><td>写作质量检查不能改变事实</td></tr>
+          <tr><td>平台材料和数字痕迹案例</td><td><code>social-platform-case</code></td><td>浏览器可见材料、来源台账、平台伦理</td><td>不打包需要平台账号和登录态的专用后端</td></tr>
+        </table>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>Skills、插件和 MCP</h2>
+        </div>
+        <div class="grid-3">
+          <article class="card"><h3>42 个 active skills</h3><p>覆盖总控、文献与审稿、计算社科与分析、写作与导出、图表与演示、运行时 helper、知识沉淀与平台材料。</p></article>
+          <article class="card"><h3>插件层</h3><p>GitHub、Superpowers、Hugging Face、Scite、Google Drive、Documents、Presentations、Spreadsheets、HyperFrames、Browser 等按任务启用。</p></article>
+          <article class="card"><h3>MCP 层</h3><p>Chrome DevTools、Zotero、OpenAlex、Semantic Scholar、Google Scholar、paper-search、agentmemory、CodeGraph 等是传感器和接口，不是事实源。</p></article>
+        </div>
+        <table>
+          <tr><th>层</th><th>代表项</th><th>边界</th></tr>
+          <tr><td>Skills</td><td><code>research-autopilot</code>、<code>citation-verifier</code>、<code>quant-analysis</code>、<code>manuscript-writing-studio</code>、<code>project-folder-hygiene</code></td><td>具体任务能力，必须受路线和质量门约束。</td></tr>
+          <tr><td>插件</td><td><code>github</code>、<code>superpowers</code>、<code>hugging-face</code>、<code>scite</code>、<code>documents</code>、<code>presentations</code></td><td>增强层，不能替代本地源规则、schema、validator 和 Git 提交。</td></tr>
+          <tr><td>MCP</td><td><code>chrome-devtools</code>、<code>zotero-mcp</code>、<code>openalex-mcp</code>、<code>semantic-scholar-mcp</code>、<code>agentmemory</code>、<code>codegraph</code></td><td>只在任务需要时打开；工具返回结果仍需进入证据或检查链。</td></tr>
+        </table>
+        <table>
+          <tr><th>Skill 角色</th><th>说明</th><th>例子</th></tr>
+          <tr><td>入口</td><td>接收用户任务，判断任务路线。</td><td><code>research-autopilot</code></td></tr>
+          <tr><td>主控</td><td>组织多步流程、分配子任务、决定检查点。</td><td><code>evidence-based-literature-workflow</code>、<code>research-team-orchestrator</code>、<code>vela-runtime-manager</code></td></tr>
+          <tr><td>执行</td><td>完成具体研究动作。</td><td><code>citation-verifier</code>、<code>quant-analysis</code>、<code>text-analysis</code>、<code>research-figure-studio</code></td></tr>
+          <tr><td>helper</td><td>支持定位、清理、浏览器操作、运行环境判断。</td><td><code>project-folder-hygiene</code>、<code>skill-vetter</code>、<code>local-cloud-router</code>、<code>playwright</code></td></tr>
+        </table>
+        <table>
+          <tr><th>MCP 启动策略</th><th>含义</th></tr>
+          <tr><td>默认不全开</td><td>新任务不会预启动所有 stdio MCP，避免慢启动和无关工具污染。</td></tr>
+          <tr><td>按路线开启</td><td>文献任务优先学术检索和 Zotero；网页材料任务才开浏览器；代码审查才用 CodeGraph。</td></tr>
+          <tr><td>先说明再调用</td><td>工具调用前应知道它解决什么问题、读取什么数据、会不会写文件。</td></tr>
+          <tr><td>输出要落地</td><td>有价值的结果应进入 materials、evidence、logs 或 handoff。</td></tr>
         </table>
       </section>
 
@@ -104,26 +260,97 @@ vela doctor</pre></article>
         <img src="../assets/overview/03-memory-evolution-governance.png" alt="VELA 记忆管理与自我演化治理">
       </section>
 
+      <section class="section">
+        <div class="section-head">
+          <h2>记忆管理</h2>
+          <p>VELA 的记忆不是全量聊天仓库。它让系统记住稳定偏好、常见路线、失败原因和项目经验，同时防止临时判断变成全局规则。</p>
+        </div>
+        <table>
+          <tr><th>记忆层</th><th>存什么</th><th>默认去向</th><th>能否自动升级为长期规则</th></tr>
+          <tr><td>临时会话记忆</td><td>本轮任务路径、失败命令、网页状态、短期上下文</td><td>过期丢弃</td><td>不能</td></tr>
+          <tr><td>项目记忆</td><td>项目事实、阶段、材料边界、证据链</td><td>项目文件或长期笔记</td><td>不能</td></tr>
+          <tr><td>私有偏好</td><td>用户协作偏好、语言偏好、入口提示</td><td>用户本机记忆</td><td>不能</td></tr>
+          <tr><td>流程记忆</td><td>可复用流程、工具顺序、质量清单</td><td>skill 或文档候选</td><td>必须检查</td></tr>
+          <tr><td>控制记忆</td><td>影响总路由、权限、验证逻辑的底层规则</td><td>governance kernel 候选</td><td>必须严格检查</td></tr>
+        </table>
+        <p>硬边界：不默认导入完整聊天记录；不默认做 LLM 压缩和自动上下文注入；不把 secrets、tokens、cookies、账号细节或验证码状态写入记忆；不让 agentmemory 或 CodeGraph 成为源规则。</p>
+        <table>
+          <tr><th>记忆落点</th><th>保存什么</th><th>什么时候看</th></tr>
+          <tr><td>项目文件</td><td>项目事实、证据、阶段、方法、交付物。</td><td>继续项目、交接项目、复盘项目。</td></tr>
+          <tr><td>运行日志</td><td>命令、检查、失败、修复、handoff、validator 报告。</td><td>排错、回滚、审计。</td></tr>
+          <tr><td>可选记忆服务</td><td>用户确认过的偏好、常见路径、重复经验。</td><td>新会话快速恢复上下文。</td></tr>
+          <tr><td>演化待办</td><td>候选规则、候选 skill、候选 schema、候选自动化。</td><td>周期性治理和版本提交。</td></tr>
+        </table>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>自动化与自我演化</h2>
+          <p>VELA 的自动化像巡检和对账系统：发现问题、写报告、生成候选改进，然后通过检查和提交进入长期规则。</p>
+        </div>
+        <table>
+          <tr><th>命令或能力</th><th>用途</th><th>边界</th></tr>
+          <tr><td><code>vela doctor</code></td><td>检查本机工具、运行层和可选集成状态</td><td>只检查和提示，不冒充安装成功</td></tr>
+          <tr><td><code>vela runtime install</code></td><td>安装或更新 VELA 运行层</td><td>不复制用户私有数据</td></tr>
+          <tr><td><code>vela validate</code></td><td>检查项目结构、schema、context 和质量门</td><td>不替用户做研究判断</td></tr>
+          <tr><td><code>vela privacy scan</code></td><td>查找隐私、路径、账号、密钥、缓存等风险</td><td>发现风险后由用户确认处理</td></tr>
+          <tr><td><code>envctl route explain</code></td><td>解释任务应该走哪条路线</td><td>只给路线建议，不替代用户确认</td></tr>
+          <tr><td><code>envctl validate stack</code></td><td>检查技能、插件、MCP、配置一致性</td><td>不静默改用户配置</td></tr>
+          <tr><td><code>envctl memory reconcile</code></td><td>对账记忆、规则和运行态状态</td><td>候选记忆必须经过复核</td></tr>
+        </table>
+        <table>
+          <tr><th>巡检类型</th><th>目的</th><th>输出</th></tr>
+          <tr><td>环境巡检</td><td>查工具缺口、profile 漂移、MCP 状态、schema 变化、运行层安装状态。</td><td>doctor report、stack validation report。</td></tr>
+          <tr><td>项目巡检</td><td>查目录结构、证据链、handoff、隐私风险、交付物完整性。</td><td>validation report、privacy report、context repair。</td></tr>
+          <tr><td>演化巡检</td><td>查哪些经验可复用，哪些规则冲突，哪些旧入口应 retired。</td><td>evolution backlog、route conflict report、candidate patch。</td></tr>
+        </table>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>常用命令</h2>
+        </div>
+        <table>
+          <tr><th>目的</th><th>命令</th></tr>
+          <tr><td>查看 VELA CLI</td><td><code>vela --help</code></td></tr>
+          <tr><td>检查环境</td><td><code>vela doctor</code></td></tr>
+          <tr><td>初始化项目</td><td><code>vela init &lt;project&gt;</code></td></tr>
+          <tr><td>创建 handoff</td><td><code>vela handoff new --template claim-check</code></td></tr>
+          <tr><td>检查 handoff</td><td><code>vela handoff lint handoffs/H001.yaml</code></td></tr>
+          <tr><td>修复项目 context</td><td><code>vela validate &lt;project&gt; --repair-context</code></td></tr>
+          <tr><td>隐私扫描</td><td><code>vela privacy scan &lt;project&gt;</code></td></tr>
+          <tr><td>解释路线</td><td><code>python -m skills.scripts.envctl route explain "你的任务" --summary</code></td></tr>
+          <tr><td>七层检查</td><td><code>python -m skills.scripts.envctl validate environment-layers --summary</code></td></tr>
+          <tr><td>记忆对账</td><td><code>python -m skills.scripts.envctl memory reconcile --summary</code></td></tr>
+        </table>
+      </section>
+
       <section class="section grid-2">
         <article class="card">
-          <h3>记忆边界</h3>
-          <ul class="guide-list">
-            <li>运行日志、handoff、证据台账和工具反馈进入候选线索。</li>
-            <li>agentmemory 可以召回偏好和历史经验。</li>
-            <li>记忆不能单独成为源规则。</li>
-          </ul>
+          <h3>最小使用路径</h3>
+          <ol class="guide-list">
+            <li>clone 或下载 VELA。</li>
+            <li>按系统运行安装脚本。</li>
+            <li>运行 <code>vela doctor</code> 看工具缺口。</li>
+            <li>用 <code>vela init &lt;project&gt;</code> 初始化研究项目。</li>
+            <li>把原始材料放入 <code>materials/</code>，核验后提升到 <code>evidence/</code>。</li>
+            <li>用 handoff 给 Codex 准备小任务，再运行 validate 和 privacy scan。</li>
+          </ol>
         </article>
         <article class="card">
-          <h3>演化边界</h3>
+          <h3>VELA 不做什么</h3>
           <ul class="guide-list">
-            <li>长期规则必须经过 schema、validator、测试、复核和提交。</li>
-            <li>VELA 不复制浏览器登录态、cookies、凭据、私有文献库或用户数据。</li>
-            <li>doctor 会区分已安装、缺失、可选和需要用户配置的工具。</li>
+            <li>不替用户判断研究结论是否成立。</li>
+            <li>不把未核验材料升级为证据。</li>
+            <li>不默认执行 <code>codex exec</code>。</li>
+            <li>不复制 cookies、tokens、密钥、验证码状态、浏览器缓存。</li>
+            <li>不默认安装或启动所有 MCP。</li>
+            <li>不把非公开个人定制模块作为公开研究工作流的一部分。</li>
           </ul>
         </article>
       </section>
 
-      <footer>Markdown 版本见 <a href="../manual.zh-CN.md">docs/manual.zh-CN.md</a>。</footer>
+      <footer>完整 Markdown 版本见 <a href="../manual.zh-CN.md">docs/manual.zh-CN.md</a>。</footer>
     </main>
   </body>
 </html>

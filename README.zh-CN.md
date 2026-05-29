@@ -44,6 +44,21 @@ VELA 的底层方法论来自工程控制论：每个研究项目都显式记录
 | 可选运行层 | 安装到用户自己 Codex 环境里的公开 research skills、route profiles、validators 和 `envctl` 工具 |
 | 机器上下文 | `.vela/context.json` 暴露当前项目状态，供有文档约束的本地读取器使用 |
 
+## 环境组成一览
+
+VELA 不是单个脚本，而是一套可安装到 Codex 的研究工作流环境。
+
+| 组成 | 说明 |
+| --- | --- |
+| 七层结构 | 任务与边界、工具与接口、上下文与证据、研究阶段、运行日志、可靠性检查、环境治理 |
+| Skills | 总控、文献与审稿、计算社科与分析、写作与导出、图表与演示、运行时 helper、知识沉淀 |
+| 插件 | GitHub、Superpowers、Hugging Face、Scite、Google Drive、Documents、Presentations、Spreadsheets、HyperFrames、Browser 等按任务启用 |
+| MCP | Chrome DevTools、Zotero、OpenAlex、Semantic Scholar、Google Scholar、paper-search、agentmemory、CodeGraph 等按路线启用 |
+| 自动化 | doctor、runtime install、validate、privacy scan、envctl route/stack/memory/evolution 检查 |
+| 记忆治理 | 记忆只作为候选线索；长期规则必须经过 schema、validator、测试和版本提交 |
+
+完整解释见 [公开版说明书](./docs/manual.zh-CN.md)。
+
 ## 快速开始
 
 按平台选择安装方式：

@@ -39,3 +39,16 @@ Windows users can run `.\install.ps1 -BootstrapTools`. macOS users can run `sh .
 - engineering-cybernetic governance for objectives, state, feedback, gates, and correction
 - memory and self-evolution governance where durable rules require validation, tests, and versioned commits
 - optional runtime skills and `envctl` helpers installed into the user's own Codex environment
+
+## Environment Map
+
+| Part | Description |
+| --- | --- |
+| Seven-layer structure | task boundary, tools/interfaces, context/evidence, research stage, runtime logs, reliability checks, environment governance |
+| Skills | orchestration, literature/evidence, computational social science, writing/export, figures/presentation, runtime helpers, knowledge sync |
+| Plugins | GitHub, Superpowers, Hugging Face, Scite, Google Drive, Documents, Presentations, Spreadsheets, HyperFrames, Browser, and related optional layers |
+| MCP | Chrome DevTools, Zotero, OpenAlex, Semantic Scholar, Google Scholar, paper-search, agentmemory, CodeGraph, enabled by route |
+| Automation | doctor, runtime install, validate, privacy scan, envctl route/stack/memory/evolution checks |
+| Memory governance | memory is a candidate signal; durable rules require schemas, validators, tests, and versioned commits |
+
+Read the full [manual](./manual.md) for the public, user-facing environment guide.

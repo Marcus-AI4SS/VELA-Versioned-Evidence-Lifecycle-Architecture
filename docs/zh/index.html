@@ -52,6 +52,23 @@
         </div>
       </section>
 
+      <section class="section">
+        <div class="section-head">
+          <h2>环境组成</h2>
+          <p>VELA 是可安装到 Codex 的研究工作流环境，不是单个 prompt 模板。</p>
+        </div>
+        <table>
+          <tr><th>组成</th><th>说明</th></tr>
+          <tr><td>七层结构</td><td>任务与边界、工具与接口、上下文与证据、研究阶段、运行日志、可靠性检查、环境治理。</td></tr>
+          <tr><td>Skills</td><td>总控、文献与审稿、计算社科与分析、写作与导出、图表与演示、运行时 helper、知识沉淀。</td></tr>
+          <tr><td>插件</td><td>GitHub、Superpowers、Hugging Face、Scite、Google Drive、Documents、Presentations、Spreadsheets、HyperFrames、Browser 等按任务启用。</td></tr>
+          <tr><td>MCP</td><td>Chrome DevTools、Zotero、OpenAlex、Semantic Scholar、Google Scholar、paper-search、agentmemory、CodeGraph 等按路线启用。</td></tr>
+          <tr><td>自动化</td><td>doctor、runtime install、validate、privacy scan、envctl route/stack/memory/evolution 检查。</td></tr>
+          <tr><td>记忆治理</td><td>记忆只作为候选线索；长期规则必须经过 schema、validator、测试和版本提交。</td></tr>
+        </table>
+        <p><a href="./manual.html">阅读完整公开版说明书</a></p>
+      </section>
+
       <section class="section grid-3">
         <article class="visual-card"><img src="../assets/overview/02-vela-architecture.png" alt="VELA 整体架构"></article>
         <article class="visual-card"><img src="../assets/overview/03-memory-evolution-governance.png" alt="VELA 记忆管理与自我演化治理"></article>

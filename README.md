@@ -44,6 +44,21 @@ Optional: VELA can interoperate with HELM through explicit local files, but VELA
 | Optional runtime | Public research skills, route profiles, validators, and `envctl` helpers installed into the user's own Codex environment |
 | Machine context | `.vela/context.json` exposes current project state for documented local readers |
 
+## Environment Map
+
+VELA is not a single script. It is a Codex-installable research workflow environment.
+
+| Part | Description |
+| --- | --- |
+| Seven-layer structure | Task boundary, tools/interfaces, context/evidence, research stage, runtime logs, reliability checks, environment governance |
+| Skills | orchestration, literature, evidence, computational social science, writing/export, figures/presentation, runtime helpers, knowledge sync |
+| Plugins | GitHub, Superpowers, Hugging Face, Scite, Google Drive, Documents, Presentations, Spreadsheets, HyperFrames, Browser, and related optional layers |
+| MCP | Chrome DevTools, Zotero, OpenAlex, Semantic Scholar, Google Scholar, paper-search, agentmemory, CodeGraph, enabled by route |
+| Automation | doctor, runtime install, validate, privacy scan, envctl route/stack/memory/evolution checks |
+| Memory governance | memory is a candidate signal; durable rules require schemas, validators, tests, and versioned commits |
+
+See the [public manual](./docs/manual.md) for the full explanation.
+
 ## Quick Start
 
 Choose the installer for your platform:

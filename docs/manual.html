@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>VELA Manual</title>
-    <meta name="description" content="VELA product guide and user manual.">
+    <title>VELA Public Manual</title>
+    <meta name="description" content="VELA public research workflow manual.">
     <link rel="stylesheet" href="./assets/site.css">
   </head>
   <body>
@@ -19,9 +19,9 @@
 
       <section class="hero compact">
         <div>
-          <div class="eyebrow">Product guide · Updated 2026-05-28</div>
-          <h1><span class="sans">VELA</span> Manual</h1>
-          <p>VELA is a portable Codex workflow package for evidence-based research projects. It turns objectives, state, feedback, validation, correction, memory, and evolution into reviewable project files.</p>
+          <div class="eyebrow">Public manual · Updated 2026-05-29</div>
+          <h1><span class="sans">VELA</span> Research Workflow Environment</h1>
+          <p>VELA is a portable research workflow environment for Codex. It gives each project a readable operating layer: folders, rules, handoffs, evidence ledgers, schemas, validators, logs, memory governance, and controlled evolution.</p>
           <div class="hero-actions">
             <a class="button button-primary" href="./installation.html">Install</a>
             <a class="button" href="./getting-started.html">Getting started</a>
@@ -35,26 +35,20 @@
       </section>
 
       <section class="section grid-3">
-        <article class="card"><h3>What VELA is</h3><p>A file-based workflow wrapper for Codex research projects: project folders, rules, handoffs, evidence ledgers, checks, and runtime logs.</p></article>
-        <article class="card"><h3>What VELA is not</h3><p>Not a desktop app, paper generator, citation manager, hidden automation service, or replacement for user-owned tools and data.</p></article>
-        <article class="card"><h3>Operating logic</h3><p>Engineering cybernetics: objectives, state, feedback, validation, and correction remain visible in files and version history.</p></article>
+        <article class="card"><h3>Not an app</h3><p>VELA is not a desktop app, paper generator, citation manager, or background automation platform.</p></article>
+        <article class="card"><h3>Engineering cybernetics</h3><p>Objectives, state, feedback, validation, and correction stay visible in files, checks, and version history.</p></article>
+        <article class="card"><h3>Seven layers</h3><p>Tasks, tools, evidence, stages, logs, checks, and durable rules remain separated.</p></article>
       </section>
 
       <section class="section">
-        <div class="section-head">
-          <h2>Seven Layers</h2>
-          <p>VELA separates research work so that tools, evidence, logs, validation, and durable rules do not collapse into one opaque process.</p>
-        </div>
+        <div class="section-head"><h2>What VELA Actually Installs</h2></div>
         <table>
-          <tr><th>Layer</th><th>Purpose</th></tr>
-          <tr><td>01 Task and boundary</td><td>Define objectives, scope, constraints, and review standard.</td></tr>
-          <tr><td>02 Tools and interfaces</td><td>Connect Git, Python, MCP servers, agentmemory, CodeGraph, Zotero, Obsidian, and other user-owned tools.</td></tr>
-          <tr><td>03 Context and evidence</td><td>Separate materials, evidence, claims, methods, and deliverables.</td></tr>
-          <tr><td>04 Research stage</td><td>Keep design, literature, reading, writing, figures, and review as visible stages.</td></tr>
-          <tr><td>05 Runtime logs</td><td>Capture operations, failures, checks, and repairs.</td></tr>
-          <tr><td>06 Reliability checks</td><td>Run schemas, validators, tests, privacy scans, and handoff linting.</td></tr>
-          <tr><td>07 Environment governance</td><td>Decide which rules can persist through versioned commits.</td></tr>
+          <tr><th>Part</th><th>Meaning</th><th>Result</th></tr>
+          <tr><td>Project order</td><td>Stable folders, Codex rules, handoff templates, and machine-readable state.</td><td>Future threads and collaborators can read the project without relying on chat history.</td></tr>
+          <tr><td>Tool governance</td><td>Skills, plugins, MCP servers, and local commands are routed through profiles and quality gates.</td><td>Tools open because the route needs them, not just because they are available.</td></tr>
+          <tr><td>Reviewable evolution</td><td>Failures, fixes, and reusable procedures become candidates for later review.</td><td>Stable experience can become durable rules only after checks and commits.</td></tr>
         </table>
+        <p>The public package includes routes, public skills, MCP/profile templates, plugin coordination notes, schemas, validators, tests, envctl helpers, memory governance, and project folder hygiene. It does not include private databases, account state, browser sessions, cookies, tokens, caches, or personal custom modules outside the public research workflow.</p>
       </section>
 
       <section class="section wide-visual">
@@ -62,28 +56,77 @@
       </section>
 
       <section class="section">
-        <div class="section-head">
-          <h2>Install</h2>
-          <p>VELA normally has two layers: the cloned source package and a local runtime under the user's <code>~/.vela</code> and <code>~/.codex</code>.</p>
-        </div>
-        <div class="grid-3">
-          <article class="card"><h3>Windows</h3><pre>git clone https://github.com/Marcus-AI4SS/VELA.git vela
-cd vela
-.\install.ps1 -BootstrapTools
-.\vela.ps1 doctor</pre></article>
-          <article class="card"><h3>macOS</h3><pre>git clone https://github.com/Marcus-AI4SS/VELA.git vela
-cd vela
-sh ./install-macos.sh
-~/.vela/bin/vela doctor</pre></article>
-          <article class="card"><h3>Linux / shell</h3><pre>git clone https://github.com/Marcus-AI4SS/VELA.git vela
-cd vela
-sh ./install.sh --bootstrap-tools
-vela doctor</pre></article>
-        </div>
+        <div class="section-head"><h2>Core Structure</h2></div>
+        <table>
+          <tr><th>Module</th><th>Meaning</th><th>Contents</th></tr>
+          <tr><td>Source package</td><td>The VELA repository cloned from GitHub</td><td><code>package/</code>, <code>runtime/</code>, <code>schemas/</code>, <code>scripts/</code>, <code>docs/</code>, <code>tests/</code></td></tr>
+          <tr><td>Local runtime</td><td>User-side runtime installed into Codex</td><td><code>~/.vela</code>, <code>~/.codex/skills</code>, CLI, profiles, commands, receipts</td></tr>
+          <tr><td>Project layer</td><td>Each research project's files</td><td><code>materials/</code>, <code>evidence/</code>, <code>claims/</code>, <code>methods/</code>, <code>deliverables/</code>, <code>handoffs/</code>, <code>logs/</code></td></tr>
+          <tr><td>Tool interface</td><td>Optional connectors to user-owned tools</td><td>Git, Python, ripgrep, MCP servers, Codex plugins, Zotero, Obsidian</td></tr>
+          <tr><td>Memory and evolution</td><td>Candidate memory and governed rule promotion</td><td>logs, agentmemory, CodeGraph, evolution backlog, validators</td></tr>
+        </table>
+        <table>
+          <tr><th>Layer</th><th>Windows</th><th>macOS / Linux</th><th>Role</th></tr>
+          <tr><td>Source package</td><td>cloned <code>vela/</code></td><td>cloned <code>vela/</code></td><td>Git-updated source, docs, schemas, tests, runtime package.</td></tr>
+          <tr><td>Local runtime</td><td><code>%USERPROFILE%\.vela</code>, <code>%USERPROFILE%\.codex</code></td><td><code>~/.vela</code>, <code>~/.codex</code></td><td>CLI shims, skills, profiles, commands, receipts, doctor reports.</td></tr>
+          <tr><td>Project layer</td><td>any project folder</td><td>any project folder</td><td><code>vela init</code> scaffold and <code>.vela/context.json</code>.</td></tr>
+        </table>
+      </section>
+
+      <section class="section">
+        <div class="section-head"><h2>Seven Layers</h2></div>
+        <table>
+          <tr><th>Layer</th><th>Purpose</th></tr>
+          <tr><td>01 Task and boundary</td><td>Define objectives, scope, constraints, and review standard.</td></tr>
+          <tr><td>02 Tools and interfaces</td><td>Decide which local tools, plugins, and MCP servers are needed.</td></tr>
+          <tr><td>03 Context and evidence</td><td>Separate materials, evidence, claims, methods, and source notes.</td></tr>
+          <tr><td>04 Research stage</td><td>Track design, literature, full text, analysis, writing, figures, submission, and retrospective stages.</td></tr>
+          <tr><td>05 Runtime logs</td><td>Preserve handoffs, rendered prompts, doctor reports, validation reports, failures, and repairs.</td></tr>
+          <tr><td>06 Reliability checks</td><td>Run schemas, validators, privacy scans, tests, and quality gates.</td></tr>
+          <tr><td>07 Environment governance</td><td>Decide which reusable rules can persist through commits.</td></tr>
+        </table>
+        <table>
+          <tr><th>Question</th><th>Layer That Answers It</th></tr>
+          <tr><td>What is the task?</td><td>Task and boundary.</td></tr>
+          <tr><td>Which tools are needed?</td><td>Tools and interfaces.</td></tr>
+          <tr><td>What supports the decision?</td><td>Context and evidence.</td></tr>
+          <tr><td>Which research stage is this?</td><td>Research stage.</td></tr>
+          <tr><td>Is it reliable?</td><td>Reliability checks.</td></tr>
+          <tr><td>Can this experience persist?</td><td>Environment governance.</td></tr>
+        </table>
       </section>
 
       <section class="section wide-visual">
         <img src="./assets/overview/04-vela-usage-roadmap.png" alt="VELA usage roadmap">
+      </section>
+
+      <section class="section">
+        <div class="section-head"><h2>Workflow Routes</h2></div>
+        <table>
+          <tr><th>Route</th><th>Use it for</th><th>Boundary</th></tr>
+          <tr><td><code>general-research</code></td><td>Initial research triage</td><td>Does not replace specialized routes.</td></tr>
+          <tr><td><code>stack-governance</code> / <code>environment-ops</code></td><td>Runtime, skills, plugins, MCP, profiles, and configuration checks</td><td>Does not decide research facts.</td></tr>
+          <tr><td><code>project-folder-hygiene</code></td><td>Project folder cleanup and handoff preparation</td><td>Does not silently delete raw material, data, PDFs, or evidence.</td></tr>
+          <tr><td><code>evidence-based-literature-workflow</code> / <code>literature-review</code> / <code>reference-fulltext-acquisition</code></td><td>Literature, full text, citation evidence, and review workflows</td><td>Discovery is not formal citation.</td></tr>
+          <tr><td><code>empirical-quant</code> / <code>text-corpus</code> / <code>network-analysis</code></td><td>Quantitative, text, and network analysis</td><td>Tools are actuators; evidence and reproducibility are deliverables.</td></tr>
+          <tr><td><code>research-figure-design</code> / <code>research-presentation</code></td><td>Figures, tables, presentations, and web decks</td><td>No invented data or statistics.</td></tr>
+          <tr><td><code>writing-export</code> / <code>social-science-submission-package</code></td><td>Writing, reviewer response, DOCX/LaTeX, and version freeze</td><td>Language polish must not change facts.</td></tr>
+        </table>
+      </section>
+
+      <section class="section wide-visual">
+        <img src="./assets/overview/03-memory-evolution-governance.png" alt="VELA memory and self-evolution governance">
+      </section>
+
+      <section class="section grid-2">
+        <article class="card">
+          <h3>Skills, Plugins, MCP</h3>
+          <p>VELA routes combine active skills, optional Codex plugins, and MCP interfaces. Plugins and MCP servers are enhancement layers; schemas, validators, project files, and commits remain the governing layer.</p>
+        </article>
+        <article class="card">
+          <h3>Memory Boundary</h3>
+          <p>Memory is a candidate signal. VELA does not import full transcripts, store secrets, inject recalled context by default, or promote memory into durable rules without checks and review.</p>
+        </article>
       </section>
 
       <section class="section">
@@ -94,36 +137,33 @@ vela doctor</pre></article>
           <tr><td>Initialize project</td><td><code>vela init &lt;project&gt;</code></td></tr>
           <tr><td>Create handoff</td><td><code>vela handoff new --template claim-check</code></td></tr>
           <tr><td>Lint handoff</td><td><code>vela handoff lint handoffs/H001.yaml</code></td></tr>
-          <tr><td>Render prompt</td><td><code>vela handoff render handoffs/H001.yaml --out handoffs/H001.prompt.md</code></td></tr>
           <tr><td>Validate project</td><td><code>vela validate &lt;project&gt; --repair-context</code></td></tr>
           <tr><td>Privacy scan</td><td><code>vela privacy scan &lt;project&gt;</code></td></tr>
+          <tr><td>Install runtime</td><td><code>vela runtime install --include core,automation,toolchain</code></td></tr>
         </table>
       </section>
 
-      <section class="section wide-visual">
-        <img src="./assets/overview/03-memory-evolution-governance.png" alt="VELA memory and self-evolution governance">
+      <section class="section">
+        <div class="section-head"><h2>Dependencies And Runtime</h2></div>
+        <table>
+          <tr><th>Type</th><th>Examples</th><th>How VELA Treats Them</th></tr>
+          <tr><td>Core</td><td>Git, Python, shell, VELA CLI, schemas, validators</td><td>installers and <code>vela doctor</code> check them directly.</td></tr>
+          <tr><td>Recommended</td><td>ripgrep, GitHub CLI, Node.js, PowerShell 7, Homebrew/winget</td><td>missing tools are reported, not faked.</td></tr>
+          <tr><td>Optional integrations</td><td>Zotero, Obsidian, MCP servers, Codex plugins, agentmemory, CodeGraph</td><td>profiles and doctor checks are provided; user authorization is required.</td></tr>
+        </table>
       </section>
 
-      <section class="section grid-2">
-        <article class="card">
-          <h3>Memory Boundary</h3>
-          <ul class="guide-list">
-            <li>Runtime logs, handoffs, evidence ledgers, and tool feedback become candidate signals.</li>
-            <li>agentmemory can recall preferences and prior experience.</li>
-            <li>Memory cannot become source-of-truth by itself.</li>
-          </ul>
-        </article>
-        <article class="card">
-          <h3>Evolution Boundary</h3>
-          <ul class="guide-list">
-            <li>Durable rules require schema checks, validators, tests, review, and commits.</li>
-            <li>VELA does not copy browser sessions, credentials, private libraries, or user data.</li>
-            <li>Doctor checks distinguish installed, missing, optional, and user-configured tools.</li>
-          </ul>
-        </article>
+      <section class="section">
+        <div class="section-head"><h2>Automation Boundary</h2></div>
+        <table>
+          <tr><th>Type</th><th>Purpose</th><th>Output</th></tr>
+          <tr><td>Environment audit</td><td>tool gaps, profile drift, MCP state, schema changes, runtime install state</td><td>doctor report, stack validation report</td></tr>
+          <tr><td>Project audit</td><td>project structure, evidence chain, handoffs, privacy risk, deliverables</td><td>validation report, privacy report, context repair</td></tr>
+          <tr><td>Evolution audit</td><td>reusable experience, conflicting rules, retired routes</td><td>evolution backlog, route conflict report, candidate patch</td></tr>
+        </table>
       </section>
 
-      <footer>Markdown version: <a href="./manual.md">docs/manual.md</a>.</footer>
+      <footer>Full Markdown version: <a href="./manual.md">docs/manual.md</a>.</footer>
     </main>
   </body>
 </html>
