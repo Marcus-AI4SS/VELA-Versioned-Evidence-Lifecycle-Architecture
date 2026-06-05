@@ -5,7 +5,6 @@ managed_mcp = [
   "chrome-devtools",
   "playwright-mcp",
   "figma-dev-mode-mcp",
-  "social-platform-mcp",
   "openalex-mcp",
   "semantic-scholar-mcp",
   "google-scholar-mcp",
@@ -14,4 +13,4 @@ managed_mcp = [
   "codegraph",
 ]
 enabled_mcp = []
-activation_note = "Use envctl apply-profile literature/social-platform/writing-review/code-context when a task actually needs MCP servers. CodeGraph stays an on-demand CLI/optional MCP; it is not prestarted in this lightweight profile."
+activation_note = "Use envctl apply-profile literature/social-platform/writing-review/code-context when a task actually needs MCP servers. Browser-visible platform material uses native Browser/Chrome/Computer Use first. CodeGraph stays an on-demand CLI/optional MCP; it is not prestarted in this lightweight profile."

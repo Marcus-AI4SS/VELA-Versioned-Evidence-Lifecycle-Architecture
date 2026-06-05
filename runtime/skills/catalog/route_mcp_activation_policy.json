@@ -124,11 +124,10 @@
         "chrome-devtools"
       ],
       "optional_mcp": [
-        "social-platform-mcp",
         "openalex-mcp"
       ],
       "activation_needed_mcp": [],
-      "notes": "Browser-visible evidence is required; generic social capture is optional; platform-specific MCP requires explicit activation. Native first: use in-app Browser for ordinary or local pages, official Chrome plugin for the user Chrome profile, logged-in tabs, cookies, extensions, and browser downloads, and Computer Use for Windows apps or file dialogs. MCP/CLI browser tools are fallback or specialized automation, not the default first click path."
+      "notes": "Browser-visible evidence is required. Platform-account backends are not shipped in public VELA. Native first: use in-app Browser for ordinary or local pages, official Chrome plugin for the user Chrome profile, logged-in tabs, cookies, extensions, and browser downloads, and Computer Use for Windows apps or file dialogs. MCP/CLI browser tools are fallback or specialized automation, not the default first click path."
     },
     {
       "route_id": "computational-social-science",

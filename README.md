@@ -53,7 +53,7 @@ VELA is not a single script. It is a Codex-installable research workflow environ
 | Seven-layer structure | Task boundary, tools/interfaces, context/evidence, research stage, runtime logs, reliability checks, environment governance |
 | Skills | orchestration, literature, evidence, computational social science, writing/export, figures/presentation, runtime helpers, knowledge sync |
 | Plugins | Native Browser, Chrome, Computer Use, GitHub, Superpowers, Zotero, Scite, Google Drive, Documents, Presentations, Spreadsheets, and related optional layers |
-| MCP and adapters | OpenAlex, Semantic Scholar, Google Scholar, paper-search, Chrome DevTools, social-platform, and CodeGraph are route-scoped helpers; native Browser/Chrome/Computer Use comes first |
+| MCP and adapters | OpenAlex, Semantic Scholar, Google Scholar, paper-search, Chrome DevTools, and CodeGraph are route-scoped helpers; native Browser/Chrome/Computer Use comes first for web and desktop interaction |
 | Automation | doctor, runtime install, validate, privacy scan, envctl route/stack/memory/evolution checks |
 | Memory governance | memory is a candidate signal; durable rules require schemas, validators, tests, and versioned commits |
 

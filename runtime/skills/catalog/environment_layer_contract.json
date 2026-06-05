@@ -1352,29 +1352,6 @@
         "delete_policy": "The ignored .codegraph cache may be deleted or rebuilt without affecting source rules; source files must not be deleted through codegraph workflows.",
         "audit_policy": "codegraph status and query results are context evidence only and must be paired with validator/test output before source changes."
       }
-    },
-    {
-      "id": "social-platform-mcp",
-      "kind": "mcp",
-      "layer": "tool",
-      "source": "optional user-configured generic social-platform MCP backend",
-      "use_boundary": "Optional backend for public, browser-visible social platform evidence when a route explicitly requires reusable capture. Native Browser, Chrome, or Computer Use remain the first choice for ordinary browser work.",
-      "write_boundary": "Does not store credentials, cookies, login state, private messages, or platform-specific session data inside VELA.",
-      "safety_controls": {
-        "source_of_truth_policy": "social-platform-mcp is a route-scoped sensor only; project evidence files and validators remain authoritative.",
-        "allowed_write_scope": [
-          "outputs/inbox/social-platform",
-          "outputs/reports/social-platform"
-        ],
-        "forbidden_actions": [
-          "store credentials",
-          "bypass login, paywalls, or captcha",
-          "replace browser-visible evidence review",
-          "mutate source rules"
-        ],
-        "delete_policy": "Generated capture reports may be deleted only inside the active project output folders.",
-        "audit_policy": "Every captured item must keep visible source URL, timestamp, and route context."
-      }
     }
   ],
   "memory_optimization": {

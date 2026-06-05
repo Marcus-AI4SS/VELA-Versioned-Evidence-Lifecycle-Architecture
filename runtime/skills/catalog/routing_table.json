@@ -777,11 +777,10 @@
       ],
       "mcp": [
         "chrome-devtools",
-        "social-platform-mcp",
         "openalex-mcp"
       ],
-      "rationale": "任务信号直接指向平台内容读取，必须先走浏览器可见证据链；若需要可复用、可留证、跨平台一致的抓取接口，则优先加用 social-platform-mcp，而不是把平台专用 MCP 当成总入口。",
-      "next_step": "先确认平台、页面类型和可见证据边界；网页打开、读取和截图优先用原生 Browser。若目标在用户 Chrome 已登录标签页、依赖 cookies、扩展或现有页面状态，优先用官方 Chrome 插件 claim 当前标签。需要跨应用点击、复制或处理非网页窗口时用 Computer Use。只有在要标准化批量采集、保存证据包或调试模板时才启用 social-platform-mcp、chrome-devtools 或 agent-browser。",
+      "rationale": "任务信号直接指向平台内容读取，必须先走浏览器可见证据链；公开 VELA 不打包需要账号态、cookies 或私有后端的平台采集 MCP。",
+      "next_step": "先确认平台、页面类型和可见证据边界；网页打开、读取和截图优先用原生 Browser。若目标在用户 Chrome 已登录标签页、依赖 cookies、扩展或现有页面状态，优先用官方 Chrome 插件 claim 当前标签。需要跨应用点击、复制或处理非网页窗口时用 Computer Use。只有在调试模板或复现网页结构时才启用 chrome-devtools 或 agent-browser。",
       "not_selected_reason": "当前任务核心不是正式文献发现。",
       "task_type": "social_evidence",
       "data_access_level": "authenticated_visible",

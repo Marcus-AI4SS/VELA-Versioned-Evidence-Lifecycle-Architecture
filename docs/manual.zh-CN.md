@@ -351,7 +351,6 @@ MCP 是把外部系统接进 Codex 的工具接口。VELA 的原则是：默认�
 | `google-scholar-mcp` | Google Scholar 检索链 | 单篇查找、右侧 PDF、引用扩展 |
 | `paper-search-mcp` | 聚合论文搜索 | 补充发现，不替代正式核验 |
 | `chrome-devtools` | DevTools 日志、网络、调试视角 | 原生 Browser/Chrome 不能满足调试需求时使用 |
-| `social-platform-mcp` | 通用社交平台证据采集后端 | 仅在用户明确需要可复现采集时作为可选后端 |
 | `external memory service pattern` | 外部记忆服务的接口思路和审查对象 | 只作 watch-only / pattern-only 线索；默认不安装、不常驻、不自动写规则 |
 | `codegraph` | 项目代码结构索引 | 需要代码关系和影响范围时按项目初始化 |
 

@@ -232,13 +232,13 @@ vela doctor</pre></article>
         <div class="grid-3">
           <article class="card"><h3>42 个 active skills</h3><p>覆盖总控、文献与审稿、计算社科与分析、写作与导出、图表与演示、运行时 helper、知识沉淀与平台材料。</p></article>
           <article class="card"><h3>插件层</h3><p>原生 Browser、Chrome、Computer Use、GitHub、Superpowers、Zotero、Scite、Google Drive、Documents、Presentations、Spreadsheets 等按任务启用。</p></article>
-          <article class="card"><h3>MCP 层</h3><p>OpenAlex、Semantic Scholar、Google Scholar、paper-search、Chrome DevTools、social-platform、CodeGraph 等是传感器和接口，不是事实源；Zotero 走官方插件，不作为默认 MCP。</p></article>
+          <article class="card"><h3>MCP 层</h3><p>OpenAlex、Semantic Scholar、Google Scholar、paper-search、Chrome DevTools、CodeGraph 等是传感器和接口，不是事实源；普通网页、本机桌面和登录态浏览器优先用原生 Browser、Chrome 和 Computer Use；Zotero 走官方插件，不作为默认 MCP。</p></article>
         </div>
         <table>
           <tr><th>层</th><th>代表项</th><th>边界</th></tr>
           <tr><td>Skills</td><td><code>research-autopilot</code>、<code>citation-verifier</code>、<code>quant-analysis</code>、<code>manuscript-writing-studio</code>、<code>project-folder-hygiene</code></td><td>具体任务能力，必须受路线和质量门约束。</td></tr>
           <tr><td>插件</td><td><code>github</code>、<code>superpowers</code>、<code>hugging-face</code>、<code>scite</code>、<code>documents</code>、<code>presentations</code></td><td>增强层，不能替代 VELA 源规则、schema、validator 和 Git 提交。</td></tr>
-          <tr><td>MCP</td><td><code>openalex-mcp</code>、<code>semantic-scholar-mcp</code>、<code>google-scholar-mcp</code>、<code>paper-search-mcp</code>、<code>chrome-devtools</code>、<code>social-platform-mcp</code>、<code>codegraph</code></td><td>只在任务需要时打开；工具返回结果仍需进入证据或检查链。</td></tr>
+          <tr><td>MCP</td><td><code>openalex-mcp</code>、<code>semantic-scholar-mcp</code>、<code>google-scholar-mcp</code>、<code>paper-search-mcp</code>、<code>chrome-devtools</code>、<code>codegraph</code></td><td>只在任务需要时打开；工具返回结果仍需进入证据或检查链。平台账号、cookies 或登录态相关后端不随公开包发布。</td></tr>
         </table>
         <table>
           <tr><th>Skill 角色</th><th>说明</th><th>例子</th></tr>

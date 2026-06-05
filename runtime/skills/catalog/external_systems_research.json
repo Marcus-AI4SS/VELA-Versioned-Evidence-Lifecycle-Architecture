@@ -408,7 +408,7 @@
       ],
       "not_adopted_by_default": [
         "does not replace browser-visible evidence capture",
-        "does not replace social-platform-mcp for repeatable social capture",
+        "does not add a public social-platform MCP backend or account-state capture service",
         "does not replace chrome-devtools or playwright-mcp for DOM, network, WebView, Electron, or Tauri debugging",
         "does not assume node_repl consumes Windows user-level NODE_REPL_NODE_MODULE_DIRS in Codex Desktop"
       ],
@@ -535,7 +535,7 @@
       ],
       "not_adopted_by_default": [
         "VELA does not replace research-autopilot as the sole router",
-        "VELA does not bypass citation-verifier, zotero-sync, writing-reference-capture, social-platform-reader, social-platform-mcp, or reproducibility-package gates",
+        "VELA does not bypass citation-verifier, zotero-sync, writing-reference-capture, social-platform-reader, or reproducibility-package gates",
         "VELA package starter, GitHub Pages site assets, generated examples, and older validators were not copied",
         "HELM export remains explicit copy-first handoff, not hidden execution or automatic cross-app mutation"
       ],

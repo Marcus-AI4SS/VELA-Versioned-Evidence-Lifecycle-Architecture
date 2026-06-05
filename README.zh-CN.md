@@ -53,7 +53,7 @@ VELA 不是单个脚本，而是一套可安装到 Codex 的研究工作流环�
 | 七层结构 | 任务与边界、工具与接口、上下文与证据、研究阶段、运行日志、可靠性检查、环境治理 |
 | Skills | 总控、文献与审稿、计算社科与分析、写作与导出、图表与演示、运行时 helper、知识沉淀 |
 | 插件 | 原生 Browser、Chrome、Computer Use、GitHub、Superpowers、Zotero、Scite、Google Drive、Documents、Presentations、Spreadsheets 等按任务启用 |
-| MCP 与适配器 | OpenAlex、Semantic Scholar、Google Scholar、paper-search、Chrome DevTools、social-platform、CodeGraph 等按路线启用；普通浏览器和电脑操作默认优先使用原生插件 |
+| MCP 与适配器 | OpenAlex、Semantic Scholar、Google Scholar、paper-search、Chrome DevTools、CodeGraph 等按路线启用；普通浏览器和电脑操作默认优先使用原生 Browser、Chrome 和 Computer Use |
 | 自动化 | doctor、runtime install、validate、privacy scan、envctl route/stack/memory/evolution 检查 |
 | 记忆治理 | 记忆只作为候选线索；长期规则必须经过 schema、validator、测试和版本提交 |
 

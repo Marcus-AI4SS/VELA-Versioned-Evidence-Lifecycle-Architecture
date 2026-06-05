@@ -214,7 +214,7 @@ Skill roles:
 
 Plugins are optional enhancement layers. Native Browser, Chrome, and Computer Use are the first choice for ordinary web pages, authenticated Chrome sessions, downloads, visible desktop apps, screenshots, and file dialogs. GitHub, Superpowers, Zotero, Scite, Google Drive, Documents, Presentations, Spreadsheets, and similar plugins may help when available. They do not replace schemas, validators, or source rules.
 
-MCP servers are sensors and interfaces. Common examples are OpenAlex, Semantic Scholar, Google Scholar, paper-search, Chrome DevTools, social-platform, and CodeGraph. Zotero is handled through the official plugin rather than a required MCP server. Browser MCP/CLI tools are reserved for debugging, reproducible automation, or route-specific capture after the native surfaces are insufficient. Their outputs must still pass project evidence and validation rules.
+MCP servers are sensors and interfaces. Common examples are OpenAlex, Semantic Scholar, Google Scholar, paper-search, Chrome DevTools, and CodeGraph. Zotero is handled through the official plugin rather than a required MCP server. Platform and browser-visible material starts with native Browser, Chrome, and Computer Use; Browser MCP/CLI tools are reserved for debugging or reproducible page-structure checks after the native surfaces are insufficient. Their outputs must still pass project evidence and validation rules.
 
 MCP startup policy:
 
