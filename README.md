@@ -52,8 +52,8 @@ VELA is not a single script. It is a Codex-installable research workflow environ
 | --- | --- |
 | Seven-layer structure | Task boundary, tools/interfaces, context/evidence, research stage, runtime logs, reliability checks, environment governance |
 | Skills | orchestration, literature, evidence, computational social science, writing/export, figures/presentation, runtime helpers, knowledge sync |
-| Plugins | GitHub, Superpowers, Hugging Face, Scite, Google Drive, Documents, Presentations, Spreadsheets, HyperFrames, Browser, and related optional layers |
-| MCP | Chrome DevTools, Zotero, OpenAlex, Semantic Scholar, Google Scholar, paper-search, agentmemory, CodeGraph, enabled by route |
+| Plugins | Native Browser, Chrome, Computer Use, GitHub, Superpowers, Zotero, Scite, Google Drive, Documents, Presentations, Spreadsheets, and related optional layers |
+| MCP and adapters | OpenAlex, Semantic Scholar, Google Scholar, paper-search, Chrome DevTools, social-platform, and CodeGraph are route-scoped helpers; native Browser/Chrome/Computer Use comes first |
 | Automation | doctor, runtime install, validate, privacy scan, envctl route/stack/memory/evolution checks |
 | Memory governance | memory is a candidate signal; durable rules require schemas, validators, tests, and versioned commits |
 
@@ -105,7 +105,7 @@ VELA works best when these public tools are available:
 | ripgrep | fast project search and privacy scans |
 | Node.js / npm | optional JavaScript-based tools |
 | GitHub CLI | optional repository checks |
-| agentmemory, CodeGraph, MCP servers, Codex plugins, Zotero, Obsidian | optional integrations checked by doctor commands; user credentials and local data stay outside VELA |
+| CodeGraph, MCP servers, Codex plugins, Zotero, Obsidian, external memory-service patterns | checked by doctor commands or adoption reviews; user credentials and local data stay outside VELA. VELA does not install or prestart external memory services |
 
 Installers create two normal user-side locations:
 

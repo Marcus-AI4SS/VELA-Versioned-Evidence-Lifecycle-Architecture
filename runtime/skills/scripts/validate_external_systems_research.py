@@ -146,7 +146,7 @@ def main() -> None:
 
 
 
-        for field in ("absorbed_into_local_stack", "not_adopted_by_default", "watch_items"):
+        for field in ("absorbed_into_vela_runtime", "not_adopted_by_default", "watch_items"):
 
             if not ensure_string_list(item.get(field, [])):
 

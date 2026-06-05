@@ -202,7 +202,7 @@ READING_EVIDENCE_PATH = CATALOG_ROOT / "workflow_governance_source_evidence.json
 
 
 
-MEMORY_DECISIONS = {"governance_kernel", "skill", "obsidian", "codex_native", "discard"}
+MEMORY_DECISIONS = {"control_kernel", "skill", "obsidian", "codex_native", "discard"}
 
 CORE_CONTROLLERS = {"research-autopilot", "vela-runtime-manager", "project-retrospective-evolver", "envctl"}
 

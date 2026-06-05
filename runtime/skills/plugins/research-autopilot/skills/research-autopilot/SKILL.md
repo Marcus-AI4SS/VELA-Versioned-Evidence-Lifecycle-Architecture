@@ -600,7 +600,7 @@ description: Use when the user is doing research, literature review, computation
 
 当用户要求“知网批量下载”“CNKI 文献进 Zotero”或提到浏览器批量下载脚本时：
 
-1. 先说明能力边界：这是 `reference-fulltext-acquisition` 下面的 CNKI 授权下载子链。默认发现与下载编排走 `envctl cnki-zotero` 和可控 Chrome/CDP；`cnki-mcp` 只在实时冒烟测试通过后作为临时候选传感器。agent-browser / Chrome DevTools 接入的已登录浏览器和用户脚本是已授权下载执行器；Zotero MCP 是正式文献库写入层。
+1. 先说明能力边界：这是 `reference-fulltext-acquisition` 下面的 CNKI 授权下载子链。默认发现与下载编排走 `envctl cnki-zotero` 和可控 Chrome/CDP；`cnki-mcp` 只在实时冒烟测试通过后作为临时候选传感器。agent-browser / Chrome DevTools 接入的已登录浏览器和用户脚本是已授权下载执行器；official Zotero plugin 是正式文献库写入层。
 
 2. 使用合同：`<VELA_RUNTIME_ROOT>\skills\catalog\cnki_zotero_workflow.json`。
 
@@ -694,7 +694,7 @@ python -m skills.scripts.envctl cnki-zotero ingest-plan --project-root "C:\path\
 
 
 
-14. 对 PDF，按报告中的 `zotero_mcp_import_plan` 使用 `zotero_add_from_file`；对有 DOI 的条目优先补充 `zotero_add_by_doi`；对 CAJ 保持人工复核或用户批准的转换路径。
+14. 对 PDF，按报告中的 `zotero_import_plan` 使用官方 Zotero 插件导入；对有 DOI 的条目优先补充 DOI 检索；对 CAJ 保持人工复核或用户批准的转换路径。
 
 15. 写入 Zotero 后运行 `zotero_update_search_database`，再用标题或 DOI 搜索确认。
 

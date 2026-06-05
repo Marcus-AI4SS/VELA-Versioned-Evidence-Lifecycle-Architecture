@@ -1,667 +1,334 @@
 {
-
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-
-  "$id": "https://marcus-ai4ss.github.io/VELA/schemas/cnki_zotero_workflow.v1.schema.json",
-
+  "$id": "https://research-environment-local/schemas/cnki_zotero_workflow.v1.schema.json",
   "title": "CNKI Zotero Controlled Workflow",
-
   "type": "object",
-
   "additionalProperties": false,
-
   "required": [
-
     "$schema",
-
     "schema_version",
-
     "workflow_id",
-
     "source_policy",
-
     "inbox",
-
     "candidate_selection",
-
     "acquisition_channels",
-
     "zotero_import",
-
     "validation_gates",
-
     "external_references"
-
   ],
-
   "properties": {
-
     "$schema": {
-
       "type": "string",
-
       "minLength": 1
-
     },
-
     "schema_version": {
-
       "const": "cnki_zotero_workflow.v1"
-
     },
-
     "workflow_id": {
-
       "type": "string",
-
       "pattern": "^[a-z0-9][a-z0-9_-]*$"
-
     },
-
     "source_policy": {
-
       "type": "object",
-
       "additionalProperties": false,
-
       "required": [
-
         "lawful_access_required",
-
         "no_login_bypass",
-
         "no_captcha_bypass",
-
         "no_cookie_persistence",
-
         "default_execution_mode",
-
         "copyrighted_files_storage"
-
       ],
-
       "properties": {
-
         "lawful_access_required": {
-
           "const": true
-
         },
-
         "no_login_bypass": {
-
           "const": true
-
         },
-
         "no_captcha_bypass": {
-
           "const": true
-
         },
-
         "no_cookie_persistence": {
-
           "const": true
-
         },
-
         "default_execution_mode": {
-
           "enum": [
-
             "report_only",
-
             "manual_confirmed_import"
-
           ]
-
         },
-
         "copyrighted_files_storage": {
-
           "type": "string",
-
           "minLength": 1
-
         }
-
       }
-
     },
-
     "inbox": {
-
       "type": "object",
-
       "additionalProperties": false,
-
       "required": [
-
         "default_path",
-
         "environment_fallback_path",
-
         "project_default_relative_path",
-
         "project_inbox_required_when_project_root_known",
-
         "allowed_environment_fallback_modes",
-
         "allowed_extensions",
-
         "metadata_sidecar_extensions",
-
         "max_auto_import_mb",
-
         "git_policy"
-
       ],
-
       "properties": {
-
         "default_path": {
-
           "type": "string",
-
           "minLength": 1
-
         },
-
         "environment_fallback_path": {
-
           "type": "string",
-
           "minLength": 1
-
         },
-
         "project_default_relative_path": {
-
           "type": "string",
-
           "minLength": 1
-
         },
-
         "project_inbox_required_when_project_root_known": {
-
           "const": true
-
         },
-
         "allowed_environment_fallback_modes": {
-
           "$ref": "#/$defs/string_list"
-
         },
-
         "allowed_extensions": {
-
           "$ref": "#/$defs/string_list"
-
         },
-
         "metadata_sidecar_extensions": {
-
           "$ref": "#/$defs/string_list"
-
         },
-
         "max_auto_import_mb": {
-
           "type": "integer",
-
           "minimum": 1
-
         },
-
         "git_policy": {
-
           "type": "string",
-
           "minLength": 1
-
         }
-
       }
-
     },
-
     "candidate_selection": {
-
       "type": "object",
-
       "additionalProperties": false,
-
       "required": [
-
         "author_affiliation_policy"
-
       ],
-
       "properties": {
-
         "author_affiliation_policy": {
-
           "type": "object",
-
           "additionalProperties": false,
-
           "required": [
-
             "required_when_affiliation_requested",
-
             "accepted_evidence_sources",
-
             "forbidden_shortcuts",
-
             "download_gate",
-
             "failure_action"
-
           ],
-
           "properties": {
-
             "required_when_affiliation_requested": {
-
               "const": true
-
             },
-
             "accepted_evidence_sources": {
-
               "type": "array",
-
               "minItems": 1,
-
               "items": {
-
                 "enum": [
-
                   "advanced_search_author_affiliation",
-
                   "detail_page_author_affiliation",
-
                   "metadata_sidecar_author_affiliation",
-
                   "user_verified_project_manifest"
-
                 ]
-
               },
-
               "uniqueItems": true
-
             },
-
             "forbidden_shortcuts": {
-
               "type": "array",
-
               "minItems": 1,
-
               "items": {
-
                 "enum": [
-
                   "author_only_search_as_affiliation_match",
-
                   "fulltext_query_as_affiliation_filter",
-
                   "citation_sort_without_affiliation_gate",
-
                   "download_before_affiliation_gate"
-
                 ]
-
               },
-
               "uniqueItems": true
-
             },
-
             "download_gate": {
-
               "type": "string",
-
               "minLength": 1
-
             },
-
             "failure_action": {
-
               "type": "string",
-
               "minLength": 1
-
             }
-
           }
-
         }
-
       }
-
     },
-
     "acquisition_channels": {
-
       "type": "array",
-
       "minItems": 1,
-
       "items": {
-
         "$ref": "#/$defs/acquisition_channel"
-
       }
-
     },
-
     "zotero_import": {
-
       "type": "object",
-
       "additionalProperties": false,
-
       "required": [
-
         "primary_write_path",
-
         "supported_import_modes",
-
         "default_tags",
-
         "collection_policy",
-
         "post_import_checks"
-
       ],
-
       "properties": {
-
         "primary_write_path": {
-
           "type": "string",
-
           "minLength": 1
-
         },
-
         "supported_import_modes": {
-
           "type": "array",
-
           "minItems": 1,
-
           "items": {
-
             "enum": [
-
               "doi_metadata",
-
               "local_pdf_add_from_file",
-
               "cnki_export_metadata",
-
               "manual_caj_attachment",
-
               "ris_review"
-
             ]
-
           },
-
           "uniqueItems": true
-
         },
-
         "default_tags": {
-
           "$ref": "#/$defs/string_list"
-
         },
-
         "collection_policy": {
-
           "type": "string",
-
           "minLength": 1
-
         },
-
         "post_import_checks": {
-
           "$ref": "#/$defs/string_list"
-
         }
-
       }
-
     },
-
     "validation_gates": {
-
       "type": "array",
-
       "minItems": 1,
-
       "items": {
-
         "$ref": "#/$defs/validation_gate"
-
       }
-
     },
-
     "external_references": {
-
       "type": "array",
-
       "items": {
-
         "$ref": "#/$defs/external_reference"
-
       }
-
     }
-
   },
-
   "$defs": {
-
     "string_list": {
-
       "type": "array",
-
       "items": {
-
         "type": "string",
-
         "minLength": 1
-
       },
-
       "uniqueItems": true
-
     },
-
     "acquisition_channel": {
-
       "type": "object",
-
       "additionalProperties": false,
-
       "required": [
-
         "id",
-
         "role",
-
         "allowed_outputs",
-
         "requires_user_session",
-
         "writes_source_files"
-
       ],
-
       "properties": {
-
         "id": {
-
           "type": "string",
-
           "pattern": "^[a-z0-9][a-z0-9_-]*$"
-
         },
-
         "role": {
-
           "type": "string",
-
           "minLength": 1
-
         },
-
         "allowed_outputs": {
-
           "$ref": "#/$defs/string_list"
-
         },
-
         "requires_user_session": {
-
           "type": "boolean"
-
         },
-
         "writes_source_files": {
-
           "const": false
-
         }
-
       }
-
     },
-
     "validation_gate": {
-
       "type": "object",
-
       "additionalProperties": false,
-
       "required": [
-
         "id",
-
         "description",
-
         "failure_action"
-
       ],
-
       "properties": {
-
         "id": {
-
           "type": "string",
-
           "pattern": "^[a-z0-9][a-z0-9_-]*$"
-
         },
-
         "description": {
-
           "type": "string",
-
           "minLength": 1
-
         },
-
         "failure_action": {
-
           "type": "string",
-
           "minLength": 1
-
         }
-
       }
-
     },
-
     "external_reference": {
-
       "type": "object",
-
       "additionalProperties": false,
-
       "required": [
-
         "name",
-
         "url",
-
         "decision",
-
         "accepted_patterns",
-
         "rejected_patterns"
-
       ],
-
       "properties": {
-
         "name": {
-
           "type": "string",
-
           "minLength": 1
-
         },
-
         "url": {
-
           "type": "string",
-
           "format": "uri"
-
         },
-
         "decision": {
-
           "enum": [
-
             "adapt",
-
             "watch",
-
             "reject"
-
           ]
-
         },
-
         "accepted_patterns": {
-
           "$ref": "#/$defs/string_list"
-
         },
-
         "rejected_patterns": {
-
           "$ref": "#/$defs/string_list"
-
         }
-
       }
-
     }
-
   }
-
 }

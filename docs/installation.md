@@ -10,7 +10,7 @@ cd vela
 .\install.ps1 -BootstrapTools
 ```
 
-`-BootstrapTools` checks public tools and uses `winget` where possible for Git, Python 3.13+, PowerShell 7, ripgrep, Node.js, GitHub CLI, and agentmemory.
+`-BootstrapTools` checks public tools and uses `winget` where possible for Git, Python 3.13+, PowerShell 7, ripgrep, Node.js, and GitHub CLI.
 
 ## macOS
 

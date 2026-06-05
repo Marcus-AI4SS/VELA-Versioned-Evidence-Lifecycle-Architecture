@@ -681,7 +681,7 @@
 
       "extracted_methodology": "大系统由多层级、多反馈回路和信息流组成，必须靠接口协调而不是互相吞并。",
 
-      "local_rule": "local 是源规则层，VELA 是分发工作流，HELM 是管理界面，Zotero 是正式文献库，Obsidian 是解释记忆，Plugin/Skill/MCP 是分层传感器和执行器。",
+      "local_rule": "VELA 源包是源规则层，运行态是执行层，可选本地看板是管理界面，Zotero 是正式文献库，Obsidian 是解释记忆，Plugin/Skill/MCP 是分层传感器和执行器。",
 
       "local_artifacts": [
 
@@ -689,7 +689,7 @@
 
           "ref": "skills/schemas/helm_snapshot_manifest.schema.json",
 
-          "role": "HELM snapshot boundary"
+          "role": "optional dashboard snapshot boundary"
 
         },
 

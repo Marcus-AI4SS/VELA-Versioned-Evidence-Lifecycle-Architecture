@@ -46,8 +46,8 @@ Windows users can run `.\install.ps1 -BootstrapTools`. macOS users can run `sh .
 | --- | --- |
 | Seven-layer structure | task boundary, tools/interfaces, context/evidence, research stage, runtime logs, reliability checks, environment governance |
 | Skills | orchestration, literature/evidence, computational social science, writing/export, figures/presentation, runtime helpers, knowledge sync |
-| Plugins | GitHub, Superpowers, Hugging Face, Scite, Google Drive, Documents, Presentations, Spreadsheets, HyperFrames, Browser, and related optional layers |
-| MCP | Chrome DevTools, Zotero, OpenAlex, Semantic Scholar, Google Scholar, paper-search, agentmemory, CodeGraph, enabled by route |
+| Plugins | Native Browser, Chrome, Computer Use, GitHub, Superpowers, Zotero, Scite, Google Drive, Documents, Presentations, Spreadsheets, and related optional layers |
+| MCP | OpenAlex, Semantic Scholar, Google Scholar, paper-search, Chrome DevTools, social-platform, and CodeGraph are route-scoped helpers; native Browser/Chrome/Computer Use comes first |
 | Automation | doctor, runtime install, validate, privacy scan, envctl route/stack/memory/evolution checks |
 | Memory governance | memory is a candidate signal; durable rules require schemas, validators, tests, and versioned commits |
 

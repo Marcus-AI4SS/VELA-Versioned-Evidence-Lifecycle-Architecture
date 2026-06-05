@@ -1,215 +1,108 @@
 {
-
   "$schema": "../schemas/memory_admission_policy.v1.schema.json",
-
   "schema_version": "memory_admission_policy.v1",
-
   "generated_at": "2026-05-09",
-
   "default_decision_order": [
-
-    "governance_kernel",
-
+    "control_kernel",
     "skill",
-
     "obsidian",
-
     "codex_native",
-
     "discard"
-
   ],
-
   "placements": [
-
     {
-
-      "decision_label": "governance_kernel",
-
+      "decision_label": "control_kernel",
       "purpose": "Store durable system logic that changes routing, validation, memory placement, or adaptive control.",
-
       "allowed_items": [
-
         "control objective",
-
         "controlled variable",
-
         "feedback signal",
-
         "stability metric",
-
         "adaptation rule",
-
         "memory placement rule"
-
       ],
-
       "forbidden_items": [
-
         "one-off project detail",
-
         "raw excerpt",
-
         "private path",
-
         "unverified citation",
-
         "temporary workaround"
-
       ],
-
       "owner": "vela-runtime-manager",
-
-      "validation_gate": "envctl validate governance"
-
+      "validation_gate": "envctl validate cybernetics"
     },
-
     {
-
       "decision_label": "skill",
-
       "purpose": "Store reusable procedural behavior that agents should execute in future tasks.",
-
       "allowed_items": [
-
         "repeatable workflow",
-
         "routing helper instruction",
-
         "tool-use sequence",
-
         "quality checklist",
-
         "domain procedure"
-
       ],
-
       "forbidden_items": [
-
         "global architectural principle",
-
         "personal vault content",
-
         "single project result",
-
         "unchecked external prompt bundle"
-
       ],
-
       "owner": "vela-runtime-manager",
-
       "validation_gate": "skill-vetter and skill-specific tests"
-
     },
-
     {
-
       "decision_label": "obsidian",
-
       "purpose": "Store long-form interpretation, reading notes, project retrospectives, and durable human-facing knowledge.",
-
       "allowed_items": [
-
         "reading note",
-
         "project retrospective",
-
         "method note",
-
         "workflow rationale",
-
         "evidence interpretation"
-
       ],
-
       "forbidden_items": [
-
         "runtime secret",
-
         "unchecked bibliographic item",
-
         "source-of-truth schema",
-
         "hidden automation rule"
-
       ],
-
       "owner": "obsidian-research-sync",
-
       "validation_gate": "obsidian sync package review"
-
     },
-
     {
-
       "decision_label": "codex_native",
-
       "purpose": "Store only stable assistant preference pointers that help future sessions find the source-of-truth rules.",
-
       "allowed_items": [
-
         "prefer research-autopilot for research tasks",
-
-        "prefer governance kernel over ad hoc memory",
-
+        "prefer control kernel over ad hoc memory",
         "prefer Chinese collaboration"
-
       ],
-
       "forbidden_items": [
-
         "project fact",
-
         "citation",
-
         "private document excerpt",
-
         "complex routing contract"
-
       ],
-
       "owner": "Codex user memory",
-
       "validation_gate": "manual user approval"
-
     },
-
     {
-
       "decision_label": "discard",
-
       "purpose": "Reject noisy, stale, unverifiable, or too-specific information from durable memory.",
-
       "allowed_items": [
-
         "obsolete path",
-
         "failed transient command detail",
-
         "duplicate observation",
-
         "unverified claim",
-
         "low-value chat phrasing"
-
       ],
-
       "forbidden_items": [
-
         "validated recurring failure",
-
         "accepted adaptation rule",
-
         "formal project evidence"
-
       ],
-
       "owner": "vela-runtime-manager",
-
       "validation_gate": "retrospective review"
-
     }
-
   ]
-
 }

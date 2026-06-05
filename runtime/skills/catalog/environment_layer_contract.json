@@ -2,8 +2,8 @@
   "$schema": "../schemas/environment_layer_contract.v1.schema.json",
   "schema_version": "environment_layer_contract.v1",
   "generated_at": "2026-05-27",
-  "policy": "VELA runtime uses a layered workflow governance model: execution, tools, context, lifecycle, observability, verification, and governance are explicit and checkable.",
-  "core_methodology_ref": "skills/catalog/governance_kernel.json",
+  "policy": "The local Codex research environment is governed as a seven-layer cybernetic system. Engineering cybernetics remains the core methodology; the seven layers make execution, tools, context, lifecycle, observability, verification, and governance explicit and checkable.",
+  "core_methodology_ref": "skills/catalog/control_kernel.json",
   "layer_order": [
     "execution",
     "tool",
@@ -42,7 +42,7 @@
       "verification": [
         "git diff --check",
         "py_compile",
-        "validate_vela_runtime",
+        "validate_research_stack",
         "protected path checks"
       ]
     },
@@ -75,7 +75,7 @@
       ],
       "verification": [
         "route-mcp-policy consistency",
-        "validate_vela_runtime command probes",
+        "validate_research_stack command probes",
         "tool-specific smoke tests"
       ]
     },
@@ -118,6 +118,7 @@
       "source_contracts": [
         "skills/catalog/research_pipeline_stages.json",
         "skills/catalog/project_scope_rules.json",
+        "skills/catalog/project_folder_contract.json",
         "skills/catalog/peer_review_workflow.json",
         "skills/catalog/manuscript_writing_workflow.json"
       ],
@@ -144,13 +145,13 @@
       "plain_meaning": "日志、日报、审计报告、状态报告、失败原因和运行痕迹。",
       "responsibility": "让环境知道自己做了什么、哪里失败、为什么不能继续。",
       "source_contracts": [
-        "runtime reports",
+        "WORKSPACE-LOG.md",
         "skills/outputs/reports",
         "skills/catalog/evolution_backlog.json",
         "skills/catalog/local_memory_system.json"
       ],
       "primary_components": [
-        "governance daily reports",
+        "cybernetics daily reports",
         "evolution intake reports",
         "memory status reports",
         "validator envelopes",
@@ -176,11 +177,12 @@
         "skills/schemas",
         "skills/catalog/quality_gates.json",
         "skills/scripts/validate_research_pipeline.py",
-        "skills/scripts/validate_vela_runtime.py"
+        "skills/scripts/validate_research_stack.py"
       ],
       "primary_components": [
         "jsonschema validation",
         "envctl validate",
+        "legacy validators",
         "quality gates",
         "unit tests"
       ],
@@ -193,16 +195,16 @@
         "validate_subagent_registry",
         "validate_agents_contract",
         "validate_research_pipeline",
-        "validate_vela_runtime"
+        "validate_research_stack"
       ]
     },
     {
       "id": "governance",
       "label": "Governance / 治理层",
-      "plain_meaning": "Workflow routing, permission boundaries, external adoption rules, protected paths, and rollback policy.",
+      "plain_meaning": "工程控制论控制核、总路由、权限边界、外部吸收策略、保护目录和回滚规则。",
       "responsibility": "决定什么能进入系统、谁是入口、哪里可以写、如何演化、如何回滚。",
       "source_contracts": [
-        "skills/catalog/governance_kernel.json",
+        "skills/catalog/control_kernel.json",
         "skills/catalog/conflict_matrix.json",
         "skills/catalog/external_adoption_reviews.json",
         "skills/catalog/environment_layer_contract.json"
@@ -220,7 +222,7 @@
         "cross repo drift report"
       ],
       "verification": [
-        "envctl validate governance",
+        "envctl validate cybernetics",
         "envctl validate environment-layers",
         "envctl validate drift"
       ]
@@ -1051,17 +1053,6 @@
       "task_type": "presentation_design"
     },
     {
-      "skill_id": "vela-runtime-manager",
-      "primary_layer": "governance",
-      "secondary_layers": [
-        "context",
-        "observability",
-        "verification"
-      ],
-      "role": "controller",
-      "task_type": "runtime_governance"
-    },
-    {
       "skill_id": "research-team-orchestrator",
       "primary_layer": "governance",
       "secondary_layers": [
@@ -1175,15 +1166,50 @@
       ],
       "role": "leaf",
       "task_type": "citation_integrity"
+    },
+    {
+      "skill_id": "vela-runtime-manager",
+      "primary_layer": "governance",
+      "secondary_layers": [
+        "execution",
+        "observability",
+        "verification"
+      ],
+      "role": "controller",
+      "task_type": "environment_runtime"
     }
   ],
   "tool_inventory": [
+    {
+      "id": "codex-in-app-browser",
+      "kind": "plugin",
+      "layer": "tool",
+      "source": "openai-bundled Browser plugin, controlled through node_repl browser-client iab backend",
+      "use_boundary": "First-choice browser surface for local files, localhost, ordinary web preview, screenshots, DOM inspection, page interaction, and in-app browser tabs.",
+      "write_boundary": "May interact with web pages only under Browser safety rules; confirms before uploads, submissions, permission changes, or sensitive data transmission."
+    },
+    {
+      "id": "official-chrome-plugin",
+      "kind": "plugin",
+      "layer": "tool",
+      "source": "openai-bundled Chrome plugin and Codex Chrome Extension for the selected user Chrome profile",
+      "use_boundary": "First-choice surface for user Chrome cookies, logged-in sessions, existing tabs, browser extensions, authenticated remote sites, and browser downloads when the extension is connected.",
+      "write_boundary": "Does not inspect cookies, local storage, passwords, or session stores; follows Browser safety and finalizes tabs after use."
+    },
+    {
+      "id": "codex-computer-use",
+      "kind": "plugin",
+      "layer": "tool",
+      "source": "openai-bundled Computer Use plugin on Windows, controlled through node_repl computer-use-client",
+      "use_boundary": "First-choice surface for Windows app inspection, screenshots, clicks, typing, Office/PowerPoint checks, Chrome window fallback, and file-dialog-level interactions when a real app UI is required.",
+      "write_boundary": "Must not automate Codex UI or terminals, bypass CAPTCHA/paywalls, change security settings, or transmit sensitive data without action-time confirmation."
+    },
     {
       "id": "chrome-devtools",
       "kind": "mcp",
       "layer": "tool",
       "source": "<CODEX_HOME>/config.toml and route_mcp_activation_policy.json",
-      "use_boundary": "Browser-visible evidence or UI automation sensor; does not bypass login, captcha, copyright, or user confirmation.",
+      "use_boundary": "Fallback/specialized browser sensor for DevTools logs, network details, and cases where native Browser/Chrome plugin cannot expose the required debugging surface.",
       "write_boundary": "No source writes unless the active route, user confirmation, and validator gates permit it."
     },
     {
@@ -1223,19 +1249,11 @@
       "kind": "mcp",
       "layer": "tool",
       "source": "<CODEX_HOME>/config.toml and route_mcp_activation_policy.json",
-      "use_boundary": "Browser-visible evidence or UI automation sensor; does not bypass login, captcha, copyright, or user confirmation.",
+      "use_boundary": "Fallback/specialized browser automation for repeatable regression tests, scripted screenshots, and deterministic flows when native Browser/Chrome cannot provide the needed automation contract.",
       "write_boundary": "No source writes unless the active route, user confirmation, and validator gates permit it."
     },
     {
       "id": "semantic-scholar-mcp",
-      "kind": "mcp",
-      "layer": "tool",
-      "source": "<CODEX_HOME>/config.toml and route_mcp_activation_policy.json",
-      "use_boundary": "Academic discovery, metadata, citation, or library sensor; formal claims still pass citation and evidence gates.",
-      "write_boundary": "No source writes unless the active route, user confirmation, and validator gates permit it."
-    },
-    {
-      "id": "zotero-mcp",
       "kind": "mcp",
       "layer": "tool",
       "source": "<CODEX_HOME>/config.toml and route_mcp_activation_policy.json",
@@ -1275,6 +1293,14 @@
       "write_boundary": "No destructive reset or checkout without explicit request."
     },
     {
+      "id": "official-zotero-plugin",
+      "kind": "plugin",
+      "layer": "tool",
+      "source": "<CODEX_HOME>/config.toml plugins.zotero@openai-curated and Codex official Zotero plugin",
+      "use_boundary": "Search the Zotero library, export BibTeX/citation keys, and support explicit reference or attachment import planning.",
+      "write_boundary": "Writes to Zotero only when the active workflow and user instruction require it; formal citations still pass citation and evidence gates."
+    },
+    {
       "id": "zotero",
       "kind": "knowledge_store",
       "layer": "context",
@@ -1307,39 +1333,16 @@
       "write_boundary": "No full transcript ingestion or source-of-truth override."
     },
     {
-      "id": "agentmemory",
-      "kind": "mcp",
-      "layer": "context",
-      "source": "<CODEX_HOME>/config.toml, @agentmemory/agentmemory@0.9.22, and <USER_HOME>/.agentmemory",
-      "use_boundary": "Runtime recall, session history, memory search, explicit memory save, audit, export, and governance delete; recalled memory remains a candidate signal.",
-      "write_boundary": "May write only to the agentmemory runtime store; cannot write source rules, AGENTS, skills, schemas, routes, or governance kernel without envctl validators and Git review.",
-      "safety_controls": {
-        "source_of_truth_policy": "agentmemory is a runtime recall and candidate layer; local Git contracts, envctl validators, and user-confirmed commits remain the source of truth.",
-        "allowed_write_scope": [
-          "<USER_HOME>/.agentmemory/data",
-          "agentmemory runtime audit/export outputs after explicit request"
-        ],
-        "forbidden_actions": [
-          "write source rules",
-          "write AGENTS, skills, schemas, routes, or governance kernel directly",
-          "auto-promote recalled memory",
-          "store secrets, cookies, account details, captcha state, or private paths as global memory"
-        ],
-        "delete_policy": "governance delete requires explicit scope, user confirmation, and an audit record; it cannot mutate source contracts.",
-        "audit_policy": "agentmemory status, health, export, delete, and promotion decisions must be logged or referenced by local decision_archive before durable changes."
-      }
-    },
-    {
       "id": "codegraph",
-      "kind": "mcp",
+      "kind": "cli",
       "layer": "context",
-      "source": "<CODEX_HOME>/config.toml and ignored project .codegraph index",
-      "use_boundary": "Code structure search, file context, callers/callees, impact, affected tests, and task context generation for local source understanding.",
+      "source": "global codegraph CLI, optional <CODEX_HOME>/config.toml mcp_servers.codegraph, and ignored project .codegraph index",
+      "use_boundary": "Code structure search, file context, callers/callees, impact, affected tests, and task context generation. Default usage is CLI; MCP is enabled only through the code-context profile.",
       "write_boundary": "May update only ignored .codegraph cache; cannot change source files or replace validators, rg, code review, or Git history.",
       "safety_controls": {
-        "source_of_truth_policy": "codegraph is an index and context aid only; source files, validators, tests, and Git history remain authoritative.",
+        "source_of_truth_policy": "codegraph is an on-demand index and context aid only; source files, validators, tests, rg, and Git history remain authoritative.",
         "allowed_write_scope": [
-          "<VELA_RUNTIME_ROOT>/.codegraph"
+          "<VELA_SOURCE_ROOT>/.codegraph"
         ],
         "forbidden_actions": [
           "change source files",
@@ -1349,16 +1352,38 @@
         "delete_policy": "The ignored .codegraph cache may be deleted or rebuilt without affecting source rules; source files must not be deleted through codegraph workflows.",
         "audit_policy": "codegraph status and query results are context evidence only and must be paired with validator/test output before source changes."
       }
+    },
+    {
+      "id": "social-platform-mcp",
+      "kind": "mcp",
+      "layer": "tool",
+      "source": "optional user-configured generic social-platform MCP backend",
+      "use_boundary": "Optional backend for public, browser-visible social platform evidence when a route explicitly requires reusable capture. Native Browser, Chrome, or Computer Use remain the first choice for ordinary browser work.",
+      "write_boundary": "Does not store credentials, cookies, login state, private messages, or platform-specific session data inside VELA.",
+      "safety_controls": {
+        "source_of_truth_policy": "social-platform-mcp is a route-scoped sensor only; project evidence files and validators remain authoritative.",
+        "allowed_write_scope": [
+          "outputs/inbox/social-platform",
+          "outputs/reports/social-platform"
+        ],
+        "forbidden_actions": [
+          "store credentials",
+          "bypass login, paywalls, or captcha",
+          "replace browser-visible evidence review",
+          "mutate source rules"
+        ],
+        "delete_policy": "Generated capture reports may be deleted only inside the active project output folders.",
+        "audit_policy": "Every captured item must keep visible source URL, timestamp, and route context."
+      }
     }
   ],
   "memory_optimization": {
-    "decision": "adopt_runtime_adapter",
+    "decision": "local_contract_with_optional_codegraph",
     "adopted_from_screenshot": [
       "perception-cognition-memory-execution-output-feedback mental model is mapped to context, lifecycle, execution, observability, verification, and governance layers",
       "keyword search, semantic search, cross-session context injection, confidence evaluation, decision archive, task tracking, memory cleanup, conversation snapshots, task status, and list/delete are useful interface ideas",
       "typed memory objects and confidence scores are preferred over prompt-only memory",
       "skill as cognitive core and MCP as access layer matches the local Plugin / Skill / MCP split",
-      "agentmemory runtime service as a vetted memory adapter",
       "codegraph local code structure index as a context adapter"
     ],
     "not_adopted": [
@@ -1366,7 +1391,8 @@
       "memory becoming a second router or source of truth",
       "QMD or a separate vector database as the default memory authority",
       "startup hooks that mutate source rules without envctl validators",
-      "agentmemory or codegraph becoming a second router or source of truth"
+      "external memory service as default runtime memory authority",
+      "external lifecycle hooks that run on every session, prompt, or tool call"
     ],
     "local_contract_ref": "skills/catalog/local_memory_system.json",
     "required_interfaces": [
@@ -1380,25 +1406,20 @@
       "conversation_snapshot",
       "task_status",
       "memory_list_delete",
-      "agentmemory_smart_search",
-      "agentmemory_session_history",
-      "agentmemory_governance_delete",
       "codegraph_context_index"
     ],
-    "adopted_from_agentmemory": [
-      "persistent cross-session memory server for coding agents",
-      "MCP smart search, save, sessions, audit, export, and governance delete tools",
-      "Codex lifecycle hooks for session start, prompt submit, tool use, compact, and stop observations",
-      "viewer and health endpoints as memory observability",
-      "LLM compression and context injection are opt-in rather than default"
+    "adopted_memory_interface_patterns": [
+      "smart search, audit, export, and governance delete remain useful interface ideas",
+      "health endpoints and viewer-style observability remain useful future patterns",
+      "default lifecycle hooks were rejected after local stability review"
     ],
     "runtime_boundaries": [
-      "agentmemory is the runtime recall layer, not the local rule source",
       "local_memory_system and memory_admission_policy decide durable promotion",
       "recalled context may trigger a clarification question but cannot silently change route",
       "no full transcript import, LLM compression, prompt injection, or source mutation by default",
-      "agentmemory data root must stay outside the active local source tree",
-      "codegraph index is ignored cache and cannot be used as rule authority"
+      "codegraph index is ignored cache and cannot be used as rule authority",
+      "local Git contracts remain the memory source of truth",
+      "external memory services are optional experiments, not default runtime adapters"
     ]
   },
   "conflict_audit": {
@@ -1416,13 +1437,13 @@
   },
   "governance_assertions": [
     "research-autopilot remains the only total router",
-    "workflow governance remains the core methodology and governance kernel",
-    "runtime governance remains explicit, versioned, and validator-backed",
-    "HELM and runtime caches are consumers, not source-of-truth layers",
+    "engineering cybernetics remains the core methodology and control kernel",
+    "optional dashboards and runtime caches are consumers, not source-of-truth layers",
     "MCP and plugins are tools, not autonomous governance authorities",
     "project and citation facts must remain evidence-gated",
     "all low-risk automation still needs logs, validators, and git traceability",
-    "agentmemory recall candidates must be scored, reviewed, and routed before becoming durable rules",
-    "codegraph is a code-context cache and not a governance authority"
+    "codegraph is a code-context cache and not a governance authority",
+    "runtime memory candidates must be scored, reviewed, and routed before becoming durable rules",
+    "codegraph is an on-demand code-context cache and not a governance authority"
   ]
 }

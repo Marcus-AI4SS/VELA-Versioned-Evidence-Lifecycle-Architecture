@@ -40,9 +40,7 @@ if [ "${VELA_BOOTSTRAP_TOOLS:-0}" = "1" ]; then
     if ! command -v gh >/dev/null 2>&1; then printf 'Install GitHub CLI if you need repository and release checks.\n'; fi
     if [ "$(uname -s)" = "Darwin" ]; then printf 'Install Homebrew first for automatic macOS public-tool bootstrap.\n'; fi
   fi
-  if ! command -v agentmemory >/dev/null 2>&1 && command -v npm >/dev/null 2>&1; then
-    npm install -g agentmemory || printf 'agentmemory npm install failed; continue with manual optional setup.\n'
-  fi
+  printf 'External memory services are watch-only patterns. VELA does not install or prestart any external memory service.\n'
   printf 'CodeGraph, MCP vendors, Codex plugins, browser/CNKI sessions, Zotero, and Obsidian are doctor/manual setup only.\n'
 fi
 

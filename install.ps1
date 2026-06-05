@@ -73,7 +73,7 @@ if ($BootstrapTools) {
   Install-VelaWingetPackage -CommandName "rg" -PackageId "BurntSushi.ripgrep.MSVC" -DisplayName "ripgrep"
   Install-VelaWingetPackage -CommandName "node" -PackageId "OpenJS.NodeJS.LTS" -DisplayName "Node.js LTS"
   Install-VelaWingetPackage -CommandName "gh" -PackageId "GitHub.cli" -DisplayName "GitHub CLI"
-  Install-VelaNpmPackage -CommandName "agentmemory" -PackageName "agentmemory" -DisplayName "agentmemory"
+  Write-Host "[VELA bootstrap] External memory services are watch-only patterns. VELA does not install or prestart any external memory service."
   Write-Host "[VELA bootstrap] CodeGraph, MCP server vendor requirements, Codex plugins, browser/CNKI login state, Zotero, and Obsidian remain explicit doctor/manual setup."
 }
 

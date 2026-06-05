@@ -64,7 +64,7 @@
 
       "enabled": true,
 
-      "purpose": "Active VELA runtime and HELM workspaces."
+      "purpose": "Active VELA runtime and optional local dashboard workspaces."
 
     },
 

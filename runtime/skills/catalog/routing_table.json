@@ -32,17 +32,18 @@
       ],
       "plugins": [
         "GitHub",
-        "Superpowers"
+        "Superpowers",
+        "Browser",
+        "Chrome",
+        "Computer Use"
       ],
       "mcp": [
         "chrome-devtools",
-        "zotero-mcp",
         "openalex-mcp",
         "semantic-scholar-mcp",
-        "agentmemory",
         "codegraph"
       ],
-      "rationale": "当前任务指向配置治理、组件审计或环境演化，应该先进入研究栈治理链，而不是直接进入具体研究执行链。",
+      "rationale": "当前任务指向配置治理、组件审计或环境演化，应该先进入研究栈治理链，而不是直接进入具体研究执行链。 浏览器和应用交互按原生优先：in-app Browser 用于本地/普通网页，官方 Chrome 用于用户登录态、扩展和已有标签页，Computer Use 用于 Windows 应用；旧 MCP/CLI 只作专用后备。",
       "next_step": "先审计当前 skill、MCP、插件、记忆运行层和代码结构索引状态，再提出变更方案或执行明确的环境修改。",
       "not_selected_reason": "这不是面向具体研究内容的执行型任务。",
       "task_type": "stack_governance",
@@ -80,7 +81,6 @@
       "helper_skills": [],
       "plugins": [],
       "mcp": [
-        "zotero-mcp",
         "openalex-mcp",
         "semantic-scholar-mcp"
       ],
@@ -146,17 +146,18 @@
         "local-cloud-router"
       ],
       "plugins": [
-        "Superpowers"
+        "Superpowers",
+        "Browser",
+        "Chrome",
+        "Computer Use"
       ],
       "mcp": [
         "chrome-devtools",
-        "zotero-mcp",
         "openalex-mcp",
-        "agentmemory",
         "codegraph"
       ],
       "rationale": "任务核心是维护研究运行环境、Python/Git/PowerShell/Codex 配置或 MCP profile；应进入环境运维子路线，而不是普通研究栈治理或具体研究执行链。",
-      "next_step": "先检查当前 shell、Python 虚拟环境、Git 状态、config.toml、profile、agentmemory、codegraph 和相关脚本，再执行最小必要修复并记录变更。",
+      "next_step": "先检查当前 shell、Python 虚拟环境、Git 状态、config.toml、profile、本地记忆报告、codegraph 和相关脚本；涉及 Codex App、Chrome、Zotero、PowerPoint、Word 或其它 Windows 应用状态时，优先用原生 Computer Use 做只读观察或明确授权的 UI 操作；网页预览优先用原生 Browser/Chrome；再执行最小必要修复并记录变更。",
       "not_selected_reason": "当前任务不是环境维护。",
       "task_type": "environment_ops",
       "data_access_level": "public_open",
@@ -204,7 +205,7 @@
         "Superpowers"
       ],
       "mcp": [],
-      "rationale": "任务核心是把目标项目文件夹整理成可交接、可继续、无明显临时垃圾和死文件的状态；它处理项目内文件组织，不等同于VELA 运行时治理。",
+      "rationale": "任务核心是把目标项目文件夹整理成可交接、可继续、无明显临时垃圾和死文件的状态；它处理项目内文件组织，不等同于 VELA runtime 治理。",
       "next_step": "先确认项目根目录、整理目的和写权限；再盘点 Git 状态和文件清单，把文件分为保留、可安全删除、需用户确认、需移动归档；执行前只处理明确安全项，完成后复查 Git 状态并输出整理报告。",
       "not_selected_reason": "当前任务不是项目文件夹清理、整理、交接或收尾。",
       "task_type": "environment_ops",
@@ -255,14 +256,15 @@
       "project_helper_skills": [
         "research-team-orchestrator"
       ],
-      "plugins": [],
+      "plugins": [
+        "Browser",
+        "Chrome"
+      ],
       "mcp": [
         "chrome-devtools",
-        "zotero-mcp",
-        "openalex-mcp",
-        "agentmemory"
+        "openalex-mcp"
       ],
-      "rationale": "任务指向项目结束后的流程复盘、技能演化判断或知识沉淀，应先由 project-retrospective-evolver 归纳工作流，再把变更提案交给 vela-runtime-manager，把耐久记忆交给 obsidian-research-sync。",
+      "rationale": "任务指向项目结束后的流程复盘、技能演化判断或知识沉淀，应先由 project-retrospective-evolver 归纳工作流，再把变更提案交给 vela-runtime-manager，把耐久记忆交给 obsidian-research-sync。 浏览器和应用交互按原生优先：in-app Browser 用于本地/普通网页，官方 Chrome 用于用户登录态、扩展和已有标签页，Computer Use 用于 Windows 应用；旧 MCP/CLI 只作专用后备。",
       "next_step": "先总结项目目标、阶段、重复模式、摩擦点和可复用流程，再判断 no-change / update-existing-skill / create-new-skill / needs-better-routing。",
       "not_selected_reason": "当前任务不是项目收尾复盘。",
       "task_type": "project_retrospective",
@@ -312,11 +314,14 @@
       "helper_skills": [
         "local-cloud-router"
       ],
-      "plugins": [],
+      "plugins": [
+        "Browser",
+        "Chrome"
+      ],
       "mcp": [
         "chrome-devtools"
       ],
-      "rationale": "任务核心是长时计算实验的运行监督、状态诊断、断点续跑或后台任务保护；应进入运行运维链，而不是直接改模型或改论文结论。",
+      "rationale": "任务核心是长时计算实验的运行监督、状态诊断、断点续跑或后台任务保护；应进入运行运维链，而不是直接改模型或改论文结论。 浏览器和应用交互按原生优先：in-app Browser 用于本地/普通网页，官方 Chrome 用于用户登录态、扩展和已有标签页，Computer Use 用于 Windows 应用；旧 MCP/CLI 只作专用后备。",
       "next_step": "先检查任务状态、进程树、CPU 时间差、结果/partial/shard 文件、状态 JSON 与日志，再判断等待、恢复、重启或修复 checkpoint。",
       "not_selected_reason": "当前任务若只是理论建模或结果解释，不应使用该路线。",
       "task_type": "runtime_ops",
@@ -403,16 +408,18 @@
       "project_helper_skills": [
         "research-team-orchestrator"
       ],
-      "plugins": [],
+      "plugins": [
+        "Browser",
+        "Chrome"
+      ],
       "mcp": [
         "chrome-devtools",
-        "zotero-mcp",
         "openalex-mcp",
         "semantic-scholar-mcp",
         "google-scholar-mcp",
         "paper-search-mcp"
       ],
-      "rationale": "用户意图是把文献从候选、全文、结构性阅读、综述写作到正文引文证据核验连成可审计证据链；应先进入 evidence-based-literature-workflow 这个总控流程，再由 DOI/元数据核验、全文获取、PDF 标注、综述和 Zotero 子链执行具体动作。",
+      "rationale": "用户意图是把文献从候选、全文、结构性阅读、综述写作到正文引文证据核验连成可审计证据链；应先进入 evidence-based-literature-workflow 这个总控流程，再由 DOI/元数据核验、全文获取、PDF 标注、综述和 Zotero 子链执行具体动作。 浏览器和应用交互按原生优先：in-app Browser 用于本地/普通网页，官方 Chrome 用于用户登录态、扩展和已有标签页，Computer Use 用于 Windows 应用；旧 MCP/CLI 只作专用后备。",
       "next_step": "先锁定研究问题、题目/摘要/框架/实证结果、来源文献、文献范围、SCI/SSCI/CSSCI 来源准入、DOI 豁免规则、全文目录和输出目录；默认先围绕理论基础、研究现状、方法或主要变量筛约 50 篇候选文献，中文约 20 篇、英文约 30 篇，优先高被引正式文献，正式纳入必须有 SCI、SSCI 或 CSSCI 来源证据；构成选题的来源文献默认进入候选池，并先查其上游引用和下游被引文献，但无 SCI/SSCI/CSSCI 证据的来源文献先列为背景或人工复核；再建立候选表、核验元数据、取得并校验 PDF、列出缺失 PDF，最后进入结构性阅读和正文引文证据审计。",
       "not_selected_reason": "如果只是单纯下载 PDF，走 reference-fulltext-acquisition；如果只是核验少量 DOI 元数据，走 citation-verifier；如果只是普通写作导出，走 writing-reference-capture。只要出现结构性阅读、文献核验、证据句、引文证据或证据包意图，应选择本路线。",
       "task_type": "citation_integrity",
@@ -469,16 +476,18 @@
       "project_helper_skills": [
         "research-team-orchestrator"
       ],
-      "plugins": [],
+      "plugins": [
+        "Browser",
+        "Chrome"
+      ],
       "mcp": [
         "chrome-devtools",
-        "zotero-mcp",
         "openalex-mcp",
         "semantic-scholar-mcp",
         "google-scholar-mcp",
         "paper-search-mcp"
       ],
-      "rationale": "任务需要跨来源发现、引文扩展、正式核验和综合写作，因此应启用完整文献 profile。",
+      "rationale": "任务需要跨来源发现、引文扩展、正式核验和综合写作，因此应启用完整文献 profile。 浏览器和应用交互按原生优先：in-app Browser 用于本地/普通网页，官方 Chrome 用于用户登录态、扩展和已有标签页，Computer Use 用于 Windows 应用；旧 MCP/CLI 只作专用后备。",
       "next_step": "先建立候选文献池和检索边界；中文数据库候选用 envctl cnki-zotero find/fetch，英文与开放索引用 Google Scholar、paper-search、OpenAlex 和 Semantic Scholar；再做引用证据核验与 Zotero 入库。证据材料里出现 DOI 时核验 DOI；用户提供来源、完整 PDF 原文或公开学术检索记录可以作为 DOI 豁免证据。",
       "not_selected_reason": "当前任务并非单篇论文评审。",
       "task_type": "literature_review",
@@ -508,6 +517,8 @@
         "下载论文",
         "下载文献",
         "下载PDF",
+        "论文PDF",
+        "文献PDF",
         "补齐PDF",
         "PDF原文",
         "fulltext",
@@ -541,17 +552,20 @@
       "project_helper_skills": [
         "research-team-orchestrator"
       ],
-      "plugins": [],
+      "plugins": [
+        "Browser",
+        "Chrome",
+        "Computer Use"
+      ],
       "mcp": [
         "chrome-devtools",
-        "zotero-mcp",
         "openalex-mcp",
         "semantic-scholar-mcp",
         "google-scholar-mcp",
         "paper-search-mcp"
       ],
       "rationale": "任务目标是从参考文献表或文献池取得、校验并整理全文 PDF；应进入统一全文获取链，而不是让 CNKI、Google Scholar、OpenAlex、Zotero 或浏览器脚本各自直接接管。",
-      "next_step": "先建立 reference_download_status.csv，核验 DOI/元数据；没有 DOI 时记录用户提供来源、完整 PDF 原文或公开学术检索记录作为 DOI 豁免证据。英文或国际文献先用 OpenAlex/Crossref/Unpaywall/Semantic Scholar 批量尝试开放全文，没有取得可校验 PDF 时默认进入 Google Scholar 逐篇精确题名检索并优先右侧 PDF；CNKI 走授权下载，用户原件走 PDF 校验；最后输出已取得和仍缺失清单。",
+      "next_step": "先建立 reference_download_status.csv，核验 DOI/元数据；没有 DOI 时记录用户提供来源、完整 PDF 原文或公开学术检索记录作为 DOI 豁免证据。英文或国际文献先用 OpenAlex/Crossref/Unpaywall/Semantic Scholar 批量尝试开放全文，没有取得可校验 PDF 时默认进入 Google Scholar 逐篇精确题名检索并优先右侧 PDF。网页操作优先用原生 Browser；需要用户 Chrome 登录态、扩展、已有标签页或浏览器下载时优先用官方 Chrome 插件；需要操作系统下载栏、文件对话框或其它 Windows 应用时优先用 Computer Use。CNKI 批量和可控下载目录仍由 envctl/cdp/agent-browser 兜底。最后输出已取得和仍缺失清单。",
       "not_selected_reason": "当前任务若只是候选文献发现或正式写作引用核验，不应直接进入全文下载链。",
       "task_type": "literature_discovery",
       "data_access_level": "licensed_library",
@@ -577,10 +591,17 @@
         "论文图片",
         "论文插图",
         "学术图",
+        "论文图表",
+        "学术图表",
         "顶刊图",
         "画图",
         "绘图",
         "作图",
+        "出图",
+        "制图",
+        "配图",
+        "图表绘制",
+        "图表美化",
         "机制图",
         "概念图",
         "框架图",
@@ -588,6 +609,10 @@
         "研究设计图",
         "结果图",
         "多面板图",
+        "莫兰迪",
+        "社科版 Nature",
+        "高级科研图",
+        "无重叠",
         "系数图",
         "事件研究图",
         "可视化",
@@ -597,6 +622,9 @@
         "research figure",
         "paper figure",
         "diagram",
+        "morandi",
+        "social science nature",
+        "premium research figure",
         "image2"
       ],
       "aliases": [
@@ -606,6 +634,8 @@
         "social science figure",
         "top journal figure",
         "nature style figure",
+        "social science nature figure",
+        "morandi figure",
         "image2 figure"
       ],
       "skills": [
@@ -616,8 +646,8 @@
       "plugins": [],
       "mcp": [],
       "rationale": "任务目标是绘制或改造论文级科研图片，应先锁定图的论证功能、面板结构、文字标签、数据证据和渲染方式，再决定使用代码、SVG/PPT/HTML 或 image2。",
-      "next_step": "先生成 figure brief：说明图要支撑的论文主张、图型、数据/概念依据、面板结构、全部文字、连接线含义、配色和风险，再渲染并审图。",
-      "not_selected_reason": "当前任务若只是普通表格、普通写作交付或界面设计，不应使用该路线。",
+      "next_step": "先生成 figure brief：说明图要支撑的论文主张、图型、数据/概念依据、面板结构、全部文字、连接线含义、风格预设、配色和风险；正式图默认使用 social_science_nature_morandi 或 nature_empirical_morandi，再渲染并检查元素重叠。",
+      "not_selected_reason": "当前任务若只是普通表格、普通写作导出或桌面 app UI 设计，不应使用该路线。",
       "task_type": "figure_table",
       "data_access_level": "public_open",
       "quality_gate_required": [
@@ -684,11 +714,13 @@
         "writing-reference-capture"
       ],
       "plugins": [
-        "Presentations"
+        "Presentations",
+        "Browser",
+        "Computer Use"
       ],
       "mcp": [],
       "rationale": "任务目标是制作或改造研究汇报、答辩、路演、PPTX 或网页演示文稿；应先进入 research-presentation-studio 做研究流程和证据边界确认，HTML 网页演示的视觉执行直接委托已安装的原版 guizang-ppt-skill，而不是把论文图表、正式引文或写作链混在一起。",
-      "next_step": "先确认输出是 HTML web deck、PPTX 还是混合交付，并在电子杂志风与瑞士国际主义之间选定视觉系统和主题。需要高质量网页视觉时调用原版 guizang-ppt-skill；需要正式 PPTX 时使用官方 Presentations 插件；涉及论文正式图表时转入 research-figure-studio 或 figure-table-studio。",
+      "next_step": "先确认输出格式、主题风格、内容结构和图片需求。HTML 网页 deck 优先用原生 Browser 预览；PPTX 或 PowerPoint 可视检查优先用官方 Presentations 插件和原生 Computer Use；guizang 原版负责网页高质量视觉，image2 负责锁定后的配图。",
       "not_selected_reason": "当前任务若目标是正式论文图表、正文写作、引文核验或数据分析，不应直接使用演示文稿路线。",
       "task_type": "presentation_design",
       "data_access_level": "public_open",
@@ -708,6 +740,7 @@
       "project_scope_class": "conditional_multi_agent",
       "clarification_rule": "project_scope_rules.social-platform-case",
       "keywords": [
+        "公开社交平台",
         "抖音",
         "B站",
         "b站",
@@ -723,6 +756,7 @@
       "aliases": [
         "social media",
         "douyin",
+        "social-platform",
         "wechat article",
         "bilibili"
       ],
@@ -736,14 +770,18 @@
       "project_helper_skills": [
         "research-team-orchestrator"
       ],
-      "plugins": [],
+      "plugins": [
+        "Browser",
+        "Chrome",
+        "Computer Use"
+      ],
       "mcp": [
         "chrome-devtools",
-        "zotero-mcp",
+        "social-platform-mcp",
         "openalex-mcp"
       ],
-      "rationale": "任务信号直接指向平台内容读取，必须先走浏览器可见证据链；若需要可复用、可留证、跨平台一致的抓取接口，则优先加用 reusable agent-browser templates，而不是把平台专用 MCP 当成总入口。",
-      "next_step": "先判断当前任务是一次性浏览器可见读取，还是需要标准化社媒抓取接口；然后输出社媒后端决策卡，明确说明为什么选 chrome-devtools，以及为什么是否直接启用 agent-browser。",
+      "rationale": "任务信号直接指向平台内容读取，必须先走浏览器可见证据链；若需要可复用、可留证、跨平台一致的抓取接口，则优先加用 social-platform-mcp，而不是把平台专用 MCP 当成总入口。",
+      "next_step": "先确认平台、页面类型和可见证据边界；网页打开、读取和截图优先用原生 Browser。若目标在用户 Chrome 已登录标签页、依赖 cookies、扩展或现有页面状态，优先用官方 Chrome 插件 claim 当前标签。需要跨应用点击、复制或处理非网页窗口时用 Computer Use。只有在要标准化批量采集、保存证据包或调试模板时才启用 social-platform-mcp、chrome-devtools 或 agent-browser。",
       "not_selected_reason": "当前任务核心不是正式文献发现。",
       "task_type": "social_evidence",
       "data_access_level": "authenticated_visible",
@@ -808,16 +846,17 @@
         "research-team-orchestrator"
       ],
       "plugins": [
-        "Hugging Face"
+        "Hugging Face",
+        "Browser",
+        "Chrome"
       ],
       "mcp": [
         "chrome-devtools",
-        "zotero-mcp",
         "openalex-mcp",
         "semantic-scholar-mcp",
         "paper-search-mcp"
       ],
-      "rationale": "任务需要计算社会科学工作流，而不是单一分析技能；主路由应自动组合数据、方法和复现链。",
+      "rationale": "任务需要计算社会科学工作流，而不是单一分析技能；主路由应自动组合数据、方法和复现链。 浏览器和应用交互按原生优先：in-app Browser 用于本地/普通网页，官方 Chrome 用于用户登录态、扩展和已有标签页，Computer Use 用于 Windows 应用；旧 MCP/CLI 只作专用后备。",
       "next_step": "先明确研究设计、数据来源和计算目标，再决定本地还是云端执行。",
       "not_selected_reason": "当前任务并不只是单一文本或网络分析。",
       "task_type": "computational_social_science",
@@ -905,7 +944,6 @@
       ],
       "plugins": [],
       "mcp": [
-        "zotero-mcp",
         "openalex-mcp",
         "semantic-scholar-mcp"
       ],
@@ -1045,7 +1083,6 @@
       ],
       "plugins": [],
       "mcp": [
-        "zotero-mcp",
         "openalex-mcp",
         "semantic-scholar-mcp"
       ],
@@ -1113,7 +1150,6 @@
         "Hugging Face"
       ],
       "mcp": [
-        "zotero-mcp",
         "openalex-mcp",
         "semantic-scholar-mcp",
         "paper-search-mcp"
@@ -1180,7 +1216,6 @@
       ],
       "plugins": [],
       "mcp": [
-        "zotero-mcp",
         "openalex-mcp",
         "semantic-scholar-mcp"
       ],
@@ -1274,6 +1309,7 @@
         "去模板化",
         "humanize",
         "deslop",
+        "stop slop",
         "avoid AI writing"
       ],
       "aliases": [
@@ -1299,6 +1335,7 @@
         "submission polish",
         "academic humanization",
         "deslop",
+        "stop slop",
         "avoid AI writing",
         "de-template academic prose"
       ],
@@ -1315,14 +1352,18 @@
       "project_helper_skills": [
         "research-team-orchestrator"
       ],
-      "plugins": [],
+      "plugins": [
+        "Browser",
+        "Chrome",
+        "Computer Use",
+        "Documents"
+      ],
       "mcp": [
-        "zotero-mcp",
         "openalex-mcp",
         "semantic-scholar-mcp"
       ],
       "rationale": "任务目标是交付、改写、润色、目标期刊适配或导出文稿；先由 manuscript-writing-studio 判断语言目标、学科类型、输出容器，以及是否需要目标期刊语料风格证据，再按需要调用引文捕获、审稿回复、Word 或 LaTeX 导出。写作链不得用英文期刊、理工科或目标期刊表层风格覆盖中文社科默认规则和事实证据边界。",
-      "next_step": "先声明语言目标和学科目标：英文期刊和计算社科/方法技术型文章可更积极借鉴 Nature-style 与目标期刊风格证据；中文期刊、传统量化和质性研究以本地社科写作规则为主。若用户要求投稿前润色或按目标期刊修改，先确认目标期刊、正文/章节、可读目标期刊语料或用户批准的 fallback，再生成风格诊断和逐段修订日志。若改动了引用、证据性断言、结果或图表措辞，再进入 writing-reference-capture 和对应质量门。 若用户明确要求降 AIGC、去 AI 味或去模板化，先锁定事实、引用、数据、变量、结果和局限，再调用 academic-humanization-studio 做 detect/rewrite/second-pass audit；不得把检测分数作为目标。",
+      "next_step": "先声明语言目标和学科目标；若需要 Word/docx 可视检查或跨应用审阅，优先使用 Documents 插件和原生 Computer Use；若写作材料来自网页或用户 Chrome 已登录页面，优先使用原生 Browser/官方 Chrome 插件读取可见证据。若用户要求投稿前润色或按目标期刊修改，先确认目标期刊、正文/章节、可读目标期刊语料或用户批准的 fallback，再生成风格诊断和逐段修订日志。",
       "not_selected_reason": "当前任务不以文献搜索为首要动作。",
       "task_type": "writing_export",
       "data_access_level": "licensed_library",
@@ -1363,15 +1404,16 @@
       "project_helper_skills": [
         "research-team-orchestrator"
       ],
-      "plugins": [],
+      "plugins": [
+        "Browser",
+        "Chrome"
+      ],
       "mcp": [
         "chrome-devtools",
-        "zotero-mcp",
         "openalex-mcp",
-        "semantic-scholar-mcp",
-        "agentmemory"
+        "semantic-scholar-mcp"
       ],
-      "rationale": "任务信号不足以进入更窄的专用链，先用稳定主链完成研究设计和信息核验。",
+      "rationale": "任务信号不足以进入更窄的专用链，先用稳定主链完成研究设计和信息核验。 浏览器和应用交互按原生优先：in-app Browser 用于本地/普通网页，官方 Chrome 用于用户登录态、扩展和已有标签页，Computer Use 用于 Windows 应用；旧 MCP/CLI 只作专用后备。",
       "next_step": "先明确研究问题、材料类型和第一可执行产出，再细分到更具体的叶子技能。",
       "not_selected_reason": "该路线是保守默认值。",
       "always_default": true,

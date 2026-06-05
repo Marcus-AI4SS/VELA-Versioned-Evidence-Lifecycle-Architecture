@@ -1,0 +1,739 @@
+{
+  "$schema": "../schemas/figure_style_presets.v1.schema.json",
+  "schema_version": "figure_style_presets.v1",
+  "updated_at": "2026-05-31",
+  "policy": "本地科研绘图采用固定风格预设，避免不同线程临场发挥。默认正式科研图使用社科版 Nature 莫兰迪风格；真实数据图仍由确定性工具控制数值。图名和长图注不进入图片内部，元素重叠必须检查。",
+  "default_presets": {
+    "formal_research_figure": "social_science_nature_morandi",
+    "empirical_figure": "nature_empirical_morandi",
+    "review_ready_figure": "minimal_review_ready_morandi",
+    "presentation_figure": "presentation_premium_morandi"
+  },
+  "presets": [
+    {
+      "id": "social_science_nature_morandi",
+      "label": "社科版 Nature 莫兰迪正式科研图",
+      "default_for": [
+        "formal_research_figure",
+        "conceptual_mechanism_figure",
+        "research_design_figure",
+        "workflow_figure",
+        "mixed_paper_figure_overview"
+      ],
+      "style_role": "默认正式科研图风格。吸收 Nature 式层级、留白、细线条和出版感，但改造成社科论文可用的概念、机制和研究设计图风格。",
+      "source_inspiration": [
+        "Yuan1z0825/nature-skills visual hierarchy",
+        "social-science top-journal restrained figure practice",
+        "local scientific_figure_workflow evidence contract"
+      ],
+      "use_cases": [
+        "机制图",
+        "概念框架图",
+        "研究设计图",
+        "流程图",
+        "理论路径图",
+        "论文图组总览图"
+      ],
+      "figure_types": [
+        "conceptual_framework",
+        "causal_mechanism",
+        "research_design",
+        "workflow",
+        "typology",
+        "multi_panel_argument"
+      ],
+      "palette": {
+        "background": [
+          "#FFFFFF",
+          "#F7F5F1"
+        ],
+        "neutral": [
+          {
+            "name": "charcoal",
+            "hex": "#2F3437",
+            "role": "primary text and key outlines"
+          },
+          {
+            "name": "warm gray",
+            "hex": "#D8D3CA",
+            "role": "light dividers and panel rules"
+          },
+          {
+            "name": "mist gray",
+            "hex": "#EEF0ED",
+            "role": "subtle background blocks"
+          }
+        ],
+        "primary": [
+          {
+            "name": "morandi blue gray",
+            "hex": "#6F8797",
+            "role": "primary path or main module"
+          },
+          {
+            "name": "sage green",
+            "hex": "#8FA99B",
+            "role": "mechanism or feedback module"
+          }
+        ],
+        "secondary": [
+          {
+            "name": "dusty lavender",
+            "hex": "#A29AAF",
+            "role": "secondary actor or comparison module"
+          },
+          {
+            "name": "sand beige",
+            "hex": "#D7C9B4",
+            "role": "context or boundary module"
+          }
+        ],
+        "accent": [
+          {
+            "name": "muted terracotta",
+            "hex": "#B9826E",
+            "role": "single emphasis, risk or intervention"
+          },
+          {
+            "name": "deep ink blue",
+            "hex": "#3C5871",
+            "role": "core arrow or central claim"
+          }
+        ],
+        "constraints": [
+          "Use low-saturation Morandi colors rather than random vivid colors.",
+          "Use at most two accent colors in one figure.",
+          "Do not default to plain black-and-white except when a target journal requires it.",
+          "Check grayscale readability as a safety test, not as the default aesthetic."
+        ]
+      },
+      "typography": {
+        "font_policy": "Formal manuscript figures prefer serif fonts with Chinese Songti/SimSun fallback and English Times-style fallback. Presentation use may use a modern sans-serif only if all labels stay consistent.",
+        "base_pt": 10,
+        "label_pt": 9,
+        "caption_outside_pt": 9,
+        "rules": [
+          "Keep visible text short; long explanation belongs in the caption or manuscript text.",
+          "Panel labels use consistent size and position.",
+          "Do not place formal figure titles inside the image.",
+          "All generated text must be checked and repaired if misspelled."
+        ]
+      },
+      "line_style": [
+        "Use fine, consistent lines.",
+        "Use slightly stronger line weight only for the central path.",
+        "Avoid heavy borders, shadows, glass effects and 3D outlines."
+      ],
+      "arrow_style": [
+        "Arrows must express real flow, causal hypothesis, process order or conceptual dependence.",
+        "Use one arrow style per semantic relation.",
+        "Dashed arrows are reserved for feedback, uncertainty or indirect links."
+      ],
+      "panel_layout": [
+        "Organize multi-panel figures as descriptive fact, main result, mechanism or heterogeneity, robustness when applicable.",
+        "Each panel must answer one distinct question.",
+        "Use generous spacing between modules and panels.",
+        "Do not create a decorative collage."
+      ],
+      "legend_rules": [
+        "Use shared legends when a legend is necessary.",
+        "Prefer direct labels when they reduce cognitive load.",
+        "Legends must not cover lines, points, arrows or text."
+      ],
+      "whitespace_rules": [
+        "Use high whitespace as part of the style.",
+        "Leave enough margin around all labels, arrows and modules.",
+        "Do not compress dense labels into small boxes."
+      ],
+      "title_caption_policy": [
+        "Do not put the formal figure title inside the image.",
+        "Do not put a long caption inside the image.",
+        "Put title, caption, data source, sample, model, note and script path in manuscript text or delivery notes."
+      ],
+      "output_formats": [
+        "svg",
+        "pdf",
+        "pptx",
+        "png"
+      ],
+      "image2_prompt_requirements": {
+        "prompt_tokens": [
+          "morandi_palette",
+          "social_science_journal_figure",
+          "white_background",
+          "high_whitespace",
+          "no_internal_title",
+          "no_long_caption",
+          "no_overlap",
+          "exact_text",
+          "no_fake_data"
+        ],
+        "required_phrases": [
+          "white-background social-science journal figure",
+          "low-saturation Morandi color palette",
+          "no figure title inside the image",
+          "no long caption inside the image",
+          "no overlapping text, legend, arrows, points or lines",
+          "all text must be readable and spelled exactly as provided",
+          "no invented data, axes, p-values, sample sizes, citations or sources"
+        ]
+      },
+      "overlap_checks": [
+        "Text must not overlap modules, arrows, panel labels or other text.",
+        "Legends must not overlap lines, points, confidence bands or arrows.",
+        "Arrowheads must not touch labels or pass through text.",
+        "Panel labels must not collide with axes, legends or content."
+      ],
+      "forbidden_elements": [
+        "decorative gradient background",
+        "glassmorphism",
+        "3D effect",
+        "stock-photo ambience",
+        "random high-saturation palette",
+        "internal formal title",
+        "long internal caption",
+        "invented empirical values"
+      ],
+      "quality_checks": [
+        "figure_style_preset_selected",
+        "morandi_palette_checked",
+        "title_caption_outside_image_checked",
+        "visual_overlap_checked",
+        "image2_locked_structure_contract",
+        "grayscale_readability_checked"
+      ]
+    },
+    {
+      "id": "nature_empirical_morandi",
+      "label": "Nature 社科版真实数据图",
+      "default_for": [
+        "empirical_figure",
+        "coefficient_plot",
+        "event_study_plot",
+        "marginal_effect_plot",
+        "distribution_plot",
+        "network_metric_plot"
+      ],
+      "style_role": "默认真实数据图风格。保持出版级克制和高级感，但所有数值、坐标、误差条和显著性必须来自确定性代码或可复现输出。",
+      "source_inspiration": [
+        "Nature-style clean empirical visual hierarchy",
+        "scientific-figure-skill data health and process data discipline",
+        "social-science regression and event-study conventions"
+      ],
+      "use_cases": [
+        "系数图",
+        "事件研究图",
+        "边际效应图",
+        "预测概率图",
+        "分布图",
+        "趋势图",
+        "网络指标图"
+      ],
+      "figure_types": [
+        "coefficient_plot",
+        "event_study",
+        "marginal_effect",
+        "predicted_probability",
+        "distribution",
+        "trend",
+        "scatter",
+        "network_metric"
+      ],
+      "palette": {
+        "background": [
+          "#FFFFFF",
+          "#FAF9F6"
+        ],
+        "neutral": [
+          {
+            "name": "axis charcoal",
+            "hex": "#30373B",
+            "role": "axis text and main labels"
+          },
+          {
+            "name": "grid gray",
+            "hex": "#E6E1D8",
+            "role": "light gridlines"
+          },
+          {
+            "name": "confidence gray",
+            "hex": "#C9CDD0",
+            "role": "confidence interval fill"
+          }
+        ],
+        "primary": [
+          {
+            "name": "estimate blue gray",
+            "hex": "#5F7F95",
+            "role": "main estimate line or point"
+          },
+          {
+            "name": "comparison sage",
+            "hex": "#8AA391",
+            "role": "comparison series"
+          }
+        ],
+        "secondary": [
+          {
+            "name": "muted violet",
+            "hex": "#9B91AA",
+            "role": "secondary model family"
+          },
+          {
+            "name": "soft clay",
+            "hex": "#C3927D",
+            "role": "treatment or highlighted group"
+          }
+        ],
+        "accent": [
+          {
+            "name": "deep slate",
+            "hex": "#334E5C",
+            "role": "reference line or direct label"
+          },
+          {
+            "name": "muted ochre",
+            "hex": "#C4A46A",
+            "role": "single warning or boundary mark"
+          }
+        ],
+        "constraints": [
+          "Use low-saturation Morandi colors as the default empirical palette.",
+          "Do not encode meaning by color alone; add line type, marker shape, facet or direct label when useful.",
+          "Keep confidence intervals and uncertainty readable.",
+          "Do not use image2 to create empirical values, axes, p-values or sample sizes.",
+          "Keep gridlines light or absent."
+        ]
+      },
+      "typography": {
+        "font_policy": "Formal empirical figures use serif fonts by default; axis labels 10 pt, ticks and legends 9 pt, panel labels 10 pt.",
+        "base_pt": 10,
+        "label_pt": 9,
+        "caption_outside_pt": 9,
+        "rules": [
+          "Axis titles must include quantity and unit when applicable.",
+          "Tick labels must not overlap or rotate into unreadability.",
+          "Legends must not cover plotted data.",
+          "No internal formal title; use external caption and manuscript text."
+        ]
+      },
+      "line_style": [
+        "Use thin reference lines and slightly heavier main estimate lines.",
+        "Confidence intervals should be visible but not visually dominant.",
+        "Avoid heavy box borders unless target journal requires them."
+      ],
+      "arrow_style": [
+        "Use arrows sparingly in empirical figures.",
+        "Annotations must point to real plotted evidence.",
+        "Do not imply causal direction without the manuscript design supporting it."
+      ],
+      "panel_layout": [
+        "Keep axis ranges comparable across panels unless a note explains otherwise.",
+        "Shared legends appear once.",
+        "Separate heterogeneous estimates by facet or panel rather than cluttering one axis."
+      ],
+      "legend_rules": [
+        "Place legends above, below, or in an empty margin when possible.",
+        "If a legend overlaps a line, point, confidence band or bar, move it or use direct labels.",
+        "Shared legend is preferred for multi-panel figures."
+      ],
+      "whitespace_rules": [
+        "Reserve margin for labels and legends.",
+        "Do not let confidence bands, annotations and legends compete for the same space.",
+        "Use tight layout only after checking overlap."
+      ],
+      "title_caption_policy": [
+        "No formal figure title inside the plotting area.",
+        "No long caption inside the image.",
+        "Caption must be delivered as text with unit, sample, time window, model, uncertainty, source and script path when available."
+      ],
+      "output_formats": [
+        "pdf",
+        "svg",
+        "png",
+        "csv_sidecar",
+        "script"
+      ],
+      "image2_prompt_requirements": {
+        "prompt_tokens": [
+          "morandi_palette",
+          "layout_assist_only",
+          "no_internal_title",
+          "no_long_caption",
+          "no_overlap",
+          "no_fake_data"
+        ],
+        "required_phrases": [
+          "layout assistance only",
+          "low-saturation Morandi color palette",
+          "no figure title inside the image",
+          "no long caption inside the image",
+          "no overlapping legend, labels, points, lines, bars or confidence intervals",
+          "do not invent or change any data values, axes, p-values, sample sizes or sources"
+        ]
+      },
+      "overlap_checks": [
+        "Text labels must not overlap axes, tick labels, legends, plotted data or annotations.",
+        "Legends must not overlap plotted data.",
+        "Axis labels and tick labels must not collide.",
+        "Annotations must not cover confidence intervals or points.",
+        "Panel labels must not overlap axes or plot marks."
+      ],
+      "forbidden_elements": [
+        "image2-generated empirical data",
+        "invented p-values",
+        "invented sample sizes",
+        "legend covering data",
+        "overcrowded multi-series plot",
+        "internal formal title",
+        "long internal caption"
+      ],
+      "quality_checks": [
+        "figure_style_preset_selected",
+        "morandi_palette_checked",
+        "title_caption_outside_image_checked",
+        "visual_overlap_checked",
+        "data_health_before_plotting",
+        "process_data_traceability",
+        "justified_statistics_annotations"
+      ]
+    },
+    {
+      "id": "minimal_review_ready_morandi",
+      "label": "投稿审稿安全莫兰迪风格",
+      "default_for": [
+        "review_ready_figure",
+        "submission_figure",
+        "revision_response_figure"
+      ],
+      "style_role": "投稿和审稿阶段默认保守风格。它保留低饱和色彩和高级感，但优先服务审稿可读性、证据边界、图注完整和可复现。",
+      "source_inspiration": [
+        "journal review readability requirements",
+        "Nature-style restrained figure polish",
+        "local peer review and submission package gates"
+      ],
+      "use_cases": [
+        "投稿图",
+        "审稿回复图",
+        "定稿图",
+        "补充材料图"
+      ],
+      "figure_types": [
+        "submission_ready_panel",
+        "revision_evidence",
+        "supplementary_figure",
+        "robustness_figure"
+      ],
+      "palette": {
+        "background": [
+          "#FFFFFF"
+        ],
+        "neutral": [
+          {
+            "name": "review black",
+            "hex": "#2B2B2B",
+            "role": "text and essential lines"
+          },
+          {
+            "name": "review gray",
+            "hex": "#DCD8D0",
+            "role": "grid and separators"
+          }
+        ],
+        "primary": [
+          {
+            "name": "review blue gray",
+            "hex": "#617C8C",
+            "role": "main result"
+          }
+        ],
+        "secondary": [
+          {
+            "name": "review sage",
+            "hex": "#8D9F91",
+            "role": "secondary result"
+          }
+        ],
+        "accent": [
+          {
+            "name": "review terracotta",
+            "hex": "#AA7A6C",
+            "role": "single emphasis"
+          }
+        ],
+        "constraints": [
+          "Use low-saturation Morandi colors as the default review-ready palette.",
+          "Use fewer colors than the formal research preset.",
+          "Keep all elements legible in grayscale.",
+          "Avoid decorative effects and visual flourish.",
+          "Never remove uncertainty, source, model or sample information for visual simplicity."
+        ]
+      },
+      "typography": {
+        "font_policy": "Use manuscript-safe serif fonts and keep font sizes stable across all submitted figures.",
+        "base_pt": 10,
+        "label_pt": 9,
+        "caption_outside_pt": 9,
+        "rules": [
+          "Prefer consistency over novelty.",
+          "Avoid tiny annotations.",
+          "No internal long notes.",
+          "All labels must survive PDF review zoom levels."
+        ]
+      },
+      "line_style": [
+        "Keep lines thin and print-safe.",
+        "Use patterns or direct labels when grayscale may collapse colors.",
+        "Remove nonessential decorative outlines."
+      ],
+      "arrow_style": [
+        "Use arrows only when necessary for interpretation.",
+        "Avoid curved decorative arrows in review figures."
+      ],
+      "panel_layout": [
+        "Panel order follows the manuscript evidence sequence.",
+        "Keep panel labels consistent across the submission package.",
+        "Do not introduce a new visual grammar only for one revision figure."
+      ],
+      "legend_rules": [
+        "Legends should be shared and outside the data-dense region.",
+        "If space is tight, use direct labels or split panels.",
+        "No legend may overlap plotted marks or text."
+      ],
+      "whitespace_rules": [
+        "Use enough white space for reviewer annotation.",
+        "Do not over-compress supplemental panels."
+      ],
+      "title_caption_policy": [
+        "External title and caption only.",
+        "No long note inside the image.",
+        "Caption text must carry source, sample, model and uncertainty."
+      ],
+      "output_formats": [
+        "pdf",
+        "svg",
+        "png",
+        "script"
+      ],
+      "image2_prompt_requirements": {
+        "prompt_tokens": [
+          "morandi_palette",
+          "review_ready",
+          "no_internal_title",
+          "no_long_caption",
+          "no_overlap",
+          "no_fake_data"
+        ],
+        "required_phrases": [
+          "review-ready social-science journal figure",
+          "low-saturation Morandi palette",
+          "no figure title inside the image",
+          "no long caption inside the image",
+          "no overlapping visual elements",
+          "no invented data, sources, axes or citations"
+        ]
+      },
+      "overlap_checks": [
+        "All text must remain legible after PDF export.",
+        "Legends and notes must stay outside dense plotted regions.",
+        "Panel labels must not collide with figure marks."
+      ],
+      "forbidden_elements": [
+        "decorative effects",
+        "dense internal notes",
+        "hidden uncertainty",
+        "legend covering evidence",
+        "internal formal title",
+        "long internal caption"
+      ],
+      "quality_checks": [
+        "figure_style_preset_selected",
+        "morandi_palette_checked",
+        "title_caption_outside_image_checked",
+        "visual_overlap_checked",
+        "grayscale_readability_checked",
+        "caption_source_traceability"
+      ]
+    },
+    {
+      "id": "presentation_premium_morandi",
+      "label": "研究汇报高级莫兰迪风格",
+      "default_for": [
+        "presentation_figure",
+        "defense_figure",
+        "research_report_figure"
+      ],
+      "style_role": "答辩、汇报和研究展示图风格。允许更强层级和视觉冲击，但仍遵守数据真实性、无重叠和图名图注外置原则。",
+      "source_inspiration": [
+        "Nature-style visual hierarchy",
+        "premium research presentation layout",
+        "local guizang presentation quality rules"
+      ],
+      "use_cases": [
+        "答辩图",
+        "汇报图",
+        "研究报告图",
+        "网页 PPT 配图"
+      ],
+      "figure_types": [
+        "presentation_mechanism",
+        "visual_abstract",
+        "research_story_panel",
+        "high_level_architecture"
+      ],
+      "palette": {
+        "background": [
+          "#FFFFFF",
+          "#F5F1EA"
+        ],
+        "neutral": [
+          {
+            "name": "presentation ink",
+            "hex": "#27333A",
+            "role": "large text and key outlines"
+          },
+          {
+            "name": "presentation mist",
+            "hex": "#EAE6DD",
+            "role": "soft containers"
+          }
+        ],
+        "primary": [
+          {
+            "name": "premium blue gray",
+            "hex": "#54758A",
+            "role": "main flow"
+          },
+          {
+            "name": "premium sage",
+            "hex": "#829C89",
+            "role": "feedback or governance"
+          }
+        ],
+        "secondary": [
+          {
+            "name": "premium lavender",
+            "hex": "#A298B1",
+            "role": "secondary layer"
+          },
+          {
+            "name": "premium sand",
+            "hex": "#D9C8A9",
+            "role": "context layer"
+          }
+        ],
+        "accent": [
+          {
+            "name": "premium clay",
+            "hex": "#B77F6E",
+            "role": "highlight"
+          },
+          {
+            "name": "premium deep blue",
+            "hex": "#2F536A",
+            "role": "callout"
+          }
+        ],
+        "constraints": [
+          "Use low-saturation Morandi colors as the default presentation palette.",
+          "Use stronger scale contrast than manuscript figures but keep low saturation.",
+          "Do not turn research figures into marketing posters.",
+          "No invented statistics or citations.",
+          "Keep the figure compatible with manuscript-grade reconstruction if needed."
+        ]
+      },
+      "typography": {
+        "font_policy": "Presentation figures may use modern sans-serif for screen readability, but manuscript exports must keep the serif fallback option.",
+        "base_pt": 12,
+        "label_pt": 11,
+        "caption_outside_pt": 10,
+        "rules": [
+          "Use larger text for screen readability.",
+          "Keep labels short and exact.",
+          "No long caption inside the figure.",
+          "Do not use decorative typography that weakens academic clarity."
+        ]
+      },
+      "line_style": [
+        "Use clean flat vector lines.",
+        "Allow subtle hierarchy through line weight.",
+        "Avoid glossy, 3D or skeuomorphic effects."
+      ],
+      "arrow_style": [
+        "Use clear directional arrows.",
+        "Dashed arrows indicate feedback or optional paths.",
+        "Avoid ornamental connector lines."
+      ],
+      "panel_layout": [
+        "Use strong visual hierarchy and generous margins.",
+        "Make the central claim legible at slide scale.",
+        "Keep each panel aligned to the story sequence."
+      ],
+      "legend_rules": [
+        "Prefer direct labels.",
+        "Use legends only when the audience needs repeated symbol decoding.",
+        "Legends must not overlap content."
+      ],
+      "whitespace_rules": [
+        "Use whitespace to create a premium publication feel.",
+        "Do not fill every corner of the canvas.",
+        "Keep hierarchy obvious at a glance."
+      ],
+      "title_caption_policy": [
+        "Slide title belongs to the slide, not inside the figure asset.",
+        "Figure caption or speaker note belongs outside the image.",
+        "Do not place long explanatory paragraphs inside the visual."
+      ],
+      "output_formats": [
+        "png",
+        "svg",
+        "pptx",
+        "html"
+      ],
+      "image2_prompt_requirements": {
+        "prompt_tokens": [
+          "morandi_palette",
+          "premium_research_presentation",
+          "white_background",
+          "high_whitespace",
+          "no_internal_title",
+          "no_long_caption",
+          "no_overlap",
+          "exact_text",
+          "no_fake_data"
+        ],
+        "required_phrases": [
+          "premium social-science research presentation figure",
+          "low-saturation Morandi palette",
+          "white or warm-white background",
+          "no figure title inside the image",
+          "no long caption inside the image",
+          "no overlapping text, legend, arrows, points or lines",
+          "all labels exactly as provided",
+          "no invented empirical values, citations or sources"
+        ]
+      },
+      "overlap_checks": [
+        "Text and callout labels must not overlap modules, arrows or large visual blocks.",
+        "Large labels must not overlap modules.",
+        "Callouts must not cover the central flow.",
+        "Legends must not hide evidence or arrows."
+      ],
+      "forbidden_elements": [
+        "marketing hero poster",
+        "decorative 3D",
+        "bokeh or orb background",
+        "internal formal title",
+        "long internal caption",
+        "invented empirical values"
+      ],
+      "quality_checks": [
+        "figure_style_preset_selected",
+        "morandi_palette_checked",
+        "title_caption_outside_image_checked",
+        "visual_overlap_checked",
+        "image2_locked_structure_contract"
+      ]
+    }
+  ]
+}

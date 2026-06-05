@@ -96,7 +96,7 @@ def run(args: argparse.Namespace) -> int:
 
     if args.action == "reconcile":
 
-        report = build_memory_reconciliation_report(probe_agentmemory=args.probe_agentmemory)
+        report = build_memory_reconciliation_report()
 
         errors = validate_memory_reconciliation_report(report)
 
@@ -216,7 +216,7 @@ def _summarize_reconciliation(report: dict) -> dict:
 
         "source_files_written": report["source_files_written"],
 
-        "agentmemory": report["agentmemory"],
+        "external_memory_service": report["external_memory_service"],
 
         "automation_reports": report["automation_reports"],
 
@@ -263,8 +263,6 @@ def add_parser(subparsers: argparse._SubParsersAction) -> None:
     reconcile = action.add_parser("reconcile")
 
     reconcile.add_argument("--summary", action="store_true")
-
-    reconcile.add_argument("--probe-agentmemory", action="store_true")
 
     reconcile.add_argument(
 

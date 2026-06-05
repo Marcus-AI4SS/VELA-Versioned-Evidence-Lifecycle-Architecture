@@ -1,0 +1,6 @@
+name = "code-context"
+display_name = "Code Context"
+description = "按需启用 CodeGraph MCP，用于代码结构、影响范围和上下文索引检查。普通新线程仍应使用 startup-safe。"
+managed_mcp = ["codegraph"]
+enabled_mcp = ["codegraph"]
+activation_note = "Use only when a task needs CodeGraph as an MCP tool. For one-off checks, prefer codegraph CLI commands without switching profile."

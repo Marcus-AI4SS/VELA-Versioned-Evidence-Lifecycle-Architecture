@@ -1,0 +1,310 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://research-environment-local/schemas/project_folder_contract.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "generated_at",
+    "purpose",
+    "applies_to",
+    "root_principles",
+    "standard_tree",
+    "zones",
+    "project_type_overrides",
+    "cleanup_decision_classes",
+    "forbidden_root_patterns",
+    "routing_integration"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schema_version": {
+      "const": "project_folder_contract.v1"
+    },
+    "generated_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 1
+    },
+    "applies_to": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "root_principles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "standard_tree": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "required_files",
+        "required_dirs",
+        "recommended_dirs",
+        "optional_files"
+      ],
+      "properties": {
+        "required_files": {
+          "$ref": "#/$defs/path_list"
+        },
+        "required_dirs": {
+          "$ref": "#/$defs/path_list"
+        },
+        "recommended_dirs": {
+          "$ref": "#/$defs/path_list"
+        },
+        "optional_files": {
+          "$ref": "#/$defs/path_list"
+        }
+      }
+    },
+    "zones": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/zone"
+      },
+      "minItems": 1
+    },
+    "project_type_overrides": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/project_type_override"
+      }
+    },
+    "cleanup_decision_classes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/decision_class"
+      },
+      "minItems": 1
+    },
+    "forbidden_root_patterns": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/forbidden_pattern"
+      }
+    },
+    "routing_integration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "initializer_manifest",
+        "project_initializer_must_create",
+        "hygiene_skill",
+        "validation_target",
+        "download_inbox_policy",
+        "subagent_output_policy"
+      ],
+      "properties": {
+        "initializer_manifest": {
+          "type": "string",
+          "minLength": 1
+        },
+        "project_initializer_must_create": {
+          "$ref": "#/$defs/path_list"
+        },
+        "hygiene_skill": {
+          "type": "string",
+          "minLength": 1
+        },
+        "validation_target": {
+          "type": "string",
+          "minLength": 1
+        },
+        "download_inbox_policy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subagent_output_policy": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  },
+  "$defs": {
+    "path_list": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "^[^\\\\]+$"
+      },
+      "uniqueItems": true
+    },
+    "zone": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "plain_meaning",
+        "paths",
+        "layer",
+        "git_policy",
+        "allowed_content",
+        "forbidden_content",
+        "cleanup_policy"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "plain_meaning": {
+          "type": "string",
+          "minLength": 1
+        },
+        "paths": {
+          "$ref": "#/$defs/path_list"
+        },
+        "layer": {
+          "type": "string",
+          "enum": [
+            "execution",
+            "tool",
+            "context",
+            "lifecycle",
+            "observability",
+            "verification",
+            "governance"
+          ]
+        },
+        "git_policy": {
+          "type": "string",
+          "enum": [
+            "track_source",
+            "ignore_generated",
+            "track_small_ledgers_ignore_large_files",
+            "optional_track"
+          ]
+        },
+        "allowed_content": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "forbidden_content": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "cleanup_policy": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "project_type_override": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "project_type",
+        "add_required_dirs",
+        "add_recommended_dirs",
+        "notes"
+      ],
+      "properties": {
+        "project_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "add_required_dirs": {
+          "$ref": "#/$defs/path_list"
+        },
+        "add_recommended_dirs": {
+          "$ref": "#/$defs/path_list"
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "decision_class": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "meaning",
+        "default_action"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "meaning": {
+          "type": "string",
+          "minLength": 1
+        },
+        "default_action": {
+          "type": "string",
+          "enum": [
+            "keep",
+            "move_or_archive",
+            "ask_user",
+            "safe_remove_after_scope_check"
+          ]
+        }
+      }
+    },
+    "forbidden_pattern": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pattern",
+        "reason",
+        "default_action"
+      ],
+      "properties": {
+        "pattern": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "default_action": {
+          "type": "string",
+          "enum": [
+            "move_to_outputs",
+            "move_to_archive",
+            "safe_remove_after_scope_check",
+            "ask_user"
+          ]
+        }
+      }
+    }
+  }
+}

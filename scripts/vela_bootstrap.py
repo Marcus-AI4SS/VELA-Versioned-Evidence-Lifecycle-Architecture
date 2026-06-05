@@ -378,26 +378,6 @@ def _tool_specs() -> list[dict[str, Any]]:
 
         {
 
-            "id": "agentmemory",
-
-            "category": "optional",
-
-            "required": False,
-
-            "command": "agentmemory",
-
-            "args": ["status"],
-
-            "install_strategy": "npm-global" if _npm_available() else "manual",
-
-            "npm_package": "agentmemory",
-
-            "remediation": "Install and initialize agentmemory only if you want the optional memory-management runtime.",
-
-        },
-
-        {
-
             "id": "codegraph",
 
             "category": "optional",
@@ -502,13 +482,13 @@ def _protected_runtime_boundaries() -> list[dict[str, str]]:
 
         {
 
-            "id": "agentmemory-data-store",
+            "id": "external-memory-service-data-store",
 
             "status": "not-redistributable",
 
             "install_policy": "doctor-only",
 
-            "reason": "VELA may install or probe the agentmemory tool, but never exports another user's memory database.",
+            "reason": "External memory-service data stores are user runtime state. VELA keeps memory governed by local contracts and does not export or prestart external memory backends.",
 
         },
 

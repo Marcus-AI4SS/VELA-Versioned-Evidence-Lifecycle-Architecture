@@ -306,9 +306,9 @@ def build_startup_context_summary(route_id: str | None = None) -> dict[str, Any]
 
         {
 
-            "id": "agentmemory",
+            "id": "local-memory-contracts",
 
-            "role": "运行态记忆召回、候选记忆、审计和删除",
+            "role": "本地记忆候选、评分、审计、清理和可验证沉淀",
 
             "boundary": memory["runtime_adapter_policy"]["promotion_boundary"],
 
@@ -346,7 +346,7 @@ def build_startup_context_summary(route_id: str | None = None) -> dict[str, Any]
 
             "正式引用必须有可审计证据；PDF 原文、用户来源或公开学术检索记录可作为 DOI 豁免证据。",
 
-            "agentmemory 和 codegraph 只提供上下文候选，不覆盖本地 Git 源规则。",
+            "本地记忆候选和 codegraph 只提供上下文线索，不覆盖本地 Git 源规则。",
 
             "阶段推进应主动建议，但必须等用户确认后切换路线或写入。",
 
@@ -364,7 +364,7 @@ def build_startup_context_summary(route_id: str | None = None) -> dict[str, Any]
 
             "完整历史对话 transcript",
 
-            "agentmemory 原始全量记忆",
+            "未审查的外部记忆服务原始召回",
 
             "未命中的技能说明全文",
 

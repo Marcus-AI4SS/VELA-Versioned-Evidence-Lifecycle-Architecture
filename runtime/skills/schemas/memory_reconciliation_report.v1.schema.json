@@ -22,7 +22,7 @@
 
     "source_of_truth",
 
-    "agentmemory",
+    "external_memory_service",
 
     "automation_reports",
 
@@ -72,7 +72,7 @@
 
     },
 
-    "agentmemory": {
+    "external_memory_service": {
 
       "type": "object",
 
@@ -134,9 +134,9 @@
 
       "required": [
 
-        "governance_daily_count",
+        "cybernetics_daily_count",
 
-        "latest_governance_daily",
+        "latest_cybernetics_daily",
 
         "evolution_intake_count",
 
@@ -146,7 +146,7 @@
 
       "properties": {
 
-        "governance_daily_count": {
+        "cybernetics_daily_count": {
 
           "type": "integer",
 
@@ -154,7 +154,7 @@
 
         },
 
-        "latest_governance_daily": {
+        "latest_cybernetics_daily": {
 
           "type": [
 

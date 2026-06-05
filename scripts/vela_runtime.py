@@ -471,20 +471,36 @@ def _mcp_status(codex_home: Path, vela_home: Path, profile: str) -> dict[str, An
 
 
 def _memory_status() -> dict[str, Any]:
+    policy_path = vela_runtime_install.RUNTIME_PACKAGE_ROOT / "skills" / "catalog" / "local_memory_system.json"
+    if not policy_path.exists():
+        return {
+            "ok": False,
+            "status": "policy-missing",
+            "policy_path": str(policy_path),
+            "errors": [f"local-memory-policy-missing:{policy_path}"],
+            "policy": "VELA memory is governed by local contracts, not by an external memory service.",
+        }
 
-    probe = _probe_command("agentmemory", ["status"], timeout=15)
+    policy = _load_json(policy_path)
+    runtime_adapter = policy.get("runtime_adapter_policy", {}) if isinstance(policy, dict) else {}
+    selected_adapter = runtime_adapter.get("selected_adapter")
+    status = runtime_adapter.get("status")
+    ok = selected_adapter == "local_contract_only" and status == "enabled"
+    errors: list[str] = []
+    if selected_adapter != "local_contract_only":
+        errors.append(f"memory-adapter-not-local-contract:{selected_adapter}")
+    if status != "enabled":
+        errors.append(f"memory-adapter-not-enabled:{status}")
 
-    stdout = str(probe.get("stdout_head", "")).lower()
-
-    healthy = bool(probe.get("ok")) and ("healthy" in stdout or "connected" in stdout or stdout == "")
-
-    probe["healthy"] = healthy
-
-    probe["ok"] = healthy
-
-    probe["policy"] = "agentmemory runtime data is probed but never exported into VELA."
-
-    return probe
+    return {
+        "ok": ok,
+        "status": "local-contract-ready" if ok else "contract-needs-review",
+        "policy_path": str(policy_path),
+        "selected_adapter": selected_adapter,
+        "adapter_status": status,
+        "errors": errors,
+        "policy": "VELA uses schema/validator-governed local memory contracts. External memory services are watch-only patterns and are not installed, prestarted, or treated as memory authority.",
+    }
 
 
 
@@ -732,19 +748,19 @@ def plan_runtime(
 
             _component(
 
-                "memory.agentmemory",
+                "memory.local-contracts",
 
                 "memory",
 
                 memory["ok"],
 
-                "healthy" if memory["ok"] else "missing-or-unhealthy",
+                "ready" if memory["ok"] else "needs-review",
 
                 required=False,
 
                 details=memory,
 
-                remediation="Install and start agentmemory only as an explicit optional runtime service.",
+                remediation="Run `python -m skills.scripts.envctl validate memory --summary`; do not install or prestart external memory services by default.",
 
             )
 

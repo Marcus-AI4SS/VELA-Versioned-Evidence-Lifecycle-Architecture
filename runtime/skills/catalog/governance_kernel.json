@@ -20,7 +20,7 @@
 
     "out_of_scope": [
 
-      "Direct mutation of VELA or HELM without an explicit promotion task",
+      "Direct mutation of VELA runtime contracts without an explicit promotion task",
 
       "Bulk import of external GitHub repositories as a runtime replacement",
 
@@ -120,7 +120,7 @@
 
       "name": "Environment stability",
 
-      "description": "Keep skills, profiles, schemas, MCP configuration, HELM snapshots, and VELA handoff contracts consistent.",
+      "description": "Keep skills, profiles, schemas, MCP configuration, runtime snapshots, and VELA handoff contracts consistent.",
 
       "owner": "vela-runtime-manager",
 
@@ -360,7 +360,7 @@
 
       "name": "Environment Control CLI",
 
-      "description": "Typed command and validator layer used by local operators and HELM.",
+      "description": "Typed command and validator layer used by local operators and optional local dashboards.",
 
       "owner": "skills/scripts/envctl"
 
@@ -420,13 +420,13 @@
 
     {
 
-      "id": "helm-app",
+      "id": "local-dashboard",
 
-      "name": "HELM app",
+      "name": "Optional local dashboard",
 
-      "description": "Default management surface that invokes envctl and consumes snapshots without becoming the source of truth.",
+      "description": "Optional management surface that invokes envctl and consumes snapshots without becoming the source of truth.",
 
-      "owner": "HELM"
+      "owner": "external-dashboard"
 
     }
 
@@ -504,7 +504,7 @@
 
       "name": "Validator pass rate",
 
-      "description": "All required validators pass before commits, HELM snapshots, or autonomous evolution.",
+      "description": "All required validators pass before commits, runtime snapshots, or autonomous evolution.",
 
       "owner": "envctl",
 

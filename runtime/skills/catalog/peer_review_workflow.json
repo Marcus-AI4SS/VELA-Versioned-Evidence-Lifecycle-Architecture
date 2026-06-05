@@ -1,1975 +1,998 @@
 {
-
   "$schema": "../schemas/peer_review_workflow.v1.schema.json",
-
   "schema_version": "peer_review_workflow.v1",
-
   "updated_at": "2026-05-27",
-
   "policy": "本地审稿工作流采用 contract-first hybrid 方案：普通单篇论文仍走轻量结构化评审；投稿前内审、返修包、顶刊级审查、图表复现审计和用户明确要求多视角讨论时，升级为角色化审稿协议。外部仓库只作为模式来源，不整包接管本地路由、引用核验、Zotero、Obsidian 或复现链。",
-
   "source_review_refs": [
-
     {
-
       "upstream": "qqfly1to19/awesome_proofreading_auto",
-
       "repo_url": "https://github.com/qqfly1to19/awesome_proofreading_auto",
-
       "adopted_as": [
-
         "artifact_issue_ledger",
-
         "document_element_audit",
-
         "checkpointed_review_report"
-
       ]
-
     },
-
     {
-
       "upstream": "c-narcissus/research-review-skill-factory",
-
       "repo_url": "https://github.com/c-narcissus/research-review-skill-factory",
-
       "adopted_as": [
-
         "runtime_literature_context_pack",
-
         "full_text_reading_gate",
-
         "subtle_logic_flaw_audit",
-
         "domain_calibrated_review_watch_layer"
-
       ]
-
     },
-
     {
-
       "upstream": "Imbad0202/academic-research-skills",
-
       "repo_url": "https://github.com/Imbad0202/academic-research-skills",
-
       "adopted_as": [
-
         "reviewer_configuration_card",
-
         "multi_perspective_review_panel",
-
         "re_review_verification"
-
       ]
-
     },
-
     {
-
       "upstream": "wanshuiyin/Auto-claude-code-research-in-sleep",
-
       "repo_url": "https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep",
-
       "adopted_as": [
-
         "reviewer_independence",
-
         "zero_context_claim_audit",
-
         "review_state_resume",
-
         "human_checkpoint_default"
-
       ]
-
     },
-
     {
-
       "upstream": "Yuan1z0825/nature-skills",
-
       "repo_url": "https://github.com/Yuan1z0825/nature-skills",
-
       "adopted_as": [
-
         "response_tracker",
-
         "action_mapping",
-
         "claim_boundary_review",
-
         "figure_data_availability_review"
-
       ]
-
     },
-
     {
-
       "upstream": "Leey21/awesome-ai-research-writing",
-
       "repo_url": "https://github.com/Leey21/awesome-ai-research-writing",
-
       "adopted_as": [
-
         "reviewer-perspective whole-manuscript audit",
-
         "fatal-versus-fixable weakness distinction",
-
         "rating or recommendation must have an explicit basis",
-
         "strategic advice separates root cause, fixability, and concrete action",
-
         "logic redline check reports only issues that block comprehension or validity"
-
       ]
-
+    },
+    {
+      "upstream": "hardikpandya/stop-slop",
+      "repo_url": "https://github.com/hardikpandya/stop-slop",
+      "adopted_as": [
+        "surface slop scan inside writing-structure review",
+        "vague declarative and performative emphasis detection",
+        "formulaic contrast, negative listing, false agency, and rhythm-monotony checks",
+        "directness and density as reviewer-visible prose-quality dimensions"
+      ]
     }
-
   ],
-
   "adoption_options": [
-
     {
-
       "id": "option_a_lightweight_text_patch",
-
       "label": "只改 skill 文本",
-
       "decision": "reject_as_default",
-
       "description": "把外部仓库里的审稿提示词直接写进现有 SKILL.md，不新增协议、schema 或 validator。",
-
       "upstream_strengths": [
-
         "上线快",
-
         "对现有路由影响小",
-
         "适合一次性口头审稿"
-
       ],
-
       "local_risks": [
-
         "不可验证",
-
         "不同线程会继续按各自理解执行",
-
         "返修矩阵和审稿报告没有统一字段",
-
         "无法阻断伪造修改、伪造引用或空泛润色"
-
       ]
-
     },
-
     {
-
       "id": "option_b_contract_first_hybrid",
-
-      "label": "协议先行的混合采用",
-
+      "label": "协议先行的混合吸收",
       "decision": "selected",
-
       "description": "先用 schema/catalog 固定审稿模式、触发条件、角色、阶段、报告和红线，再让 academic-paper-review、reviewer-response-pack 和 submission packager 读取同一协议。",
-
       "upstream_strengths": [
-
-        "采用专项审校矩阵",
-
-        "采用领域化 reviewer card",
-
-        "采用 full-text reading gate",
-
-        "采用 response tracker 和 action mapping",
-
-        "采用 zero-context audit 与 reviewer independence"
-
+        "吸收专项审校矩阵",
+        "吸收领域化 reviewer card",
+        "吸收 full-text reading gate",
+        "吸收 response tracker 和 action mapping",
+        "吸收 zero-context audit 与 reviewer independence"
       ],
-
       "local_risks": [
-
         "需要维护一个新 validator",
-
-        "需要把 runtime skill 与VELA source保持同步",
-
+        "需要把 runtime skill 与 VELA 源规则保持同步",
         "高强度模式可能增加 token 和时间成本"
-
       ]
-
     },
-
     {
-
       "id": "option_c_default_multi_agent_panel",
-
       "label": "所有审稿默认多 agent 面板",
-
       "decision": "reject_as_default",
-
       "description": "把任何单篇论文评审都拆成 EIC、方法、领域、跨学科、反方和整合者等多个 agent。",
-
       "upstream_strengths": [
-
         "覆盖视角最广",
-
         "适合投稿前大修内审",
-
         "能显式保留不同 reviewer 的分歧"
-
       ],
-
       "local_risks": [
-
         "违背 single-paper-review 的 never_default_multi_agent 设计",
-
         "普通审稿成本过高",
-
         "容易把角色表演误当证据",
-
         "没有项目材料时会制造过度审稿"
-
       ]
-
     },
-
     {
-
       "id": "option_d_domain_skill_factory",
-
       "label": "领域审稿 skill 工厂",
-
       "decision": "watch",
-
       "description": "根据某个领域的公开审稿、代表性论文和用户样本生成专属审稿 skill。",
-
       "upstream_strengths": [
-
         "能学习领域 reviewer taste",
-
         "适合长期稳定研究方向",
-
         "可把近邻文献和 subtle logic flaws 固化为领域规则"
-
       ],
-
       "local_risks": [
-
         "可能泄露私有样本、路径或 reviewer bank",
-
         "会增加大量 child skill",
-
         "公开审稿数据在社科领域未必充分",
-
         "需要单独匿名化和版权边界 validator"
-
       ]
-
     },
-
     {
-
       "id": "option_e_autonomous_review_fix_loop",
-
       "label": "自动审稿-修改循环",
-
       "decision": "partial",
-
       "description": "让系统按 review -> fix -> re-review 循环自动推进，直到达到预设分数或 gate。",
-
       "upstream_strengths": [
-
         "能持续压低明显缺陷",
-
         "有状态文件和断点恢复",
-
         "有 reviewer independence 和 trace 纪律"
-
       ],
-
       "local_risks": [
-
         "论文修改、实验补做和引用新增必须保留人工检查点",
-
         "AI 分数不是投稿就绪证明",
-
         "社科论文的理论和识别问题不能靠自动改写解决"
-
       ]
-
     }
-
   ],
-
   "selected_strategy": "option_b_contract_first_hybrid",
-
   "modes": [
-
     {
-
       "id": "standard_single_review",
-
       "label": "普通单篇论文评审",
-
       "description": "用于用户要求评审、 critique、方法检查或 referee report，但未要求投稿前多角色内审的单篇论文任务。",
-
       "default_subagent_policy": "role_simulation_only",
-
       "trigger_signals": [
-
         "审稿",
-
         "review this paper",
-
         "单篇论文评审",
-
         "methodology check",
-
         "referee report"
-
       ],
-
       "required_inputs": [
-
         "target_paper_text_or_pdf",
-
         "metadata_evidence",
-
         "access_boundary"
-
       ],
-
       "stage_ids": [
-
         "intake_and_scope",
-
         "metadata_and_access_gate",
-
         "artifact_issue_ledger",
-
         "subtle_logic_flaw_audit",
-
         "writing_structure_audit",
-
         "integration_decision"
-
       ],
-
       "outputs": [
-
         "academic_paper_review_report",
-
         "review_issue_ledger"
-
       ]
-
     },
-
     {
-
       "id": "top_journal_internal_review",
-
       "label": "投稿前高强度内审",
-
       "description": "用于顶刊级审稿、大修前内审、投稿前审查或用户明确要求多视角审稿时。",
-
       "default_subagent_policy": "conditional_subagents",
-
       "trigger_signals": [
-
         "顶刊审稿",
-
         "投稿前内审",
-
         "大修前审查",
-
         "多 reviewer",
-
         "多视角评审"
-
       ],
-
       "required_inputs": [
-
         "manuscript",
-
         "figures_tables",
-
         "references",
-
         "target_venue_or_review_standard",
-
         "available_appendix_or_reproducibility_materials"
-
       ],
-
       "stage_ids": [
-
         "intake_and_scope",
-
         "metadata_and_access_gate",
-
         "reviewer_configuration",
-
         "runtime_literature_context_pack",
-
         "artifact_issue_ledger",
-
         "independent_role_review",
-
         "subtle_logic_flaw_audit",
-
         "writing_structure_audit",
-
         "integration_decision"
-
       ],
-
       "outputs": [
-
         "reviewer_configuration_card",
-
         "runtime_literature_context_pack",
-
         "multi_reviewer_report",
-
         "revision_priority_map"
-
       ]
-
     },
-
     {
-
       "id": "revision_response_review",
-
       "label": "返修与回复审稿",
-
       "description": "用于已有审稿意见、response letter、修改稿或用户要求核验是否真正回应审稿意见的任务。",
-
       "default_subagent_policy": "conditional_subagents",
-
       "trigger_signals": [
-
         "回复审稿",
-
         "response letter",
-
         "rebuttal",
-
         "revise and resubmit",
-
         "返修核验"
-
       ],
-
       "required_inputs": [
-
         "editor_decision_letter",
-
         "reviewer_comments",
-
         "revised_manuscript_or_change_notes",
-
         "response_draft_optional"
-
       ],
-
       "stage_ids": [
-
         "intake_and_scope",
-
         "metadata_and_access_gate",
-
         "response_tracker_or_re_review",
-
         "artifact_issue_ledger",
-
         "writing_structure_audit",
-
         "integration_decision"
-
       ],
-
       "outputs": [
-
         "reviewer_response_tracker",
-
         "revision_verification_matrix",
-
         "response_readiness_report"
-
       ]
-
     },
-
     {
-
       "id": "submission_package_review",
-
       "label": "送审包总审",
-
       "description": "用于论文、图表、引用、代码、数据说明和复现包需要一起冻结的投稿包任务。",
-
       "default_subagent_policy": "always_multi_agent",
-
       "trigger_signals": [
-
         "送审包",
-
         "投稿包",
-
         "最终定稿",
-
         "复现包",
-
         "submission package"
-
       ],
-
       "required_inputs": [
-
         "manuscript",
-
         "figures_tables",
-
         "citation_report",
-
         "writing_quality_report",
-
         "reproducibility_materials",
-
         "package_boundary"
-
       ],
-
       "stage_ids": [
-
         "intake_and_scope",
-
         "metadata_and_access_gate",
-
         "artifact_issue_ledger",
-
         "independent_role_review",
-
         "writing_structure_audit",
-
         "integration_decision",
-
         "package_freeze_check"
-
       ],
-
       "outputs": [
-
         "submission_review_manifest",
-
         "gate_report",
-
         "freeze_blocker_list"
-
       ]
-
     },
-
     {
-
       "id": "domain_calibrated_review",
-
       "label": "领域校准审稿",
-
       "description": "用于长期研究方向，只有在有足够领域样本、公开评审或用户提供的高低质量样本时才启用。",
-
       "default_subagent_policy": "conditional_subagents",
-
       "trigger_signals": [
-
         "校准审稿人",
-
         "领域审稿 skill",
-
         "reviewer calibration",
-
         "领域 taste"
-
       ],
-
       "required_inputs": [
-
         "domain_profile",
-
         "public_review_evidence_or_user_samples",
-
         "anonymization_plan",
-
         "validation_prompt_set"
-
       ],
-
       "stage_ids": [
-
         "intake_and_scope",
-
         "reviewer_configuration",
-
         "runtime_literature_context_pack",
-
         "subtle_logic_flaw_audit",
-
         "integration_decision"
-
       ],
-
       "outputs": [
-
         "domain_reviewer_configuration_card",
-
         "calibration_limitations",
-
         "future_skill_proposal"
-
       ]
-
     }
-
   ],
-
   "trigger_rules": [
-
     {
-
       "id": "single_paper_default",
-
       "route_id": "single-paper-review",
-
       "mode_id": "standard_single_review",
-
       "signals": [
-
         "单篇论文评审",
-
         "review this paper",
-
         "referee report",
-
         "methodology check"
-
       ],
-
       "excluded_when": [
-
         "用户提供审稿意见并要求回复",
-
         "用户要求投稿包或最终冻结",
-
         "用户明确要求多角色内审"
-
       ]
-
     },
-
     {
-
       "id": "top_journal_escalation",
-
       "route_id": "single-paper-review",
-
       "mode_id": "top_journal_internal_review",
-
       "signals": [
-
         "顶刊级审稿",
-
         "多 reviewer 内审",
-
         "投稿前审查",
-
         "大修前内审"
-
       ],
-
       "excluded_when": [
-
         "只有题名摘要",
-
         "无法访问全文",
-
         "用户只要快速判断"
-
       ]
-
     },
-
     {
-
       "id": "response_letter_priority",
-
       "route_id": "writing-export",
-
       "mode_id": "revision_response_review",
-
       "signals": [
-
         "回复审稿",
-
         "response letter",
-
         "rebuttal",
-
         "revise and resubmit",
-
         "revision package"
-
       ],
-
       "excluded_when": [
-
         "没有审稿意见原文",
-
         "用户只要求评估一篇外部论文"
-
       ]
-
     },
-
     {
-
       "id": "submission_package_priority",
-
       "route_id": "social-science-submission-package",
-
       "mode_id": "submission_package_review",
-
       "signals": [
-
         "送审包",
-
         "投稿包",
-
         "定稿冻结",
-
         "复现包核验"
-
       ],
-
       "excluded_when": [
-
         "任务只涉及单篇论文外部评审"
-
       ]
-
     }
-
   ],
-
   "roles": [
-
     {
-
       "role_id": "lead_integrator",
-
       "display_name": "主审整合者",
-
       "purpose": "整合各角色意见，排序主要问题、次要问题和阻断项，给出可执行修订路线。",
-
       "allowed_actions": [
-
         "综合已读材料",
-
         "保留分歧",
-
         "输出审稿结论和修订优先级"
-
       ],
-
       "forbidden_actions": [
-
         "直接改写主稿",
-
         "伪造 reviewer 共识",
-
         "跳过证据不足的 major issue"
-
       ],
-
       "output_fields": [
-
         "overall_judgment",
-
         "major_concerns",
-
         "minor_concerns",
-
         "revision_priority_map",
-
         "confidence"
-
       ]
-
     },
-
     {
-
       "role_id": "theory_literature_reviewer",
-
       "display_name": "理论与文献审查者",
-
       "purpose": "检查研究问题、理论机制、文献缺口、贡献位置和引用对位。",
-
       "allowed_actions": [
-
         "指出理论链断点",
-
         "指出关键文献缺失",
-
         "要求降低贡献主张"
-
       ],
-
       "forbidden_actions": [
-
         "凭记忆新增未核验引用",
-
         "把文献检索结果当作正式参考文献",
-
         "用空泛领域判断代替具体证据"
-
       ],
-
       "output_fields": [
-
         "literature_gap",
-
         "theory_mechanism_risk",
-
         "citation_alignment_issue",
-
         "required_action"
-
       ]
-
     },
-
     {
-
       "role_id": "method_identification_reviewer",
-
       "display_name": "方法与识别审查者",
-
       "purpose": "检查数据、测量、识别、模型假设、稳健性、外推和因果主张。",
-
       "allowed_actions": [
-
         "指出识别缺口",
-
         "要求测量效度说明",
-
         "要求稳健性或边界降级"
-
       ],
-
       "forbidden_actions": [
-
         "未读方法和附录就判断识别成立",
-
         "把相关关系写成因果",
-
         "编造样本量、p 值或模型结果"
-
       ],
-
       "output_fields": [
-
         "design_risk",
-
         "measurement_risk",
-
         "model_assumption_risk",
-
         "required_action"
-
       ]
-
     },
-
     {
-
       "role_id": "evidence_citation_auditor",
-
       "display_name": "证据与引文审查者",
-
       "purpose": "核对作者、年份、题名、来源、DOI 或豁免依据，以及正文引用是否支撑对应判断。",
-
       "allowed_actions": [
-
         "标出 unsupported citation",
-
         "标出 metadata conflict",
-
         "要求回到 citation-verifier 或 evidence-based-literature-workflow"
-
       ],
-
       "forbidden_actions": [
-
         "伪造 DOI",
-
         "用 metadata-only 文献支撑强 novelty 判断",
-
         "把候选发现直接写入正式引用"
-
       ],
-
       "output_fields": [
-
         "citation_id",
-
         "verification_basis",
-
         "support_strength",
-
         "required_action"
-
       ]
-
     },
-
     {
-
       "role_id": "writing_structure_reviewer",
-
       "display_name": "写作结构审查者",
-
       "purpose": "检查章节职责、读者路径、PEEL 闭环、主张强度、证据边界和空洞表达。",
-
       "allowed_actions": [
-
         "指出段落论点不闭合",
-
         "要求降级过强主张",
-
         "提出结构级修订"
-
       ],
-
       "forbidden_actions": [
-
         "只做语言润色",
-
         "用流畅表达掩盖理论或证据缺口",
-
         "改变作者原意"
-
       ],
-
       "output_fields": [
-
         "section_logic_issue",
-
         "claim_strength_issue",
-
         "empty_phrase_hits",
-
         "revision_instruction"
-
       ]
-
     },
-
     {
-
       "role_id": "figure_repro_reviewer",
-
       "display_name": "图表与复现审查者",
-
       "purpose": "检查图表主张、样本口径、图注、误差条、脚本路径、图文一致性和复现边界。",
-
       "allowed_actions": [
-
         "标出图文不一致",
-
         "要求说明误差条和样本",
-
         "要求复现路径或限制说明"
-
       ],
-
       "forbidden_actions": [
-
         "让图片替代证据",
-
         "允许 image2 编造数据图",
-
         "忽略受限数据说明"
-
       ],
-
       "output_fields": [
-
         "figure_table_id",
-
         "claim_mismatch",
-
         "source_or_script_path",
-
         "required_action"
-
       ]
-
     },
-
     {
-
       "role_id": "review_response_reviewer",
-
       "display_name": "返修回复审查者",
-
       "purpose": "把编辑和审稿人意见拆成稳定 ID，映射到真实修改、证据、澄清、不同意理由或待作者补充。",
-
       "allowed_actions": [
-
         "生成 comment-response tracker",
-
         "标记 AUTHOR_INPUT_NEEDED",
-
         "核验声称修改和实际位置是否一致"
-
       ],
-
       "forbidden_actions": [
-
         "编造已完成分析",
-
         "编造行号页码",
-
         "忽略任一审稿意见"
-
       ],
-
       "output_fields": [
-
         "comment_id",
-
         "action",
-
         "readiness",
-
         "manuscript_location",
-
         "missing_author_input"
-
       ]
-
     },
-
     {
-
       "role_id": "adversarial_logic_reviewer",
-
       "display_name": "反方逻辑审查者",
-
       "purpose": "专门找细微逻辑漏洞、替代解释、scope inflation、proxy metric 和机制证据不足。",
-
       "allowed_actions": [
-
         "输出 subtle logic flaw audit",
-
         "提出最强反方解释",
-
         "区分文本澄清和必须补证据的问题"
-
       ],
-
       "forbidden_actions": [
-
         "为反对而反对",
-
         "把不适用项省略",
-
         "把 minor issue 放在 blocking issue 前"
-
       ],
-
       "output_fields": [
-
         "flaw_type",
-
         "where_it_appears",
-
         "why_it_matters",
-
         "evidence_needed",
-
         "revision_path"
-
       ]
-
     }
-
   ],
-
   "stage_sequence": [
-
     {
-
       "id": "intake_and_scope",
-
       "label": "输入与范围锁定",
-
       "description": "确认审稿对象、版本、目标、是否返修、是否投稿包、是否需要多角色。",
-
       "applies_to_modes": [
-
         "standard_single_review",
-
         "top_journal_internal_review",
-
         "revision_response_review",
-
         "submission_package_review",
-
         "domain_calibrated_review"
-
       ],
-
       "inputs": [
-
         "user_request",
-
         "manuscript_or_paper",
-
         "target_output"
-
       ],
-
       "outputs": [
-
         "review_run_card"
-
       ],
-
       "blockers": [
-
         "只有题名摘要却要求完整审稿",
-
         "稿件版本不明",
-
         "输出目标和材料边界冲突"
-
       ]
-
     },
-
     {
-
       "id": "metadata_and_access_gate",
-
       "label": "元数据与可读范围门",
-
       "description": "核验论文元数据、DOI 或豁免依据，并声明已读和未读范围。",
-
       "applies_to_modes": [
-
         "standard_single_review",
-
         "top_journal_internal_review",
-
         "revision_response_review",
-
         "submission_package_review"
-
       ],
-
       "inputs": [
-
         "metadata",
-
         "pdf_or_text",
-
         "citation_evidence"
-
       ],
-
       "outputs": [
-
         "verified_metadata_table",
-
         "access_boundary"
-
       ],
-
       "blockers": [
-
         "正式引用无法核验",
-
         "关键部分不可访问却要求判断",
-
         "证据材料出现 DOI 但未核验"
-
       ]
-
     },
-
     {
-
       "id": "reviewer_configuration",
-
       "label": "审稿角色配置",
-
       "description": "按领域、方法、目标期刊和任务风险生成 reviewer configuration card。",
-
       "applies_to_modes": [
-
         "top_journal_internal_review",
-
         "domain_calibrated_review"
-
       ],
-
       "inputs": [
-
         "target_paper",
-
         "field",
-
         "method",
-
         "target_venue"
-
       ],
-
       "outputs": [
-
         "reviewer_configuration_card"
-
       ],
-
       "blockers": [
-
         "领域或方法无法从材料中判断",
-
         "用户拒绝高强度多角色模式"
-
       ]
-
     },
-
     {
-
       "id": "runtime_literature_context_pack",
-
       "label": "运行时文献上下文包",
-
       "description": "围绕目标论文构建相关文献、baseline、上游问题和 full-text coverage；metadata-only 不得支撑强 novelty 判断。",
-
       "applies_to_modes": [
-
         "top_journal_internal_review",
-
         "domain_calibrated_review"
-
       ],
-
       "inputs": [
-
         "target_claims",
-
         "related_work",
-
         "search_sources",
-
         "available_fulltexts"
-
       ],
-
       "outputs": [
-
         "runtime_literature_context_pack"
-
       ],
-
       "blockers": [
-
         "强 novelty 判断没有 full-text-read 或 partial-full-text 支撑",
-
         "检索失败却未声明边界"
-
       ]
-
     },
-
     {
-
       "id": "artifact_issue_ledger",
-
       "label": "文稿元素问题账本",
-
       "description": "把文字、术语、表格、图片、参考文献、数据一致性和格式问题统一写成 issue ledger。",
-
       "applies_to_modes": [
-
         "standard_single_review",
-
         "top_journal_internal_review",
-
         "revision_response_review",
-
         "submission_package_review"
-
       ],
-
       "inputs": [
-
         "paper_sections",
-
         "tables",
-
         "figures",
-
         "references"
-
       ],
-
       "outputs": [
-
         "review_issue_ledger"
-
       ],
-
       "blockers": [
-
         "major issue 缺少稿件位置",
-
         "issue 没有 evidence_seen",
-
         "问题分类和严重度缺失"
-
       ]
-
     },
-
     {
-
       "id": "independent_role_review",
-
       "label": "独立角色审稿",
-
       "description": "理论、方法、证据、图表复现、写作结构等角色独立阅读材料并输出同一字段结构。",
-
       "applies_to_modes": [
-
         "top_journal_internal_review",
-
         "submission_package_review"
-
       ],
-
       "inputs": [
-
         "primary_artifacts",
-
         "reviewer_configuration_card",
-
         "issue_contract"
-
       ],
-
       "outputs": [
-
         "role_review_memos"
-
       ],
-
       "blockers": [
-
         "reviewer 只读二手总结",
-
         "reviewer 直接修改主稿",
-
         "角色输出字段不完整"
-
       ]
-
     },
-
     {
-
       "id": "subtle_logic_flaw_audit",
-
       "label": "细微逻辑漏洞审计",
-
       "description": "独立检查因果链、机制证据、proxy metric、scope inflation、基线公平、图像证据等不易在普通 weakness 中暴露的问题。",
-
       "applies_to_modes": [
-
         "standard_single_review",
-
         "top_journal_internal_review",
-
         "domain_calibrated_review"
-
       ],
-
       "inputs": [
-
         "claims",
-
         "methods",
-
         "figures_tables",
-
         "results"
-
       ],
-
       "outputs": [
-
         "subtle_logic_flaw_audit"
-
       ],
-
       "blockers": [
-
         "未覆盖适用项",
-
         "不适用项没有理由",
-
         "把 subtle logic flaw 混入普通弱点列表"
-
       ]
-
     },
-
     {
-
       "id": "writing_structure_audit",
-
       "label": "写作结构审查",
-
-      "description": "检查章节职责、读者路径、PEEL、主张强度、边界、表达密度和空洞词。",
-
+      "description": "检查章节职责、读者路径、PEEL、主张强度、边界、表达密度、空洞词、套式结构、隐藏行动者和过度整齐的 AI 式节奏。",
       "applies_to_modes": [
-
         "standard_single_review",
-
         "top_journal_internal_review",
-
         "revision_response_review",
-
         "submission_package_review"
-
       ],
-
       "inputs": [
-
         "manuscript",
-
         "writing_quality_rules",
-
         "publication_style_rules"
-
       ],
-
       "outputs": [
-
         "writing_structure_review",
-
         "claim_strength_revision_plan"
-
       ],
-
       "blockers": [
-
         "只做润色不处理论证结构",
-
         "因果或外推主张超过证据",
-
         "引用和正文判断不对位"
-
       ]
-
     },
-
     {
-
       "id": "response_tracker_or_re_review",
-
       "label": "返修追踪与再审",
-
       "description": "把每条编辑/审稿意见拆为稳定 ID，核验作者声称修改是否对应真实文稿位置。",
-
       "applies_to_modes": [
-
         "revision_response_review"
-
       ],
-
       "inputs": [
-
         "reviewer_comments",
-
         "response_draft",
-
         "revised_manuscript"
-
       ],
-
       "outputs": [
-
         "reviewer_response_tracker",
-
         "revision_verification_matrix"
-
       ],
-
       "blockers": [
-
         "审稿意见未稳定编号",
-
         "声称已改但无真实位置",
-
         "AUTHOR_INPUT_NEEDED 被伪装成 ready"
-
       ]
-
     },
-
     {
-
       "id": "integration_decision",
-
       "label": "整合与决策",
-
       "description": "整合角色意见，保留分歧，给出主要问题、修订优先级、推荐结论和置信度。",
-
       "applies_to_modes": [
-
         "standard_single_review",
-
         "top_journal_internal_review",
-
         "revision_response_review",
-
         "submission_package_review",
-
         "domain_calibrated_review"
-
       ],
-
       "inputs": [
-
         "role_review_memos",
-
         "issue_ledger",
-
         "gate_reports"
-
       ],
-
       "outputs": [
-
         "peer_review_report",
-
         "revision_priority_map"
-
       ],
-
       "blockers": [
-
         "强行制造共识",
-
         "blocking issue 被降为 minor",
-
         "没有置信度和材料边界"
-
       ]
-
     },
-
     {
-
       "id": "package_freeze_check",
-
       "label": "交付冻结检查",
-
       "description": "投稿包进入最终状态前，核对引用、写作质量、图表、复现、数据说明和隐私边界。",
-
       "applies_to_modes": [
-
         "submission_package_review"
-
       ],
-
       "inputs": [
-
         "final_manuscript",
-
         "citation_report",
-
         "writing_quality_report",
-
         "figure_table_report",
-
         "reproducibility_report"
-
       ],
-
       "outputs": [
-
         "submission_review_manifest",
-
         "freeze_blocker_list"
-
       ],
-
       "blockers": [
-
         "引用、图表或复现任一 gate 未通过",
-
         "最终稿与支持材料版本不一致",
-
         "受限材料边界未说明"
-
       ]
-
     }
-
   ],
-
   "issue_contract": {
-
     "severity_values": [
-
       "blocking",
-
       "critical",
-
       "major",
-
       "minor",
-
       "informational"
-
     ],
-
     "status_values": [
-
       "open",
-
       "needs_author_input",
-
       "needs_evidence",
-
       "accepted_for_revision",
-
       "partially_addressed",
-
       "verified_resolved",
-
       "rejected_with_reason",
-
       "not_applicable"
-
     ],
-
     "required_fields": [
-
       "issue_id",
-
       "role_id",
-
       "severity",
-
       "manuscript_location",
-
       "claim_or_object",
-
       "evidence_seen",
-
       "diagnosis",
-
       "required_action",
-
       "confidence",
-
       "blocker"
-
     ],
-
     "optional_fields": [
-
       "source_ref",
-
       "suggested_wording",
-
       "related_gate",
-
       "reviewer_comment_id",
-
       "revision_location",
-
       "author_input_needed",
-
       "runtime_literature_coverage"
-
     ]
-
   },
-
   "report_contracts": [
-
     {
-
       "id": "academic_paper_review_report",
-
       "path_template": "outputs/reviews/<run_id>/academic_paper_review_report.md",
-
       "producer": "academic-paper-review",
-
       "consumed_by_gates": [
-
         "peer_review_protocol_checked",
-
         "writing_quality_checked"
-
       ],
-
       "required_sections": [
-
         "review_run_card",
-
         "verified_metadata",
-
         "access_boundary",
-
         "main_strengths",
-
         "major_concerns",
-
         "methodology_assessment",
-
         "subtle_logic_flaw_audit",
-
         "recommendation"
-
       ]
-
     },
-
     {
-
       "id": "review_issue_ledger",
-
       "path_template": "outputs/reviews/<run_id>/review_issue_ledger.json",
-
       "producer": "academic-paper-review",
-
       "consumed_by_gates": [
-
         "peer_review_protocol_checked"
-
       ],
-
       "required_sections": [
-
         "schema_version",
-
         "issues",
-
         "summary",
-
         "status"
-
       ]
-
     },
-
     {
-
       "id": "runtime_literature_context_pack",
-
       "path_template": "outputs/reviews/<run_id>/runtime_literature_context_pack.md",
-
       "producer": "academic-paper-review",
-
       "consumed_by_gates": [
-
         "peer_review_protocol_checked",
-
         "doi_and_metadata_verified"
-
       ],
-
       "required_sections": [
-
         "target_paper_placement",
-
         "retrieved_works",
-
         "full_text_reading_notes",
-
         "review_implications",
-
         "retrieval_limits"
-
       ]
-
     },
-
     {
-
       "id": "reviewer_response_tracker",
-
       "path_template": "outputs/revisions/<run_id>/reviewer_response_tracker.json",
-
       "producer": "reviewer-response-pack",
-
       "consumed_by_gates": [
-
         "peer_review_protocol_checked",
-
         "writing_quality_checked"
-
       ],
-
       "required_sections": [
-
         "comments",
-
         "action_map",
-
         "missing_author_input",
-
         "readiness_state"
-
       ]
-
     },
-
     {
-
       "id": "revision_verification_matrix",
-
       "path_template": "outputs/revisions/<run_id>/revision_verification_matrix.md",
-
       "producer": "reviewer-response-pack",
-
       "consumed_by_gates": [
-
         "peer_review_protocol_checked"
-
       ],
-
       "required_sections": [
-
         "original_comment",
-
         "author_claim",
-
         "revision_location",
-
         "verified_status",
-
         "residual_issue"
-
       ]
-
     },
-
     {
-
       "id": "submission_review_manifest",
-
       "path_template": "outputs/submission/<run_id>/submission_review_manifest.json",
-
       "producer": "social-science-submission-packager",
-
       "consumed_by_gates": [
-
         "peer_review_protocol_checked",
-
         "final_package_frozen",
-
         "reproducibility_bundle_verified"
-
       ],
-
       "required_sections": [
-
         "manuscript_version",
-
         "citation_gate",
-
         "writing_gate",
-
         "figure_table_gate",
-
         "reproducibility_gate",
-
         "freeze_decision"
-
       ]
-
     }
-
   ],
-
   "safety_rules": [
-
     {
-
       "id": "reviewers_must_not_modify_manuscript",
-
       "rule": "审稿角色只输出审查、矩阵、风险和修订建议，不直接覆盖主稿、图表、数据或参考文献表。",
-
       "failure_action": "停止审稿链，转交 writing-producer 或用户明确授权的修改链。"
-
     },
-
     {
-
       "id": "metadata_only_cannot_support_strong_claim",
-
       "rule": "metadata-only 文献不能支撑强 novelty、baseline missing 或结论充分性判断。",
-
       "failure_action": "把判断降级为线索，或回到全文获取和结构性阅读。"
-
     },
-
     {
-
       "id": "response_claim_requires_real_location",
-
       "rule": "返修回复中声称完成的修改、分析、图表、引用或澄清必须有真实文稿位置或明确 AUTHOR_INPUT_NEEDED。",
-
       "failure_action": "把 readiness 降为 needs_author_input 或 blocked。"
-
     },
-
     {
-
       "id": "human_checkpoint_before_mutation",
-
       "rule": "自动 review-fix-re-review 只能提出修改计划；实际改稿、补实验、改图、改引用前必须有用户授权或项目 contract 授权。",
-
       "failure_action": "只输出 proposal，不写主产物。"
-
     },
-
     {
-
       "id": "social_science_standard_first",
-
       "rule": "社科论文默认以理论、证据、识别、测量、伦理、复现和写作结构为审稿标准，不移植医学、湿实验或理工默认门槛。",
-
       "failure_action": "移除不适配的外部标准，只保留可迁移的审稿结构。"
-
     }
-
   ]
-
 }

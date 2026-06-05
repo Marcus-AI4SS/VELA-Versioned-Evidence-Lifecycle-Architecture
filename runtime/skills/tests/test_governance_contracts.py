@@ -72,7 +72,7 @@ class GovernanceContractTests(unittest.TestCase):
 
         labels = {item["decision_label"] for item in policy["placements"]}
 
-        self.assertEqual(labels, {"governance_kernel", "skill", "obsidian", "codex_native", "discard"})
+        self.assertEqual(labels, {"control_kernel", "skill", "obsidian", "codex_native", "discard"})
 
 
 

@@ -1,6 +1,6 @@
 # VELA Public Manual
 
-Updated: 2026-05-29
+Updated: 2026-05-31
 
 VELA, Versioned Evidence Lifecycle Architecture, is a portable research workflow environment for Codex. It gives each research project a readable operating layer: project folders, `AGENTS.md` rules, handoffs, evidence ledgers, schemas, validators, runtime logs, memory governance, and controlled evolution.
 
@@ -62,7 +62,7 @@ The loop is:
 | Local runtime | User-side runtime installed into Codex | `~/.vela`, `~/.codex/skills`, CLI, profiles, commands, receipts |
 | Project layer | Each research project's files | `materials/`, `evidence/`, `claims/`, `methods/`, `deliverables/`, `handoffs/`, `logs/` |
 | Tool interface | Optional connectors to user-owned tools | Git, Python, ripgrep, MCP servers, Codex plugins, Zotero, Obsidian |
-| Memory and evolution | Candidate memory and governed rule promotion | logs, agentmemory recall, CodeGraph index, evolution backlog, validators |
+| Memory and evolution | Candidate memory and governed rule promotion | logs, local memory candidates, memory status reports, CodeGraph index, evolution backlog, validators |
 
 VELA does not copy browser sessions, cookies, credentials, Zotero libraries, Obsidian vaults, or private local caches.
 
@@ -148,7 +148,7 @@ Platform differences:
 | Node.js / npm | Optional JavaScript-based tooling | Optional |
 | GitHub CLI | Repository collaboration and CI checks | Optional |
 | Zotero / Obsidian | User-owned bibliography and notes | Optional; VELA does not copy databases |
-| MCP servers | Browser, literature, memory, code-index interfaces | Route-specific |
+| MCP servers | academic lookup, browser diagnostics, social evidence, and code-index interfaces | Route-specific |
 | Codex plugins | GitHub, Superpowers, documents, spreadsheets, presentations, browser, and other enhancement layers | Route-specific |
 
 Dependencies are grouped as:
@@ -157,7 +157,7 @@ Dependencies are grouped as:
 | --- | --- | --- |
 | Core | Git, Python, shell, VELA CLI, schemas, validators | installers and `vela doctor` check them directly |
 | Recommended | ripgrep, GitHub CLI, Node.js, PowerShell 7, Homebrew/winget | missing tools are reported, not faked |
-| Optional integrations | Zotero, Obsidian, MCP servers, Codex plugins, agentmemory, CodeGraph | profiles and doctor checks are provided; user authorization is required |
+| Optional integrations | Zotero, Obsidian, MCP servers, Codex plugins, external memory-service patterns, CodeGraph | profiles, doctor checks, and adoption reviews are provided; user authorization is required. External memory services are not installed or prestarted by VELA |
 
 ## 7. Project Structure
 
@@ -212,16 +212,17 @@ Skill roles:
 | Executor | Performs concrete research actions | `citation-verifier`, `quant-analysis`, `text-analysis`, `research-figure-studio` |
 | Helper | Supports cleanup, browser work, routing, or environment checks | `project-folder-hygiene`, `skill-vetter`, `local-cloud-router`, `playwright` |
 
-Plugins are optional enhancement layers: GitHub, Superpowers, Hugging Face, Scite, Google Drive, Documents, Presentations, Spreadsheets, HyperFrames, Browser, and Obsidian sidecars may help when available. They do not replace schemas, validators, or source rules.
+Plugins are optional enhancement layers. Native Browser, Chrome, and Computer Use are the first choice for ordinary web pages, authenticated Chrome sessions, downloads, visible desktop apps, screenshots, and file dialogs. GitHub, Superpowers, Zotero, Scite, Google Drive, Documents, Presentations, Spreadsheets, and similar plugins may help when available. They do not replace schemas, validators, or source rules.
 
-MCP servers are sensors and interfaces. Common examples are Chrome DevTools, Zotero, OpenAlex, Semantic Scholar, Google Scholar, paper-search, agentmemory, and CodeGraph. Their outputs must still pass project evidence and validation rules.
+MCP servers are sensors and interfaces. Common examples are OpenAlex, Semantic Scholar, Google Scholar, paper-search, Chrome DevTools, social-platform, and CodeGraph. Zotero is handled through the official plugin rather than a required MCP server. Browser MCP/CLI tools are reserved for debugging, reproducible automation, or route-specific capture after the native surfaces are insufficient. Their outputs must still pass project evidence and validation rules.
 
 MCP startup policy:
 
 | Policy | Meaning |
 | --- | --- |
+| Native first | Browser, Chrome, and Computer Use handle ordinary web and desktop interaction before MCP fallback |
 | Do not open everything by default | avoids slow startup, resource waste, and unrelated tool state |
-| Open by route | literature uses academic/Zotero tools; web evidence uses browser tools; code review uses CodeGraph |
+| Open by route | literature uses academic lookup and the official Zotero plugin; web evidence starts with native browser tools; code review uses CodeGraph only when code structure is needed |
 | Explain before use | the agent should know what the server reads and whether it writes files |
 | Persist useful output | useful results should land in materials, evidence, logs, or handoffs |
 
@@ -247,7 +248,7 @@ Memory has four public landing zones:
 | --- | --- | --- |
 | Project files | project facts, evidence, stage, methods, deliverables | continuation, handoff, review |
 | Runtime logs | commands, checks, failures, repairs, handoffs, validation reports | debugging, rollback, audit |
-| Optional memory service | approved preferences and repeated patterns | cross-session recall |
+| Local memory status reports | approved preferences and repeated-pattern candidates | auditable context recovery without automatic rule changes |
 | Evolution backlog | candidate rules, skills, schemas, automations | periodic governance and commits |
 
 ## 11. Automation
@@ -292,5 +293,5 @@ Automation categories:
 - It does not run `codex exec` by default.
 - It does not copy cookies, credentials, browser state, private libraries, or local caches.
 - It does not start every MCP server by default.
-- It does not treat agentmemory, CodeGraph, or plugin caches as source rules.
+- It does not treat external memory services, CodeGraph, or plugin caches as source rules.
 - It does not include personal custom modules outside the public research workflow.

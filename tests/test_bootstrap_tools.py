@@ -70,9 +70,7 @@ class BootstrapToolsTests(unittest.TestCase):
 
         optional = {tool["id"]: tool for tool in plan["tools"]}
 
-        self.assertIn("agentmemory", optional)
-
-        self.assertIn(optional["agentmemory"]["install_strategy"], {"npm-global", "manual"})
+        self.assertNotIn("agentmemory", optional)
 
         self.assertIn("codegraph", optional)
 

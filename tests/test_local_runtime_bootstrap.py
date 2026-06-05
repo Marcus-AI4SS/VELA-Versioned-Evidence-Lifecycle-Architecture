@@ -38,7 +38,8 @@ class LocalRuntimeBootstrapTests(unittest.TestCase):
 
         self.assertIn("VELA repository package", manifest["boundary"]["source_authority"]["role"])
         self.assertIn("User runtime", manifest["boundary"]["runtime_authority"]["role"])
-        self.assertIn("agentmemory data stores", manifest["boundary"]["never_export"])
+        self.assertIn("external memory service data stores", manifest["boundary"]["never_export"])
+        self.assertTrue(any(item["id"] == "memory.local-contracts" for item in manifest["components"]))
 
 
 

@@ -22,6 +22,8 @@ try:
 
     from ..conflict_matrix import validate_conflict_matrix
 
+    from ..cybernetics import validate_cybernetics_contracts
+
     from ..governance import validate_governance_contracts
 
     from ..empirical_quant_workflow import validate_empirical_quant_workflow
@@ -29,6 +31,8 @@ try:
     from ..environment_layers import validate_environment_layer_contract
 
     from ..external_adoption_readiness import validate_external_adoption_readiness
+
+    from ..figure_style_presets import validate_figure_style_presets
 
     from ..helm_snapshot import validate_helm_snapshot_contract
 
@@ -39,6 +43,8 @@ try:
     from ..memory_system import validate_local_memory_system
 
     from ..peer_review_workflow import validate_peer_review_workflow
+
+    from ..project_folder_contract import validate_project_folder_contract
 
     from ..research_presentation_workflow import validate_research_presentation_workflow
 
@@ -60,6 +66,8 @@ except ImportError:  # pragma: no cover
 
     from envctl.conflict_matrix import validate_conflict_matrix
 
+    from envctl.cybernetics import validate_cybernetics_contracts
+
     from envctl.governance import validate_governance_contracts
 
     from envctl.empirical_quant_workflow import validate_empirical_quant_workflow
@@ -67,6 +75,8 @@ except ImportError:  # pragma: no cover
     from envctl.environment_layers import validate_environment_layer_contract
 
     from envctl.external_adoption_readiness import validate_external_adoption_readiness
+
+    from envctl.figure_style_presets import validate_figure_style_presets
 
     from envctl.helm_snapshot import validate_helm_snapshot_contract
 
@@ -77,6 +87,8 @@ except ImportError:  # pragma: no cover
     from envctl.memory_system import validate_local_memory_system
 
     from envctl.peer_review_workflow import validate_peer_review_workflow
+
+    from envctl.project_folder_contract import validate_project_folder_contract
 
     from envctl.research_presentation_workflow import validate_research_presentation_workflow
 
@@ -132,6 +144,10 @@ def run(args: argparse.Namespace) -> int:
 
         report = validate_governance_contracts()
 
+    elif args.target == "cybernetics":
+
+        report = validate_cybernetics_contracts()
+
     elif args.target == "memory":
 
         report = validate_local_memory_system()
@@ -164,6 +180,10 @@ def run(args: argparse.Namespace) -> int:
 
         report = validate_scientific_figure_workflow()
 
+    elif args.target == "figure-style-presets":
+
+        report = validate_figure_style_presets()
+
     elif args.target == "manuscript-writing":
 
         report = validate_manuscript_writing_workflow()
@@ -179,6 +199,10 @@ def run(args: argparse.Namespace) -> int:
     elif args.target == "empirical-quant-workflow":
 
         report = validate_empirical_quant_workflow()
+
+    elif args.target == "project-folder-contract":
+
+        report = validate_project_folder_contract(args.project_root, project_type=args.project_type)
 
     elif args.target == "stack":
 
@@ -364,6 +388,8 @@ def add_parser(subparsers: argparse._SubParsersAction) -> None:
 
             "governance",
 
+            "cybernetics",
+
             "memory",
 
             "environment-layers",
@@ -380,6 +406,8 @@ def add_parser(subparsers: argparse._SubParsersAction) -> None:
 
             "scientific-figure-workflow",
 
+            "figure-style-presets",
+
             "manuscript-writing",
 
             "research-presentation-workflow",
@@ -388,9 +416,29 @@ def add_parser(subparsers: argparse._SubParsersAction) -> None:
 
             "empirical-quant-workflow",
 
+            "project-folder-contract",
+
         ],
 
         default="contracts",
+
+    )
+
+    parser.add_argument(
+
+        "--project-root",
+
+        type=Path,
+
+        help="Optionally validate a real project folder against the project folder contract.",
+
+    )
+
+    parser.add_argument(
+
+        "--project-type",
+
+        help="Optional project type override, such as paper_project, data_project, coding_project, or presentation_project.",
 
     )
 

@@ -1,35 +1,17 @@
 name = "startup-safe"
-
 display_name = "Startup Safe"
-
-description = "降低新对话启动负载的安全默认 profile。默认不预启动 stdio MCP；需要文献、Zotero、浏览器或平台采集时再切到对应 profile。"
-
+description = "降低新对话启动负载的安全默认 profile。默认不预启动 stdio MCP；需要文献、浏览器或平台采集时再切到对应 profile；Zotero 使用官方插件。"
 managed_mcp = [
-
   "chrome-devtools",
-
   "playwright-mcp",
-
   "figma-dev-mode-mcp",
-
-  ,
-
-  "zotero-mcp",
-
+  "social-platform-mcp",
   "openalex-mcp",
-
   "semantic-scholar-mcp",
-
   "google-scholar-mcp",
-
   "cnki-mcp",
-
   "paper-search-mcp",
-
-  "agentmemory",
-
   "codegraph",
-
 ]
-
 enabled_mcp = []
+activation_note = "Use envctl apply-profile literature/social-platform/writing-review/code-context when a task actually needs MCP servers. CodeGraph stays an on-demand CLI/optional MCP; it is not prestarted in this lightweight profile."

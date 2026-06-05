@@ -44,7 +44,7 @@
 
       "tokens and secrets",
 
-      "agentmemory data stores",
+      "external memory service data stores",
 
       "plugin cache payloads",
 
@@ -158,19 +158,19 @@
 
     {
 
-      "id": "memory.agentmemory",
+      "id": "memory.local-contracts",
 
       "category": "memory",
 
-      "kind": "optional_service",
+      "kind": "local_governance_contract",
 
       "default_action": "doctor",
 
-      "probe": "agentmemory status",
+      "validator": "envctl validate memory --summary",
 
-      "install_policy": "explicit_optional_runtime",
+      "install_policy": "vela_managed_contracts_no_external_memory_service",
 
-      "description": "agentmemory may provide runtime recall and audit. Source rules remain in Git-controlled contracts and validators."
+      "description": "VELA memory is governed by local contracts, validators, reports, and Git-reviewed promotion. External memory services are watch-only patterns and are not installed or prestarted by VELA."
 
     },
 
@@ -258,9 +258,7 @@
 
         "Node.js LTS",
 
-        "GitHub CLI",
-
-        "agentmemory when npm is available"
+        "GitHub CLI"
 
       ],
 
@@ -276,9 +274,7 @@
 
         "Node.js LTS via Homebrew",
 
-        "GitHub CLI via Homebrew",
-
-        "agentmemory when npm is available"
+        "GitHub CLI via Homebrew"
 
       ],
 

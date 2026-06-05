@@ -1,0 +1,378 @@
+{
+  "$schema": "../schemas/cybernetic_control_kernel.v1.schema.json",
+  "schema_version": "cybernetic_control_kernel.v1",
+  "generated_at": "2026-05-09",
+  "system_boundary": {
+    "system_name": "vela-research-workflow-environment",
+    "source_of_truth_repo": "<VELA_SOURCE_ROOT>",
+    "managed_repositories": [
+      "<VELA_SOURCE_ROOT>"
+    ],
+    "out_of_scope": [
+      "Direct mutation of VELA runtime contracts without an explicit promotion task",
+      "Bulk import of external GitHub repositories as a runtime replacement",
+      "Formal academic citation from unverified PDFs, fabricated DOI values, unverifiable source metadata, or missing DOI-waiver evidence"
+    ]
+  },
+  "source_material": [
+    {
+      "id": "engineering-cybernetics-en",
+      "title": "Engineering Cybernetics",
+      "language": "en",
+      "local_path": "<REFERENCE_LIBRARY>\\engineering-cybernetics-en.pdf",
+      "status": "verified",
+      "formal_citation_status": "local_source_only"
+    },
+    {
+      "id": "engineering-cybernetics-zh-vol1",
+      "title": "工程控制论 上册 第三版",
+      "language": "zh",
+      "local_path": "<REFERENCE_LIBRARY>\\engineering-cybernetics-zh-vol1.pdf",
+      "status": "verified",
+      "formal_citation_status": "local_source_only"
+    },
+    {
+      "id": "engineering-cybernetics-zh-vol2",
+      "title": "工程控制论 下册 第三版",
+      "language": "zh",
+      "local_path": "<REFERENCE_LIBRARY>\\engineering-cybernetics-zh-vol2.pdf",
+      "status": "verified",
+      "formal_citation_status": "local_source_only"
+    }
+  ],
+  "control_objectives": [
+    {
+      "id": "research-integrity",
+      "name": "Research integrity",
+      "description": "Keep formal claims, citations, evidence capture, and reproducibility gates auditable before delivery.",
+      "owner": "research-autopilot",
+      "signals": [
+        "validator_result.v1",
+        "citation verification output",
+        "quality gate logs"
+      ],
+      "gates": [
+        "validate_research_pipeline",
+        "validate_agents_contract"
+      ]
+    },
+    {
+      "id": "environment-stability",
+      "name": "Environment stability",
+      "description": "Keep skills, profiles, schemas, MCP configuration, runtime snapshots, and VELA handoff contracts consistent.",
+      "owner": "vela-runtime-manager",
+      "signals": [
+        "runtime skill drift",
+        "cross repository drift",
+        "daily cybernetics audit"
+      ],
+      "gates": [
+        "validate_research_stack",
+        "envctl validate drift"
+      ]
+    },
+    {
+      "id": "adaptive-learning",
+      "name": "Adaptive learning",
+      "description": "Admit durable lessons through a controlled retrospective loop instead of silent route or skill mutation.",
+      "owner": "project-retrospective-evolver",
+      "signals": [
+        "project friction",
+        "route correction",
+        "repeated manual workflow"
+      ],
+      "gates": [
+        "envctl validate cybernetics",
+        "vela-runtime-manager proposal review"
+      ]
+    }
+  ],
+  "controlled_variables": [
+    {
+      "id": "route-selection",
+      "name": "Route selection",
+      "description": "The route chosen by research-autopilot for each task type and project scope, with user confirmation before a new route or chain is entered.",
+      "owner": "research-autopilot"
+    },
+    {
+      "id": "skill-memory-placement",
+      "name": "Skill and memory placement",
+      "description": "The placement of durable logic, reusable procedures, long-form interpretation, and transient facts.",
+      "owner": "vela-runtime-manager"
+    },
+    {
+      "id": "contract-validity",
+      "name": "Contract validity",
+      "description": "Schema-valid catalogs, dispatch artifacts, validator envelopes, and snapshot boundaries.",
+      "owner": "envctl"
+    },
+    {
+      "id": "research-stage-progression",
+      "name": "Research stage progression",
+      "description": "The confirmed transition from one research milestone to the next, including literature acquisition, structured reading, PDF evidence annotation, drafting, figures, review, revision, polishing, language review, and formatting.",
+      "owner": "research-autopilot"
+    },
+    {
+      "id": "project-folder-hygiene",
+      "name": "Project folder hygiene",
+      "description": "The organization state of each thread's target project folder, including temporary artifacts, dead files, stale outputs, duplicate drafts, evidence preservation, and handoff readability.",
+      "owner": "project-folder-hygiene"
+    },
+    {
+      "id": "subagent-context-load",
+      "name": "Subagent context load",
+      "description": "The share of context-heavy reading, searching, inventory, testing, and review work delegated to isolated subagent contexts while the main context keeps only routing, decisions, and integration state.",
+      "owner": "research-team-orchestrator"
+    },
+    {
+      "id": "external-adoption-pressure",
+      "name": "External adoption pressure",
+      "description": "The inflow of GitHub patterns, plugins, MCP servers, skills, and harness ideas.",
+      "owner": "skill-vetter"
+    }
+  ],
+  "feedback_signals": [
+    {
+      "id": "validator-feedback",
+      "name": "Validator feedback",
+      "description": "Structured pass, needs_review, or fail results from envctl and legacy validators.",
+      "owner": "envctl"
+    },
+    {
+      "id": "retrospective-feedback",
+      "name": "Project retrospective feedback",
+      "description": "Project-end friction, repeated prompts, missing routing logic, and proposed skill changes.",
+      "owner": "project-retrospective-evolver"
+    },
+    {
+      "id": "knowledge-feedback",
+      "name": "Knowledge feedback",
+      "description": "Zotero verification, Obsidian sync packages, and writing-reference capture records.",
+      "owner": "zotero-sync / obsidian-research-sync"
+    },
+    {
+      "id": "daily-audit-feedback",
+      "name": "Daily audit feedback",
+      "description": "Proposal-only reports from the cybernetics daily skill audit automation.",
+      "owner": "vela-runtime-manager"
+    },
+    {
+      "id": "folder-hygiene-feedback",
+      "name": "Folder hygiene feedback",
+      "description": "Git status, file inventory, removed or retained artifact lists, and needs-user-decision cleanup reports from project-folder-hygiene.",
+      "owner": "project-folder-hygiene"
+    }
+  ],
+  "controllers": [
+    {
+      "id": "research-autopilot",
+      "name": "Research Autopilot",
+      "description": "Sole total router for research tasks, profile choice, helper skills, and route cards.",
+      "owner": "research-autopilot"
+    },
+    {
+      "id": "vela-runtime-manager",
+      "name": "VELA Runtime Manager",
+      "description": "Governance controller for VELA skills, plugins, MCP profiles, reports, and recurring update proposals.",
+      "owner": "vela-runtime-manager"
+    },
+    {
+      "id": "envctl",
+      "name": "Environment Control CLI",
+      "description": "Typed command and validator layer used by local operators and optional local dashboards.",
+      "owner": "skills/scripts/envctl"
+    },
+    {
+      "id": "project-retrospective-evolver",
+      "name": "Project Retrospective Evolver",
+      "description": "Adaptive controller that decides whether a project produces no change, skill update, new skill, or routing fix.",
+      "owner": "project-retrospective-evolver"
+    }
+  ],
+  "actuators": [
+    {
+      "id": "skills",
+      "name": "Skills",
+      "description": "Reusable procedural behavior and domain workflows.",
+      "owner": "skills directory"
+    },
+    {
+      "id": "schemas-catalogs",
+      "name": "Schemas and catalogs",
+      "description": "Typed contracts for routing, project initialization, handoffs, validation, and control logic.",
+      "owner": "skills/schemas and skills/catalog"
+    },
+    {
+      "id": "automations",
+      "name": "Codex automations",
+      "description": "Recurring proposal-only checks before any autonomous mutation is approved.",
+      "owner": "Codex App automations"
+    },
+    {
+      "id": "local-dashboard",
+      "name": "Optional local dashboard",
+      "description": "Optional management surface that invokes envctl and consumes snapshots without becoming the source of truth.",
+      "owner": "external-dashboard"
+    }
+  ],
+  "disturbance_classes": [
+    {
+      "id": "path-drift",
+      "name": "Path drift",
+      "description": "Old local roots, stale plugin cache paths, and mismatched runtime cwd values.",
+      "owner": "cross_repo_drift"
+    },
+    {
+      "id": "upstream-change",
+      "name": "Upstream change",
+      "description": "New plugin, MCP, GitHub, or Codex native feature updates that may tempt uncontrolled adoption.",
+      "owner": "skill-vetter"
+    },
+    {
+      "id": "citation-noise",
+      "name": "Citation noise",
+      "description": "Unverified references, fabricated DOI values, missing DOI-waiver evidence, and discovery results incorrectly promoted into formal bibliography.",
+      "owner": "citation-verifier"
+    },
+    {
+      "id": "context-loss",
+      "name": "Context loss",
+      "description": "Thread compaction, missing handoff, project memory drift, or repeated reconstruction of the same workflow.",
+      "owner": "project-retrospective-evolver"
+    },
+    {
+      "id": "workspace-clutter",
+      "name": "Workspace clutter",
+      "description": "Temporary files, stale intermediate outputs, duplicate drafts, dead code, dead folders, and unclassified artifacts that make a project harder to continue or review.",
+      "owner": "project-folder-hygiene"
+    }
+  ],
+  "stability_metrics": [
+    {
+      "id": "validator-pass-rate",
+      "name": "Validator pass rate",
+      "description": "All required validators pass before commits, runtime snapshots, or autonomous evolution.",
+      "owner": "envctl",
+      "gates": [
+        "contracts",
+        "stack",
+        "initializer-policy",
+        "helm-snapshot",
+        "drift",
+        "cybernetics"
+      ]
+    },
+    {
+      "id": "memory-placement-precision",
+      "name": "Memory placement precision",
+      "description": "Durable logic goes to the kernel, procedures go to skills, long explanation goes to Obsidian, and noisy specifics are discarded.",
+      "owner": "memory_admission_policy"
+    },
+    {
+      "id": "external-adoption-discipline",
+      "name": "External adoption discipline",
+      "description": "Every upstream component has keep, adapt, watch, or reject status before any implementation.",
+      "owner": "skill-vetter"
+    },
+    {
+      "id": "project-folder-cleanliness",
+      "name": "Project folder cleanliness",
+      "description": "Project folders end substantial work with classified files, no avoidable scratch artifacts, no accidental deletion of evidence, and a readable handoff state.",
+      "owner": "project-folder-hygiene"
+    },
+    {
+      "id": "subagent-delegation-discipline",
+      "name": "Subagent delegation discipline",
+      "description": "Substantial divisible tasks use explicit agent task cards and return evidence-based reports before main-agent integration.",
+      "owner": "research-team-orchestrator"
+    }
+  ],
+  "adaptation_rules": [
+    {
+      "id": "retrospective-before-skill-change",
+      "trigger": "A completed project exposes repeated friction, missing routing logic, or repeated manual reconstruction.",
+      "controller": "project-retrospective-evolver",
+      "allowed_targets": [
+        "skill",
+        "route",
+        "docs",
+        "obsidian"
+      ],
+      "required_gates": [
+        "vela-runtime-manager proposal mode",
+        "envctl validate cybernetics"
+      ],
+      "rollback": "Keep the prior skill or route in git history and reject the evolution event if validators fail."
+    },
+    {
+      "id": "external-candidate-before-adoption",
+      "trigger": "A GitHub repository, plugin, MCP server, or workflow pattern is proposed for local adoption.",
+      "controller": "skill-vetter",
+      "allowed_targets": [
+        "external_adoption_review",
+        "schema",
+        "docs",
+        "watch"
+      ],
+      "required_gates": [
+        "external_systems_research entry",
+        "external_adoption_review.v1",
+        "validate_research_stack"
+      ],
+      "rollback": "Remove the candidate from active adoption and keep only a watch record."
+    },
+    {
+      "id": "daily-audit-before-autonomous-change",
+      "trigger": "Daily cybernetics audit proposes a low-risk environment correction.",
+      "controller": "vela-runtime-manager",
+      "allowed_targets": [
+        "docs",
+        "skill",
+        "schema",
+        "validator"
+      ],
+      "required_gates": [
+        "14 stable daily reports",
+        "dedicated branch",
+        "all validators pass"
+      ],
+      "rollback": "Revert the dedicated branch before promotion; never mutate runtime config silently."
+    },
+    {
+      "id": "hygiene-before-handoff",
+      "trigger": "A thread finishes substantial file-generating work, starts project handoff, archives a project, or detects stale temporary artifacts.",
+      "controller": "project-folder-hygiene",
+      "allowed_targets": [
+        "reports",
+        "temporary_files",
+        "archive",
+        "outputs"
+      ],
+      "required_gates": [
+        "confirmed project root",
+        "file classification before deletion",
+        "post-cleanup git status"
+      ],
+      "rollback": "Do not delete ambiguous or tracked files; move only with user confirmation or restore from Git/history if a safe cleanup candidate was misclassified."
+    },
+    {
+      "id": "delegate-context-heavy-work",
+      "trigger": "A task has separable reading, search, file inventory, testing, review, comparison, or implementation units that would overload the main context.",
+      "controller": "research-team-orchestrator",
+      "allowed_targets": [
+        "subagent task cards",
+        "context packets",
+        "agent reports",
+        "review gates"
+      ],
+      "required_gates": [
+        "explicit task card per agent",
+        "bounded write scope",
+        "main-agent integration review"
+      ],
+      "rollback": "Collapse back to single-agent execution when the task is tiny, unsafe to delegate, or the available subagent channel cannot enforce the needed scope."
+    }
+  ],
+  "memory_policy_ref": "skills/catalog/memory_admission_policy.json",
+  "external_adoption_policy_ref": "skills/catalog/external_adoption_reviews.json"
+}

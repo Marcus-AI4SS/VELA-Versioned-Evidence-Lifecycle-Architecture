@@ -1,8 +1,6 @@
 name = "cloud-batch"
-
 display_name = "Cloud Batch"
-
 description = "适合需要云端长时运行的批处理项目。"
-
-managed_mcp = ["chrome-devtools", "zotero-mcp", "openalex-mcp", "semantic-scholar-mcp", "google-scholar-mcp", "cnki-mcp", "paper-search-mcp"]
-enabled_mcp = ["zotero-mcp", "openalex-mcp", "semantic-scholar-mcp", "paper-search-mcp"]
+managed_mcp = ["chrome-devtools", "openalex-mcp", "semantic-scholar-mcp", "google-scholar-mcp", "cnki-mcp", "paper-search-mcp"]
+enabled_mcp = ["openalex-mcp", "semantic-scholar-mcp", "paper-search-mcp"]
+native_interaction_order = ["browser@openai-bundled", "chrome@openai-bundled", "chrome-devtools"]

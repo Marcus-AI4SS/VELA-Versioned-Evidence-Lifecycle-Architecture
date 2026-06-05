@@ -196,6 +196,8 @@
 
             "governance_kernel",
 
+            "control_kernel",
+
             "skill",
 
             "route",

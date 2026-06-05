@@ -684,9 +684,7 @@
 
           "enum": [
 
-            "local_contract_only",
-
-            "agentmemory"
+            "local_contract_only"
 
           ]
 
@@ -915,6 +913,8 @@
           "enum": [
 
             "governance_kernel",
+
+            "control_kernel",
 
             "skill",
 

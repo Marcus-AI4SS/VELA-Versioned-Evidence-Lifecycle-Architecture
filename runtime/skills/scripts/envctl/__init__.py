@@ -1,1 +1,1 @@
-"""Environment control package for HELM and local Codex workflows."""
+"""Environment control package for VELA runtime workflows."""

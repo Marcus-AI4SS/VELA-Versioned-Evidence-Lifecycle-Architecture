@@ -9,7 +9,5 @@
     "playwright-mcp",
     "figma-dev-mode-mcp"
   ],
-  "disallowed_due_to_side_effects": [
-    "zotero-mcp"
-  ]
+  "disallowed_due_to_side_effects": []
 }

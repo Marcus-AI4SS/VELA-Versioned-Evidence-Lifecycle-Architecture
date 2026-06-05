@@ -65,4 +65,4 @@ vela privacy scan .
 
 ## Optional Runtime
 
-The installer can also place VELA's public runtime helpers under `~/.vela` and public skills under `~/.codex/skills`. Optional integrations such as MCP servers, Codex plugins, Zotero, Obsidian, CodeGraph, and browser sessions stay in the user's own runtime and are only checked or configured when explicitly requested.
+The installer can also place VELA's public runtime helpers under `~/.vela` and public skills under `~/.codex/skills`. Optional integrations such as MCP servers, Codex plugins, Zotero, Obsidian, CodeGraph, external memory-service patterns, and browser sessions stay in the user's own runtime and are only checked or reviewed when explicitly requested. VELA does not install or prestart external memory services.

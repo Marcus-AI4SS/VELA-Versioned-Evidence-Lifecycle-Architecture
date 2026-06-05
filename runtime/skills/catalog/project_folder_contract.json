@@ -1,0 +1,471 @@
+{
+  "$schema": "../schemas/project_folder_contract.v1.schema.json",
+  "schema_version": "project_folder_contract.v1",
+  "generated_at": "2026-05-31",
+  "purpose": "为所有 Codex 项目提供统一目录规范，让项目能被新线程、子智能体、复盘流程和自动化稳定接手。",
+  "applies_to": [
+    "research_project",
+    "paper_project",
+    "data_project",
+    "coding_project",
+    "desktop_app_project",
+    "presentation_project",
+    "environment_maintenance_project"
+  ],
+  "root_principles": [
+    "项目根目录只放入口文件、项目合同和少量总览文件，不放临时下载、截图、测试残留和半成品。",
+    "规则、角色、任务、记忆、材料、数据、代码、输出、日志和归档必须分区存放。",
+    "所有可复用规则进 AGENTS.md 或 .codex；所有阶段事实进 research-map、material-passport、evidence-ledger、logs 和 memory。",
+    "用户提供材料、原始数据、PDF、证据账本、Zotero/Obsidian 导出和正式交付物不得静默删除。",
+    "生成物默认进 outputs，运行痕迹默认进 logs，下载全文默认进项目自己的 outputs/inbox，不进入环境级全局收件箱。",
+    "能用 Git 追踪的轻量规则、脚本、清单、状态文件要追踪；大型 PDF、原始数据、缓存、下载物和构建产物默认忽略或只登记 manifest。",
+    "清理前必须先分类，递归删除前必须确认候选路径仍在项目根目录内。"
+  ],
+  "standard_tree": {
+    "required_files": [
+      "README.md",
+      "AGENTS.md",
+      ".gitignore",
+      "research-map.md",
+      "findings-memory.md",
+      "material-passport.yaml",
+      "evidence-ledger.yaml",
+      "logs/quality-gates/pipeline-status.json",
+      "logs/quality-gates/writing-quality-report.json",
+      "logs/project-state/current.json",
+      "logs/project-state/history.md",
+      "memory/project-context.md",
+      "memory/decisions.md",
+      "memory/lessons-learned.md",
+      "tasks/todo.md",
+      "tasks/in-progress.md",
+      "tasks/done.md"
+    ],
+    "required_dirs": [
+      ".codex/agents",
+      ".codex/dispatch",
+      ".codex/context-packets",
+      ".codex/rules",
+      ".codex/prompts",
+      ".codex/templates",
+      "outputs/agent-runs",
+      "outputs/inbox",
+      "outputs/reports",
+      "logs/agent-handoffs",
+      "logs/quality-gates",
+      "logs/project-state",
+      "logs/runs",
+      "memory",
+      "tasks",
+      "archive"
+    ],
+    "recommended_dirs": [
+      "materials",
+      "references",
+      "literature",
+      "data/raw",
+      "data/interim",
+      "data/processed",
+      "analysis",
+      "scripts",
+      "tests",
+      "outputs/drafts",
+      "outputs/figures",
+      "outputs/tables",
+      "outputs/exports",
+      "outputs/inbox/reference-fulltext",
+      "outputs/inbox/cnki-downloads",
+      "outputs/reports/cnki-zotero",
+      "outputs/review-panels"
+    ],
+    "optional_files": [
+      ".codex/project-notes.md",
+      ".codex/rules/project-rules.md",
+      ".codex/prompts/common-prompts.md",
+      ".codex/templates/report-template.md",
+      "CHANGELOG.md",
+      "LICENSE",
+      "package.json",
+      "pyproject.toml",
+      "requirements.txt"
+    ]
+  },
+  "zones": [
+    {
+      "id": "root_entry",
+      "label": "项目入口区",
+      "plain_meaning": "打开项目后第一眼需要看的说明、规则和总览。",
+      "paths": [
+        "README.md",
+        "AGENTS.md",
+        ".gitignore",
+        "research-map.md",
+        "findings-memory.md",
+        "material-passport.yaml",
+        "evidence-ledger.yaml"
+      ],
+      "layer": "context",
+      "git_policy": "track_source",
+      "allowed_content": [
+        "项目目标、当前阶段、材料边界、证据台账、Codex 规则、忽略规则"
+      ],
+      "forbidden_content": [
+        "临时下载文件",
+        "一次性截图",
+        "未命名草稿",
+        "大体积 PDF 或数据文件"
+      ],
+      "cleanup_policy": "根目录出现半成品、下载物或临时文件时，先移入 outputs、materials、archive 或列入待确认，不在根目录长期停留。"
+    },
+    {
+      "id": "codex_contract",
+      "label": "Codex 协作区",
+      "plain_meaning": "项目自己的 AI 角色、任务卡、规则补充和可复用提示词。",
+      "paths": [
+        ".codex/agents",
+        ".codex/dispatch",
+        ".codex/context-packets",
+        ".codex/rules",
+        ".codex/prompts",
+        ".codex/templates"
+      ],
+      "layer": "lifecycle",
+      "git_policy": "track_source",
+      "allowed_content": [
+        "项目 agent 定义",
+        "任务分发卡",
+        "子智能体上下文包",
+        "项目规则补充",
+        "可复用提示词",
+        "输出模板"
+      ],
+      "forbidden_content": [
+        "浏览器 cookies",
+        "账号密钥",
+        "个人隐私配置",
+        "项目外路径写入脚本"
+      ],
+      "cleanup_policy": "保留真实项目 contract；过期 dispatch 和 context packet 可归档到 archive，但不得用临时 JSON 或 audit 目录替代。"
+    },
+    {
+      "id": "materials_and_references",
+      "label": "材料与文献区",
+      "plain_meaning": "用户给的材料、候选文献、阅读笔记和 Zotero/Obsidian 交接材料。",
+      "paths": [
+        "materials",
+        "references",
+        "literature"
+      ],
+      "layer": "context",
+      "git_policy": "track_small_ledgers_ignore_large_files",
+      "allowed_content": [
+        "用户提供材料",
+        "候选文献表",
+        "阅读笔记",
+        "引用证据表",
+        "Zotero 导出清单",
+        "Obsidian 同步摘要"
+      ],
+      "forbidden_content": [
+        "未登记来源的论文全文",
+        "混入代码构建产物",
+        "无法解释来源的重复 PDF"
+      ],
+      "cleanup_policy": "材料和文献只移动不静默删除；大型文件保留在项目忽略区并写入 manifest 或 evidence-ledger。"
+    },
+    {
+      "id": "data_and_analysis",
+      "label": "数据与分析区",
+      "plain_meaning": "原始数据、清洗过程、分析脚本、模型结果和复现用测试。",
+      "paths": [
+        "data/raw",
+        "data/interim",
+        "data/processed",
+        "analysis",
+        "scripts",
+        "tests"
+      ],
+      "layer": "execution",
+      "git_policy": "track_small_ledgers_ignore_large_files",
+      "allowed_content": [
+        "原始数据清单",
+        "清洗脚本",
+        "分析脚本",
+        "notebook",
+        "模型结果摘要",
+        "复现测试"
+      ],
+      "forbidden_content": [
+        "未脱敏个人数据",
+        "把原始数据直接覆盖成处理后数据",
+        "无说明的 notebook 检查点"
+      ],
+      "cleanup_policy": "原始数据不可覆盖；中间数据和 notebook 先判断是否支撑证据链，不能只因体积大而删除。"
+    },
+    {
+      "id": "outputs",
+      "label": "输出区",
+      "plain_meaning": "所有草稿、报告、图表、PPT、下载全文、导出包和子智能体结果。",
+      "paths": [
+        "outputs/agent-runs",
+        "outputs/inbox",
+        "outputs/reports",
+        "outputs/drafts",
+        "outputs/figures",
+        "outputs/tables",
+        "outputs/exports",
+        "outputs/review-panels"
+      ],
+      "layer": "observability",
+      "git_policy": "ignore_generated",
+      "allowed_content": [
+        "子智能体输出",
+        "项目收件箱",
+        "下载全文",
+        "阶段报告",
+        "草稿",
+        "图表",
+        "导出包"
+      ],
+      "forbidden_content": [
+        "未经确认的正式源文件",
+        "需要长期复用却没有移入 source/scripts/catalog 的规则"
+      ],
+      "cleanup_policy": "输出区可清理缓存和失败残留；正式交付物、证据报告和用户确认版本只能归档或待确认。"
+    },
+    {
+      "id": "logs_and_quality",
+      "label": "日志与检查区",
+      "plain_meaning": "项目状态、质量检查、运行记录、交接记录和失败原因。",
+      "paths": [
+        "logs/agent-handoffs",
+        "logs/quality-gates",
+        "logs/project-state",
+        "logs/runs"
+      ],
+      "layer": "verification",
+      "git_policy": "track_small_ledgers_ignore_large_files",
+      "allowed_content": [
+        "质量门结果",
+        "项目状态",
+        "交接日志",
+        "运行摘要",
+        "错误原因"
+      ],
+      "forbidden_content": [
+        "密钥",
+        "完整账号会话",
+        "无法复现的一次性聊天摘录"
+      ],
+      "cleanup_policy": "日志是可观测证据，默认保留摘要；大日志可压缩或归档，不直接删除关键失败原因。"
+    },
+    {
+      "id": "memory_and_tasks",
+      "label": "项目记忆与任务区",
+      "plain_meaning": "只记录对后续继续有用的决策、经验、上下文和待办。",
+      "paths": [
+        "memory/project-context.md",
+        "memory/decisions.md",
+        "memory/lessons-learned.md",
+        "tasks/todo.md",
+        "tasks/in-progress.md",
+        "tasks/done.md"
+      ],
+      "layer": "lifecycle",
+      "git_policy": "track_source",
+      "allowed_content": [
+        "项目背景",
+        "重要决策",
+        "复盘经验",
+        "待办",
+        "进行中任务",
+        "完成记录"
+      ],
+      "forbidden_content": [
+        "逐字粘贴整段对话",
+        "无用情绪记录",
+        "未核验的长期事实"
+      ],
+      "cleanup_policy": "记忆只保留可复用结论和决策，不把所有聊天内容堆进项目。"
+    },
+    {
+      "id": "archive",
+      "label": "归档区",
+      "plain_meaning": "保留旧版本、废弃路线、历史输出和不再活跃但不能删除的材料。",
+      "paths": [
+        "archive"
+      ],
+      "layer": "governance",
+      "git_policy": "optional_track",
+      "allowed_content": [
+        "旧版本",
+        "废弃路线说明",
+        "历史输出",
+        "用户要求保留的材料"
+      ],
+      "forbidden_content": [
+        "无来源的敏感数据",
+        "本应删除的缓存",
+        "可由构建命令重新生成的大型产物"
+      ],
+      "cleanup_policy": "归档前写清楚原因；归档不是垃圾桶，明显缓存仍按安全删除处理。"
+    }
+  ],
+  "project_type_overrides": [
+    {
+      "project_type": "paper_project",
+      "add_required_dirs": [
+        "literature",
+        "references",
+        "outputs/drafts",
+        "outputs/figures",
+        "outputs/tables",
+        "outputs/exports"
+      ],
+      "add_recommended_dirs": [
+        "outputs/inbox/reference-fulltext",
+        "outputs/review-panels"
+      ],
+      "notes": [
+        "文献候选表、全文获取状态、PDF 标注、引用证据和审稿意见必须能回到项目目录。",
+        "正式写作不直接引用 outputs/inbox 里的文件名，必须通过 evidence-ledger 或引用证据表。"
+      ]
+    },
+    {
+      "project_type": "data_project",
+      "add_required_dirs": [
+        "data/raw",
+        "data/interim",
+        "data/processed",
+        "analysis",
+        "scripts",
+        "tests"
+      ],
+      "add_recommended_dirs": [
+        "outputs/tables",
+        "outputs/figures"
+      ],
+      "notes": [
+        "原始数据只读保存，处理后数据另存。",
+        "每个关键分析脚本要能说明输入、输出、版本和复现命令。"
+      ]
+    },
+    {
+      "project_type": "coding_project",
+      "add_required_dirs": [
+        "scripts",
+        "tests"
+      ],
+      "add_recommended_dirs": [
+        "src",
+        "docs",
+        "outputs/reports"
+      ],
+      "notes": [
+        "源代码、测试和配置必须与生成物分开。",
+        "构建产物、依赖目录和缓存不进入根目录。"
+      ]
+    },
+    {
+      "project_type": "presentation_project",
+      "add_required_dirs": [
+        "outputs/exports"
+      ],
+      "add_recommended_dirs": [
+        "assets",
+        "outputs/figures",
+        "outputs/drafts"
+      ],
+      "notes": [
+        "PPT、网页演示、图片和素材分区存放。",
+        "最终可交付版本要与草稿和截图分开。"
+      ]
+    }
+  ],
+  "cleanup_decision_classes": [
+    {
+      "id": "keep_source",
+      "meaning": "源文件、规则、脚本、测试、配置、项目合同和正式说明。",
+      "default_action": "keep"
+    },
+    {
+      "id": "keep_evidence",
+      "meaning": "原始材料、数据、PDF、截图证据、Zotero/Obsidian 导出、证据账本和质量日志。",
+      "default_action": "keep"
+    },
+    {
+      "id": "keep_deliverable",
+      "meaning": "用户确认的正式报告、论文稿、图表、投稿包、复现包和交接包。",
+      "default_action": "keep"
+    },
+    {
+      "id": "move_or_archive_candidate",
+      "meaning": "有保留价值但位置错误、命名混乱或已不活跃的材料。",
+      "default_action": "move_or_archive"
+    },
+    {
+      "id": "review_needed",
+      "meaning": "含义不明、可能仍被引用、可能含用户手工工作的文件。",
+      "default_action": "ask_user"
+    },
+    {
+      "id": "safe_remove_candidate",
+      "meaning": "缓存、空目录、失败残留、重复 scratch 导出、无引用临时文件。",
+      "default_action": "safe_remove_after_scope_check"
+    }
+  ],
+  "forbidden_root_patterns": [
+    {
+      "pattern": "*.tmp",
+      "reason": "临时文件不应停在项目根目录。",
+      "default_action": "safe_remove_after_scope_check"
+    },
+    {
+      "pattern": "*.log",
+      "reason": "运行日志应进入 logs/runs 或 outputs/reports。",
+      "default_action": "move_to_outputs"
+    },
+    {
+      "pattern": "download*.pdf",
+      "reason": "浏览器下载的未命名 PDF 应进入项目收件箱并重命名、校验。",
+      "default_action": "move_to_outputs"
+    },
+    {
+      "pattern": "untitled*",
+      "reason": "未命名草稿缺少上下文，不能长期停在根目录。",
+      "default_action": "ask_user"
+    },
+    {
+      "pattern": "新建文件夹*",
+      "reason": "空壳目录或临时目录需要归并到标准分区。",
+      "default_action": "ask_user"
+    }
+  ],
+  "routing_integration": {
+    "initializer_manifest": "skills/catalog/project_initializer_manifest.json",
+    "project_initializer_must_create": [
+      "README.md",
+      "AGENTS.md",
+      ".gitignore",
+      ".codex/agents",
+      ".codex/dispatch",
+      ".codex/context-packets",
+      "outputs/agent-runs",
+      "outputs/inbox",
+      "outputs/reports",
+      "logs/agent-handoffs",
+      "logs/quality-gates",
+      "logs/project-state",
+      "memory/project-context.md",
+      "memory/decisions.md",
+      "memory/lessons-learned.md",
+      "tasks/todo.md",
+      "tasks/in-progress.md",
+      "tasks/done.md"
+    ],
+    "hygiene_skill": "project-folder-hygiene",
+    "validation_target": "python -m skills.scripts.envctl validate project-folder-contract --project-root <project_root>",
+    "download_inbox_policy": "所有文献下载、CNKI/Google Scholar/PDF 获取和浏览器回收文件，默认写入项目 outputs/inbox 下的专门子目录。",
+    "subagent_output_policy": "每个子智能体只写 outputs/agent-runs/<run_id>/<agent_id>/；正式整合后再提升到 drafts、reports、figures、tables 或 exports。"
+  }
+}

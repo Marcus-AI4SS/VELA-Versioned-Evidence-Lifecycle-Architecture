@@ -36,6 +36,18 @@ EXCLUDED_TOKENS = [
 
     "scholar" + "_advisory_panel",
 
+    "zotero-" + "mcp",
+
+    "xiao" + "hongshu",
+
+    "小" + "红书",
+
+    "c:" + "\\users\\" + "17" + "666",
+
+    "c:" + "/users/" + "17" + "666",
+
+    "d:" + "\\ai environment-github",
+
 ]
 
 REQUIRED_PATHS = [
@@ -47,15 +59,31 @@ REQUIRED_PATHS = [
 
     "catalog/local_memory_system.json",
 
+    "catalog/project_folder_contract.json",
+
+    "catalog/figure_style_presets.json",
+
+    "catalog/route_mcp_activation_policy.json",
+
     "catalog/protected_runtime_paths.json",
 
     "schemas/validator_result.schema.json",
 
     "schemas/local_memory_system.v1.schema.json",
 
+    "schemas/project_folder_contract.v1.schema.json",
+
+    "schemas/figure_style_presets.v1.schema.json",
+
     "profiles/baseline.toml",
 
+    "profiles/startup-safe.toml",
+
     "scripts/envctl/__main__.py",
+
+    "scripts/envctl/project_folder_contract.py",
+
+    "scripts/envctl/figure_style_presets.py",
 
     "plugins/research-autopilot/skills/research-autopilot/SKILL.md",
 

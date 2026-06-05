@@ -8,38 +8,33 @@
       "required_mcp": [],
       "optional_mcp": [
         "chrome-devtools",
-        "zotero-mcp",
         "openalex-mcp",
         "semantic-scholar-mcp",
-        "agentmemory",
         "codegraph"
       ],
       "activation_needed_mcp": [],
-      "notes": "Governance work may inspect browser-visible plugin state, formal reference tooling, runtime memory, and code structure context, but shell and envctl remain the primary actuators."
+      "notes": "Governance work may inspect browser-visible plugin state, formal reference tooling, runtime memory, and code structure context, but shell and envctl remain the primary actuators. Native first: use in-app Browser for ordinary or local pages, official Chrome plugin for the user Chrome profile, logged-in tabs, cookies, extensions, and browser downloads, and Computer Use for Windows apps or file dialogs. MCP/CLI browser tools are fallback or specialized automation, not the default first click path."
     },
     {
       "route_id": "single-paper-review",
       "required_mcp": [
-        "zotero-mcp",
         "openalex-mcp",
         "semantic-scholar-mcp"
       ],
       "optional_mcp": [],
       "activation_needed_mcp": [],
-      "notes": "Formal paper review requires citation evidence and metadata lookup plus Zotero synchronization before final references are accepted. DOI is verified when present; user-provided sources, complete PDFs, and public academic index records can waive the must-have-DOI requirement."
+      "notes": "Formal paper review requires citation evidence and metadata lookup plus official Zotero plugin synchronization before final references are accepted. DOI is verified when present; user-provided sources, complete PDFs, and public academic index records can waive the must-have-DOI requirement."
     },
     {
       "route_id": "environment-ops",
       "required_mcp": [],
       "optional_mcp": [
         "chrome-devtools",
-        "zotero-mcp",
         "openalex-mcp",
-        "agentmemory",
         "codegraph"
       ],
       "activation_needed_mcp": [],
-      "notes": "Environment operations can use MCP evidence, agentmemory health, and codegraph context when relevant, but config mutation must remain governed by envctl and validators."
+      "notes": "Environment operations can use MCP evidence, local memory reports and CodeGraph context when relevant, but config mutation must remain governed by envctl and validators. Native first: use in-app Browser for ordinary or local pages, official Chrome plugin for the user Chrome profile, logged-in tabs, cookies, extensions, and browser downloads, and Computer Use for Windows apps or file dialogs. MCP/CLI browser tools are fallback or specialized automation, not the default first click path."
     },
     {
       "route_id": "project-folder-hygiene",
@@ -53,12 +48,10 @@
       "required_mcp": [],
       "optional_mcp": [
         "chrome-devtools",
-        "zotero-mcp",
-        "openalex-mcp",
-        "agentmemory"
+        "openalex-mcp"
       ],
       "activation_needed_mcp": [],
-      "notes": "Retrospective work may inspect evidence sources and runtime memory signals, but durable changes go through project-retrospective-evolver and vela-runtime-manager."
+      "notes": "Retrospective work may inspect evidence sources and local memory status signals, but durable changes go through project-retrospective-evolver and vela-runtime-manager. Native first: use in-app Browser for ordinary or local pages, official Chrome plugin for the user Chrome profile, logged-in tabs, cookies, extensions, and browser downloads, and Computer Use for Windows apps or file dialogs. MCP/CLI browser tools are fallback or specialized automation, not the default first click path."
     },
     {
       "route_id": "long-running-experiment-ops",
@@ -67,12 +60,11 @@
         "chrome-devtools"
       ],
       "activation_needed_mcp": [],
-      "notes": "Browser tooling is optional for dashboards; process, logs, checkpoints, and shell probes remain primary."
+      "notes": "Browser tooling is optional for dashboards; process, logs, checkpoints, and shell probes remain primary. Native first: use in-app Browser for ordinary or local pages, official Chrome plugin for the user Chrome profile, logged-in tabs, cookies, extensions, and browser downloads, and Computer Use for Windows apps or file dialogs. MCP/CLI browser tools are fallback or specialized automation, not the default first click path."
     },
     {
       "route_id": "evidence-based-literature-workflow",
       "required_mcp": [
-        "zotero-mcp",
         "openalex-mcp",
         "semantic-scholar-mcp"
       ],
@@ -82,12 +74,11 @@
         "paper-search-mcp"
       ],
       "activation_needed_mcp": [],
-      "notes": "Structured reading and citation evidence auditing require the formal metadata/Zotero chain. Browser, Google Scholar, and paper-search remain discovery or PDF-evidence sensors, not substitutes for the citation gate."
+      "notes": "Structured reading and citation evidence auditing require the formal metadata/Zotero chain. Browser, Google Scholar, and paper-search remain discovery or PDF-evidence sensors, not substitutes for the citation gate. Native first: use in-app Browser for ordinary or local pages, official Chrome plugin for the user Chrome profile, logged-in tabs, cookies, extensions, and browser downloads, and Computer Use for Windows apps or file dialogs. MCP/CLI browser tools are fallback or specialized automation, not the default first click path."
     },
     {
       "route_id": "literature-review",
       "required_mcp": [
-        "zotero-mcp",
         "openalex-mcp",
         "semantic-scholar-mcp"
       ],
@@ -97,7 +88,7 @@
         "paper-search-mcp"
       ],
       "activation_needed_mcp": [],
-      "notes": "The citation evidence/Zotero/OpenAlex/Semantic Scholar chain is required for formal citation. DOI is checked when present; user-provided sources, complete PDFs, and public academic index records can waive the must-have-DOI requirement. Google Scholar and paper-search remain optional discovery sensors; CNKI discovery/download defaults to envctl cnki-zotero rather than direct cnki-mcp activation."
+      "notes": "The citation evidence/official Zotero plugin/OpenAlex/Semantic Scholar chain is required for formal citation. DOI is checked when present; user-provided sources, complete PDFs, and public academic index records can waive the must-have-DOI requirement. Google Scholar and paper-search remain optional discovery sensors; CNKI discovery/download defaults to envctl cnki-zotero rather than direct cnki-mcp activation. Native first: use in-app Browser for ordinary or local pages, official Chrome plugin for the user Chrome profile, logged-in tabs, cookies, extensions, and browser downloads, and Computer Use for Windows apps or file dialogs. MCP/CLI browser tools are fallback or specialized automation, not the default first click path."
     },
     {
       "route_id": "reference-fulltext-acquisition",
@@ -107,12 +98,11 @@
       ],
       "optional_mcp": [
         "chrome-devtools",
-        "zotero-mcp",
         "google-scholar-mcp",
         "paper-search-mcp"
       ],
       "activation_needed_mcp": [],
-      "notes": "Fulltext acquisition uses DOI/OA metadata first. For English or international papers, OpenAlex/Crossref/Unpaywall/Semantic Scholar are the batch OA attempt; if no verified PDF is acquired, Google Scholar exact-title lookup and right-side PDF links become the default per-paper fallback. Zotero is only for explicit attachment or import planning. CNKI discovery/download defaults to envctl cnki-zotero and authorized Chrome/CDP rather than direct cnki-mcp activation. Browser selectors, local smoke-test status, and captcha checkpoint rules are governed by scholar_browser_patterns.json."
+      "notes": "Fulltext acquisition uses DOI/OA metadata first. For English or international papers, OpenAlex/Crossref/Unpaywall/Semantic Scholar are the batch OA attempt; if no verified PDF is acquired, Google Scholar exact-title lookup and right-side PDF links become the default per-paper fallback. The official Zotero plugin is used for library search, BibTeX export, citation keys, and explicit attachment/import planning. CNKI discovery/download defaults to envctl cnki-zotero and authorized Chrome/CDP rather than direct cnki-mcp activation. Browser selectors, local smoke-test status, and captcha checkpoint rules are governed by scholar_browser_patterns.json. Native first: use in-app Browser for ordinary or local pages, official Chrome plugin for the user Chrome profile, logged-in tabs, cookies, extensions, and browser downloads, and Computer Use for Windows apps or file dialogs. MCP/CLI browser tools are fallback or specialized automation, not the default first click path."
     },
     {
       "route_id": "research-figure-design",
@@ -134,29 +124,27 @@
         "chrome-devtools"
       ],
       "optional_mcp": [
-        "zotero-mcp",
+        "social-platform-mcp",
         "openalex-mcp"
       ],
       "activation_needed_mcp": [],
-      "notes": "Browser-visible evidence is required; generic social capture is optional; VELA does not ship platform-specific social MCP backends."
+      "notes": "Browser-visible evidence is required; generic social capture is optional; platform-specific MCP requires explicit activation. Native first: use in-app Browser for ordinary or local pages, official Chrome plugin for the user Chrome profile, logged-in tabs, cookies, extensions, and browser downloads, and Computer Use for Windows apps or file dialogs. MCP/CLI browser tools are fallback or specialized automation, not the default first click path."
     },
     {
       "route_id": "computational-social-science",
       "required_mcp": [],
       "optional_mcp": [
         "chrome-devtools",
-        "zotero-mcp",
         "openalex-mcp",
         "semantic-scholar-mcp",
         "paper-search-mcp"
       ],
       "activation_needed_mcp": [],
-      "notes": "MCP tools are sensors for literature and data discovery; reproducible local artifacts remain the controlled outputs."
+      "notes": "MCP tools are sensors for literature and data discovery; reproducible local artifacts remain the controlled outputs. Native first: use in-app Browser for ordinary or local pages, official Chrome plugin for the user Chrome profile, logged-in tabs, cookies, extensions, and browser downloads, and Computer Use for Windows apps or file dialogs. MCP/CLI browser tools are fallback or specialized automation, not the default first click path."
     },
     {
       "route_id": "social-science-submission-package",
       "required_mcp": [
-        "zotero-mcp",
         "openalex-mcp",
         "semantic-scholar-mcp"
       ],
@@ -168,7 +156,6 @@
       "route_id": "empirical-quant",
       "required_mcp": [],
       "optional_mcp": [
-        "zotero-mcp",
         "openalex-mcp",
         "semantic-scholar-mcp"
       ],
@@ -179,19 +166,17 @@
       "route_id": "text-corpus",
       "required_mcp": [],
       "optional_mcp": [
-        "zotero-mcp",
         "openalex-mcp",
         "semantic-scholar-mcp",
         "paper-search-mcp"
       ],
       "activation_needed_mcp": [],
-      "notes": "Corpus projects may use literature and paper search MCPs as discovery sensors, not as uncontrolled data sources."
+      "notes": "Corpus projects may use literature and paper search MCPs as discovery sensors, not as uncontrolled data sources. Native first: use in-app Browser for ordinary or local pages, official Chrome plugin for the user Chrome profile, logged-in tabs, cookies, extensions, and browser downloads, and Computer Use for Windows apps or file dialogs. MCP/CLI browser tools are fallback or specialized automation, not the default first click path."
     },
     {
       "route_id": "network-analysis",
       "required_mcp": [],
       "optional_mcp": [
-        "zotero-mcp",
         "openalex-mcp",
         "semantic-scholar-mcp"
       ],
@@ -201,7 +186,6 @@
     {
       "route_id": "writing-export",
       "required_mcp": [
-        "zotero-mcp",
         "openalex-mcp",
         "semantic-scholar-mcp"
       ],
@@ -214,13 +198,11 @@
       "required_mcp": [],
       "optional_mcp": [
         "chrome-devtools",
-        "zotero-mcp",
         "openalex-mcp",
-        "semantic-scholar-mcp",
-        "agentmemory"
+        "semantic-scholar-mcp"
       ],
       "activation_needed_mcp": [],
-      "notes": "General research keeps MCPs as optional sensors until a more specific route selects stricter gates; runtime memory can help recall prior context but cannot silently switch route."
+      "notes": "General research keeps MCPs as optional sensors until a more specific route selects stricter gates; local memory reports can help recall prior context but cannot silently switch route. Native first: use in-app Browser for ordinary or local pages, official Chrome plugin for the user Chrome profile, logged-in tabs, cookies, extensions, and browser downloads, and Computer Use for Windows apps or file dialogs. MCP/CLI browser tools are fallback or specialized automation, not the default first click path."
     }
   ]
 }

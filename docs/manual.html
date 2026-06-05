@@ -19,7 +19,7 @@
 
       <section class="hero compact">
         <div>
-          <div class="eyebrow">Public manual · Updated 2026-05-29</div>
+          <div class="eyebrow">Public manual · Updated 2026-05-31</div>
           <h1><span class="sans">VELA</span> Research Workflow Environment</h1>
           <p>VELA is a portable research workflow environment for Codex. It gives each project a readable operating layer: folders, rules, handoffs, evidence ledgers, schemas, validators, logs, memory governance, and controlled evolution.</p>
           <div class="hero-actions">
@@ -62,8 +62,8 @@
           <tr><td>Source package</td><td>The VELA repository cloned from GitHub</td><td><code>package/</code>, <code>runtime/</code>, <code>schemas/</code>, <code>scripts/</code>, <code>docs/</code>, <code>tests/</code></td></tr>
           <tr><td>Local runtime</td><td>User-side runtime installed into Codex</td><td><code>~/.vela</code>, <code>~/.codex/skills</code>, CLI, profiles, commands, receipts</td></tr>
           <tr><td>Project layer</td><td>Each research project's files</td><td><code>materials/</code>, <code>evidence/</code>, <code>claims/</code>, <code>methods/</code>, <code>deliverables/</code>, <code>handoffs/</code>, <code>logs/</code></td></tr>
-          <tr><td>Tool interface</td><td>Optional connectors to user-owned tools</td><td>Git, Python, ripgrep, MCP servers, Codex plugins, Zotero, Obsidian</td></tr>
-          <tr><td>Memory and evolution</td><td>Candidate memory and governed rule promotion</td><td>logs, agentmemory, CodeGraph, evolution backlog, validators</td></tr>
+          <tr><td>Tool interface</td><td>Optional connectors to user-owned tools</td><td>Git, Python, ripgrep, native Browser/Chrome/Computer Use, route-scoped MCP servers, Codex plugins, Zotero, Obsidian</td></tr>
+          <tr><td>Memory and evolution</td><td>Candidate memory and governed rule promotion</td><td>logs, local memory contracts, CodeGraph, evolution backlog, validators</td></tr>
         </table>
         <table>
           <tr><th>Layer</th><th>Windows</th><th>macOS / Linux</th><th>Role</th></tr>
@@ -149,7 +149,7 @@
           <tr><th>Type</th><th>Examples</th><th>How VELA Treats Them</th></tr>
           <tr><td>Core</td><td>Git, Python, shell, VELA CLI, schemas, validators</td><td>installers and <code>vela doctor</code> check them directly.</td></tr>
           <tr><td>Recommended</td><td>ripgrep, GitHub CLI, Node.js, PowerShell 7, Homebrew/winget</td><td>missing tools are reported, not faked.</td></tr>
-          <tr><td>Optional integrations</td><td>Zotero, Obsidian, MCP servers, Codex plugins, agentmemory, CodeGraph</td><td>profiles and doctor checks are provided; user authorization is required.</td></tr>
+          <tr><td>Optional integrations</td><td>Zotero, Obsidian, MCP servers, Codex plugins, external memory-service patterns, CodeGraph</td><td>profiles, doctor checks, and adoption reviews are provided; user authorization is required. External memory services are not installed or prestarted by VELA.</td></tr>
         </table>
       </section>
 

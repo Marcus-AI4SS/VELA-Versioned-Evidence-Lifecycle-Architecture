@@ -1,6 +1,6 @@
 # VELA 公开版说明书
 
-更新日期：2026-05-29
+更新日期：2026-05-31
 
 VELA（Versioned Evidence Lifecycle Architecture）是一套面向 Codex 的便携式研究工作流环境。它把研究项目拆成清楚的目录、规则、证据、交接、检查、日志和可演化经验，让 Codex 在可审查的边界内协作。
 
@@ -79,7 +79,7 @@ VELA 分成五块。用户可以只用最小项目结构，也可以安装完整
 | 本机运行层 | 安装到你自己 Codex 环境里的运行入口 | `~/.vela`、`~/.codex/skills`、CLI、profiles、commands、安装回执 |
 | 项目工作层 | 每个研究项目自己的文件结构 | `materials/`、`evidence/`、`claims/`、`methods/`、`deliverables/`、`handoffs/`、`logs/` |
 | 工具接口层 | 按任务需要连接外部工具 | Git、Python、ripgrep、MCP servers、Codex plugins、Zotero、Obsidian |
-| 记忆与演化层 | 保存经验，但必须经过治理 | logs、agentmemory 候选召回、CodeGraph 索引、evolution backlog、validators |
+| 记忆与演化层 | 保存经验，但必须经过治理 | logs、本地记忆候选、本地记忆状态报告、CodeGraph 索引、evolution backlog、validators |
 
 安装后通常形成“两层”：
 
@@ -192,7 +192,7 @@ VELA 的目标不是把所有依赖强行装满，而是先给出清楚的检查
 | Node.js / npm | 部分插件、MCP 或展示工具可能需要 | 可选 |
 | GitHub CLI | 仓库协作、发布和 CI 检查 | 可选 |
 | Zotero / Obsidian | 文献库和长期笔记 | 用户自有工具，VELA 不复制数据库 |
-| MCP servers | 浏览器、文献、记忆、代码索引等接口 | 按任务启用 |
+| MCP servers | 学术检索、浏览器调试、社交证据和代码索引等接口 | 按任务启用 |
 | Codex plugins | GitHub、Superpowers、文档、表格、演示等增强层 | 按任务启用 |
 
 依赖分成三类：
@@ -201,7 +201,7 @@ VELA 的目标不是把所有依赖强行装满，而是先给出清楚的检查
 | --- | --- | --- |
 | 核心依赖 | Git、Python、shell、VELA CLI、schemas、validators | 安装脚本和 `vela doctor` 会重点检查 |
 | 推荐依赖 | ripgrep、GitHub CLI、Node.js、PowerShell 7、Homebrew/winget | 缺失时提示，不伪装成已安装 |
-| 可选集成 | Zotero、Obsidian、MCP servers、Codex plugins、agentmemory、CodeGraph | 只提供 profile、doctor 检查和使用说明，用户授权后才启用 |
+| 可选集成 | Zotero、Obsidian、MCP servers、Codex plugins、外部记忆服务模式、CodeGraph | 只提供 profile、doctor 检查、adoption review 和使用说明；外部记忆服务默认不安装、不常驻 |
 
 ## 8. 初始化研究项目
 
@@ -258,11 +258,11 @@ my-research-project/
 
 | 你要做什么 | 路线 | 主要能力 | 工具接口 | 边界 |
 | --- | --- | --- | --- | --- |
-| 不确定该走哪条研究路线 | `general-research` | 研究设计、引用核验、基础导出 | 可选浏览器、Zotero、OpenAlex、Semantic Scholar、agentmemory | 用于初始分流，不替代具体路线 |
-| 检查 VELA、skills、profiles、MCP、插件和配置 | `stack-governance` | `vela-runtime-manager`、`skill-vetter` | GitHub、Superpowers、agentmemory、CodeGraph 可选 | 管环境，不管具体研究结论 |
-| 安装、修复、更新运行层 | `environment-ops` | runtime 检查、profile 应用、配置漂移检查 | 可选浏览器、Zotero、OpenAlex、agentmemory、CodeGraph | 不静默改用户级配置 |
+| 不确定该走哪条研究路线 | `general-research` | 研究设计、引用核验、基础导出 | 可选浏览器、Zotero、OpenAlex、Semantic Scholar、本地记忆状态 | 用于初始分流，不替代具体路线 |
+| 检查 VELA、skills、profiles、MCP、插件和配置 | `stack-governance` | `vela-runtime-manager`、`skill-vetter` | GitHub、Superpowers、本地记忆状态、CodeGraph 可选 | 管环境，不管具体研究结论 |
+| 安装、修复、更新运行层 | `environment-ops` | runtime 检查、profile 应用、配置漂移检查 | 可选浏览器、Zotero、OpenAlex、本地记忆状态、CodeGraph | 不静默改用户级配置 |
 | 清理项目文件夹 | `project-folder-hygiene` | 文件盘点、临时文件分类、交接前整理 | 一般不需要 MCP | 不静默删除原始材料、数据、PDF、证据 |
-| 项目复盘和经验沉淀 | `project-retrospective` | 复盘、经验候选、演化待办 | 可选 agentmemory、浏览器、文献工具 | 复盘不是自动改规则 |
+| 项目复盘和经验沉淀 | `project-retrospective` | 复盘、经验候选、演化待办 | 本地记忆状态、浏览器、文献工具可选 | 复盘不是自动改规则 |
 | 长时间实验或后台任务 | `long-running-experiment-ops` | 进程、日志、断点、失败恢复 | 可选浏览器看仪表盘 | 以本地日志和检查点为准 |
 | 文献证据总控 | `evidence-based-literature-workflow` | 结构性阅读、证据核验、引用支撑 | Zotero、OpenAlex、Semantic Scholar；浏览器/Scholar/paper-search 可选 | 发现文献不等于正式引用 |
 | 文献综述和研究版图 | `literature-review` | 主题检索、引用扩展、综述表 | Zotero、OpenAlex、Semantic Scholar；Google Scholar 可选 | 综述写作前仍需引用核验 |
@@ -326,7 +326,9 @@ VELA runtime 当前公开研究包里包含 42 个 active skills，分为七类�
 | `presentations` | PPTX 创建、编辑、渲染、导出 | 演示交付层，不承担研究发现 |
 | `spreadsheets` | 表格文件创建、编辑、分析、可视化 | 表格工件层，正式分析仍走研究路线 |
 | `hyperframes` | 视频、动画、网页转视频 | 展示增强层，按需使用 |
-| `browser` | Codex 原生浏览器交互层 | 需要用户安装并授权，适合网页预览和可视检查 |
+| `browser` | Codex 原生浏览器交互层 | 普通网页、本地页面、截图、可视检查的第一入口 |
+| `chrome` | 用户真实 Chrome 会话 | 需要登录态、扩展、下载目录或已有标签页时优先使用 |
+| `computer-use` | 本机桌面应用操作 | 文件对话框、Office/浏览器窗口和系统级可视检查优先使用 |
 | `obsidian-sidecar` | 长期研究笔记侧车 | 只沉淀笔记，不替代源规则 |
 
 候选或非默认插件不会被写成“已安装”。涉及账号授权、云端权限或本机客户端的插件，都由用户自行启用。
@@ -339,32 +341,34 @@ VELA runtime 当前公开研究包里包含 42 个 active skills，分为七类�
 
 ## 12. MCP 工具接口
 
-MCP 是把外部系统接进 Codex 的工具接口。VELA 的原则是：默认不预启动全部 MCP，只在任务需要时打开。
+MCP 是把外部系统接进 Codex 的工具接口。VELA 的原则是：默认不预启动全部 MCP，只在任务需要时打开。普通浏览器和电脑操作优先使用 Codex 原生 Browser、Chrome 和 Computer Use；MCP/CLI 浏览器工具只作为调试、复现和专项采集后备。
 
-| MCP | 用途 | 什么时候用 |
+| 接口 | 用途 | 什么时候用 |
 | --- | --- | --- |
-| `chrome-devtools` | 浏览器页面检查、截图、网页材料、可视状态 | 平台材料、全文下载、网页证据、UI 检查 |
-| `zotero-mcp` | 文献条目、附件、笔记、标签、收藏夹 | 正式引用、文献入库、附件同步 |
+| `official Zotero plugin` | 文献条目、附件、笔记、标签、收藏夹 | 正式引用、文献入库、附件同步；它不是默认 MCP |
 | `openalex-mcp` | 开放学术元数据、作者、机构、主题、引用网络 | 文献发现、综述、引用核验 |
 | `semantic-scholar-mcp` | 相关论文、引用关系、语义线索 | 文献发现、引文追踪 |
 | `google-scholar-mcp` | Google Scholar 检索链 | 单篇查找、右侧 PDF、引用扩展 |
 | `paper-search-mcp` | 聚合论文搜索 | 补充发现，不替代正式核验 |
-| `agentmemory` | 运行态记忆召回和审计 | 复盘、路线线索、跨会话经验召回 |
-| `codegraph` | 项目代码结构索引 | 理解代码关系和影响范围 |
+| `chrome-devtools` | DevTools 日志、网络、调试视角 | 原生 Browser/Chrome 不能满足调试需求时使用 |
+| `social-platform-mcp` | 通用社交平台证据采集后端 | 仅在用户明确需要可复现采集时作为可选后端 |
+| `external memory service pattern` | 外部记忆服务的接口思路和审查对象 | 只作 watch-only / pattern-only 线索；默认不安装、不常驻、不自动写规则 |
+| `codegraph` | 项目代码结构索引 | 需要代码关系和影响范围时按项目初始化 |
 
 重要边界：
 
 - MCP 是传感器和执行接口，不是事实源。
 - 浏览器可见内容只是材料，进入证据层前仍要记录来源、访问时间、权利和伦理说明。
 - VELA 不打包需要平台账号和登录态的专用后端。
-- agentmemory 和 CodeGraph 不能替代 schema、validator、源码审查和 Git 历史。
+- 外部记忆服务和 CodeGraph 不能替代 schema、validator、源码审查和 Git 历史。
 
 VELA 对 MCP 采用“启动安全”策略：
 
 | 策略 | 含义 |
 | --- | --- |
+| 原生优先 | Browser、Chrome、Computer Use 先处理普通网页、登录态浏览器和本机可视操作 |
 | 默认不全开 | 新任务不会预启动所有 stdio MCP，避免慢启动、资源占用和无关工具污染 |
-| 按路线开启 | 文献任务优先学术检索和 Zotero；网页材料任务才开浏览器；代码审查才用 CodeGraph |
+| 按路线开启 | 文献任务优先学术检索和官方 Zotero 插件；网页材料先用原生浏览器；代码审查才用 CodeGraph |
 | 先说明再调用 | 工具调用前应知道它解决什么问题、读取什么数据、会不会写文件 |
 | 输出要落地 | 有价值的结果应进入 materials、evidence、logs 或 handoff，而不是留在临时聊天里 |
 | 账号相关后端不随包发布 | 涉及平台账号、登录态或私有缓存的后端不会打进公开 VELA |
@@ -381,7 +385,7 @@ VELA 的记忆管理不是“把所有聊天都永久存起来”。它的目标
 | 项目记忆 | 项目事实、阶段、材料边界、证据链 | 项目文件或长期笔记 | 不能 |
 | 私有偏好 | 用户协作偏好、语言偏好、入口提示 | 用户本机记忆 | 不能 |
 | 流程记忆 | 可复用流程、工具顺序、质量清单 | skill 或文档候选 | 必须检查 |
-| 控制记忆 | 会影响总路由、权限、验证逻辑的底层规则 | governance kernel 候选 | 必须严格检查 |
+| 控制记忆 | 会影响总路由、权限、验证逻辑的底层规则 | control kernel 候选 | 必须严格检查 |
 | 噪声 | 一次性聊天、无证据断言、过时路径、泄密风险项 | 丢弃 | 不能 |
 
 记忆进入长期规则前，要走候选管线：
@@ -399,7 +403,7 @@ VELA 的记忆管理不是“把所有聊天都永久存起来”。它的目标
 - 不默认导入完整聊天记录。
 - 不默认做 LLM 压缩和自动上下文注入。
 - 不把 secrets、tokens、cookies、账号细节或验证码状态写入记忆。
-- 不让 agentmemory 成为源规则。
+- 不让外部记忆服务成为源规则。
 - 不让 CodeGraph 索引成为事实依据。
 
 VELA 中“记忆”的四个落点：
@@ -408,7 +412,7 @@ VELA 中“记忆”的四个落点：
 | --- | --- | --- |
 | 项目文件 | 当前项目事实、证据、阶段、方法、交付物 | 继续项目、交接项目、复盘项目 |
 | 运行日志 | 命令、检查、失败、修复、handoff、validator 报告 | 排错、回滚、审计 |
-| 可选记忆服务 | 用户确认过的偏好、常见路径、重复经验 | 新会话快速恢复上下文 |
+| 本地记忆状态报告 | 用户确认过的偏好、常见路径、重复经验候选 | 新会话只获得可审计线索，不自动改规则 |
 | 演化待办 | 候选规则、候选 skill、候选 schema、候选自动化 | 周期性治理和版本提交 |
 
 这套设计避免“记住得越多越好”的误区。研究环境真正需要的是：能解释来源、能检查风险、能回滚错误、能沉淀稳定经验。
@@ -447,7 +451,7 @@ VELA 的自动化不是“无人值守地改环境”。它更像巡检和对账
 - 导入完整聊天记录。
 - 启动未经审查的持久向量数据库。
 - 自动提升中高风险规则。
-- 把 agentmemory 数据写入 VELA 源仓。
+- 把外部记忆服务数据写入 VELA 源仓。
 - 开启 LLM 压缩、自动上下文注入或无边界 prompt injection。
 
 自动化的日常工作可以分成三类：
@@ -546,7 +550,7 @@ python -m skills.scripts.envctl validate environment-layers --summary
 - 不接管用户浏览器、Zotero、Obsidian 或本机账号。
 - 不复制 cookies、tokens、密钥、验证码状态、浏览器缓存。
 - 不默认安装或启动所有 MCP。
-- 不把 agentmemory、CodeGraph、插件缓存当成源规则。
+- 不把外部记忆服务、CodeGraph、插件缓存当成源规则。
 - 不把非公开个人定制模块作为公开研究工作流的一部分。
 
 ## 20. 推荐阅读顺序

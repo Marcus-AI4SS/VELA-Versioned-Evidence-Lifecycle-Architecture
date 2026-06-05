@@ -1,1143 +1,609 @@
 {
-
   "$schema": "../schemas/external_adoption_review.v1.schema.json",
-
   "schema_version": "external_adoption_review.v1",
-
   "reviewed_at": "2026-05-27",
-
-  "policy": "External systems are inputs to be vetted, adapted, watched, or rejected. They must not replace Codex, research-autopilot, envctl, or the local governance kernel as the main runtime.",
-
+  "policy": "External systems are inputs to be vetted, adapted, watched, or rejected. They must not replace Codex, research-autopilot, envctl, or the local control kernel as the main runtime.",
   "reviews": [
-
     {
-
       "upstream": "agentsmd/agents.md",
-
       "repo_url": "https://github.com/agentsmd/agents.md",
-
       "decision": "keep",
-
       "current_status": "absorbed as the AGENTS inheritance model",
-
       "accepted_patterns": [
-
         "root-to-project rule inheritance",
-
         "project rules can tighten but not expand permissions"
-
       ],
-
       "rejected_patterns": [
-
-        "using AGENTS.md as the only governance kernel"
-
+        "using AGENTS.md as the only control kernel"
       ],
-
       "controller": "vela-runtime-manager",
-
-      "required_gate": "envctl validate governance"
-
+      "required_gate": "envctl validate cybernetics"
     },
-
     {
-
       "upstream": "Imbad0202/academic-research-skills",
-
       "repo_url": "https://github.com/Imbad0202/academic-research-skills",
-
       "decision": "adapt",
-
       "current_status": "re-reviewed on 2026-05-27; deeper pipeline, claim-audit, reviewer-contract, corpus, and temporal-integrity patterns absorbed as local contracts rather than upstream runtime",
-
       "accepted_patterns": [
-
         "task metadata and data-access annotation",
-
         "pipeline stages and quality gates",
-
         "reviewer configuration card and multi-perspective review roles",
-
         "two-phase reviewer sprint contract before paper-visible review",
-
         "re-review verification checklist and response traceability",
-
         "claim-reference alignment audit and uncited assertion detection",
-
         "citation locator and evidence-anchor discipline",
-
         "Material Passport as cross-session state boundary",
-
         "literature corpus pre-screening before external search",
-
         "benchmark disclosure and reproducibility lock patterns",
-
         "temporal integrity advisory checks"
-
       ],
-
       "rejected_patterns": [
-
         "bulk import of the original skill bundle",
-
         "Claude-Code-specific runtime orchestration as local runtime replacement",
-
         "claiming ARS paper-writing autonomy as social-science submission readiness proof",
-
         "adding every upstream lint or agent as a local hard gate before local evidence exists"
-
       ],
-
       "controller": "skill-vetter",
-
       "required_gate": "validate_research_pipeline"
-
     },
-
     {
-
       "upstream": "langchain-ai/deepagents",
-
       "repo_url": "https://github.com/langchain-ai/deepagents",
-
       "decision": "watch",
-
       "current_status": "reserved as a future harness adapter target",
-
       "accepted_patterns": [
-
         "checkpoint interface",
-
         "resume interface",
-
         "isolated harness boundary"
-
       ],
-
       "rejected_patterns": [
-
         "main runtime replacement",
-
         "direct takeover of Codex dispatch"
-
       ],
-
       "controller": "skill-vetter",
-
       "required_gate": "validate_harness_adapter_contract"
-
     },
-
     {
-
       "upstream": "wan-huiyan/subagent-driven-development",
-
       "repo_url": "https://github.com/wan-huiyan/subagent-driven-development",
-
       "decision": "adapt",
-
       "current_status": "partially absorbed as multi-agent review discipline",
-
       "accepted_patterns": [
-
         "review-first discipline",
-
         "integration review",
-
         "worktree isolation as future option"
-
       ],
-
       "rejected_patterns": [
-
         "mandatory full runtime orchestration layer"
-
       ],
-
       "controller": "research-team-orchestrator",
-
       "required_gate": "validate_agents_contract"
-
     },
-
     {
-
       "upstream": "obra/superpowers",
-
       "repo_url": "https://github.com/obra/superpowers",
-
       "decision": "keep",
-
-      "current_status": "active plugin and methodology layer",
-
+      "current_status": "optional Codex methodology plugin; useful when available, but VELA keeps schemas, validators, and Git records as the governing layer",
       "accepted_patterns": [
-
         "planning discipline",
-
         "execution checkpoints",
-
         "verification before completion"
-
       ],
-
       "rejected_patterns": [
-
-        "replacement of VELA research route contracts"
-
+        "replacement of local research route contracts"
       ],
-
       "controller": "vela-runtime-manager",
-
-      "required_gate": "validate_vela_runtime"
-
+      "required_gate": "validate_research_stack"
     },
-
     {
-
       "upstream": "VoltAgent/awesome-codex-subagents",
-
       "repo_url": "https://github.com/VoltAgent/awesome-codex-subagents",
-
       "decision": "adapt",
-
       "current_status": "partially absorbed as subagent role metadata",
-
       "accepted_patterns": [
-
         "display names",
-
         "preferred model hints",
-
         "parallel safety metadata"
-
       ],
-
       "rejected_patterns": [
-
         "bulk installation of external subagents"
-
       ],
-
       "controller": "research-team-orchestrator",
-
       "required_gate": "validate_subagent_registry"
-
     },
-
     {
-
       "upstream": "Leey21/awesome-ai-research-writing",
-
       "repo_url": "https://github.com/Leey21/awesome-ai-research-writing",
-
       "decision": "adapt",
-
       "current_status": "re-reviewed on 2026-05-27 at commit c07628b; deeply absorbed as prompt-pattern adapters for manuscript writing, venue migration, figure/table wording, chart selection, and reviewer-perspective audit; upstream prompt bundle and OpenSkills install path not copied",
-
       "accepted_patterns": [
-
         "style calibration",
-
         "argument closure",
-
         "citation alignment",
-
         "empty phrase scan",
-
         "format-sensitive LaTeX versus Word translation",
-
         "back-translation or logic-flow check after bilingual rewriting",
-
         "micro shorten and expand with delta logs",
-
         "minimal-change English and Chinese polishing threshold",
-
         "AI-surface cleanup without claim changes",
-
         "data-bound experiment and result analysis",
-
         "plain figure and table title generation",
-
         "chart type recommendation by evidence need",
-
         "reviewer-perspective whole-manuscript audit",
-
         "fatal-versus-fixable weakness distinction",
-
         "conference or journal venue migration checklist"
-
       ],
-
       "rejected_patterns": [
-
         "generic prompt bundle copied verbatim",
-
         "OpenSkills install or external skill installation as a local management path",
-
         "current model rankings as local policy",
-
         "CS or LLM conference assumptions as default social-science writing structure",
-
         "arXiv translator runtime as a default local tool",
-
         "any prompt template bypassing citation, figure, peer-review, or package gates"
-
       ],
-
       "controller": "vela-runtime-manager",
-
       "required_gate": "envctl validate manuscript-writing"
-
     },
-
     {
-
       "upstream": "ganzhi-black/humanities-thesis-skill",
-
       "repo_url": "https://github.com/ganzhi-black/humanities-thesis-skill",
-
       "decision": "adapt",
-
       "current_status": "reviewed on 2026-05-27 at commit 9f9c971; selectively absorbed into manuscript-writing, writing-quality, and publication-style contracts as humanities/social-science thesis writing rules; upstream search scripts and runtime skill are not installed",
-
       "accepted_patterns": [
-
         "structured intake before humanities thesis drafting",
-
         "research object, problem, thesis direction, theory, paper type, and expected length confirmation",
-
         "theory as tool and material as destination",
-
         "material-first close reading and chapter opening",
-
         "chapter progression and transition paragraph checks",
-
         "quote-followed-by-analysis rule",
-
         "literature review grouped by argument function instead of chronology",
-
         "terminology consistency and bilingual glossary checks",
-
         "footnote function and format checks",
-
         "metadata-only literature entries cannot support strong paper-content claims"
-
       ],
-
       "rejected_patterns": [
-
         "bulk installing humanities-thesis as a separate runtime skill",
-
         "using upstream search.py as a replacement for local CNKI, Google Scholar, OpenAlex, Zotero, or citation-verifier workflows",
-
         "using upstream terminology or theorist tables as verified references",
-
         "claiming a paper's argument from title, abstract, citation count, or search-result metadata alone",
-
         "copying Claude Code or OpenClaw platform instructions into local Codex policy"
-
       ],
-
       "controller": "skill-vetter",
-
       "required_gate": "envctl validate manuscript-writing"
-
     },
-
     {
-
       "upstream": "brycewang-stanford/Awesome-Agent-Skills-for-Empirical-Research",
-
       "repo_url": "https://github.com/brycewang-stanford/Awesome-Agent-Skills-for-Empirical-Research",
-
       "decision": "adapt",
-
       "current_status": "reviewed on 2026-05-27 at commit e03ff8cf62f1ce8739c4181cead149da5dd84b11; deeply absorbed as an empirical quant workflow contract and academic de-template writing audit; upstream empirical and humanizer skills are not bulk-installed",
-
       "accepted_patterns": [
-
         "AER-style identification-first empirical sequence",
-
         "empirical question, estimand, design family, diagnostics, robustness, tables and replication as one workflow",
-
         "modern DID, IV, RDD, matching, synthetic control, DML and causal-ML red-flag checks",
-
         "full empirical analysis loop across cleaning, variables, descriptives, diagnostics, modeling, robustness, further analysis, publication outputs and replication",
-
         "replication package and README-first discipline",
-
         "academic humanization as a claim-preserving surface audit",
-
         "Chinese and English de-template checks for empty rhetoric, mechanical transitions, vague attribution, excessive hedging, inflated novelty and uniform rhythm",
-
         "second-pass writing audit after polishing"
-
       ],
-
       "rejected_patterns": [
-
         "bulk installing all external empirical research skills into the Codex runtime",
-
         "making AER or economics top-5 standards the default for all social-science papers",
-
         "using StatsPAI or any one-shot DSL as a black box without auditable inputs and outputs",
-
         "treating detector-evasion as an academic objective",
-
         "changing claims, evidence, citations, variables, estimates, uncertainty or limitations during de-AI surface edits",
-
         "letting external humanizer skills bypass local writing quality, citation, peer-review, figure/table or package gates"
-
       ],
-
       "controller": "skill-vetter",
-
       "required_gate": "envctl validate empirical-quant-workflow"
-
     },
-
     {
-
+      "upstream": "hardikpandya/stop-slop",
+      "repo_url": "https://github.com/hardikpandya/stop-slop",
+      "decision": "adapt",
+      "current_status": "reviewed on 2026-05-28 at commit 8da1f030185bdfe8471220585162991eaeb970e9; absorbed as a pattern-only language-density and anti-template audit inside local writing, polishing, and review workflows; upstream skill is not installed as a competing runtime route",
+      "accepted_patterns": [
+        "throat-clearing opener removal",
+        "performative emphasis and pull-quote style cleanup",
+        "business jargon and vague declarative scan",
+        "binary contrast and negative-listing pattern detection",
+        "false agency and hidden-actor checks",
+        "sentence rhythm variation and density scoring",
+        "directness, rhythm, trust, authenticity, and density as a surface-quality rubric"
+      ],
+      "rejected_patterns": [
+        "blanket ban on all adverbs or passive voice in academic prose",
+        "turning human-sounding prose into detector-evasion",
+        "using conversational 'you' as a default in formal academic writing",
+        "removing legitimate hedging, field terms, passive constructions, or statistical language when they preserve accuracy",
+        "installing stop-slop as a separate top-level skill or router"
+      ],
+      "controller": "skill-vetter",
+      "required_gate": "envctl validate manuscript-writing"
+    },
+    {
       "upstream": "ResearAI/DeepScientist",
-
       "repo_url": "https://github.com/ResearAI/DeepScientist",
-
       "decision": "adapt",
-
       "current_status": "partially absorbed as project structure",
-
       "accepted_patterns": [
-
         "research-map.md",
-
         "findings-memory.md",
-
         "material-passport.yaml",
-
         "evidence-ledger.yaml"
-
       ],
-
       "rejected_patterns": [
-
         "parallel project operating system outside Codex"
-
       ],
-
       "controller": "vela-runtime-manager",
-
       "required_gate": "validate_research_pipeline"
-
     },
-
     {
-
       "upstream": "Marcus-AI4SS/VELA",
-
       "repo_url": "https://github.com/Marcus-AI4SS/VELA",
-
       "decision": "adapt",
-
       "current_status": "schema and playbook contract absorbed",
-
       "accepted_patterns": [
-
         "project context schema",
-
         "handoff schema",
-
         "route-level team playbooks"
-
       ],
-
       "rejected_patterns": [
-
         "replacement of research-autopilot",
-
         "hidden cross-app mutation"
-
       ],
-
       "controller": "vela-runtime-manager",
-
       "required_gate": "validate_vela_contracts"
-
     },
-
     {
-
       "upstream": "alchaincyf/darwin-skill",
-
       "repo_url": "https://github.com/alchaincyf/darwin-skill",
-
       "decision": "adapt",
-
       "current_status": "absorbed as evaluation-and-ratchet pressure for the adaptive evolution loop",
-
       "accepted_patterns": [
-
         "score before changing a skill",
-
         "test with representative prompts instead of only reading the file",
-
         "keep only measurable improvements",
-
         "record rollback paths instead of silent mutation"
-
       ],
-
       "rejected_patterns": [
-
         "autonomous skill rewriting without local validators",
-
         "creating a parallel optimizer runtime",
-
         "bulk applying external scoring rules to research skills without project evidence"
-
       ],
-
       "controller": "vela-runtime-manager",
-
-      "required_gate": "envctl validate governance"
-
+      "required_gate": "envctl validate cybernetics"
     },
-
     {
-
       "upstream": "binggandata/bggg-skill-taotie",
-
       "repo_url": "https://github.com/binggandata/bggg-skill-taotie",
-
       "decision": "adapt",
-
       "current_status": "absorbed as a controlled skill-pattern transfer workflow",
-
       "accepted_patterns": [
-
         "compare a target skill with a reference skill before adaptation",
-
         "extract reusable patterns instead of copying whole instructions",
-
         "use staged injection with user checkpoints",
-
         "record an evolution log and pattern library"
-
       ],
-
       "rejected_patterns": [
-
         "unrestricted Write or Agent permissions as a default path",
-
         "executing unfamiliar external scripts during review",
-
         "installing the skill as a new main evolution engine"
-
       ],
-
       "controller": "skill-vetter",
-
-      "required_gate": "envctl validate governance"
-
+      "required_gate": "envctl validate cybernetics"
     },
-
     {
-
       "upstream": "cookjohn/cnki-skills",
-
       "repo_url": "https://github.com/cookjohn/cnki-skills",
-
       "decision": "adapt",
-
       "current_status": "locally smoke-tested for CNKI basic search, advanced CSSCI search, result extraction, and export ids; absorbed as a controlled CNKI-to-Zotero ingestion pattern, not installed as a new runtime",
-
       "accepted_patterns": [
-
         "user-authenticated browser download as an acquisition channel",
-
         "single browser script per search or extraction operation",
-
         "old-style advanced search for author, affiliation, and source-category fields",
-
         "result checkbox value as batch metadata export id",
-
         "captcha checkpoint and resume queue instead of repeated failed retries",
-
         "CNKI export metadata before Zotero write",
-
         "Zotero local connector as the first write path",
-
         "batch handling to reduce repeated browser navigation"
-
       ],
-
       "rejected_patterns": [
-
         "bulk installing upstream skills without local schema",
-
         "persisting browser cookies or credentials",
-
         "bypassing login, captcha, paywall, or institutional access checks",
-
         "treating CNKI metadata export as formal DOI verification"
-
       ],
-
       "controller": "skill-vetter",
-
       "required_gate": "envctl validate scholar-browser-patterns"
-
     },
-
     {
-
       "upstream": "cookjohn/gs-skills",
-
       "repo_url": "https://github.com/cookjohn/gs-skills",
-
       "decision": "adapt",
-
       "current_status": "local smoke test is blocked by the current Google Scholar verification page; only the data-cid, right-side PDF, BibTeX, cited-by, and captcha-stop patterns are absorbed, and the upstream skill bundle is not installed",
-
       "accepted_patterns": [
-
         "data-cid as Google Scholar browser-session primary key",
-
         "right-side PDF and all-versions links as full-text candidate sensors after OA batch attempts fail",
-
         "cited-by navigation as literature expansion, not quality proof",
-
         "BibTeX navigation as metadata review when no better export exists",
-
         "captcha stop-and-resume instead of automatic retry loops"
-
       ],
-
       "rejected_patterns": [
-
         "Sci-Hub or other bypass links",
-
         "treating Google Scholar metadata as formal DOI verification",
-
         "direct Zotero writes before citation evidence and import planning",
-
         "claiming local Google Scholar extraction is fully available while the current smoke test is blocked"
-
       ],
-
       "controller": "skill-vetter",
-
       "required_gate": "envctl validate scholar-browser-patterns"
-
     },
-
     {
-
       "upstream": "Yuan1z0825/nature-skills",
-
       "repo_url": "https://github.com/Yuan1z0825/nature-skills",
-
       "decision": "adapt",
-
-      "current_status": "deeply absorbed as social-science publication style rules, local figure skills, and a manuscript-writing contract; upstream nature-* bundle was not installed",
-
+      "current_status": "deeply absorbed as social-science publication style rules, Morandi figure style presets, local figure skills, and a manuscript-writing contract; upstream nature-* bundle was not installed",
       "accepted_patterns": [
-
         "figure contract before plotting",
-
         "multi-panel evidence hierarchy",
-
+        "social-science Nature Morandi style presets",
+        "legend economy and visual-overlap checks",
+        "figure title and long caption kept outside the image",
         "white-background restrained palette and editable vector export",
-
         "image2 allowed for locked-structure conceptual and mechanism figures",
-
         "logic-first manuscript polishing",
-
         "language target declaration before writing or polishing",
-
         "discipline target declaration before importing English/STEM writing patterns",
-
         "English high-impact journal section architecture as an optional preset",
-
         "computational social-science and method papers may borrow pipeline and reproducibility exposition",
-
         "traditional quantitative and qualitative manuscripts remain governed by local social-science writing logic",
-
         "claim strength and boundary checks",
-
         "point-by-point reviewer response tracker",
-
         "action mapping with missing-author-input states",
-
         "data availability inventory and access-route mapping"
-
       ],
-
       "rejected_patterns": [
-
         "bulk installing all nature-* skills",
-
         "Nature/CNS journal scope as the default target for social-science writing",
-
         "English journal prose as the default for Chinese journals or CSSCI manuscripts",
-
         "STEM section templates as the default for traditional quantitative or qualitative social-science manuscripts",
-
         "biomedical, materials, imaging, or wet-lab review standards as default social-science gates",
-
         "PubMed or MeSH priority for general social-science discovery",
-
         "a separate citation or academic-search runtime that bypasses local citation-verifier, Zotero, Obsidian, and quality gates"
-
       ],
-
       "controller": "skill-vetter",
-
-      "required_gate": "envctl validate manuscript-writing"
-
+      "required_gate": "envctl validate manuscript-writing; envctl validate scientific-figure-workflow; envctl validate figure-style-presets"
     },
-
     {
-
       "upstream": "myzhao0114-del/scientific-figure-skill",
-
       "repo_url": "https://github.com/myzhao0114-del/scientific-figure-skill",
-
       "decision": "adapt",
-
-      "current_status": "adopted as a contract-first scientific figure standard for research-figure-studio and figure-table-studio; upstream skill is not installed",
-
+      "current_status": "absorbed as a contract-first scientific figure standard for local research-figure-studio and figure-table-studio; upstream skill is not installed",
       "accepted_patterns": [
-
         "configuration block before analysis code",
-
         "data health report before plotting",
-
         "isolated output directory with figures and process_data",
-
         "per-figure data sidecars for traceability",
-
         "statistics only when group comparison or model design justifies it",
-
         "p-value formatting with p < 0.001 instead of p = 0.0000",
-
         "error bars must name SD, SEM, standard error, or confidence interval",
-
         "Chinese and English serif font fallback chains",
-
         "explicit font-size defaults for base, axes, ticks, legends, captions, panel labels, and significance marks",
-
         "single-column and double-column figure-size defaults with 300 DPI previews",
-
         "caption what/how/so-what structure",
-
         "multi-format export with editable or vector source preferred"
-
       ],
-
       "rejected_patterns": [
-
         "bulk installing upstream skill into runtime",
-
         "importing sci-figure.zip or other binary bundle",
-
         "letting upstream allow_implicit_invocation bypass research-autopilot",
-
         "making four-sided chart frames a universal social-science default",
-
         "making matplotlib the only renderer when R, Stata, SVG, PPT, HTML, or image2 are better suited",
-
         "JPG-only delivery",
-
         "using statistical annotation rules to override social-science model, identification, or uncertainty conventions",
-
         "letting image2 generate numerical results, axes, p-values, sample sizes, citations, or sources"
-
       ],
-
       "controller": "skill-vetter",
-
       "required_gate": "envctl validate scientific-figure-workflow"
-
     },
-
     {
-
       "upstream": "qqfly1to19/awesome_proofreading_auto",
-
       "repo_url": "https://github.com/qqfly1to19/awesome_proofreading_auto",
-
       "decision": "adapt",
-
       "current_status": "absorbed as a social-science document-element review ledger pattern; medical domain knowledge and upstream runtime were not installed",
-
       "accepted_patterns": [
-
         "specialized issue ledgers for language, terminology, data, tables, figures, references, consistency, and polishing",
-
         "standardized issue fields with severity, location, current text, suggested fix, reason, and rule",
-
         "checkpointed review output and human final review posture",
-
         "interactive report as an optional generated view rather than a source of truth"
-
       ],
-
       "rejected_patterns": [
-
         "medical terminology databases as social-science review standards",
-
         "clinical logic gates",
-
         "whole proofread skill installation",
-
         "HTML report as the canonical review contract"
-
       ],
-
       "controller": "skill-vetter",
-
       "required_gate": "envctl validate peer-review-workflow"
-
     },
-
     {
-
       "upstream": "c-narcissus/research-review-skill-factory",
-
       "repo_url": "https://github.com/c-narcissus/research-review-skill-factory",
-
       "decision": "adapt",
-
       "current_status": "absorbed as runtime literature context, full-text reading gate, subtle logic flaw audit, and future domain reviewer calibration pattern",
-
       "accepted_patterns": [
-
         "target-paper-specific runtime literature context pack",
-
         "full-text-read, partial-full-text, metadata-only, and inaccessible coverage states",
-
         "metadata-only cannot support strong novelty or missing-baseline claims",
-
         "standalone subtle logic flaw audit",
-
         "domain-specific reviewer skill factory as a watch-layer proposal"
-
       ],
-
       "rejected_patterns": [
-
         "bulk child-skill generation without anonymization review",
-
         "raw review banks or private source maps inside runtime skills",
-
         "OpenReview-first assumptions as a default for social science",
-
         "static reviewer taste profile as a substitute for current literature verification"
-
       ],
-
       "controller": "skill-vetter",
-
       "required_gate": "envctl validate peer-review-workflow"
-
     },
-
     {
-
       "upstream": "wanshuiyin/Auto-claude-code-research-in-sleep",
-
       "repo_url": "https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep",
-
       "decision": "adapt",
-
       "current_status": "re-reviewed on 2026-05-27; absorbed as automation reliability, reviewer independence, trace/resume, helper-resolution, mirror-drift, and human-checkpoint discipline; ARIS-Code runtime remains non-default",
-
       "accepted_patterns": [
-
         "reviewer reads primary artifacts directly instead of executor summaries",
-
         "review-fix-re-review state discipline with resume files",
-
         "zero-context claim, citation, experiment, and proof audit pattern adapted to social-science evidence checks",
-
         "human checkpoint before manuscript mutation",
-
         "audit traces as forensic evidence",
-
         "canonical helper resolver instead of hard-coded tool paths",
-
         "skill mirror drift checking and source commit pinning",
-
         "watchdog and session recovery documentation for long-running work",
-
         "per-server MCP timeout and clean process restart idea",
-
         "stream idle timeout and retry boundary as reliability design pattern",
-
         "configuration redaction and sandbox strict-mode concepts as security hygiene"
-
       ],
-
       "rejected_patterns": [
-
         "fully autonomous paper rewriting as a default",
-
         "AI review score as submission readiness proof",
-
         "ARIS-Code or provider-mixing runtime replacement",
-
         "automatic experiments, edits, or citation changes without local gate approval",
-
         "copying Feishu, GPU, provider, or model-routing integrations into the local default stack",
-
         "installing upstream skill bundles or helper caches as local source of truth"
-
       ],
-
       "controller": "skill-vetter",
-
       "required_gate": "envctl validate peer-review-workflow"
-
     },
-
     {
-
       "upstream": "opendataloader-project/opendataloader-pdf",
-
       "repo_url": "https://github.com/opendataloader-project/opendataloader-pdf",
-
       "decision": "adapt",
-
-      "current_status": "installed in the active local repository virtual environment as an optional existing-PDF structure extraction backend; MCP and hybrid/OCR backends are not enabled by default",
-
+      "current_status": "pattern-only optional PDF structure extraction backend; VELA keeps the workflow boundary but does not bundle Java runtimes, private PDFs, or a required local opendataloader install",
       "accepted_patterns": [
-
         "Apache-2.0 Python wrapper around a bundled Java PDF CLI",
-
         "Markdown and JSON extraction from already obtained PDFs",
-
         "project-local output for structured reading and evidence triage",
-
         "portable Java runtime under the local ignored runtime directory",
-
         "wrapper script that pins execution to the active local repository virtual environment"
-
       ],
-
       "rejected_patterns": [
-
         "treating the parser as a literature acquisition or download route",
-
         "replacing citation-verifier, evidence-based-literature-workflow, Zotero, or PDF evidence checks",
-
         "enabling the MCP server before a separate local-path permission review",
-
         "enabling hybrid/OCR model backends by default",
-
         "using extracted Markdown as final evidence without checking the original PDF location"
-
       ],
-
       "controller": "skill-vetter",
-
-      "required_gate": "validate_vela_runtime"
-
+      "required_gate": "validate_research_stack"
     },
-
     {
-
+      "upstream": "Jinze-Lee/codex-skills-workbench",
+      "repo_url": "https://github.com/Jinze-Lee/codex-skills-workbench",
+      "decision": "adapt",
+      "current_status": "reviewed on 2026-05-27; absorbed as skill workbench governance policy and selected workflow adapters; upstream workbench not installed",
+      "accepted_patterns": [
+        "manifest maps source file, display name, invocation name, skill directory, and category",
+        "source notes are preserved separately from packaged SKILL.md files",
+        "validate repository structure before local install",
+        "install and export scripts have explicit direction and force flags",
+        "public-template policy removes private paths, account ids, project folders, and local output manifests",
+        "narrow skills can require explicit invocation to avoid accidental routing",
+        "skill categories make inventory readable for non-specialists",
+        "keyword literature harvest uses no-dedup candidate tables, PDF-only folders, non-PDF caches, retry logs, and dedup manifests",
+        "plotting tool selection is based on final destination, data shape, modeling need, visible desktop automation, and reproducibility",
+        "R scatter, raincloud, weighted regression, and ggplot2 rich-text notes can serve as optional figure-table adapters",
+        "PPT production uses figure/table manifests, custom image-wall layout, aspect-ratio preservation, and preview/PDF QA",
+        "Chinese thesis studio contributes project manifests, decisions logs, placeholders, and template-preserving DOCX output as an explicit opt-in pattern"
+      ],
+      "rejected_patterns": [
+        "using a second manifests/skills.json as a competing source of truth",
+        "runtime-first editing of <CODEX_HOME>/skills",
+        "bulk installing ecology or thesis-specific skills into the research-autopilot default stack",
+        "making PubMed/Europe PMC the default literature route for social-science projects",
+        "auto-triggering a thesis-specific DOCX workflow for ordinary论文写作 or Word export",
+        "turning hypervolume, phylogeny, or ecology trait workflows into default social-science methods",
+        "letting workbench scripts overwrite protected private-skill-workspace or generated scholar skills",
+        "promoting local private paths as public templates without scrub validation"
+      ],
+      "controller": "vela-runtime-manager",
+      "required_gate": "envctl validate skill-workbench"
+    },
+    {
       "upstream": "op7418/guizang-ppt-skill",
-
       "repo_url": "https://github.com/op7418/guizang-ppt-skill",
-
       "decision": "adapt",
-
-      "current_status": "reviewed on 2026-05-27 and installed as the original runtime skill at $CODEX_HOME/skills/guizang-ppt-skill; research-presentation-studio now delegates HTML web deck visual execution to it, while local routing and quality gates remain the source of truth",
-
+      "current_status": "optional presentation skill integration; VELA may detect it when available, but does not require it for the base research workflow",
       "accepted_patterns": [
-
         "two visual systems: electronic magazine/e-ink and Swiss International",
-
         "single-file horizontal HTML deck templates as a high-quality web presentation mode",
-
         "Swiss locked layout discipline with S01-S22 registered body layouts",
-
         "Swiss static validation script for data-layout, image slots, SVG text, and title alignment",
-
         "theme selection discipline instead of arbitrary color mixing",
-
         "screenshot preservation and framing before any generated redesign",
-
         "image generation prompt library for presentation visuals with ratio and no-slide-chrome constraints",
-
         "browser preview plus checklist before delivery",
-
         "PPTX remains available through the official Presentations plugin while borrowing the same visual rules"
-
       ],
-
       "rejected_patterns": [
-
         "installing the upstream skill as a second top-level research router",
-
         "maintaining a modified visual fork under research-presentation-studio",
-
         "treating HTML web deck as the only PowerPoint workflow",
-
         "letting presentation templates bypass formal paper figure, citation, or data gates",
-
         "assuming Claude Code ask_question APIs are available in Codex",
-
         "using presentation visuals to invent data, papers, DOI, samples, or empirical results"
-
       ],
-
       "controller": "skill-vetter",
-
       "required_gate": "envctl validate research-presentation-workflow"
-
     },
-
     {
-
       "upstream": "WantongC/journal-adapt-writing-skill",
-
       "repo_url": "https://github.com/WantongC/journal-adapt-writing-skill",
-
       "decision": "adapt",
-
       "current_status": "reviewed on 2026-05-27 at commit cc79265; absorbed into manuscript-writing workflow as target-journal adaptation mode; upstream runtime skill is not installed",
-
       "accepted_patterns": [
-
         "primary target-journal corpus as the highest-weight style signal below manuscript facts and user instructions",
-
         "optional secondary field corpus and user or lab exemplars as lower-priority style support",
-
         "conversion and readability gate before corpus analysis",
-
         "paper style cards that describe rhetorical and structural patterns without quoting or paraphrasing corpus papers",
-
         "aggregated journal style profile with conflict table and red flags",
-
         "temporary dynamic writing skill reviewed by the user before manuscript revision",
-
         "one-section-at-a-time diagnosis, revision, journal-fit score, and revision log",
-
         "explicit conflict logging when target-journal, secondary corpus, exemplar, static base, and cleanup rules disagree"
-
       ],
-
       "rejected_patterns": [
-
         "installing upstream journal-adapt as a separate active runtime route",
-
         "using MinerU or any PDF converter as a hard dependency when readable text is already available",
-
         "using partial OCR, failed conversions, metadata, or snippets as style evidence",
-
         "copying or paraphrasing corpus-paper text into the manuscript",
-
         "letting target-journal style override claims, facts, data, citations, equations, variables, results, figures, or author decisions",
-
         "auto-installing recommended external static writing skills",
-
         "treating target-journal style profile as citation verification, DOI verification, or submission readiness proof"
-
       ],
-
       "controller": "skill-vetter",
-
       "required_gate": "envctl validate manuscript-writing"
-
     },
-
     {
-
-      "upstream": "rohitg00/agentmemory",
-
-      "repo_url": "https://github.com/rohitg00/agentmemory",
-
-      "decision": "adapt",
-
-      "current_status": "installed globally on 2026-05-27 as @agentmemory/agentmemory@0.9.22 with iii-engine 0.11.2; adopted as the runtime memory adapter for recall, session history, audit, export, and governance delete, while local contracts remain the source of truth",
-
-      "accepted_patterns": [
-
-        "persistent cross-session memory server",
-
-        "MCP tool surface for smart search, save, sessions, audit, export, and governance delete",
-
-        "Codex lifecycle hooks for session start, prompt submit, tool use, compact, and stop observations",
-
-        "viewer and health endpoints for observability",
-
-        "LLM compression and context injection remain opt-in rather than default"
-
-      ],
-
-      "rejected_patterns": [
-
-        "agentmemory as a replacement for research-autopilot, envctl, AGENTS, or governance kernel",
-
-        "automatic full transcript import",
-
-        "automatic source-rule mutation from recalled memory",
-
-        "saving secrets, cookies, account states, captcha states, or private paths as global memory",
-
-        "enabling LLM compression, context injection, or agent-sdk fallback without a separate stability and cost review"
-
-      ],
-
-      "controller": "vela-runtime-manager",
-
-      "required_gate": "envctl validate environment-layers"
-
-    },
-
-    {
-
       "upstream": "colbymchenry/codegraph",
-
       "repo_url": "https://github.com/colbymchenry/codegraph",
-
       "decision": "adapt",
-
-      "current_status": "installed globally on 2026-05-27 as @colbymchenry/codegraph@0.9.6; active local repository indexed into ignored .codegraph cache and exposed as optional Codex MCP for code structure context",
-
+      "current_status": "optional on-demand code-structure adapter; VELA ships project-level guidance and doctor checks, but does not require a global CodeGraph install or prestarted MCP server",
       "accepted_patterns": [
-
         "local-first code intelligence index",
-
         "MCP server for AI assistants",
-
         "symbol search, file structure, callers, callees, impact analysis, affected tests, and task context generation",
-
         "ignored project-local cache rather than committed source files",
-
         "codegraph context as a helper to reduce repeated source discovery"
-
       ],
-
       "rejected_patterns": [
-
         "codegraph index as a source of truth for rules or contracts",
-
         "replacement of rg, validator checks, code review, or Git history",
-
         "committing .codegraph cache to the repository",
-
         "using codegraph MCP as a new router"
-
       ],
-
       "controller": "vela-runtime-manager",
-
       "required_gate": "envctl validate environment-layers"
-
     }
-
   ]
-
 }
