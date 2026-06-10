@@ -292,6 +292,12 @@ def validate_static() -> tuple[list[str], list[str], dict]:
 
         "section_logic_reader_flow",
 
+        "direct_argument_progression_checked",
+
+        "four_sentence_storyline_checked",
+
+        "method_transition_continuity_checked",
+
         "language_target_declared",
 
         "discipline_target_declared",
@@ -302,11 +308,17 @@ def validate_static() -> tuple[list[str], list[str], dict]:
 
         "claim_strength_and_boundary",
 
+        "contribution_posture_checked",
+
         "results_discussion_boundary",
 
         "polishing_diagnosis_before_editing",
 
         "sentence_paragraph_control",
+
+        "rhythm_variety_checked",
+
+        "reader_facing_terms_checked",
 
         "format_sensitive_translation_container",
 

@@ -11,10 +11,10 @@ Use this skill for one-paper tasks. If the user wants a topic review across mult
 
 Before reviewing, read:
 
-- `<VELA_RUNTIME_ROOT>\skills\catalog\peer_review_workflow.json`
-- `<VELA_RUNTIME_ROOT>\skills\catalog\writing_quality_rules.json`
-- `<VELA_RUNTIME_ROOT>\skills\catalog\publication_style_rules.json`
-- `<VELA_RUNTIME_ROOT>\skills\catalog\citation_verification_rules.json`
+- `<VELA_RUNTIME_ROOT>/skills/catalog/peer_review_workflow.json`
+- `<VELA_RUNTIME_ROOT>/skills/catalog/writing_quality_rules.json`
+- `<VELA_RUNTIME_ROOT>/skills/catalog/publication_style_rules.json`
+- `<VELA_RUNTIME_ROOT>/skills/catalog/citation_verification_rules.json`
 
 The review must follow the selected mode in `peer_review_workflow.json`.
 
@@ -35,6 +35,7 @@ Do not select `revision_response_review`; that belongs to `reviewer-response-pac
 5. If the paper text is incomplete, state the access boundary and do not review unread sections as if they were read.
 6. Reviewers must not directly modify the submitted manuscript. Produce review reports, ledgers, and revision priorities only.
 7. For social science papers, prioritize theory, evidence, identification, measurement, ethics, reproducibility, and claim boundary over decorative polish.
+8. Do not turn review into automatic self-weakening. Identify real limits and unsupported claims, but also preserve contributions that the evidence can support.
 
 ## Review Workflow
 
@@ -118,10 +119,14 @@ When reviewing manuscript prose, use `writing_quality_rules.json` to flag surfac
 
 - filler openings, vague importance claims, and performative emphasis;
 - formulaic "not X but Y" reversals and negative-listing setups;
+- mechanical `rather than`, `since`, `however`, `therefore`, and `not only but also` structures that delay the real claim;
+- defensive or limitation-first phrasing that weakens the contribution before stating what the paper shows;
 - hidden actors, false agency, and passive constructions that obscure responsibility when actor identity matters;
-- repeated three-part rhythm, slogan endings, and paragraph conclusions that sound like pull quotes.
+- repeated three-part rhythm, uniform short paragraph blocks, identical sentence cadence, slogan endings, and paragraph conclusions that sound like pull quotes;
+- Chinese terms that appear to be invented from English rather than grounded in Chinese scholarship or established Chinese academic usage;
+- reader-facing internal workflow or engineering terms that should stay outside the manuscript.
 
-Treat these as writing issues, not scientific defects. Do not let surface style concerns outrank theory, evidence, identification, measurement, ethics, reproducibility, or citation integrity.
+Treat these as writing issues, not scientific defects. Do not let surface style concerns outrank theory, evidence, identification, measurement, ethics, reproducibility, or citation integrity. A strong review should state what the paper can credibly contribute, what must be fixed, and which limits need to be named without turning the manuscript into a defensive limitations list.
 
 ## Output Contract
 

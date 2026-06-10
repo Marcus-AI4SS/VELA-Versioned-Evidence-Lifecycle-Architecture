@@ -1,0 +1,132 @@
+{
+  "$schema": "../schemas/thread_memory_intake_policy.v1.schema.json",
+  "schema_version": "thread_memory_intake_policy.v1",
+  "generated_at": "2026-06-08",
+  "mode": "controlled_auto_landing",
+  "input_policy": {
+    "accepted_inputs": [
+      "compact_thread_summary",
+      "user_correction_snippet",
+      "structured_observation_json"
+    ],
+    "raw_transcript_ingestion": "forbidden_by_default",
+    "minimum_fields": [
+      "source_ref",
+      "text",
+      "signal_type"
+    ],
+    "classification_rule": "Thread memory intake records only extracted user preferences, corrections, route failures, repeated manual work, and skill-evolution signals. It does not ingest full transcripts.",
+    "privacy_rule": "Project facts and private paths stay project-private or Obsidian-scoped. Only stable, non-private, reusable workflow preferences can become source-rule candidates."
+  },
+  "signal_routes": [
+    {
+      "signal_type": "global_preference",
+      "memory_layer": "procedural_memory",
+      "privacy_scope": "public_repo",
+      "proposed_target": "skill",
+      "source_type": "explicit_preference",
+      "default_status": "candidate",
+      "skill_evolution_eligible": true
+    },
+    {
+      "signal_type": "workflow_preference",
+      "memory_layer": "procedural_memory",
+      "privacy_scope": "public_repo",
+      "proposed_target": "skill",
+      "source_type": "explicit_preference",
+      "default_status": "candidate",
+      "skill_evolution_eligible": true
+    },
+    {
+      "signal_type": "skill_correction",
+      "memory_layer": "procedural_memory",
+      "privacy_scope": "public_repo",
+      "proposed_target": "skill",
+      "source_type": "user_correction",
+      "default_status": "candidate",
+      "skill_evolution_eligible": true
+    },
+    {
+      "signal_type": "route_correction",
+      "memory_layer": "control_memory",
+      "privacy_scope": "public_repo",
+      "proposed_target": "evolution_backlog",
+      "source_type": "route_override",
+      "default_status": "candidate",
+      "skill_evolution_eligible": false
+    },
+    {
+      "signal_type": "project_fact",
+      "memory_layer": "project_memory",
+      "privacy_scope": "project_private",
+      "proposed_target": "obsidian",
+      "source_type": "project_retrospective",
+      "default_status": "needs_review",
+      "skill_evolution_eligible": false
+    },
+    {
+      "signal_type": "temporary_noise",
+      "memory_layer": "discarded_noise",
+      "privacy_scope": "session_only",
+      "proposed_target": "discard",
+      "source_type": "daily_audit",
+      "default_status": "candidate",
+      "skill_evolution_eligible": false
+    }
+  ],
+  "skill_evolution_policy": {
+    "eligible_targets": [
+      "skill",
+      "evolution_backlog"
+    ],
+    "minimum_decisions": [
+      "needs_review",
+      "promotion_plan"
+    ],
+    "required_evidence": [
+      "source_ref",
+      "normalized_claim",
+      "memory_candidate_id",
+      "admission_score",
+      "target_skill_or_route_hint"
+    ],
+    "forbidden_promotions": [
+      "full transcript imports",
+      "secrets, cookies, account states, captcha states, or private project paths",
+      "single-session noise without user confirmation or repeated evidence",
+      "project-private facts into global skills",
+      "citation or DOI claims without the citation gate"
+    ],
+    "default_controller": "research-stack-manager"
+  },
+  "auto_landing_policy": {
+    "allowed_auto_actions": [
+      "write ignored thread-memory-intake reports",
+      "append deduplicated observed skill-evolution candidates to evolution_backlog.json",
+      "surface low-confidence or conflicting preferences as clarification questions",
+      "let weekly safe evolver turn low-risk repeated preferences into source changes after gates pass"
+    ],
+    "manual_review_required": [
+      "control_kernel changes",
+      "new or removed skills",
+      "MCP, plugin, user-level Codex config, or runtime cache changes",
+      "private project facts",
+      "citation, DOI, data, model result, or evidence-chain rules"
+    ],
+    "forbidden_auto_actions": [
+      "ingest raw full transcripts by default",
+      "write user-level Codex config",
+      "mutate runtime skill cache directly",
+      "scan or modify protected private-distillation-workspace content",
+      "promote secrets, account states, captcha states, or private paths",
+      "bypass envctl validators before source changes"
+    ],
+    "required_gates": [
+      "python -m skills.scripts.envctl validate memory",
+      "python -m skills.scripts.envctl validate cybernetics",
+      "python -m skills.scripts.envctl validate conflicts",
+      "python -m skills.scripts.envctl validate stack"
+    ]
+  },
+  "report_output_dir": "skills/outputs/reports/thread-memory-intake"
+}

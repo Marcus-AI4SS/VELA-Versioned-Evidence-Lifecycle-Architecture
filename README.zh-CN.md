@@ -55,9 +55,18 @@ VELA 不是单个脚本，而是一套可安装到 Codex 的研究工作流环�
 | 插件 | 原生 Browser、Chrome、Computer Use、GitHub、Superpowers、Zotero、Scite、Google Drive、Documents、Presentations、Spreadsheets 等按任务启用 |
 | MCP 与适配器 | OpenAlex、Semantic Scholar、Google Scholar、paper-search、Chrome DevTools、CodeGraph 等按路线启用；普通浏览器和电脑操作默认优先使用原生 Browser、Chrome 和 Computer Use |
 | 自动化 | doctor、runtime install、validate、privacy scan、envctl route/stack/memory/evolution 检查 |
-| 记忆治理 | 记忆只作为候选线索；长期规则必须经过 schema、validator、测试和版本提交 |
+| 记忆治理 | 记忆只作为候选线索；线程级 intake、对账报告、长期规则和演化待办都必须经过 schema、validator、测试和版本提交 |
 
 完整解释见 [公开版说明书](./docs/manual.zh-CN.md)。
+
+## 当前运行层更新
+
+当前公开 runtime 已加入：
+
+- schema 校验的线程记忆 intake，让有价值经验先成为可复核候选，而不是导入完整聊天记录
+- 红蓝彩虹科研图预设，用于论文图、机制图和汇报图的统一视觉约束
+- 更严格的学术写作质量门，检查论点推进、方法与问题衔接、贡献表达和段落节奏
+- 去重后的环境治理断言，明确记忆、CodeGraph、工具接口和源规则边界
 
 ## 快速开始
 

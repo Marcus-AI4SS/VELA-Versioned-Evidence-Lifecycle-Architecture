@@ -5,7 +5,7 @@ Use this reference for social-science paper figures, not for marketing graphics.
 ## Evidence Base
 
 This local standard combines:
-- the adapted `Yuan1z0825/nature-skills` figure contract: claim before plotting, multi-panel evidence hierarchy, restrained white-background style, low-saturation Morandi palette, editable output, and review-risk awareness.
+- the adapted `Yuan1z0825/nature-skills` figure contract plus the local Nature social-capital visual reference: claim before plotting, multi-panel evidence hierarchy, restrained white-background style, red-blue anchored rainbow palette, editable output, and review-risk awareness.
 - official style guidance from ASR/Sage, SMR/Sage, AJPS, AEA journals, APSA, and APA-style conventions.
 - local samples inspected from AJS, ASR, Social Forces, SMR, PNAS, computational social science, network, and ABM papers under the user's desktop research folders.
 
@@ -49,7 +49,7 @@ Use these defaults unless the target journal requires otherwise:
 - Gridlines: none or very light gray.
 - Axes: thin dark gray or black.
 - Color: restrained and meaningful, never decorative.
-- Palette: default to low-saturation Morandi colors. Prefer blue gray, mist green, dusty lavender, muted terracotta, sand beige, charcoal, and warm gray. Do not default to plain black-and-white unless the journal requires it.
+- Palette: default to a red-blue anchored Nature-style rainbow palette. Use red and blue for the main semantic contrast; use cyan, amber, orange, indigo and pale middle tones for additional groups, ordered bins, maps, scatter categories or colorbars. Do not default to plain black-and-white unless the journal requires it.
 - Typography: one font family; consistent size hierarchy.
 - Labels: direct labels preferred over large legends.
 - Legends: one shared legend for multi-panel figures when possible; legends must not overlap lines, points, confidence intervals, bars, arrows, or labels.

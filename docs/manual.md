@@ -1,6 +1,6 @@
 # VELA Public Manual
 
-Updated: 2026-05-31
+Updated: 2026-06-10
 
 VELA, Versioned Evidence Lifecycle Architecture, is a portable research workflow environment for Codex. It gives each research project a readable operating layer: project folders, `AGENTS.md` rules, handoffs, evidence ledgers, schemas, validators, runtime logs, memory governance, and controlled evolution.
 
@@ -249,7 +249,10 @@ Memory has four public landing zones:
 | Project files | project facts, evidence, stage, methods, deliverables | continuation, handoff, review |
 | Runtime logs | commands, checks, failures, repairs, handoffs, validation reports | debugging, rollback, audit |
 | Local memory status reports | approved preferences and repeated-pattern candidates | auditable context recovery without automatic rule changes |
+| Thread memory intake reports | bounded lessons from a finished task, with risk score and routing recommendation | reviewable evolution candidates without full transcript import |
 | Evolution backlog | candidate rules, skills, schemas, automations | periodic governance and commits |
+
+Thread memory intake is deliberately narrow. A finished task can leave a structured report with a summary, evidence pointers, reusable procedure, risk notes, and a recommended landing zone. The report is validated against `thread_memory_intake_report.v1`; it can feed the evolution backlog only after review. It does not copy full conversations, credentials, browser state, or private project files.
 
 ## 11. Automation
 

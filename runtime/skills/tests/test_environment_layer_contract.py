@@ -20,7 +20,6 @@ class EnvironmentLayerContractTests(unittest.TestCase):
         self.assertEqual(collect_schema_errors(result, envelope, "environment_layers_result"), [])
         self.assertTrue(result["ok"], result)
         self.assertEqual(result["validator"], "validate_environment_layer_contract")
-        self.assertTrue(result["details"]["local_memory_contract_enabled"])
 
     def test_seven_layers_are_explicit_and_complete(self) -> None:
         payload = load_json(ROOT / "catalog" / "environment_layer_contract.json")
@@ -58,6 +57,16 @@ class EnvironmentLayerContractTests(unittest.TestCase):
         self.assertIn("auto-promote runtime memory", forbidden)
         self.assertIn("full transcript import", forbidden)
         self.assertIn("secrets", forbidden)
+
+    def test_governance_assertions_are_deduplicated(self) -> None:
+        payload = load_json(ROOT / "catalog" / "environment_layer_contract.json")
+        assertions = payload["governance_assertions"]
+
+        self.assertEqual(len(assertions), len(set(assertions)))
+        self.assertEqual(
+            [item for item in assertions if "codegraph" in item.lower()],
+            ["codegraph is an on-demand code-context cache and not a governance authority"],
+        )
 
     def test_research_autopilot_is_the_only_total_entry(self) -> None:
         catalog = load_json(ROOT / "catalog" / "skill_catalog.json")

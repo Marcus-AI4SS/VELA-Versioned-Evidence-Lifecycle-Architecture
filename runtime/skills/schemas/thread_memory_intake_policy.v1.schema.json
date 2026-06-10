@@ -1,0 +1,218 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://research-environment-local/schemas/thread_memory_intake_policy.v1.schema.json",
+  "title": "Thread Memory Intake Policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "generated_at",
+    "mode",
+    "input_policy",
+    "signal_routes",
+    "skill_evolution_policy",
+    "auto_landing_policy",
+    "report_output_dir"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schema_version": {
+      "const": "thread_memory_intake_policy.v1"
+    },
+    "generated_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mode": {
+      "const": "controlled_auto_landing"
+    },
+    "input_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "accepted_inputs",
+        "raw_transcript_ingestion",
+        "minimum_fields",
+        "classification_rule",
+        "privacy_rule"
+      ],
+      "properties": {
+        "accepted_inputs": {
+          "$ref": "#/$defs/string_list"
+        },
+        "raw_transcript_ingestion": {
+          "const": "forbidden_by_default"
+        },
+        "minimum_fields": {
+          "$ref": "#/$defs/string_list"
+        },
+        "classification_rule": {
+          "type": "string",
+          "minLength": 1
+        },
+        "privacy_rule": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "signal_routes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/signal_route"
+      }
+    },
+    "skill_evolution_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "eligible_targets",
+        "minimum_decisions",
+        "required_evidence",
+        "forbidden_promotions",
+        "default_controller"
+      ],
+      "properties": {
+        "eligible_targets": {
+          "$ref": "#/$defs/string_list"
+        },
+        "minimum_decisions": {
+          "$ref": "#/$defs/string_list"
+        },
+        "required_evidence": {
+          "$ref": "#/$defs/string_list"
+        },
+        "forbidden_promotions": {
+          "$ref": "#/$defs/string_list"
+        },
+        "default_controller": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "auto_landing_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "allowed_auto_actions",
+        "manual_review_required",
+        "forbidden_auto_actions",
+        "required_gates"
+      ],
+      "properties": {
+        "allowed_auto_actions": {
+          "$ref": "#/$defs/string_list"
+        },
+        "manual_review_required": {
+          "$ref": "#/$defs/string_list"
+        },
+        "forbidden_auto_actions": {
+          "$ref": "#/$defs/string_list"
+        },
+        "required_gates": {
+          "$ref": "#/$defs/string_list"
+        }
+      }
+    },
+    "report_output_dir": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "$defs": {
+    "string_list": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "signal_route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "signal_type",
+        "memory_layer",
+        "privacy_scope",
+        "proposed_target",
+        "source_type",
+        "default_status",
+        "skill_evolution_eligible"
+      ],
+      "properties": {
+        "signal_type": {
+          "type": "string",
+          "enum": [
+            "global_preference",
+            "workflow_preference",
+            "skill_correction",
+            "route_correction",
+            "project_fact",
+            "temporary_noise"
+          ]
+        },
+        "memory_layer": {
+          "type": "string",
+          "enum": [
+            "ephemeral_session",
+            "project_memory",
+            "private_preference",
+            "procedural_memory",
+            "control_memory",
+            "discarded_noise"
+          ]
+        },
+        "privacy_scope": {
+          "type": "string",
+          "enum": [
+            "public_repo",
+            "project_private",
+            "local_private",
+            "session_only"
+          ]
+        },
+        "proposed_target": {
+          "type": "string",
+          "enum": [
+            "control_kernel",
+            "skill",
+            "obsidian",
+            "codex_native",
+            "evolution_backlog",
+            "discard"
+          ]
+        },
+        "source_type": {
+          "type": "string",
+          "enum": [
+            "user_correction",
+            "route_override",
+            "validator_failure",
+            "project_retrospective",
+            "tool_health",
+            "explicit_preference",
+            "daily_audit",
+            "weekly_review"
+          ]
+        },
+        "default_status": {
+          "type": "string",
+          "enum": [
+            "candidate",
+            "needs_review"
+          ]
+        },
+        "skill_evolution_eligible": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

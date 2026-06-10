@@ -55,9 +55,18 @@ VELA is not a single script. It is a Codex-installable research workflow environ
 | Plugins | Native Browser, Chrome, Computer Use, GitHub, Superpowers, Zotero, Scite, Google Drive, Documents, Presentations, Spreadsheets, and related optional layers |
 | MCP and adapters | OpenAlex, Semantic Scholar, Google Scholar, paper-search, Chrome DevTools, and CodeGraph are route-scoped helpers; native Browser/Chrome/Computer Use comes first for web and desktop interaction |
 | Automation | doctor, runtime install, validate, privacy scan, envctl route/stack/memory/evolution checks |
-| Memory governance | memory is a candidate signal; durable rules require schemas, validators, tests, and versioned commits |
+| Memory governance | memory is a candidate signal; thread-level intake, reconciliation reports, durable rules, and evolution backlog all require schemas, validators, tests, and versioned commits |
 
 See the [public manual](./docs/manual.md) for the full explanation.
+
+## Current Runtime Updates
+
+The current public runtime adds:
+
+- schema-checked thread memory intake, so useful experience can become a reviewable candidate without importing full chat history
+- red-blue-rainbow scientific figure presets for clearer paper figures and presentation diagrams
+- stronger academic writing quality gates for direct argument flow, method-to-question continuity, contribution posture, and paragraph rhythm
+- deduplicated governance assertions for memory, CodeGraph, tools, and source-rule boundaries
 
 ## Quick Start
 

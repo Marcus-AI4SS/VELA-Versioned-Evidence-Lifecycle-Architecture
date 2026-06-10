@@ -6,7 +6,7 @@
     "id": "contract-governed-local-memory",
     "name": "本地合同治理记忆系统",
     "status": "selected",
-    "rationale": "VELA 源包继续作为源规则层，记忆只通过本地 schema、envctl validator、日报、演化待办、Obsidian/Zotero/Git 记录和用户确认沉淀；外部记忆服务只作为观察中的接口模式，不作为常驻运行态适配器。"
+    "rationale": "本地仓继续作为源规则层，记忆只通过本地 schema、envctl validator、日报、演化待办、Obsidian/Zotero/Git 记录和用户确认沉淀；external_memory_service 已评估但当前不作为常驻运行态适配器。"
   },
   "design_principles": [
     "记忆先成为候选，再决定是否沉淀。",
@@ -16,7 +16,8 @@
     "默认不启用外部记忆常驻服务；记忆先进入本地候选、评分、复盘和验证流程。",
     "默认不开启 LLM 压缩、自动上下文注入、全量 transcript 导入和自动规则写入。",
     "代码结构上下文由 codegraph 索引辅助，不替代 rg、validator、代码审查和 Git 历史。",
-    "后台服务必须有健康检查、端口边界、数据目录边界和可停止/可删除路径。"
+    "后台服务必须有健康检查、端口边界、数据目录边界和可停止/可删除路径。",
+    "线程中的稳定偏好、纠错和 skill 进化信号先进入 thread-memory-intake 报告，再由日报、演化待办、校验器和 Git 决定是否沉淀到全局环境。"
   ],
   "external_inputs": [
     {
@@ -57,8 +58,26 @@
       ],
       "rejected_patterns": [
         "startup hook that writes user-level directories",
-        "monolithic migration script as VELA runtime core",
+        "monolithic migration script as local environment core",
         "automatic repair that mutates source rules without validation"
+      ]
+    },
+    {
+      "repo": "external-memory-service-pattern",
+      "decision": "watch",
+      "absorbed_patterns": [
+        "persistent memory as an optional reference pattern, not a default runtime",
+        "smart search, session history, audit, export, and governance delete as interface ideas",
+        "privacy-first defaults that strip secrets and keep compression/context injection opt-in",
+        "health endpoints and viewer-style observability as future optional ideas"
+      ],
+      "rejected_patterns": [
+        "making external_memory_service the source-of-truth rule engine",
+        "default Codex lifecycle hooks that run on every session, prompt, and tool use",
+        "external_memory_service MCP as a prestarted default server",
+        "full transcript import as a default behavior",
+        "enabling LLM compression, automatic prompt injection, or prompt rewriting without explicit review",
+        "storing secrets, cookies, captcha states, account details, or private project facts as global memory"
       ]
     }
   ],
@@ -144,7 +163,8 @@
       "conversation_snapshot",
       "task_status",
       "memory_list_delete",
-      "codegraph_context_index"
+      "codegraph_context_index",
+      "thread_memory_intake"
     ],
     "default_retrieval_order": [
       "current_project_truth_sources",
@@ -275,6 +295,24 @@
           "codegraph results are context candidates, not authority for source changes"
         ],
         "failure_behavior": "If the index is stale or unavailable, fall back to rg and validators."
+      },
+      {
+        "interface": "thread_memory_intake",
+        "purpose": "从各线程的用户偏好、纠错、路由失败和重复手工流程里抽取候选记忆，让 skill 能随使用自然演化。",
+        "required_fields": [
+          "source_ref",
+          "thread_id",
+          "signal_type",
+          "memory_candidate_id",
+          "target_skill",
+          "decision"
+        ],
+        "safety_rules": [
+          "raw full transcripts must not be ingested by default",
+          "project-private facts must not become global skills",
+          "skill evolution candidates must pass memory, cybernetics, conflicts, and stack gates before source changes"
+        ],
+        "failure_behavior": "If the signal is ambiguous, keep it as a report-only candidate and ask the user before promotion."
       }
     ],
     "optional_semantic_search": {
@@ -306,20 +344,20 @@
       "stability": 0.15,
       "scope_fit": 0.1,
       "validator_support": 0.1,
-      "privacy_risk": 0,
-      "conflict_risk": 0,
-      "staleness": 0
+      "privacy_risk": 0.0,
+      "conflict_risk": 0.0,
+      "staleness": 0.0
     },
     "risk_penalties": {
-      "evidence": 0,
-      "recurrence": 0,
-      "actionability": 0,
-      "stability": 0,
-      "scope_fit": 0,
-      "validator_support": 0,
-      "privacy_risk": 1,
-      "conflict_risk": 1,
-      "staleness": 1
+      "evidence": 0.0,
+      "recurrence": 0.0,
+      "actionability": 0.0,
+      "stability": 0.0,
+      "scope_fit": 0.0,
+      "validator_support": 0.0,
+      "privacy_risk": 1.0,
+      "conflict_risk": 1.0,
+      "staleness": 1.0
     }
   },
   "automation_policy": {
@@ -331,19 +369,23 @@
       "write local memory status report",
       "commit only allowlisted low-risk changes after gates pass",
       "use codegraph status for local repository context health",
-      "use codegraph CLI status for local repository context health when explicitly requested"
+      "use codegraph CLI status for local repository context health when explicitly requested",
+      "write ignored thread-memory-intake reports",
+      "append deduplicated thread-memory skill evolution candidates to evolution_backlog.json"
     ],
     "forbidden_auto_actions": [
       "install external dependencies",
       "change user-level Codex config",
       "write runtime skill cache or plugin cache",
-      "scan or mutate protected private-skill-workspace content",
+      "scan or mutate protected private-distillation-workspace content",
       "ingest full chat transcript by default",
       "start a persistent vector database",
       "auto-promote medium or high risk backlog items",
       "let codegraph index become a source-of-truth rule store",
       "enable external memory hooks or memory MCP by default",
-      "run external memory services as startup dependencies"
+      "run external memory services as startup dependencies",
+      "ingest raw full thread transcripts by default",
+      "auto-promote thread preferences into skills without envctl validators"
     ],
     "allowed_source_write_scope": [
       "skills/catalog/evolution_backlog.json",
@@ -361,6 +403,7 @@
     "weekly_review_scope": [
       "skills/outputs/reports/cybernetics-daily",
       "skills/outputs/reports/evolution-intake",
+      "skills/outputs/reports/thread-memory-intake",
       "skills/outputs/reports/local-memory-system",
       "git log --since=7.days"
     ],
@@ -382,6 +425,7 @@
       "skills/catalog/control_kernel.json",
       "skills/catalog/memory_admission_policy.json",
       "skills/catalog/local_memory_system.json",
+      "skills/catalog/thread_memory_intake_policy.json",
       "skills/catalog/evolution_backlog.json",
       "skills/AGENTS.md",
       "README.md",
@@ -393,7 +437,8 @@
       "runtime skill cache",
       "future optional read-only retrieval cache",
       "codegraph local code index",
-      "local memory status and reconciliation reports"
+      "local memory status and reconciliation reports",
+      "thread-memory-intake reports"
     ],
     "forbidden_defaults": [
       "no_vector_database_by_default",
@@ -416,13 +461,14 @@
     "data_root": "<VELA_RUNTIME_ROOT>/skills/outputs/reports/local-memory-system",
     "ports": [],
     "codex_integration": [
-      "<CODEX_HOME>/hooks.json has no external memory lifecycle hooks",
-      "<CODEX_HOME>/config.toml has no default external memory MCP block",
+      "<CODEX_HOME>/hooks.json has no external_memory_service lifecycle hooks",
+      "<CODEX_HOME>/config.toml has no mcp_servers.external_memory_service block",
       "Codex native memory may keep only compact entry preferences and pointers to source rules"
     ],
     "allowed_actions": [
       "memory candidate scoring through envctl memory score",
       "local memory status and reconciliation reports",
+      "thread-memory intake reports for extracted preferences and corrections",
       "promotion only through schema, validator, user confirmation, and Git review",
       "CodeGraph CLI context as optional code-structure evidence"
     ],
@@ -431,6 +477,7 @@
       "write AGENTS, skills, schemas, routing, or control kernel without envctl validators",
       "inject recalled context into a route switch without asking the user",
       "enable external memory hooks, automatic prompt injection, or full transcript import by default",
+      "ingest raw full thread transcripts by default",
       "store secrets, cookies, account data, captcha state, or private project paths as global memory"
     ],
     "promotion_boundary": "local_memory_system, memory_admission_policy, control_kernel, envctl validators, and Git commits decide durable memory promotion.",

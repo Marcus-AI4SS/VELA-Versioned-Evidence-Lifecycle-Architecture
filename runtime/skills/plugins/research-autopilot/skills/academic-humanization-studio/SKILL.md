@@ -51,14 +51,19 @@ Check for:
 - performative emphasis, pull-quote endings, slogan-like paragraphs, and vague declarations of importance;
 - binary reversal formulas such as "not X but Y" when the sentence can state the real claim directly;
 - negative lists that delay the actual argument;
+- mechanical `rather than`, `since`, `however`, `therefore`, and `not only but also` patterns when they create detours instead of logic;
+- limitation-first or apology-like passages that weaken a supported contribution before stating it;
 - inanimate subjects hiding the actor when an actor matters;
-- repeated three-part cadence, identical sentence lengths, and paragraph endings that sound manufactured.
+- repeated three-part cadence, identical sentence lengths, uniform four-to-five-line paragraph blocks, and paragraph endings that sound manufactured.
 
 Academic adaptation:
 
 - Do not ban all adverbs, passive voice, hedging, or field terms. Keep them when they mark evidence strength, statistical uncertainty, methods, institutional processes, or standard scholarly caution.
 - In formal academic prose, do not replace neutral scholarly voice with conversational "you" unless the target output is a talk, memo, or user-facing guide.
 - Treat the scan as a density and precision check. It cannot override locked facts, citations, variables, estimates, quotations, or limitations.
+- Do not add extra explanation just to avoid a watched phrase. The revised sentence must be clearer for a first-time reader.
+- Chinese concepts must be checked against Chinese-language scholarship and common Chinese academic usage. Do not search English first and invent a Chinese term.
+- Keep contribution posture. If the evidence supports a contribution, state it directly before boundaries and limitations.
 
 ## Core Workflow
 
@@ -103,6 +108,9 @@ Use a five-step loop:
 - 句长和结构过于整齐导致的模板感；
 - 结论绝对化或把相关写成因果；
 - 先否定两个空靶子再揭示论点、用反转句制造戏剧性、用“深层原因”“重要意义”替代具体机制。
+- 连续小碎段、整齐句式和过度一致的段尾节奏。
+- 把中文概念从英文材料中自行直译，或把本地内部工程用语带进论文正文。
+- 过度防御式表述，例如在贡献尚未说明前反复写“本文不能”“本文无法”“不是……而是……”。
 
 不要为了“像人写的”加入口语、错别字、奇怪同义词、古风表达或无依据的情绪化判断。
 

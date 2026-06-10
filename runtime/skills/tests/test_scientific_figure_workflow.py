@@ -37,7 +37,7 @@ class ScientificFigureWorkflowTests(unittest.TestCase):
         rule_ids = {item["id"] for item in rules["figure_table"]["rules"]}
         expected = {
             "figure_style_preset_selected",
-            "morandi_palette_checked",
+            "red_blue_rainbow_palette_checked",
             "title_caption_outside_image_checked",
             "visual_overlap_checked",
             "data_health_before_plotting",
@@ -86,8 +86,8 @@ class ScientificFigureWorkflowTests(unittest.TestCase):
         style_contract = payload["style_preset_contract"]
         self.assertEqual(style_contract["catalog"], "catalog/figure_style_presets.json")
         self.assertEqual(style_contract["schema"], "schemas/figure_style_presets.v1.schema.json")
-        self.assertEqual(style_contract["default_formal_research_figure"], "social_science_nature_morandi")
-        self.assertEqual(style_contract["default_empirical_figure"], "nature_empirical_morandi")
+        self.assertEqual(style_contract["default_formal_research_figure"], "social_science_nature_red_blue_rainbow")
+        self.assertEqual(style_contract["default_empirical_figure"], "nature_empirical_red_blue_rainbow")
         self.assertIn("not an independent runtime entrypoint", style_contract["external_visual_source_role"])
 
     def test_workbench_plotting_adapters_are_absorbed_without_new_route(self) -> None:

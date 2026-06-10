@@ -18,23 +18,23 @@
       {
         "id": "figure_style_preset_selected",
         "label": "正式图必须绑定风格预设",
-        "requirement": "论文图、科研图、投稿图、答辩图和真实数据图必须选择或继承 `figure_style_presets.json` 中的固定预设；默认正式科研图为 `social_science_nature_morandi`，默认真实数据图为 `nature_empirical_morandi`。",
+        "requirement": "论文图、科研图、投稿图、答辩图和真实数据图必须选择或继承 `figure_style_presets.json` 中的固定预设；默认正式科研图为 `social_science_nature_red_blue_rainbow`，默认真实数据图为 `nature_empirical_red_blue_rainbow`。",
         "social_science_adaptation": "这条规则用来解决不同线程随机发挥的问题。社科论文图可以有高级感，但必须先锁定风格、证据功能和图型边界。",
         "upstream_inspiration": "Nature-style visual system 被改造成社科版风格内核，而不是作为独立运行入口。",
         "examples": [
-          "机制图默认使用 `social_science_nature_morandi`。",
-          "系数图、事件研究图默认使用 `nature_empirical_morandi`。",
-          "投稿终稿可切到 `minimal_review_ready_morandi`。"
+          "机制图默认使用 `social_science_nature_red_blue_rainbow`。",
+          "系数图、事件研究图默认使用 `nature_empirical_red_blue_rainbow`。",
+          "投稿终稿可切到 `minimal_review_ready_red_blue`。"
         ]
       },
       {
-        "id": "morandi_palette_checked",
-        "label": "莫兰迪低饱和配色已检查",
-        "requirement": "正式图默认采用低饱和莫兰迪色系，包括蓝灰、雾青、鼠尾草绿、灰紫、暖陶和浅砂色；不得使用随机高饱和配色，也不得把审稿安全等同于简陋黑白图。",
+        "id": "red_blue_rainbow_palette_checked",
+        "label": "红蓝主轴彩虹配色已检查",
+        "requirement": "正式图默认采用社科版 Nature 红蓝主轴彩虹配色：红蓝用于主要对比、方向和强弱，青色、橙色、琥珀色、靛蓝等彩虹色只用于分组、梯度、地图和多系列图；不得使用无语义的随机高饱和配色，也不得把审稿安全等同于简陋黑白图。",
         "social_science_adaptation": "社科图表需要可读、克制和有出版感。灰度可读仍要检查，但它是安全底线，不是默认审美目标。",
         "upstream_inspiration": "Nature-style 的色彩克制、视觉层级和出版级留白。",
         "examples": [
-          "同一处理组、模型族或机制路径在整组图中保持同一低饱和色。",
+          "同一处理组、模型族或机制路径在整组图中保持同一语义色。",
           "核心路径最多使用一到两个强调色。",
           "目标期刊明确要求黑白时才切换到更克制版本。"
         ]
@@ -303,6 +303,39 @@
         ]
       },
       {
+        "id": "direct_argument_progression_checked",
+        "label": "论点直接推进",
+        "requirement": "正文应直接把读者带向论文主张，避免迂回立论、防御式铺垫、否定式开场、空转转折和公式化反转。not X but Y、rather than、since、however、therefore、not only but also 及其中文同义结构只能在确有逻辑功能时使用。",
+        "social_science_adaptation": "社科论文需要展示问题、证据和解释链，不需要先证明自己没有夸大、没有替代、没有否认一长串对象。能直接说清的主张，应直接说。",
+        "upstream_inspiration": "stop-slop 的二元反转、否定铺垫和机械转折扫描，经本地化后作为学术正文直接性检查。",
+        "examples": [
+          "把“本文不是要否定既有研究，而是……”改成“本文在既有研究的基础上解释……”。",
+          "删除没有逻辑功能的 however/therefore，改用真实关系：原因、条件、对比、递进或限制。"
+        ]
+      },
+      {
+        "id": "four_sentence_storyline_checked",
+        "label": "四句话讲清论文主线",
+        "requirement": "正式稿必须能用四句话说明：基于什么背景，关注什么问题，使用什么方法或材料，得到什么结论。标题、摘要、引言、讨论和结论都要服务这条主线。",
+        "social_science_adaptation": "这条规则防止论文被文献综述、技术细节、材料堆叠或局限说明带偏。四句话不是摘要模板，而是检查整篇文章是否有清楚故事线。",
+        "upstream_inspiration": "Nature-style article architecture 与本地工程控制论目标函数，被压缩为写作主线验收口径。",
+        "examples": [
+          "背景：平台治理改变了劳动关系。问题：现有研究未解释某类机制。方法：本文使用某类数据和识别/解释策略。结论：发现某机制如何发生并改变了何种理解。",
+          "如果四句话只能说成“本文研究了一个重要问题”，说明主线仍未建立。"
+        ]
+      },
+      {
+        "id": "method_transition_continuity_checked",
+        "label": "方法选择自然衔接",
+        "requirement": "方法段和引言中的方法说明必须从研究问题、材料结构、识别需求或解释目标自然过渡到当前设计；不得前一句只讲可能性，后一句突然跳到某个模型、算法或编码流程。",
+        "social_science_adaptation": "传统量化稿要从估计目标和识别条件进入模型；质性稿要从材料类型和解释任务进入编码、比较或细读；计算社科稿要先说明为什么需要技术流程，再展开模块。",
+        "upstream_inspiration": "本地 manuscript workflow 的 method matches question 与技术细节延后原则。",
+        "examples": [
+          "先说明为什么该问题需要面板比较，再引入固定效应或 DID。",
+          "先说明材料如何呈现意义冲突，再引入访谈编码或文本细读。"
+        ]
+      },
+      {
         "id": "language_target_declared",
         "label": "先声明语言目标",
         "requirement": "正式写作或润色前必须判断文本面向中文期刊、英文期刊还是中英转换；英文期刊可以积极借鉴 Nature-style 结构和句法，中文期刊默认遵守本地中文社科写作规则。",
@@ -366,6 +399,17 @@
         ]
       },
       {
+        "id": "contribution_posture_checked",
+        "label": "贡献表达不自我削弱",
+        "requirement": "审稿和写作不能过度谨慎、反复降低贡献或把正文写成局限清单。证据允许的贡献应清楚写出：本文说明了什么、如何说明、相对于既有研究推进了哪一部分。",
+        "social_science_adaptation": "社科论文需要边界，但边界不能吞没发现。讨论和结论应先回答研究问题，再说明边界；审稿回复也应在真实修改基础上维护论文能够成立的贡献。",
+        "upstream_inspiration": "peer-review contribution assessment 与本地 stop-slop 反防御式写作规则。",
+        "examples": [
+          "不要连续用“本文只能”“本文无法”“本文并不试图”开段。",
+          "在局限前先写清核心发现改变了哪条理论、经验或方法理解。"
+        ]
+      },
+      {
         "id": "results_discussion_boundary",
         "label": "结果和讨论分工清楚",
         "requirement": "结果段报告发现、证据和必要的模型或材料解释；讨论段再处理理论意义、机制解释、与文献关系、局限和未来研究。",
@@ -396,6 +440,28 @@
         "examples": [
           "结果段先报告发现，再解释识别或机制含义。",
           "讨论段先说明发现改变了什么理解，再说明边界和未来工作。"
+        ]
+      },
+      {
+        "id": "rhythm_variety_checked",
+        "label": "句段节奏错落",
+        "requirement": "正文段落和句子应有长短变化，服务论证节奏。不能把论文切成一串四五行小碎段，也不能让每句话都使用同一长度、同一连接方式和同一结尾节奏。",
+        "social_science_adaptation": "短段适合承接、转折、点明贡献或提出小结；长段适合展开证据、比较文献、解释机制和交代方法。段落长度变化必须来自论证需要，不是装饰。",
+        "upstream_inspiration": "stop-slop 的 rhythm monotony scan 与本地中文社科高语义密度要求。",
+        "examples": [
+          "连续三个小段都只写四五行时，检查是否应合并为一个完整论证段。",
+          "连续句式都是“本文……本文……本文……”时，改为更自然的主语、谓语和句长变化。"
+        ]
+      },
+      {
+        "id": "reader_facing_terms_checked",
+        "label": "正文术语面向读者",
+        "requirement": "给读者和审稿人的正文必须限制 AI 味、翻译腔、过度技术化词语、自创概念和内部工程用词；优先使用对应学科公认常用概念。中文概念必须优先查中文文献、中文期刊和中文学术通行译法，不能先查英文再自行翻译。新术语只有在构成论文创新或贡献时才引入，并必须给出定义和使用边界。",
+        "social_science_adaptation": "内部工作流词如 route、quality gate、pipeline、harness、workflow、agent 等不能无故进入论文正文。计算社科和方法论文可以使用技术术语，但必须服务研究问题和可复现说明。",
+        "upstream_inspiration": "本地写作质量门、target-journal style profile 和 stop-slop 语言密度规则。",
+        "examples": [
+          "把内部工程词改成学科可读表达，例如“研究流程”“材料处理步骤”“识别策略”。",
+          "不要把“控制论闭环”“智能体链条”等本地环境概念写进论文，除非论文主题本身研究这些对象。"
         ]
       },
       {
@@ -525,8 +591,8 @@
       {
         "id": "terminology_consistency_checked",
         "label": "术语和译名保持一致",
-        "requirement": "核心理论概念、变量、材料类型和中英译名必须保持一致；无法确认的术语要标记待核验，不自行创造稳定译名。",
-        "social_science_adaptation": "中文人文社科稿常有西方理论和中国语境术语并存，必须建立术语决定；英文投稿或英文摘要要按目标学界通行用法重建表达。",
+        "requirement": "核心理论概念、变量、材料类型和中英译名必须保持一致；中文概念优先核对中文文献、中文期刊和中文学术通行译法。无法确认的术语要标记待核验，不自行创造稳定译名。",
+        "social_science_adaptation": "中文人文社科稿常有西方理论和中国语境术语并存，必须建立术语决定；英文投稿或英文摘要要按目标学界通行用法重建表达。做中文稿时，不得先查英文概念再自行翻译成中文口径。",
         "upstream_inspiration": "humanities-thesis-skill 的 terminology-bilingual and terminology consistency checks。",
         "examples": [
           "同一稿中不要把 aura 交替写成灵晕、灵韵、灵光而不说明。",

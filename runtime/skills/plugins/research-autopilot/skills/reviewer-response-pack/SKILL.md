@@ -11,9 +11,9 @@ Use this skill after peer-review feedback arrives. It is not a generic paper rev
 
 Before drafting, read:
 
-- `<VELA_RUNTIME_ROOT>\skills\catalog\peer_review_workflow.json`
-- `<VELA_RUNTIME_ROOT>\skills\catalog\publication_style_rules.json`
-- `<VELA_RUNTIME_ROOT>\skills\catalog\writing_quality_rules.json`
+- `<VELA_RUNTIME_ROOT>/skills/catalog/peer_review_workflow.json`
+- `<VELA_RUNTIME_ROOT>/skills/catalog/publication_style_rules.json`
+- `<VELA_RUNTIME_ROOT>/skills/catalog/writing_quality_rules.json`
 
 Use the `revision_response_review` mode in `peer_review_workflow.json`.
 
@@ -61,13 +61,15 @@ If reviewer boundaries, comment segmentation, or manuscript version is unclear, 
 6. Build the response strategy summary before drafting prose.
 7. Draft point-by-point responses only for items with enough facts.
 8. For every claimed change, include manuscript location, figure/table/supplement location, citation evidence, or an explicit placeholder.
-9. For response prose and revised wording, run the local stop-slop surface scan through `writing_quality_rules.json`: remove throat-clearing, performative emphasis, vague importance claims, binary-reversal formulas, negative-listing setups, hidden-actor prose, and rhythmically over-polished paragraph endings. Keep reviewer respect, factual precision, legitimate hedging, and unchanged manuscript claims.
+9. For response prose and revised wording, run the local stop-slop surface scan through `writing_quality_rules.json`: remove throat-clearing, performative emphasis, vague importance claims, binary-reversal formulas, negative-listing setups, mechanical `rather than` / `since` / `however` / `therefore` / `not only but also` transitions, hidden-actor prose, uniform short paragraph blocks, and rhythmically over-polished paragraph endings. Keep reviewer respect, factual precision, legitimate hedging, contribution posture, and unchanged manuscript claims.
 10. Run verification:
    - every comment answered or explicitly unresolved
    - every "we have..." statement tied to real evidence
    - no invented line numbers, analyses, citations, figures, data, or appendices
    - disagreement first acknowledges the concern
    - limitations are not hidden
+   - the response does not over-concede, apologize for supported contributions, or rewrite a defensible claim as a limitation
+   - Chinese terms in revised manuscript wording follow Chinese literature and established Chinese academic usage rather than ad hoc English-to-Chinese translation
 
 ## Re-Review Verification
 
@@ -124,3 +126,4 @@ Default output:
 - Do not cite time, money, or convenience as the main reason for not doing requested work.
 - Do not draft around missing ethics, compliance, or data-integrity requirements.
 - Do not let response writing bypass `citation-verifier`, `writing-reference-capture`, or the peer-review protocol gate.
+- Do not over-weaken supported claims just to sound polite. If a claim is evidence-backed, preserve it and clarify its boundary.

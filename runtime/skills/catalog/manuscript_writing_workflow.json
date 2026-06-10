@@ -62,7 +62,7 @@
       ],
       "not_adopted": [
         "copying the prompt bundle verbatim as local runtime instructions",
-        "OpenSkills installation as a VELA runtime management path",
+        "OpenSkills installation as a local stack management path",
         "current model ranking or provider preference as environment policy",
         "CS or LLM conference assumptions as default social-science manuscript structure",
         "arXiv translator runtime as a default local paper-writing tool",
@@ -902,6 +902,8 @@
         "identify missing claim, evidence, explanation, or link",
         "separate result from interpretation",
         "downgrade unsupported causal or novelty claims",
+        "state the positive contribution that the evidence can support before listing limitations",
+        "check whether the paper can be summarized in four sentences: background, problem, method or materials, finding",
         "mark missing evidence or citation blockers"
       ],
       "blockers": [
@@ -919,6 +921,8 @@
         "make each paragraph carry one controlling idea",
         "move background before claim only when needed",
         "place evidence next to the claim it supports",
+        "avoid defensive openings and negative setup paragraphs when the claim can be stated directly",
+        "vary paragraph length according to argumentative work instead of producing uniform short blocks",
         "add transitions that name logic, not decoration"
       ],
       "blockers": [
@@ -934,6 +938,9 @@
       "actions": [
         "remove empty phrases",
         "keep terms consistent",
+        "check Chinese concepts against Chinese literature and field-standard Chinese usage before using translated terminology",
+        "remove reader-facing internal workflow, engineering, or AI-process terms unless the paper studies them",
+        "vary sentence length and syntax while preserving precision",
         "shorten English sentences when they exceed the reader's working memory",
         "keep Chinese clauses dense but not overloaded"
       ],
@@ -1064,6 +1071,21 @@
       "id": "no_stop_slop_overreach",
       "rule": "Stop-slop style cleanup is a surface audit. It may remove filler, vague announcements, performative emphasis, formulaic contrasts, and hidden-actor prose, but it must preserve legitimate academic hedging, passive voice, field terms, statistical wording, citations, and claim boundaries.",
       "failure_action": "Keep the accurate academic wording, record the rejected surface edit, and continue with local writing-quality checks."
+    },
+    {
+      "id": "no_defensive_argument_drift",
+      "rule": "Writing and review revision should not repeatedly weaken the paper's contribution, open with limitation-first defensive language, or use negative setup formulas when the evidence supports a direct positive claim.",
+      "failure_action": "Rewrite the passage to state what the paper can show, how it shows it, and where the boundary belongs."
+    },
+    {
+      "id": "no_english_to_chinese_term_guessing",
+      "rule": "Chinese concepts, Chinese theory labels, and Chinese social-science terms must be checked against Chinese-language scholarship and common Chinese academic usage; do not search English first and invent a Chinese translation.",
+      "failure_action": "Mark the term as pending verification, search Chinese sources or ask the user, and avoid stabilizing an invented translation in the manuscript."
+    },
+    {
+      "id": "no_uniform_fragmented_paragraphs",
+      "rule": "Do not make manuscript prose a sequence of uniform four-to-five-line fragments or identical sentence rhythms. Paragraph and sentence length should vary with the argument's work.",
+      "failure_action": "Merge, split, or reorder paragraphs so each one has a clear task and the section reads with natural argumentative rhythm."
     },
     {
       "id": "no_fake_human_noise",

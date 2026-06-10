@@ -16,7 +16,7 @@
       "rejected_patterns": [
         "using AGENTS.md as the only control kernel"
       ],
-      "controller": "vela-runtime-manager",
+      "controller": "research-stack-manager",
       "required_gate": "envctl validate cybernetics"
     },
     {
@@ -83,7 +83,7 @@
       "upstream": "obra/superpowers",
       "repo_url": "https://github.com/obra/superpowers",
       "decision": "keep",
-      "current_status": "optional Codex methodology plugin; useful when available, but VELA keeps schemas, validators, and Git records as the governing layer",
+      "current_status": "active plugin and methodology layer",
       "accepted_patterns": [
         "planning discipline",
         "execution checkpoints",
@@ -92,7 +92,7 @@
       "rejected_patterns": [
         "replacement of local research route contracts"
       ],
-      "controller": "vela-runtime-manager",
+      "controller": "research-stack-manager",
       "required_gate": "validate_research_stack"
     },
     {
@@ -141,7 +141,7 @@
         "arXiv translator runtime as a default local tool",
         "any prompt template bypassing citation, figure, peer-review, or package gates"
       ],
-      "controller": "vela-runtime-manager",
+      "controller": "research-stack-manager",
       "required_gate": "envctl validate manuscript-writing"
     },
     {
@@ -235,7 +235,7 @@
       "rejected_patterns": [
         "parallel project operating system outside Codex"
       ],
-      "controller": "vela-runtime-manager",
+      "controller": "research-stack-manager",
       "required_gate": "validate_research_pipeline"
     },
     {
@@ -252,7 +252,7 @@
         "replacement of research-autopilot",
         "hidden cross-app mutation"
       ],
-      "controller": "vela-runtime-manager",
+      "controller": "research-stack-manager",
       "required_gate": "validate_vela_contracts"
     },
     {
@@ -271,7 +271,7 @@
         "creating a parallel optimizer runtime",
         "bulk applying external scoring rules to research skills without project evidence"
       ],
-      "controller": "vela-runtime-manager",
+      "controller": "research-stack-manager",
       "required_gate": "envctl validate cybernetics"
     },
     {
@@ -342,11 +342,11 @@
       "upstream": "Yuan1z0825/nature-skills",
       "repo_url": "https://github.com/Yuan1z0825/nature-skills",
       "decision": "adapt",
-      "current_status": "deeply absorbed as social-science publication style rules, Morandi figure style presets, local figure skills, and a manuscript-writing contract; upstream nature-* bundle was not installed",
+      "current_status": "deeply absorbed as social-science publication style rules, red-blue rainbow figure style presets, local figure skills, and a manuscript-writing contract; upstream nature-* bundle was not installed",
       "accepted_patterns": [
         "figure contract before plotting",
         "multi-panel evidence hierarchy",
-        "social-science Nature Morandi style presets",
+        "social-science Nature red-blue rainbow style presets",
         "legend economy and visual-overlap checks",
         "figure title and long caption kept outside the image",
         "white-background restrained palette and editable vector export",
@@ -480,7 +480,7 @@
       "upstream": "opendataloader-project/opendataloader-pdf",
       "repo_url": "https://github.com/opendataloader-project/opendataloader-pdf",
       "decision": "adapt",
-      "current_status": "pattern-only optional PDF structure extraction backend; VELA keeps the workflow boundary but does not bundle Java runtimes, private PDFs, or a required local opendataloader install",
+      "current_status": "installed in the active local repository virtual environment as an optional existing-PDF structure extraction backend; MCP and hybrid/OCR backends are not enabled by default",
       "accepted_patterns": [
         "Apache-2.0 Python wrapper around a bundled Java PDF CLI",
         "Markdown and JSON extraction from already obtained PDFs",
@@ -524,17 +524,17 @@
         "making PubMed/Europe PMC the default literature route for social-science projects",
         "auto-triggering a thesis-specific DOCX workflow for ordinary论文写作 or Word export",
         "turning hypervolume, phylogeny, or ecology trait workflows into default social-science methods",
-        "letting workbench scripts overwrite protected private-skill-workspace or generated scholar skills",
+        "letting workbench scripts overwrite protected private-distillation-workspace or private generated scholar skills",
         "promoting local private paths as public templates without scrub validation"
       ],
-      "controller": "vela-runtime-manager",
+      "controller": "research-stack-manager",
       "required_gate": "envctl validate skill-workbench"
     },
     {
       "upstream": "op7418/guizang-ppt-skill",
       "repo_url": "https://github.com/op7418/guizang-ppt-skill",
       "decision": "adapt",
-      "current_status": "optional presentation skill integration; VELA may detect it when available, but does not require it for the base research workflow",
+      "current_status": "reviewed on 2026-05-27 and installed as the original runtime skill at $CODEX_HOME/skills/guizang-ppt-skill; research-presentation-studio now delegates HTML web deck visual execution to it, while local routing and quality gates remain the source of truth",
       "accepted_patterns": [
         "two visual systems: electronic magazine/e-ink and Swiss International",
         "single-file horizontal HTML deck templates as a high-quality web presentation mode",
@@ -585,10 +585,32 @@
       "required_gate": "envctl validate manuscript-writing"
     },
     {
+      "upstream": "external-memory-service-pattern",
+      "repo_url": "https://github.com/external-memory-service-pattern",
+      "decision": "watch",
+      "current_status": "evaluated and removed from Codex runtime on 2026-05-31: MCP, lifecycle hooks, and global npm package were removed after health checks showed the service was not running and recall returned empty; local memory contracts remain the default.",
+      "accepted_patterns": [
+        "persistent cross-session memory server",
+        "MCP tool surface for smart search, save, sessions, audit, export, and governance delete",
+        "Codex lifecycle hooks for session start, prompt submit, tool use, compact, and stop observations",
+        "viewer and health endpoints for observability",
+        "LLM compression and context injection remain opt-in rather than default"
+      ],
+      "rejected_patterns": [
+        "external_memory_service as a replacement for research-autopilot, envctl, AGENTS, or control kernel",
+        "automatic full transcript import",
+        "automatic source-rule mutation from recalled memory",
+        "saving secrets, cookies, account states, captcha states, or private paths as global memory",
+        "enabling LLM compression, context injection, or agent-sdk fallback without a separate stability and cost review"
+      ],
+      "controller": "research-stack-manager",
+      "required_gate": "envctl validate environment-layers"
+    },
+    {
       "upstream": "colbymchenry/codegraph",
       "repo_url": "https://github.com/colbymchenry/codegraph",
       "decision": "adapt",
-      "current_status": "optional on-demand code-structure adapter; VELA ships project-level guidance and doctor checks, but does not require a global CodeGraph install or prestarted MCP server",
+      "current_status": "installed globally as @colbymchenry/codegraph@0.9.6; active local repository indexed into ignored .codegraph cache; MCP config kept disabled by default and enabled only through the code-context profile when needed.",
       "accepted_patterns": [
         "local-first code intelligence index",
         "MCP server for AI assistants",
@@ -602,7 +624,7 @@
         "committing .codegraph cache to the repository",
         "using codegraph MCP as a new router"
       ],
-      "controller": "vela-runtime-manager",
+      "controller": "research-stack-manager",
       "required_gate": "envctl validate environment-layers"
     }
   ]

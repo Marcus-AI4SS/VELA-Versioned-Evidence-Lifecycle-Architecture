@@ -19,19 +19,19 @@ CONTRACT_PATH = CATALOG_ROOT / "figure_style_presets.json"
 SCHEMA_PATH = SCHEMAS_ROOT / "figure_style_presets.v1.schema.json"
 
 REQUIRED_PRESETS = {
-    "social_science_nature_morandi",
-    "nature_empirical_morandi",
-    "minimal_review_ready_morandi",
-    "presentation_premium_morandi",
+    "social_science_nature_red_blue_rainbow",
+    "nature_empirical_red_blue_rainbow",
+    "minimal_review_ready_red_blue",
+    "presentation_premium_red_blue_rainbow",
 }
 EXPECTED_DEFAULTS = {
-    "formal_research_figure": "social_science_nature_morandi",
-    "empirical_figure": "nature_empirical_morandi",
-    "review_ready_figure": "minimal_review_ready_morandi",
-    "presentation_figure": "presentation_premium_morandi",
+    "formal_research_figure": "social_science_nature_red_blue_rainbow",
+    "empirical_figure": "nature_empirical_red_blue_rainbow",
+    "review_ready_figure": "minimal_review_ready_red_blue",
+    "presentation_figure": "presentation_premium_red_blue_rainbow",
 }
 REQUIRED_PROMPT_TOKENS = {
-    "morandi_palette",
+    "red_blue_rainbow_palette",
     "no_internal_title",
     "no_long_caption",
     "no_overlap",
@@ -39,7 +39,7 @@ REQUIRED_PROMPT_TOKENS = {
 }
 REQUIRED_QUALITY_CHECKS = {
     "figure_style_preset_selected",
-    "morandi_palette_checked",
+    "red_blue_rainbow_palette_checked",
     "title_caption_outside_image_checked",
     "visual_overlap_checked",
 }
@@ -128,7 +128,11 @@ def _collect_contract_errors(contract: dict[str, Any]) -> list[str]:
             errors.append(f"figure-style-presets:{preset_id}:text-overlap-check-missing")
 
         palette_constraints = " ".join(preset.get("palette", {}).get("constraints", []))
-        if "Morandi" not in palette_constraints and "莫兰迪" not in palette_constraints:
-            errors.append(f"figure-style-presets:{preset_id}:morandi-constraint-missing")
+        has_red_blue = "red-blue" in palette_constraints or "红蓝" in palette_constraints
+        has_rainbow = "rainbow" in palette_constraints or "彩虹" in palette_constraints
+        if not has_red_blue:
+            errors.append(f"figure-style-presets:{preset_id}:red-blue-constraint-missing")
+        if preset_id != "minimal_review_ready_red_blue" and not has_rainbow:
+            errors.append(f"figure-style-presets:{preset_id}:rainbow-constraint-missing")
 
     return errors

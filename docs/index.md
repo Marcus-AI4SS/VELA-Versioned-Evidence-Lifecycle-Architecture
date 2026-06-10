@@ -49,6 +49,13 @@ Windows users can run `.\install.ps1 -BootstrapTools`. macOS users can run `sh .
 | Plugins | Native Browser, Chrome, Computer Use, GitHub, Superpowers, Zotero, Scite, Google Drive, Documents, Presentations, Spreadsheets, and related optional layers |
 | MCP | OpenAlex, Semantic Scholar, Google Scholar, paper-search, Chrome DevTools, and CodeGraph are route-scoped helpers; native Browser/Chrome/Computer Use comes first for web and desktop interaction |
 | Automation | doctor, runtime install, validate, privacy scan, envctl route/stack/memory/evolution checks |
-| Memory governance | memory is a candidate signal; durable rules require schemas, validators, tests, and versioned commits |
+| Memory governance | memory is a candidate signal; thread-level intake, reconciliation reports, durable rules, and evolution backlog require schemas, validators, tests, and versioned commits |
+
+## Current Runtime Updates
+
+- Thread memory intake is now schema-checked before it becomes a reviewable candidate.
+- Scientific figure routes default to red-blue-rainbow presets for clear paper and presentation graphics.
+- Academic writing gates check argument progression, method continuity, contribution posture, and paragraph rhythm.
+- Governance assertions for memory, CodeGraph, tool interfaces, and source rules have been deduplicated.
 
 Read the full [manual](./manual.md) for the public, user-facing environment guide.

@@ -22,7 +22,7 @@
       "adopted_as": [
         "figure_claim_contract",
         "visual_argument_hierarchy",
-        "social_science_nature_morandi_style_presets",
+        "social_science_nature_red_blue_rainbow_style_presets",
         "panel_layout_and_legend_economy",
         "editable_publication_outputs",
         "review_ready_caption_and_notes"
@@ -122,7 +122,7 @@
       "id": "option_e_runtime_prompt_only",
       "label": "只保留成运行态提示模板",
       "decision": "reject_as_default",
-      "description": "不改 VELA 源包，只在对话里提示画图时参考该仓库风格。",
+      "description": "不改本地仓，只在对话里提示画图时参考该仓库风格。",
       "strengths": [
         "零代码变更",
         "适合一次性实验"
@@ -138,10 +138,10 @@
   "style_preset_contract": {
     "catalog": "catalog/figure_style_presets.json",
     "schema": "schemas/figure_style_presets.v1.schema.json",
-    "default_formal_research_figure": "social_science_nature_morandi",
-    "default_empirical_figure": "nature_empirical_morandi",
-    "default_review_ready_figure": "minimal_review_ready_morandi",
-    "default_presentation_figure": "presentation_premium_morandi",
+    "default_formal_research_figure": "social_science_nature_red_blue_rainbow",
+    "default_empirical_figure": "nature_empirical_red_blue_rainbow",
+    "default_review_ready_figure": "minimal_review_ready_red_blue",
+    "default_presentation_figure": "presentation_premium_red_blue_rainbow",
     "external_visual_source_role": "Nature visual practice is absorbed as a visual parameter source, not an independent runtime entrypoint.",
     "routing_policy": "research-figure-studio remains the concept/mechanism/image2 owner; figure-table-studio remains the empirical figure/table owner. Every formal figure must select or inherit a style preset before rendering."
   },
@@ -374,7 +374,7 @@
     {
       "id": "publication_rendering",
       "label": "出版风格渲染",
-      "requirement": "默认绑定 figure_style_presets 中的预设；正式科研图默认 social_science_nature_morandi，真实数据图默认 nature_empirical_morandi。使用白底或极浅暖灰、莫兰迪低饱和配色、字体一致、坐标单位明确、数字精度统一、灰度可读；按目标期刊决定是否使用四边框或更轻量坐标轴。",
+      "requirement": "默认绑定 figure_style_presets 中的预设；正式科研图默认 social_science_nature_red_blue_rainbow，真实数据图默认 nature_empirical_red_blue_rainbow。使用白底或极浅冷灰、红蓝主轴彩虹配色、字体一致、坐标单位明确、数字精度统一、灰度可读；按目标期刊决定是否使用四边框或更轻量坐标轴。",
       "applies_to_modes": [
         "empirical_tabular_figure",
         "conceptual_mechanism_figure",
@@ -502,14 +502,14 @@
     {
       "id": "figure_style_preset_selected",
       "label": "正式图必须选择风格预设",
-      "requirement": "正式科研图、真实数据图、投稿图和汇报图必须选择或继承 figure_style_presets 中的一个固定预设；默认正式科研图为 social_science_nature_morandi，默认真实数据图为 nature_empirical_morandi。",
+      "requirement": "正式科研图、真实数据图、投稿图和汇报图必须选择或继承 figure_style_presets 中的一个固定预设；默认正式科研图为 social_science_nature_red_blue_rainbow，默认真实数据图为 nature_empirical_red_blue_rainbow。",
       "owner": "research-figure-studio + figure-table-studio",
       "check": "figure brief、脚本配置或交付说明中记录 preset id；不得只写 Nature 风格、顶刊风格或好看一点这类模糊描述。"
     },
     {
-      "id": "morandi_palette_checked",
-      "label": "默认使用莫兰迪低饱和色系",
-      "requirement": "默认科研图使用低饱和莫兰迪蓝灰、雾青、鼠尾草绿、灰紫、暖陶和浅砂色；避免随机高饱和配色，也不要把审稿安全误解为简陋黑白图。",
+      "id": "red_blue_rainbow_palette_checked",
+      "label": "默认使用红蓝主轴彩虹色系",
+      "requirement": "默认科研图使用红蓝主轴彩虹色系：红蓝用于主要对比，青色、橙色、琥珀色、靛蓝等用于分组、梯度、地图和多系列图；避免无语义的随机高饱和配色，也不要把审稿安全误解为简陋黑白图。",
       "owner": "research-figure-studio + figure-table-studio",
       "check": "交付说明记录所用主色和强调色；灰度可读是安全检查，不是默认审美。"
     },

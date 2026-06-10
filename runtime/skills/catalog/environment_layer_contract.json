@@ -1419,7 +1419,6 @@
     "MCP and plugins are tools, not autonomous governance authorities",
     "project and citation facts must remain evidence-gated",
     "all low-risk automation still needs logs, validators, and git traceability",
-    "codegraph is a code-context cache and not a governance authority",
     "runtime memory candidates must be scored, reviewed, and routed before becoming durable rules",
     "codegraph is an on-demand code-context cache and not a governance authority"
   ]

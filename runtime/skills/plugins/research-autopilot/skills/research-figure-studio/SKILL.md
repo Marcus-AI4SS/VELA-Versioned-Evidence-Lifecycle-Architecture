@@ -22,9 +22,9 @@ Do not treat this as a generic poster, marketing graphic, dashboard, or app UI t
 Before producing a serious figure, read only the relevant parts:
 - `references/social-science-top-journal-figure-style.md`
 - `references/image2-figure-contract.md`
-- `<VELA_RUNTIME_ROOT>\skills\catalog\scientific_figure_workflow.json`
-- `<VELA_RUNTIME_ROOT>\skills\catalog\figure_style_presets.json`
-- `<VELA_RUNTIME_ROOT>\skills\catalog\publication_style_rules.json`
+- `<VELA_RUNTIME_ROOT>/skills/catalog/scientific_figure_workflow.json`
+- `<VELA_RUNTIME_ROOT>/skills/catalog/figure_style_presets.json`
+- `<VELA_RUNTIME_ROOT>/skills/catalog/publication_style_rules.json`
 
 ## Core Rule
 
@@ -36,7 +36,7 @@ Use `scientific_figure_workflow.json` as the shared contract for figure producti
 
 For conceptual, mechanism, research-design, workflow, and image2-first figures:
 - Lock the exact structure, text, arrows, panel count, palette, and unsupported-claim prohibitions before rendering.
-- Use `social_science_nature_morandi` as the default formal research figure preset unless the user or target journal requires another preset.
+- Use `social_science_nature_red_blue_rainbow` as the default formal research figure preset unless the user or target journal requires another preset.
 - Apply the typography contract unless the target venue requires another house style: serif fonts; Chinese fallback `SimSun`, `Songti SC`, `Source Han Serif SC`, `Noto Serif CJK SC`; English fallback `Times New Roman`, `Liberation Serif`, `DejaVu Serif`; base 10 pt; captions 9 pt; panel labels 10 pt.
 - Keep figure text short enough to remain readable at single-column or double-column manuscript sizes.
 - Prefer PDF/SVG/PPT/editable source for final use, with PNG preview as needed.
@@ -84,7 +84,7 @@ Never let image2 invent empirical values, axes, statistical significance, sample
 
 Default style:
 - white background
-- restrained low-saturation Morandi color
+- red-blue anchored Nature-style rainbow color
 - black-and-white readable
 - color-blind friendly
 - consistent typography
@@ -111,10 +111,10 @@ For social-science manuscripts, prefer this evidence order:
 
 Use `figure_style_presets.json` before rendering:
 
-- `social_science_nature_morandi`: default for formal mechanism, concept, research-design, workflow, typology and mixed overview figures. It uses white or warm-white background, high whitespace, fine lines, Morandi blue-gray, mist green, dusty lavender, muted terracotta and sand accents.
-- `nature_empirical_morandi`: use when this skill coordinates a mixed figure set that contains empirical panels; delegate those panels to `figure-table-studio`.
-- `minimal_review_ready_morandi`: use for submission, reviewer response and final manuscript figures when review safety is more important than visual emphasis.
-- `presentation_premium_morandi`: use for defense, report and presentation figures when screen readability and visual hierarchy matter, while preserving evidence boundaries.
+- `social_science_nature_red_blue_rainbow`: default for formal mechanism, concept, research-design, workflow, typology and mixed overview figures. It uses white or very light gray background, high whitespace, fine lines, black text, red-blue semantic anchors, and controlled cyan, amber, orange and indigo rainbow accents for groups, gradients, maps and multi-series figures.
+- `nature_empirical_red_blue_rainbow`: use when this skill coordinates a mixed figure set that contains empirical panels; delegate those panels to `figure-table-studio`.
+- `minimal_review_ready_red_blue`: use for submission, reviewer response and final manuscript figures when review safety is more important than visual emphasis.
+- `presentation_premium_red_blue_rainbow`: use for defense, report and presentation figures when screen readability and visual hierarchy matter, while preserving evidence boundaries.
 
 Do not describe the target only as "Nature style", "top-journal style" or "make it premium". Pick or inherit one preset and record it in the figure brief.
 
@@ -133,12 +133,12 @@ Formal figures must pass these checks before delivery:
 
 When using image2, the prompt must include:
 - "white-background social-science journal figure"
-- "low-saturation Morandi color palette"
-- the selected style preset id, usually `social_science_nature_morandi`
+- "red-blue anchored Nature-style rainbow color palette"
+- the selected style preset id, usually `social_science_nature_red_blue_rainbow`
 - exact panel count and layout
 - exact visible text labels
 - exact arrows or relationships
-- restrained palette
+- controlled red-blue rainbow palette
 - "no figure title inside the image"
 - "no long caption inside the image"
 - "no overlapping text, legend, arrows, points or lines"

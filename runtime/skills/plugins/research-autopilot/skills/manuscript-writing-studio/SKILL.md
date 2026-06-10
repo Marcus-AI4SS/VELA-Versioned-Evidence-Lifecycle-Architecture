@@ -9,9 +9,22 @@ description: Use when the user asks to draft, rewrite, polish, translate, or fin
 
 ## Required References
 
-- `<VELA_RUNTIME_ROOT>\skills\catalog\manuscript_writing_workflow.json`
-- `<VELA_RUNTIME_ROOT>\skills\catalog\writing_quality_rules.json`
-- `<VELA_RUNTIME_ROOT>\skills\catalog\publication_style_rules.json`
+- `<VELA_RUNTIME_ROOT>/skills/catalog/manuscript_writing_workflow.json`
+- `<VELA_RUNTIME_ROOT>/skills/catalog/writing_quality_rules.json`
+- `<VELA_RUNTIME_ROOT>/skills/catalog/publication_style_rules.json`
+
+## Global Writing Floor
+
+所有写作、重写、润色、中英转换、目标期刊适配和定稿检查都必须先服从这组底层规则：
+
+- 论文要有一条能讲清楚的主线。正式稿应能用四句话概括：基于什么背景，关注什么问题，使用什么方法或材料，得到什么结论。
+- 写作要直接推进论点。减少迂回立论、防御式铺垫、否定式开场和二元反转套式；`not X but Y`、`rather than`、`since`、`however`、`therefore`、`not only but also` 及其中文同义结构只有在真正承担逻辑关系时才使用。
+- 不为了规避某些句式而加入无必要解释。改写后的文本必须让第一次阅读的读者更容易理解。
+- 方法选择要自然衔接。先说明研究问题、材料结构、识别需求或解释目标，再进入模型、算法、编码、比较或细读程序；技术细节不能过早压住问题意识。
+- 每段有明确任务，避免重复。段落和句子要长短错落，不能把正文切成一串四五行小碎段，也不能让所有句子使用同一长度和同一节奏。
+- 限制 AI 味、翻译腔、过度技术化词语、自创概念和内部工程用词。正文面向读者和审稿人，不展示本地工作流、route、quality gate、agent、harness 等内部用语，除非论文主题本身研究这些对象。
+- 使用对应学科公认常用概念。中文概念优先查中文文献、中文期刊和中文学术通行用法，不能先查英文再自行翻译成中文术语。
+- 审稿和写作不能过度自我削弱。先告诉读者本文能说明什么、如何说明、推进了哪一部分，再说明证据边界和局限。
 
 ## Route Boundaries
 
@@ -84,6 +97,9 @@ description: Use when the user asks to draft, rewrite, polish, translate, or fin
 - 不编造数据、样本量、结果、参考文献、DOI、期刊状态、页码或原文引句。
 - 不把“写得顺”当作“论证成立”。
 - 不把相关写成因果，不把局部样本写成总体规律，不把探索性发现写成已证实机制。
+- 不把文章写成防御性说明或局限清单；证据能支撑的贡献要写清楚。
+- 不把中文学术概念从英文材料中自行翻译出来；中文稿优先核对中文文献和通行译法。
+- 不让段落、句子和连接词呈现机械均匀的模板节奏。
 - 英文高影响期刊稿件可以使用更紧的摘要、引言 funnel、短句和 section moves。
 - 中文社科稿件保持概念密度、问题意识、理论脉络和 PEEL 闭环，不机械套用英文短句节奏。
 - 计算社科和方法技术型论文可以更强调 pipeline、方法模块、数据处理和复现。

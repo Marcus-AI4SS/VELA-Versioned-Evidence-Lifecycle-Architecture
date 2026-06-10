@@ -18,22 +18,22 @@ class FigureStylePresetsTests(unittest.TestCase):
         result = validate_figure_style_presets()
         self.assertTrue(result["ok"], result)
 
-    def test_default_presets_are_social_science_nature_morandi(self) -> None:
+    def test_default_presets_are_social_science_nature_red_blue_rainbow(self) -> None:
         payload = json.loads((SKILLS_ROOT / "catalog" / "figure_style_presets.json").read_text(encoding="utf-8"))
         defaults = payload["default_presets"]
-        self.assertEqual(defaults["formal_research_figure"], "social_science_nature_morandi")
-        self.assertEqual(defaults["empirical_figure"], "nature_empirical_morandi")
-        self.assertEqual(defaults["review_ready_figure"], "minimal_review_ready_morandi")
-        self.assertEqual(defaults["presentation_figure"], "presentation_premium_morandi")
+        self.assertEqual(defaults["formal_research_figure"], "social_science_nature_red_blue_rainbow")
+        self.assertEqual(defaults["empirical_figure"], "nature_empirical_red_blue_rainbow")
+        self.assertEqual(defaults["review_ready_figure"], "minimal_review_ready_red_blue")
+        self.assertEqual(defaults["presentation_figure"], "presentation_premium_red_blue_rainbow")
 
     def test_image2_prompt_contract_prevents_random_style_and_overlap(self) -> None:
         payload = json.loads((SKILLS_ROOT / "catalog" / "figure_style_presets.json").read_text(encoding="utf-8"))
         presets = {item["id"]: item for item in payload["presets"]}
-        formal = presets["social_science_nature_morandi"]
+        formal = presets["social_science_nature_red_blue_rainbow"]
         tokens = set(formal["image2_prompt_requirements"]["prompt_tokens"])
         self.assertTrue(
             {
-                "morandi_palette",
+                "red_blue_rainbow_palette",
                 "no_internal_title",
                 "no_long_caption",
                 "no_overlap",
@@ -43,7 +43,7 @@ class FigureStylePresetsTests(unittest.TestCase):
             <= tokens
         )
         phrases = "\n".join(formal["image2_prompt_requirements"]["required_phrases"])
-        self.assertIn("low-saturation Morandi color palette", phrases)
+        self.assertIn("red-blue anchored Nature-style rainbow color palette", phrases)
         self.assertIn("no figure title inside the image", phrases)
         self.assertIn("no long caption inside the image", phrases)
         self.assertIn("no overlapping text", phrases)
@@ -52,7 +52,7 @@ class FigureStylePresetsTests(unittest.TestCase):
     def test_empirical_preset_forbids_image2_data_generation(self) -> None:
         payload = json.loads((SKILLS_ROOT / "catalog" / "figure_style_presets.json").read_text(encoding="utf-8"))
         presets = {item["id"]: item for item in payload["presets"]}
-        empirical = presets["nature_empirical_morandi"]
+        empirical = presets["nature_empirical_red_blue_rainbow"]
         self.assertIn("image2-generated empirical data", empirical["forbidden_elements"])
         self.assertIn("invented p-values", empirical["forbidden_elements"])
         self.assertIn("invented sample sizes", empirical["forbidden_elements"])
@@ -65,7 +65,7 @@ class FigureStylePresetsTests(unittest.TestCase):
         self.assertTrue(
             {
                 "figure_style_preset_selected",
-                "morandi_palette_checked",
+                "red_blue_rainbow_palette_checked",
                 "title_caption_outside_image_checked",
                 "visual_overlap_checked",
             }

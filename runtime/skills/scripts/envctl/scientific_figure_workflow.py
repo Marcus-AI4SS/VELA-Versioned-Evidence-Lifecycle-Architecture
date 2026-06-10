@@ -39,7 +39,7 @@ REQUIRED_STEPS = {
 }
 REQUIRED_STYLE_RULES = {
     "figure_style_preset_selected",
-    "morandi_palette_checked",
+    "red_blue_rainbow_palette_checked",
     "title_caption_outside_image_checked",
     "visual_overlap_checked",
     "config_block_reproducibility",
@@ -172,10 +172,10 @@ def _collect_style_preset_contract_errors(style_contract: dict[str, Any]) -> lis
     expected = {
         "catalog": "catalog/figure_style_presets.json",
         "schema": "schemas/figure_style_presets.v1.schema.json",
-        "default_formal_research_figure": "social_science_nature_morandi",
-        "default_empirical_figure": "nature_empirical_morandi",
-        "default_review_ready_figure": "minimal_review_ready_morandi",
-        "default_presentation_figure": "presentation_premium_morandi",
+        "default_formal_research_figure": "social_science_nature_red_blue_rainbow",
+        "default_empirical_figure": "nature_empirical_red_blue_rainbow",
+        "default_review_ready_figure": "minimal_review_ready_red_blue",
+        "default_presentation_figure": "presentation_premium_red_blue_rainbow",
     }
     for key, value in expected.items():
         if style_contract.get(key) != value:

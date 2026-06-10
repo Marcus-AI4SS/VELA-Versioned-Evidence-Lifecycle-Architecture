@@ -1,18 +1,18 @@
 {
   "$schema": "../schemas/figure_style_presets.v1.schema.json",
   "schema_version": "figure_style_presets.v1",
-  "updated_at": "2026-05-31",
-  "policy": "本地科研绘图采用固定风格预设，避免不同线程临场发挥。默认正式科研图使用社科版 Nature 莫兰迪风格；真实数据图仍由确定性工具控制数值。图名和长图注不进入图片内部，元素重叠必须检查。",
+  "updated_at": "2026-06-06",
+  "policy": "本地科研绘图采用固定风格预设，避免不同线程临场发挥。默认正式科研图改用社科版 Nature 红蓝主轴彩虹风格；红蓝用于主要对比、方向和强弱，彩虹色用于分组、梯度、地图和多系列图。真实数据图仍由确定性工具控制数值。图名和长图注不进入图片内部，元素重叠必须检查。",
   "default_presets": {
-    "formal_research_figure": "social_science_nature_morandi",
-    "empirical_figure": "nature_empirical_morandi",
-    "review_ready_figure": "minimal_review_ready_morandi",
-    "presentation_figure": "presentation_premium_morandi"
+    "formal_research_figure": "social_science_nature_red_blue_rainbow",
+    "empirical_figure": "nature_empirical_red_blue_rainbow",
+    "review_ready_figure": "minimal_review_ready_red_blue",
+    "presentation_figure": "presentation_premium_red_blue_rainbow"
   },
   "presets": [
     {
-      "id": "social_science_nature_morandi",
-      "label": "社科版 Nature 莫兰迪正式科研图",
+      "id": "social_science_nature_red_blue_rainbow",
+      "label": "社科版 Nature 红蓝彩虹正式科研图",
       "default_for": [
         "formal_research_figure",
         "conceptual_mechanism_figure",
@@ -24,6 +24,7 @@
       "source_inspiration": [
         "Yuan1z0825/nature-skills visual hierarchy",
         "social-science top-journal restrained figure practice",
+        "Nature social capital red-blue and rainbow empirical figure practice",
         "local scientific_figure_workflow evidence contract"
       ],
       "use_cases": [
@@ -45,64 +46,71 @@
       "palette": {
         "background": [
           "#FFFFFF",
-          "#F7F5F1"
+          "#F7F9FC"
         ],
         "neutral": [
           {
             "name": "charcoal",
-            "hex": "#2F3437",
+            "hex": "#262A2E",
             "role": "primary text and key outlines"
           },
           {
-            "name": "warm gray",
-            "hex": "#D8D3CA",
-            "role": "light dividers and panel rules"
+            "name": "axis gray",
+            "hex": "#9AA3AD",
+            "role": "secondary labels, light axes and panel rules"
           },
           {
-            "name": "mist gray",
-            "hex": "#EEF0ED",
-            "role": "subtle background blocks"
+            "name": "grid gray",
+            "hex": "#E7EBF0",
+            "role": "subtle gridlines and separators"
           }
         ],
         "primary": [
           {
-            "name": "morandi blue gray",
-            "hex": "#6F8797",
-            "role": "primary path or main module"
+            "name": "nature deep blue",
+            "hex": "#1F5AA6",
+            "role": "main positive path, high value, intervention or core module"
           },
           {
-            "name": "sage green",
-            "hex": "#8FA99B",
-            "role": "mechanism or feedback module"
+            "name": "nature red",
+            "hex": "#C7363D",
+            "role": "main contrast path, low value, risk or comparison module"
           }
         ],
         "secondary": [
           {
-            "name": "dusty lavender",
-            "hex": "#A29AAF",
-            "role": "secondary actor or comparison module"
+            "name": "cyan teal",
+            "hex": "#18A6B8",
+            "role": "secondary group, exposure or bridging pathway"
           },
           {
-            "name": "sand beige",
-            "hex": "#D7C9B4",
-            "role": "context or boundary module"
+            "name": "warm amber",
+            "hex": "#F2B84B",
+            "role": "middle category, context or transition state"
+          },
+          {
+            "name": "orange",
+            "hex": "#E67E3A",
+            "role": "comparison group, threshold or intermediate warning"
           }
         ],
         "accent": [
           {
-            "name": "muted terracotta",
-            "hex": "#B9826E",
-            "role": "single emphasis, risk or intervention"
+            "name": "indigo",
+            "hex": "#273E8E",
+            "role": "deep high-value category or dense-series anchor"
           },
           {
-            "name": "deep ink blue",
-            "hex": "#3C5871",
-            "role": "core arrow or central claim"
+            "name": "scarlet",
+            "hex": "#E84A5F",
+            "role": "strong low-value category or alert"
           }
         ],
         "constraints": [
-          "Use low-saturation Morandi colors rather than random vivid colors.",
-          "Use at most two accent colors in one figure.",
+          "Use a red-blue anchored Nature-style rainbow palette rather than Morandi colors as the default.",
+          "Use red and blue for the main semantic contrast; use cyan, amber, orange and indigo only for additional groups, gradients or maps.",
+          "Keep saturation controlled; vivid colors are allowed only when they encode categories or ordered values.",
+          "Use no more colors than the figure can explain with a clear legend, direct labels or colorbar.",
           "Do not default to plain black-and-white except when a target journal requires it.",
           "Check grayscale readability as a safety test, not as the default aesthetic."
         ]
@@ -158,7 +166,7 @@
       ],
       "image2_prompt_requirements": {
         "prompt_tokens": [
-          "morandi_palette",
+          "red_blue_rainbow_palette",
           "social_science_journal_figure",
           "white_background",
           "high_whitespace",
@@ -170,7 +178,7 @@
         ],
         "required_phrases": [
           "white-background social-science journal figure",
-          "low-saturation Morandi color palette",
+          "red-blue anchored Nature-style rainbow color palette",
           "no figure title inside the image",
           "no long caption inside the image",
           "no overlapping text, legend, arrows, points or lines",
@@ -196,7 +204,7 @@
       ],
       "quality_checks": [
         "figure_style_preset_selected",
-        "morandi_palette_checked",
+        "red_blue_rainbow_palette_checked",
         "title_caption_outside_image_checked",
         "visual_overlap_checked",
         "image2_locked_structure_contract",
@@ -204,7 +212,7 @@
       ]
     },
     {
-      "id": "nature_empirical_morandi",
+      "id": "nature_empirical_red_blue_rainbow",
       "label": "Nature 社科版真实数据图",
       "default_for": [
         "empirical_figure",
@@ -263,42 +271,49 @@
         ],
         "primary": [
           {
-            "name": "estimate blue gray",
-            "hex": "#5F7F95",
-            "role": "main estimate line or point"
+            "name": "estimate blue",
+            "hex": "#1F5AA6",
+            "role": "main estimate line, high value or positive category"
           },
           {
-            "name": "comparison sage",
-            "hex": "#8AA391",
-            "role": "comparison series"
+            "name": "comparison red",
+            "hex": "#C7363D",
+            "role": "comparison series, low value or negative category"
           }
         ],
         "secondary": [
           {
-            "name": "muted violet",
-            "hex": "#9B91AA",
-            "role": "secondary model family"
+            "name": "cyan",
+            "hex": "#18A6B8",
+            "role": "secondary model family or middle-high category"
           },
           {
-            "name": "soft clay",
-            "hex": "#C3927D",
-            "role": "treatment or highlighted group"
+            "name": "amber",
+            "hex": "#F2B84B",
+            "role": "middle category or transition group"
+          },
+          {
+            "name": "orange",
+            "hex": "#E67E3A",
+            "role": "treatment or highlighted intermediate group"
           }
         ],
         "accent": [
           {
-            "name": "deep slate",
-            "hex": "#334E5C",
-            "role": "reference line or direct label"
+            "name": "deep indigo",
+            "hex": "#273E8E",
+            "role": "reference line, highest bin or direct label"
           },
           {
-            "name": "muted ochre",
-            "hex": "#C4A46A",
-            "role": "single warning or boundary mark"
+            "name": "pale peach",
+            "hex": "#F6D6B8",
+            "role": "low-opacity background bin or map interval"
           }
         ],
         "constraints": [
-          "Use low-saturation Morandi colors as the default empirical palette.",
+          "Use a red-blue anchored Nature-style rainbow palette as the default empirical palette.",
+          "For diverging or ordered maps, colorbars should run from red/orange through light middle tones to cyan/blue.",
+          "For categorical scatter and line plots, keep red and blue as the anchor categories and use cyan, amber, orange or indigo only when categories require them.",
           "Do not encode meaning by color alone; add line type, marker shape, facet or direct label when useful.",
           "Keep confidence intervals and uncertainty readable.",
           "Do not use image2 to create empirical values, axes, p-values or sample sizes.",
@@ -356,7 +371,7 @@
       ],
       "image2_prompt_requirements": {
         "prompt_tokens": [
-          "morandi_palette",
+          "red_blue_rainbow_palette",
           "layout_assist_only",
           "no_internal_title",
           "no_long_caption",
@@ -365,7 +380,7 @@
         ],
         "required_phrases": [
           "layout assistance only",
-          "low-saturation Morandi color palette",
+          "red-blue anchored Nature-style rainbow color palette",
           "no figure title inside the image",
           "no long caption inside the image",
           "no overlapping legend, labels, points, lines, bars or confidence intervals",
@@ -390,7 +405,7 @@
       ],
       "quality_checks": [
         "figure_style_preset_selected",
-        "morandi_palette_checked",
+        "red_blue_rainbow_palette_checked",
         "title_caption_outside_image_checked",
         "visual_overlap_checked",
         "data_health_before_plotting",
@@ -399,14 +414,14 @@
       ]
     },
     {
-      "id": "minimal_review_ready_morandi",
-      "label": "投稿审稿安全莫兰迪风格",
+      "id": "minimal_review_ready_red_blue",
+      "label": "投稿审稿安全红蓝风格",
       "default_for": [
         "review_ready_figure",
         "submission_figure",
         "revision_response_figure"
       ],
-      "style_role": "投稿和审稿阶段默认保守风格。它保留低饱和色彩和高级感，但优先服务审稿可读性、证据边界、图注完整和可复现。",
+      "style_role": "投稿和审稿阶段默认保守风格。它保留红蓝主轴和少量彩虹辅助色，但优先服务审稿可读性、证据边界、图注完整和可复现。",
       "source_inspiration": [
         "journal review readability requirements",
         "Nature-style restrained figure polish",
@@ -442,28 +457,28 @@
         ],
         "primary": [
           {
-            "name": "review blue gray",
-            "hex": "#617C8C",
-            "role": "main result"
+            "name": "review blue",
+            "hex": "#2458A5",
+            "role": "main result, high value or positive contrast"
           }
         ],
         "secondary": [
           {
-            "name": "review sage",
-            "hex": "#8D9F91",
-            "role": "secondary result"
+            "name": "review red",
+            "hex": "#C83E45",
+            "role": "comparison result, low value or risk contrast"
           }
         ],
         "accent": [
           {
-            "name": "review terracotta",
-            "hex": "#AA7A6C",
-            "role": "single emphasis"
+            "name": "review cyan",
+            "hex": "#2AA7B8",
+            "role": "single auxiliary group or direct label"
           }
         ],
         "constraints": [
-          "Use low-saturation Morandi colors as the default review-ready palette.",
-          "Use fewer colors than the formal research preset.",
+          "Use red-blue as the review-ready default palette.",
+          "Use fewer rainbow colors than the formal research preset.",
           "Keep all elements legible in grayscale.",
           "Avoid decorative effects and visual flourish.",
           "Never remove uncertainty, source, model or sample information for visual simplicity."
@@ -517,7 +532,7 @@
       ],
       "image2_prompt_requirements": {
         "prompt_tokens": [
-          "morandi_palette",
+          "red_blue_rainbow_palette",
           "review_ready",
           "no_internal_title",
           "no_long_caption",
@@ -526,7 +541,7 @@
         ],
         "required_phrases": [
           "review-ready social-science journal figure",
-          "low-saturation Morandi palette",
+          "red-blue anchored Nature-style palette",
           "no figure title inside the image",
           "no long caption inside the image",
           "no overlapping visual elements",
@@ -548,7 +563,7 @@
       ],
       "quality_checks": [
         "figure_style_preset_selected",
-        "morandi_palette_checked",
+        "red_blue_rainbow_palette_checked",
         "title_caption_outside_image_checked",
         "visual_overlap_checked",
         "grayscale_readability_checked",
@@ -556,8 +571,8 @@
       ]
     },
     {
-      "id": "presentation_premium_morandi",
-      "label": "研究汇报高级莫兰迪风格",
+      "id": "presentation_premium_red_blue_rainbow",
+      "label": "研究汇报高级红蓝彩虹风格",
       "default_for": [
         "presentation_figure",
         "defense_figure",
@@ -600,43 +615,43 @@
         ],
         "primary": [
           {
-            "name": "premium blue gray",
-            "hex": "#54758A",
+            "name": "premium blue",
+            "hex": "#1F5AA6",
             "role": "main flow"
           },
           {
-            "name": "premium sage",
-            "hex": "#829C89",
+            "name": "premium red",
+            "hex": "#C7363D",
             "role": "feedback or governance"
           }
         ],
         "secondary": [
           {
-            "name": "premium lavender",
-            "hex": "#A298B1",
+            "name": "premium cyan",
+            "hex": "#18A6B8",
             "role": "secondary layer"
           },
           {
-            "name": "premium sand",
-            "hex": "#D9C8A9",
+            "name": "premium amber",
+            "hex": "#F2B84B",
             "role": "context layer"
           }
         ],
         "accent": [
           {
-            "name": "premium clay",
-            "hex": "#B77F6E",
+            "name": "premium orange",
+            "hex": "#E67E3A",
             "role": "highlight"
           },
           {
             "name": "premium deep blue",
-            "hex": "#2F536A",
+            "hex": "#273E8E",
             "role": "callout"
           }
         ],
         "constraints": [
-          "Use low-saturation Morandi colors as the default presentation palette.",
-          "Use stronger scale contrast than manuscript figures but keep low saturation.",
+          "Use a red-blue anchored rainbow palette as the default presentation palette.",
+          "Use stronger scale contrast than manuscript figures but keep the palette semantically disciplined.",
           "Do not turn research figures into marketing posters.",
           "No invented statistics or citations.",
           "Keep the figure compatible with manuscript-grade reconstruction if needed."
@@ -692,7 +707,7 @@
       ],
       "image2_prompt_requirements": {
         "prompt_tokens": [
-          "morandi_palette",
+          "red_blue_rainbow_palette",
           "premium_research_presentation",
           "white_background",
           "high_whitespace",
@@ -704,7 +719,7 @@
         ],
         "required_phrases": [
           "premium social-science research presentation figure",
-          "low-saturation Morandi palette",
+          "red-blue anchored Nature-style rainbow palette",
           "white or warm-white background",
           "no figure title inside the image",
           "no long caption inside the image",
@@ -729,7 +744,7 @@
       ],
       "quality_checks": [
         "figure_style_preset_selected",
-        "morandi_palette_checked",
+        "red_blue_rainbow_palette_checked",
         "title_caption_outside_image_checked",
         "visual_overlap_checked",
         "image2_locked_structure_contract"

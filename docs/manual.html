@@ -19,7 +19,7 @@
 
       <section class="hero compact">
         <div>
-          <div class="eyebrow">Public manual · Updated 2026-05-31</div>
+          <div class="eyebrow">Public manual · Updated 2026-06-10</div>
           <h1><span class="sans">VELA</span> Research Workflow Environment</h1>
           <p>VELA is a portable research workflow environment for Codex. It gives each project a readable operating layer: folders, rules, handoffs, evidence ledgers, schemas, validators, logs, memory governance, and controlled evolution.</p>
           <div class="hero-actions">
@@ -125,8 +125,19 @@
         </article>
         <article class="card">
           <h3>Memory Boundary</h3>
-          <p>Memory is a candidate signal. VELA does not import full transcripts, store secrets, inject recalled context by default, or promote memory into durable rules without checks and review.</p>
+          <p>Memory is a candidate signal. Thread memory intake reports are schema-checked, bounded candidates; VELA does not import full transcripts, store secrets, inject recalled context by default, or promote memory into durable rules without checks and review.</p>
         </article>
+      </section>
+
+      <section class="section">
+        <div class="section-head"><h2>Thread Memory Intake</h2></div>
+        <table>
+          <tr><th>Landing zone</th><th>Stores</th><th>Boundary</th></tr>
+          <tr><td>Project files</td><td>Project facts, evidence, stage, methods, deliverables</td><td>Project-scoped continuation and review.</td></tr>
+          <tr><td>Runtime logs</td><td>Commands, checks, failures, repairs, handoffs, validation reports</td><td>Debugging, rollback, and audit.</td></tr>
+          <tr><td>Thread memory intake report</td><td>Short task summary, evidence pointers, reusable procedure, risk notes, and recommended landing zone</td><td>Validated by <code>thread_memory_intake_report.v1</code>; no full chat, credentials, browser state, or private files.</td></tr>
+          <tr><td>Evolution backlog</td><td>Candidate rules, skills, schemas, automations</td><td>Only after review, validation, tests, and commits.</td></tr>
+        </table>
       </section>
 
       <section class="section">

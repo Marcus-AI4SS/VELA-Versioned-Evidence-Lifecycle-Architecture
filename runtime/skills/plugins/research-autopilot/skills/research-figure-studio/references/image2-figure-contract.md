@@ -37,8 +37,8 @@ Create a white-background social-science journal figure suitable for manuscript 
 
 Figure type: [mechanism / research design / conceptual framework / workflow / multi-panel evidence figure].
 Audience: social-science journal reviewers.
-Style preset: social_science_nature_morandi unless another preset is explicitly selected.
-Style: restrained, high-quality academic figure, Nature-inspired but adapted to social science; low-saturation Morandi palette; clean white or warm-white background; high whitespace; thin lines; consistent typography; color-blind friendly; readable in grayscale; no 3D, no gradients, no poster style, no decorative background.
+Style preset: social_science_nature_red_blue_rainbow unless another preset is explicitly selected.
+Style: restrained, high-quality academic figure, Nature-inspired but adapted to social science; red-blue anchored Nature-style rainbow palette; clean white or very light gray background; high whitespace; thin lines; consistent typography; color-blind friendly; readable in grayscale; no 3D, no decorative background, no poster style.
 
 Canvas: [16:9 / journal single-column / journal double-column].
 Layout: [exact panel count and arrangement].
@@ -53,11 +53,10 @@ Connections:
 - [dashed feedback line from ... to ... means ...]
 
 Color mapping:
-- [Morandi blue gray = ...]
-- [sage green = ...]
-- [dusty lavender = ...]
-- [muted terracotta = ...]
-- [warm gray = ...]
+- [Nature deep blue = #1F5AA6; Nature red = #C7363D; cyan = #18A6B8; amber = #F2B84B; orange = #E67E3A; indigo = #273E8E; light grid gray = #E7EBF0]
+- [Use red and blue as the primary semantic contrast.]
+- [Use cyan, amber, orange and indigo only for extra groups, gradients, maps or multi-series encodings.]
+- [Use light gray for axes, grids and panel separators.]
 
 Strict constraints:
 - Do not put a formal figure title inside the image; no figure title inside the image.
