@@ -50,7 +50,7 @@ EXCLUDED_DIR_NAMES = {
 
 SECRET_FILE_NAMES = {".env", ".env.local", "credentials.json", "secrets.json"}
 
-INTERNAL_FILE_EXCLUDES = {".vela/context.json"}
+INTERNAL_FILE_EXCLUDES = {".vela/context.json", ".vela/initializer-manifest.json"}
 
 TEXT_SUFFIXES = {
 
@@ -74,7 +74,9 @@ TEXT_SUFFIXES = {
 
 }
 
-LOCAL_PATH_RE = re.compile(r"(?i)([A-Z]:\\{1,2}Users\\{1,2}[^\\\s\"]+|/Users/[^/\s\"]+|/home/[^/\s\"]+)")
+LOCAL_PATH_RE = re.compile(
+    r"(?i)([A-Z]:\\{1,2}(?:[^\\\s\"']+\\{1,2})*[^\\\s\"']+|/Users/[^/\s\"']+|/home/[^/\s\"']+)"
+)
 
 SECRET_RE = re.compile(r"(?i)(api[_-]?key|secret|token|password)\s*[:=]\s*[\"']?[A-Za-z0-9_\-./+=]{12,}")
 
@@ -204,7 +206,7 @@ def scan_project(project_root: Path, *, scope_label: str | None = None) -> dict[
 
             if LOCAL_PATH_RE.search(text):
 
-                warnings.append(f"{relative}: contains local absolute path")
+                errors.append(f"{relative}: contains local absolute path")
 
                 issue_count += 1
 

@@ -75,6 +75,30 @@ def _relative(root: Path, path: Path) -> str:
         return str(path)
 
 
+def _is_relative_to(path: Path, base: Path) -> bool:
+
+    try:
+
+        path.resolve().relative_to(base.resolve())
+
+        return True
+
+    except ValueError:
+
+        return False
+
+
+def _safe_project_id(project_root: Path) -> str:
+
+    raw = project_root.name.strip().lower() or "vela-project"
+
+    slug = "".join(ch if ch.isalnum() else "-" for ch in raw)
+
+    slug = "-".join(part for part in slug.split("-") if part)
+
+    return slug or "vela-project"
+
+
 
 
 
@@ -126,7 +150,7 @@ def _project_summary(project_root: Path) -> dict[str, Any]:
 
         return {
 
-            "id": project.get("id"),
+            "id": project.get("id") or _safe_project_id(project_root),
 
             "name": project.get("name") or project_root.name,
 
@@ -136,7 +160,7 @@ def _project_summary(project_root: Path) -> dict[str, Any]:
 
         }
 
-    return {"id": None, "name": project_root.name}
+    return {"id": _safe_project_id(project_root), "name": project_root.name}
 
 
 
@@ -160,9 +184,23 @@ def build_public_export(project_root: Path, output_root: Path, *, force: bool = 
 
     output_root = output_root.expanduser().resolve()
 
-    if project_root == output_root:
+    if output_root == project_root or _is_relative_to(output_root, project_root):
 
-        raise ValueError("Public export output must not be the project root.")
+        return {
+
+            "ok": False,
+
+            "exported": False,
+
+            "reason": "output_inside_project_root",
+
+            "project_root": str(project_root),
+
+            "output_root": str(output_root),
+
+            "next_action": "Choose an output directory outside the project root.",
+
+        }
 
 
 

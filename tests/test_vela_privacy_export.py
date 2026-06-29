@@ -44,9 +44,9 @@ class VelaPrivacyExportTests(unittest.TestCase):
 
             report = vela_privacy.scan_project(project_root, scope_label=".")
 
-            self.assertTrue(report["ok"], report)
+            self.assertFalse(report["ok"], report)
 
-            self.assertTrue(any("local absolute path" in warning for warning in report["warnings"]), report)
+            self.assertTrue(any("local absolute path" in error for error in report["errors"]), report)
 
 
 
@@ -70,7 +70,9 @@ class VelaPrivacyExportTests(unittest.TestCase):
 
             report = vela_privacy.scan_project(project_root, scope_label=".")
 
-            self.assertTrue(any("local absolute path" in warning for warning in report["warnings"]), report)
+            self.assertFalse(report["ok"], report)
+
+            self.assertTrue(any("local absolute path" in error for error in report["errors"]), report)
 
 
 
@@ -103,6 +105,69 @@ class VelaPrivacyExportTests(unittest.TestCase):
             self.assertEqual(manifest["source_root"], "<local-project-root>")
 
             self.assertNotIn(str(project_root), manifest_path.read_text(encoding="utf-8"))
+
+
+    def test_public_export_blocks_output_inside_project_root(self) -> None:
+
+        with tempfile.TemporaryDirectory() as tmp:
+
+            project_root = Path(tmp) / "demo-project"
+
+            init_research_project.initialize_project(project_root, skip_codex_trust=True, route_hint="literature-review")
+
+            result = vela_public_export.build_public_export(project_root, project_root / "deliverables" / "public")
+
+            self.assertFalse(result["ok"], result)
+
+            self.assertEqual(result["reason"], "output_inside_project_root")
+
+
+    def test_public_export_blocks_local_absolute_paths(self) -> None:
+
+        with tempfile.TemporaryDirectory() as tmp:
+
+            project_root = Path(tmp) / "demo-project"
+
+            output_root = Path(tmp) / "public-export"
+
+            init_research_project.initialize_project(project_root, skip_codex_trust=True, route_hint="literature-review")
+
+            (project_root / "README.md").write_text(
+
+                "Local path: D:\\AI environment-GITHUB\\private\\draft.md",
+
+                encoding="utf-8",
+
+            )
+
+            result = vela_public_export.build_public_export(project_root, output_root)
+
+            self.assertFalse(result["ok"], result)
+
+            self.assertEqual(result["reason"], "privacy_scan_failed")
+
+            self.assertFalse((output_root / "README.md").exists())
+
+
+    def test_public_export_without_context_uses_safe_project_summary(self) -> None:
+
+        with tempfile.TemporaryDirectory() as tmp:
+
+            project_root = Path(tmp) / "demo-project"
+
+            output_root = Path(tmp) / "public-export"
+
+            project_root.mkdir()
+
+            (project_root / "README.md").write_text("# Demo\n", encoding="utf-8")
+
+            result = vela_public_export.build_public_export(project_root, output_root)
+
+            self.assertTrue(result["ok"], result)
+
+            manifest = json.loads((output_root / "VELA-PUBLIC-EXPORT-MANIFEST.json").read_text(encoding="utf-8"))
+
+            self.assertEqual(manifest["project"]["id"], "demo-project")
 
 
 
